@@ -1,5 +1,7 @@
 package jrh.game;
 
+import jrh.game.action.Action;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,10 @@ public class Match {
 
     public Match(List<Player> players) {
         this.players = new ArrayList<>(players);
+    }
+
+    public void accept(Action action) {
+        action.applyTo(this);
     }
 
     public Player currentPlayer() {
