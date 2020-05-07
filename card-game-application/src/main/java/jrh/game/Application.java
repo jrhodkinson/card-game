@@ -26,10 +26,9 @@ public class Application {
         Hand hand = new Hand();
         for (int i = 0; i < size; i++) {
             if (random.nextBoolean()) {
-                hand.addCard(new DamageCard(random.nextInt(10)));
+                hand.addCard(new DamageCard(1 + random.nextInt(10)));
             } else {
-                hand.addCard(new MoneyCard(random.nextInt(2)));
-
+                hand.addCard(new MoneyCard(1 + random.nextInt(2)));
             }
         }
         return hand;

@@ -1,8 +1,5 @@
 package jrh.game;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +25,15 @@ public class Match {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("players", players)
-                .toString();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < players.size(); i++) {
+            builder.append(players.get(i));
+            if (i == currentPlayer) {
+                builder.append(" (*)");
+            }
+            builder.append("\n");
+        }
+        builder.deleteCharAt(builder.lastIndexOf("\n"));
+        return builder.toString();
     }
 }
