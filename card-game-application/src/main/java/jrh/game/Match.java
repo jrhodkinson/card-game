@@ -9,9 +9,21 @@ import java.util.List;
 public class Match {
 
     private final List<Player> players;
+    private int currentPlayer = 0;
 
     public Match(List<Player> players) {
         this.players = new ArrayList<>(players);
+    }
+
+    public Player currentPlayer() {
+        return players.get(currentPlayer);
+    }
+
+    public void advanceToNextPlayer() {
+        currentPlayer++;
+        if (currentPlayer >= players.size()) {
+            currentPlayer = 0;
+        }
     }
 
     @Override
