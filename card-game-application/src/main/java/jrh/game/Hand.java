@@ -1,4 +1,7 @@
-package jrh.game.card;
+package jrh.game;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,4 +23,10 @@ public class Hand {
         cards.remove(card);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("cards", cards)
+                .toString();
+    }
 }
