@@ -34,6 +34,7 @@ public class Player {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("name", name)
+                .append("health", health)
                 .append("hand", hand)
                 .toString();
     }
