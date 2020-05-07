@@ -30,11 +30,13 @@ public class Application {
         while (running) {
             System.out.println(match.toString());
             List<Card> cards = match.currentPlayer().getHand().getCards();
+            System.out.print("\033[0;34m"); // BLUE
             String optionFormat = "%d: %-12s";
             for (int i = 0; i < cards.size(); i++) {
                 System.out.printf(optionFormat, i + 1, cards.get(i));
             }
             System.out.printf("%n" + optionFormat + optionFormat + "%n", cards.size() + 1, "End turn", cards.size() + 2, "Quit");
+            System.out.print("\033[0m"); // RESET
             int option = scanner.nextInt();
             if (option > 0 && option < cards.size() + 1) {
                 match.accept(new PlayCard(cards.get(option - 1)));
