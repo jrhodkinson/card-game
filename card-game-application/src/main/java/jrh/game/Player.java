@@ -7,6 +7,7 @@ public class Player {
 
     private final String name;
     private final Hand hand;
+    private int health = 50;
 
     public Player(String name, Hand hand) {
         this.name = name;
@@ -19,6 +20,14 @@ public class Player {
 
     public Hand getHand() {
         return hand;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void damage(int amount) {
+        health -= amount;
     }
 
     @Override
