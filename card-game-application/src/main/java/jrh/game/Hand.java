@@ -16,8 +16,8 @@ public class Hand {
         cards.add(card);
     }
 
-    public void removeCard(Card card) {
-        cards.remove(card);
+    public boolean removeCard(Card card) {
+        return cards.remove(card);
     }
 
     @Override
