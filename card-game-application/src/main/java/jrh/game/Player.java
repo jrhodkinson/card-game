@@ -3,7 +3,7 @@ package jrh.game;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Player {
+public class Player implements Target {
 
     private final String name;
     private final Hand hand;

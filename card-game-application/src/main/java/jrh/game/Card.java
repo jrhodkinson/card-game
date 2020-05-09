@@ -1,6 +1,6 @@
 package jrh.game;
 
-public class Card {
+public abstract class Card {
 
     private final int cost;
 
@@ -11,4 +11,6 @@ public class Card {
     public int getCost() {
         return cost;
     }
+
+    abstract public void play(Match match, Target target);
 }

@@ -1,6 +1,11 @@
 package jrh.game;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class DamageCard extends Card {
+
+    private static final Logger logger = LogManager.getLogger(DamageCard.class);
 
     private final int damage;
 
@@ -9,8 +14,13 @@ public class DamageCard extends Card {
         this.damage = damage;
     }
 
-    public int getDamage() {
-        return damage;
+    @Override
+    public void play(Match match, Target target) {
+        if (target instanceof Player) {
+            ((Player) target).damage(this.damage);
+        } else {
+            logger.error("Invalid target");
+        }
     }
 
     @Override

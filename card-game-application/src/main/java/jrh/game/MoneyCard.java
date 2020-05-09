@@ -1,6 +1,11 @@
 package jrh.game;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MoneyCard extends Card {
+
+    private static final Logger logger = LogManager.getLogger(MoneyCard.class);
 
     private final int amount;
 
@@ -9,8 +14,9 @@ public class MoneyCard extends Card {
         this.amount = amount;
     }
 
-    public int getAmount() {
-        return amount;
+    @Override
+    public void play(Match match, Target target) {
+        logger.error("Not implemented");
     }
 
     @Override

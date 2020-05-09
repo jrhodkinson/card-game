@@ -2,44 +2,45 @@ package jrh.game;
 
 import jrh.game.action.Action;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Match {
 
-    private final List<Player> players;
-    private int currentPlayer = 0;
+    private final Player firstPlayer;
+    private final Player secondPlayer;
+    private boolean firstPlayerIsActive = true;
 
-    public Match(List<Player> players) {
-        this.players = new ArrayList<>(players);
+    public Match(Player firstPlayer, Player secondPlayer) {
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
     }
 
     public void accept(Action action) {
         action.applyTo(this);
     }
 
-    public Player currentPlayer() {
-        return players.get(currentPlayer);
+    public Player activePlayer() {
+        return firstPlayerIsActive ? firstPlayer : secondPlayer;
+    }
+
+    public Player inactivePlayer() {
+        return firstPlayerIsActive ? secondPlayer : firstPlayer;
     }
 
     public void advanceToNextPlayer() {
-        currentPlayer++;
-        if (currentPlayer >= players.size()) {
-            currentPlayer = 0;
-        }
+        firstPlayerIsActive = !firstPlayerIsActive;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < players.size(); i++) {
-            builder.append(players.get(i));
-            if (i == currentPlayer) {
-                builder.append(" (*)");
-            }
-            builder.append("\n");
+        builder.append(firstPlayer);
+        if (firstPlayerIsActive) {
+            builder.append(" (*)");
         }
-        builder.deleteCharAt(builder.lastIndexOf("\n"));
+        builder.append("\n");
+        builder.append(secondPlayer);
+        if (!firstPlayerIsActive) {
+            builder.append(" (*)");
+        }
         return builder.toString();
     }
 }
