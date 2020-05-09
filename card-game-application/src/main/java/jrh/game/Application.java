@@ -29,9 +29,9 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while (running) {
+            System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
-            System.out.println(currentTurn.toString());
-            List<Card> cards = currentTurn.getActivePlayer().getHand().getCards();
+            List<Card> cards = match.getActivePlayer().getHand().getCards();
             System.out.print("\033[0;34m"); // BLUE
             String optionFormat = "%d: %-12s";
             for (int i = 0; i < cards.size(); i++) {
@@ -43,7 +43,7 @@ public class Application {
             if (option > 0 && option < cards.size() + 1) {
                 Card card = cards.get(option - 1);
                 if (card instanceof DamageCard) {
-                    match.accept(new PlayCard(card, currentTurn.getInactivePlayer()));
+                    match.accept(new PlayCard(card, match.getInactivePlayer()));
                 } else if (card instanceof MoneyCard) {
                     match.accept(new PlayCard(card, null));
                 } else {
