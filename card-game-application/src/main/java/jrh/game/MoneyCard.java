@@ -21,6 +21,6 @@ public class MoneyCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("%d money", amount);
+        return String.format("%d money (%d)", amount, getCost());
     }
 }

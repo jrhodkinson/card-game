@@ -23,4 +23,9 @@ public class Store {
     public boolean removeCard(Card card) {
         return cards.remove(card);
     }
+
+    @Override
+    public String toString() {
+        return cards.toString();
+    }
 }

@@ -25,6 +25,6 @@ public class DamageCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("%d damage", damage);
+        return String.format("%d damage (%d)", damage, getCost());
     }
 }
