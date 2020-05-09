@@ -11,6 +11,6 @@ public class EndTurn implements Action {
     @Override
     public void applyTo(Match match) {
         logger.info("Ending turn");
-        match.advanceToNextPlayer();
+        match.advanceToNextTurn();
     }
 }

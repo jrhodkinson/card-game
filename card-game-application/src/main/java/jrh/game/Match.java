@@ -7,40 +7,28 @@ public class Match {
     private final Player firstPlayer;
     private final Player secondPlayer;
     private boolean firstPlayerIsActive = true;
+    private Turn currentTurn;
 
     public Match(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
+        this.currentTurn = new Turn(firstPlayer, secondPlayer);
     }
 
     public void accept(Action action) {
         action.applyTo(this);
     }
 
-    public Player activePlayer() {
-        return firstPlayerIsActive ? firstPlayer : secondPlayer;
+    public Turn getCurrentTurn() {
+        return currentTurn;
     }
 
-    public Player inactivePlayer() {
-        return firstPlayerIsActive ? secondPlayer : firstPlayer;
-    }
-
-    public void advanceToNextPlayer() {
+    public void advanceToNextTurn() {
         firstPlayerIsActive = !firstPlayerIsActive;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(firstPlayer);
         if (firstPlayerIsActive) {
-            builder.append(" (*)");
+            currentTurn = new Turn(firstPlayer, secondPlayer);
+        } else {
+            currentTurn = new Turn(secondPlayer, firstPlayer);
         }
-        builder.append("\n");
-        builder.append(secondPlayer);
-        if (!firstPlayerIsActive) {
-            builder.append(" (*)");
-        }
-        return builder.toString();
     }
 }

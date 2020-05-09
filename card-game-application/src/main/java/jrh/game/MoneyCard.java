@@ -16,7 +16,7 @@ public class MoneyCard extends Card {
 
     @Override
     public void play(Match match, Target target) {
-        logger.error("Not implemented");
+        match.getCurrentTurn().setMoney(match.getCurrentTurn().getMoney() + amount);
     }
 
     @Override

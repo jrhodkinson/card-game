@@ -21,9 +21,9 @@ public class PlayCard implements Action {
     @Override
     public void applyTo(Match match) {
         logger.info("Playing card={}", card);
-        if (!match.activePlayer().getHand().removeCard(card)) {
+        if (!match.getCurrentTurn().getActivePlayer().getHand().removeCard(card)) {
             logger.error("Player's hand did not contain card");
-            logger.error("Player's hand did not contain card");
+            return;
         }
         card.play(match, target);
     }
