@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Hand {
+public class DiscardPile {
 
-    private final List<Card> cards = new ArrayList<>();
+    private final List<Card> discardPile = new ArrayList<>();
 
     public List<Card> getCards() {
-        return Collections.unmodifiableList(cards);
+        return Collections.unmodifiableList(discardPile);
     }
 
     public void addCard(Card card) {
-        cards.add(card);
+        discardPile.add(card);
     }
 
     public boolean removeCard(Card card) {
-        return cards.remove(card);
+        return discardPile.remove(card);
     }
 
     @Override
     public String toString() {
-        return cards.toString();
+        return discardPile.toString();
     }
 }
