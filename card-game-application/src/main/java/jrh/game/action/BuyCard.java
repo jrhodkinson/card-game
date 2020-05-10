@@ -29,6 +29,6 @@ public class BuyCard implements Action {
         }
         match.getCurrentTurn().setMoney(money - cost);
         match.getStore().removeCard(card);
-        match.getActivePlayer().getHand().addCard(card); // TODO discard pile
+        match.getActivePlayer().getDiscardPile().addCard(card);
     }
 }

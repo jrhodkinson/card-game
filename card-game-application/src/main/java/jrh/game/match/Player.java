@@ -44,6 +44,7 @@ public class Player implements Target {
                 .append("name", name)
                 .append("health", health)
                 .append("hand", hand)
+                .append("discardPile", discardPile)
                 .toString();
     }
 }
