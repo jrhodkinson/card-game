@@ -1,4 +1,4 @@
-package jrh.game;
+package jrh.game.match;
 
 public interface Target {
 }

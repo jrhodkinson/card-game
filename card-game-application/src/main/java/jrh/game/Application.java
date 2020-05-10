@@ -3,6 +3,14 @@ package jrh.game;
 import jrh.game.action.BuyCard;
 import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
+import jrh.game.card.Card;
+import jrh.game.card.DamageCard;
+import jrh.game.card.Hand;
+import jrh.game.card.MoneyCard;
+import jrh.game.match.Match;
+import jrh.game.match.Player;
+import jrh.game.match.Turn;
+import jrh.game.util.Colors;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,18 +42,18 @@ public class Application {
             System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
             List<Card> cards = match.getActivePlayer().getHand().getCards();
-            System.out.print(Color.BLUE);
+            System.out.print(Colors.BLUE);
             String optionFormat = "%d: %-15s";
             for (int i = 0; i < cards.size(); i++) {
                 System.out.printf(optionFormat, i + 1, cards.get(i));
             }
-            System.out.println(Color.YELLOW);
+            System.out.println(Colors.YELLOW);
             for (int i = 0; i < match.getStore().getCards().size(); i++) {
                 System.out.printf(optionFormat, i + 1 + cards.size(), match.getStore().getCards().get(i));
             }
-            System.out.print(Color.RED);
+            System.out.print(Colors.RED);
             System.out.printf("%n" + optionFormat + optionFormat + "%n", match.getStore().getCards().size() + cards.size() + 1, "End turn", match.getStore().getCards().size() + cards.size() + 2, "Quit");
-            System.out.print(Color.RESET);
+            System.out.print(Colors.RESET);
             int option = scanner.nextInt();
             if (option > 0 && option < cards.size() + 1) {
                 Card card = cards.get(option - 1);

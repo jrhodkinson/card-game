@@ -1,6 +1,7 @@
-package jrh.game;
+package jrh.game.match;
 
 import jrh.game.action.Action;
+import jrh.game.card.Store;
 
 public class Match {
 

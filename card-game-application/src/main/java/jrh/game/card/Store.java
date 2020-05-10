@@ -1,4 +1,4 @@
-package jrh.game;
+package jrh.game.card;
 
 import java.util.ArrayList;
 import java.util.Collections;

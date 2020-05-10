@@ -1,6 +1,6 @@
 package jrh.game.action;
 
-import jrh.game.Match;
+import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

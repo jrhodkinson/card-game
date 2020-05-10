@@ -1,5 +1,8 @@
-package jrh.game;
+package jrh.game.card;
 
+import jrh.game.match.Match;
+import jrh.game.match.Player;
+import jrh.game.match.Target;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

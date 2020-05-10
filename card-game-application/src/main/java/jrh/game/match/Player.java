@@ -1,5 +1,6 @@
-package jrh.game;
+package jrh.game.match;
 
+import jrh.game.card.Hand;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
