@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.RandomAccess;
 
-public class Hand extends ForwardingList<Card> implements RandomAccess {
+public class Deck extends ForwardingList<Card> implements RandomAccess {
 
-    private final List<Card> cards = new ArrayList<>();
+    private final List<Card> deck = new ArrayList<>();
 
     @Override
     protected List<Card> delegate() {
-        return cards;
+        return deck;
     }
 
     @Override
     public String toString() {
-        return cards.toString();
+        return deck.toString();
     }
 }

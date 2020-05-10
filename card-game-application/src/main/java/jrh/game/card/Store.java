@@ -1,27 +1,18 @@
 package jrh.game.card;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.google.common.collect.ForwardingList;
 
-public class Store {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.RandomAccess;
+
+public class Store extends ForwardingList<Card> implements RandomAccess {
 
     private final List<Card> cards = new ArrayList<>();
 
-    public boolean contains(Card card) {
-        return cards.contains(card);
-    }
-
-    public List<Card> getCards() {
-        return Collections.unmodifiableList(cards);
-    }
-
-    public void addCard(Card card) {
-        cards.add(card);
-    }
-
-    public boolean removeCard(Card card) {
-        return cards.remove(card);
+    @Override
+    protected List<Card> delegate() {
+        return cards;
     }
 
     @Override

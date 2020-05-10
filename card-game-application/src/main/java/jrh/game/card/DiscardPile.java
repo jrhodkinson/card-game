@@ -1,23 +1,18 @@
 package jrh.game.card;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.google.common.collect.ForwardingList;
 
-public class DiscardPile {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.RandomAccess;
+
+public class DiscardPile extends ForwardingList<Card> implements RandomAccess {
 
     private final List<Card> discardPile = new ArrayList<>();
 
-    public List<Card> getCards() {
-        return Collections.unmodifiableList(discardPile);
-    }
-
-    public void addCard(Card card) {
-        discardPile.add(card);
-    }
-
-    public boolean removeCard(Card card) {
-        return discardPile.remove(card);
+    @Override
+    protected List<Card> delegate() {
+        return discardPile;
     }
 
     @Override

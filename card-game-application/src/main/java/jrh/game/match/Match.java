@@ -1,7 +1,9 @@
 package jrh.game.match;
 
 import jrh.game.action.Action;
+import jrh.game.card.DiscardPile;
 import jrh.game.card.Store;
+import jrh.game.util.Constants;
 
 public class Match {
 
@@ -38,25 +40,23 @@ public class Match {
     }
 
     public void advanceToNextTurn() {
+        DiscardPile discardPile = getActivePlayer().getDeckAndDiscardPile().getDiscardPile();
+        discardPile.addAll(getCurrentTurn().getPlayedCards());
+        discardPile.addAll(getActivePlayer().getHand());
+        getActivePlayer().getHand().clear();
         firstPlayerIsActive = !firstPlayerIsActive;
         currentTurn = new Turn();
+        while (getActivePlayer().getHand().size() < Constants.INITIAL_HAND_SIZE && getActivePlayer().drawToHand()) {
+            // intentionally empty
+        }
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(firstPlayer);
-        if (firstPlayerIsActive) {
-            builder.append(" (*)");
-        }
-        builder.append("\n");
-        builder.append(secondPlayer);
-        if (!firstPlayerIsActive) {
-            builder.append(" (*)");
-        }
-        builder.append("\n");
-        builder.append(store.toString()).append("\n");
-        builder.append(currentTurn.getMoney()).append(" money");
-        return builder.toString();
+        return  getInactivePlayer().getName() + " (" + getInactivePlayer().getHealth() + ")\n" +
+                currentTurn.getPlayedCards() + " played\n" +
+                getActivePlayer().getDeckAndDiscardPile().getDeck().size() + " in deck\n" +
+                getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard\n" +
+                currentTurn.getMoney() + " money";
     }
 }

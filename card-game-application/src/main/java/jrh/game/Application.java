@@ -15,7 +15,6 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -41,22 +40,22 @@ public class Application {
         while (running) {
             System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
-            List<Card> cards = match.getActivePlayer().getHand().getCards();
+            Hand hand = match.getActivePlayer().getHand();
             System.out.print(Colors.BLUE);
             String optionFormat = "%d: %-15s";
-            for (int i = 0; i < cards.size(); i++) {
-                System.out.printf(optionFormat, i + 1, cards.get(i));
+            for (int i = 0; i < hand.size(); i++) {
+                System.out.printf(optionFormat, i + 1, hand.get(i));
             }
             System.out.println(Colors.YELLOW);
-            for (int i = 0; i < match.getStore().getCards().size(); i++) {
-                System.out.printf(optionFormat, i + 1 + cards.size(), match.getStore().getCards().get(i));
+            for (int i = 0; i < match.getStore().size(); i++) {
+                System.out.printf(optionFormat, i + 1 + hand.size(), match.getStore().get(i));
             }
             System.out.print(Colors.RED);
-            System.out.printf("%n" + optionFormat + optionFormat + "%n", match.getStore().getCards().size() + cards.size() + 1, "End turn", match.getStore().getCards().size() + cards.size() + 2, "Quit");
+            System.out.printf("%n" + optionFormat + optionFormat + "%n", match.getStore().size() + hand.size() + 1, "End turn", match.getStore().size() + hand.size() + 2, "Quit");
             System.out.print(Colors.RESET);
             int option = scanner.nextInt();
-            if (option > 0 && option < cards.size() + 1) {
-                Card card = cards.get(option - 1);
+            if (option > 0 && option < hand.size() + 1) {
+                Card card = hand.get(option - 1);
                 if (card instanceof DamageCard) {
                     match.accept(new PlayCard(card, match.getInactivePlayer()));
                 } else if (card instanceof MoneyCard) {
@@ -64,10 +63,10 @@ public class Application {
                 } else {
                     throw new NotImplementedException("Not implemented yet");
                 }
-            } else if (option >= cards.size() + 1 && option < cards.size() + match.getStore().getCards().size() + 1) {
-                Card card = match.getStore().getCards().get(option - 1 - cards.size());
+            } else if (option >= hand.size() + 1 && option < hand.size() + match.getStore().size() + 1) {
+                Card card = match.getStore().get(option - 1 - hand.size());
                 match.accept(new BuyCard(card));
-            } else if (option == cards.size() + match.getStore().getCards().size() + 1) {
+            } else if (option == hand.size() + match.getStore().size() + 1) {
                 match.accept(new EndTurn());
             } else {
                 running = false;
@@ -81,9 +80,9 @@ public class Application {
         Hand hand = new Hand();
         for (int i = 0; i < size; i++) {
             if (random.nextBoolean()) {
-                hand.addCard(new DamageCard(1 + random.nextInt(5)));
+                hand.add(new DamageCard(1 + random.nextInt(5)));
             } else {
-                hand.addCard(new MoneyCard(1 + random.nextInt(2)));
+                hand.add(new MoneyCard(1 + random.nextInt(2)));
             }
         }
         return hand;
@@ -93,9 +92,9 @@ public class Application {
         Random random = new Random();
         for (int i = 0; i < 7; i++) {
             if (random.nextBoolean()) {
-                match.getStore().addCard(new DamageCard(2 + random.nextInt(10)));
+                match.getStore().add(new DamageCard(2 + random.nextInt(10)));
             } else {
-                match.getStore().addCard(new MoneyCard(2 + random.nextInt(3)));
+                match.getStore().add(new MoneyCard(2 + random.nextInt(3)));
             }
         }
     }
