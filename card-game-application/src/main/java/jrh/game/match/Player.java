@@ -31,12 +31,14 @@ public class Player implements Target {
         return deckAndDiscardPile;
     }
 
-    public boolean drawToHand() {
-        Optional<Card> card = deckAndDiscardPile.draw();
-        if (card.isEmpty()) {
-            return false;
+    public boolean drawToHand(int amount) {
+        for (int i =0; i < amount; i++) {
+            Optional<Card> card = deckAndDiscardPile.draw();
+            if (card.isEmpty()) {
+                return false;
+            }
+            hand.add(card.get());
         }
-        hand.add(card.get());
         return true;
     }
 

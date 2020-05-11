@@ -44,11 +44,9 @@ public class Match {
         discardPile.addAll(getCurrentTurn().getPlayedCards());
         discardPile.addAll(getActivePlayer().getHand());
         getActivePlayer().getHand().clear();
+        getActivePlayer().drawToHand(Constants.INITIAL_HAND_SIZE);
         firstPlayerIsActive = !firstPlayerIsActive;
         currentTurn = new Turn();
-        while (getActivePlayer().getHand().size() < Constants.INITIAL_HAND_SIZE && getActivePlayer().drawToHand()) {
-            // intentionally empty
-        }
     }
 
     @Override
