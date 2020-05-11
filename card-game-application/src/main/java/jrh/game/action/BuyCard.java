@@ -23,12 +23,12 @@ public class BuyCard implements Action {
             logger.error("Not enough money to buy card (money={}, cost={})", money, cost);
             return;
         }
-        if (!match.getStore().contains(card)) {
-            logger.error("Card={} is not in the store", card);
+        if (!match.getStore().getStorefront().contains(card)) {
+            logger.error("Card={} is not in the storefront", card);
             return;
         }
         match.getCurrentTurn().setMoney(money - cost);
-        match.getStore().remove(card);
+        match.getStore().removeFromStorefront(card);
         match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
     }
 }

@@ -1,22 +1,36 @@
 package jrh.game.card;
 
-import com.google.common.collect.ForwardingList;
+import java.util.Random;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.RandomAccess;
+public class Store {
 
-public class Store extends ForwardingList<Card> implements RandomAccess {
+    private final Random random = new Random();
+    private final Storefront storefront = new Storefront();
 
-    private final List<Card> cards = new ArrayList<>();
-
-    @Override
-    protected List<Card> delegate() {
-        return cards;
+    public Store(int storefrontSize) {
+        populateStorefront(storefrontSize);
     }
 
-    @Override
-    public String toString() {
-        return cards.toString();
+    public Storefront getStorefront() {
+        return storefront;
+    }
+
+    public void removeFromStorefront(Card card) {
+        if (storefront.remove(card)) {
+            storefront.add(randomCard());
+        }
+    }
+
+    private void populateStorefront(int size) {
+        while (storefront.size() < size) {
+            storefront.add(randomCard());
+        }
+    }
+
+    private Card randomCard() {
+        if (random.nextBoolean()) {
+            return new DamageCard(2 + random.nextInt(10));
+        }
+        return new MoneyCard(2 + random.nextInt(3));
     }
 }

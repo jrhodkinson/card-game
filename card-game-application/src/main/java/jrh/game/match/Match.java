@@ -7,7 +7,7 @@ import jrh.game.util.Constants;
 
 public class Match {
 
-    private Store store = new Store();
+    private final Store store = new Store(Constants.STORE_SIZE);
     private final Player firstPlayer;
     private final Player secondPlayer;
     private boolean firstPlayerIsActive = true;
@@ -53,7 +53,7 @@ public class Match {
 
     @Override
     public String toString() {
-        return  getInactivePlayer().getName() + " (" + getInactivePlayer().getHealth() + ")\n" +
+        return getInactivePlayer().getName() + " (" + getInactivePlayer().getHealth() + ")\n" +
                 currentTurn.getPlayedCards() + " played\n" +
                 getActivePlayer().getDeckAndDiscardPile().getDeck().size() + " in deck\n" +
                 getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard\n" +

@@ -7,6 +7,7 @@ import jrh.game.card.Card;
 import jrh.game.card.DamageCard;
 import jrh.game.card.Hand;
 import jrh.game.card.MoneyCard;
+import jrh.game.card.Storefront;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Turn;
@@ -30,7 +31,6 @@ public class Application {
         Player hero = new Player("Hero", hand(5));
         Player villain = new Player("Villain", hand(5));
         Match match = new Match(hero, villain);
-        populateStore(match);
         simulateGame(match);
     }
 
@@ -47,11 +47,12 @@ public class Application {
                 System.out.printf(optionFormat, i + 1, hand.get(i));
             }
             System.out.println(Colors.YELLOW);
-            for (int i = 0; i < match.getStore().size(); i++) {
-                System.out.printf(optionFormat, i + 1 + hand.size(), match.getStore().get(i));
+            Storefront storefront = match.getStore().getStorefront();
+            for (int i = 0; i < storefront.size(); i++) {
+                System.out.printf(optionFormat, i + 1 + hand.size(), storefront.get(i));
             }
             System.out.print(Colors.RED);
-            System.out.printf("%n" + optionFormat + optionFormat + "%n", match.getStore().size() + hand.size() + 1, "End turn", match.getStore().size() + hand.size() + 2, "Quit");
+            System.out.printf("%n" + optionFormat + optionFormat + "%n", storefront.size() + hand.size() + 1, "End turn", storefront.size() + hand.size() + 2, "Quit");
             System.out.print(Colors.RESET);
             int option = scanner.nextInt();
             if (option > 0 && option < hand.size() + 1) {
@@ -63,10 +64,10 @@ public class Application {
                 } else {
                     throw new NotImplementedException("Not implemented yet");
                 }
-            } else if (option >= hand.size() + 1 && option < hand.size() + match.getStore().size() + 1) {
-                Card card = match.getStore().get(option - 1 - hand.size());
+            } else if (option >= hand.size() + 1 && option < hand.size() + storefront.size() + 1) {
+                Card card = storefront.get(option - 1 - hand.size());
                 match.accept(new BuyCard(card));
-            } else if (option == hand.size() + match.getStore().size() + 1) {
+            } else if (option == hand.size() + storefront.size() + 1) {
                 match.accept(new EndTurn());
             } else {
                 running = false;
@@ -86,16 +87,5 @@ public class Application {
             }
         }
         return hand;
-    }
-
-    private void populateStore(Match match) {
-        Random random = new Random();
-        for (int i = 0; i < 7; i++) {
-            if (random.nextBoolean()) {
-                match.getStore().add(new DamageCard(2 + random.nextInt(10)));
-            } else {
-                match.getStore().add(new MoneyCard(2 + random.nextInt(3)));
-            }
-        }
     }
 }
