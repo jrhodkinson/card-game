@@ -16,8 +16,10 @@ public class Store {
     }
 
     public void removeFromStorefront(Card card) {
-        if (storefront.remove(card)) {
-            storefront.add(randomCard());
+        int index = storefront.indexOf(card);
+        if (index != -1) {
+            storefront.remove(card);
+            storefront.add(index, randomCard());
         }
     }
 
