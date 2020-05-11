@@ -4,9 +4,11 @@ import jrh.game.action.BuyCard;
 import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
+import jrh.game.card.CardFactory;
 import jrh.game.card.DamageCard;
-import jrh.game.deck.Hand;
+import jrh.game.card.DrawCard;
 import jrh.game.card.MoneyCard;
+import jrh.game.deck.Hand;
 import jrh.game.deck.Storefront;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
@@ -16,7 +18,6 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -28,9 +29,10 @@ public class Application {
     }
 
     void start() {
-        Player hero = new Player("Hero", hand(5));
-        Player villain = new Player("Villain", hand(5));
+        Player hero = new Player("Hero", CardFactory.startingDeck());
+        Player villain = new Player("Villain", CardFactory.startingDeck());
         Match match = new Match(hero, villain);
+        match.start();
         simulateGame(match);
     }
 
@@ -61,6 +63,8 @@ public class Application {
                     match.accept(new PlayCard(card, match.getInactivePlayer()));
                 } else if (card instanceof MoneyCard) {
                     match.accept(new PlayCard(card, null));
+                } else if (card instanceof DrawCard) {
+                    match.accept(new PlayCard(card, null));
                 } else {
                     throw new NotImplementedException("Not implemented yet");
                 }
@@ -74,18 +78,5 @@ public class Application {
             }
             System.out.println();
         }
-    }
-
-    private Hand hand(int size) {
-        Random random = new Random();
-        Hand hand = new Hand();
-        for (int i = 0; i < size; i++) {
-            if (random.nextBoolean()) {
-                hand.add(new DamageCard(1 + random.nextInt(5)));
-            } else {
-                hand.add(new MoneyCard(1 + random.nextInt(2)));
-            }
-        }
-        return hand;
     }
 }

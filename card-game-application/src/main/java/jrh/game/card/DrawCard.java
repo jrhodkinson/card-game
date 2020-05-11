@@ -16,4 +16,9 @@ public class DrawCard extends Card {
     public void play(Match match, Target target) {
         match.getActivePlayer().drawToHand(amountToDraw);
     }
+
+    @Override
+    public String toString() {
+        return String.format("draw %d (%d)", amountToDraw, getCost());
+    }
 }

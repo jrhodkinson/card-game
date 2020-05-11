@@ -7,8 +7,12 @@ import java.util.Optional;
 
 public class DeckAndDiscardPile {
 
-    private final Deck deck = new Deck();
+    private final Deck deck;
     private final DiscardPile discardPile = new DiscardPile();
+
+    public DeckAndDiscardPile(Deck deck) {
+        this.deck = deck;
+    }
 
     public Deck getDeck() {
         return deck;
