@@ -52,7 +52,8 @@ public class Application {
             for (int i = 0; i < storefront.size(); i++) {
                 System.out.printf(optionFormat, i + 1 + hand.size(), storefront.get(i));
             }
-            System.out.printf("%n" + optionFormat + optionFormat + "%n", storefront.size() + hand.size() + 1, option("End turn"), storefront.size() + hand.size() + 2, option("Quit"));
+            System.out.printf("%n" + optionFormat + optionFormat + "%n", storefront.size() + hand.size() + 1,
+                    option("End turn"), storefront.size() + hand.size() + 2, option("Quit"));
             int option = scanner.nextInt();
             if (option == 0) {
                 while (hand.size() > 0) {

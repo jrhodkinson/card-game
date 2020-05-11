@@ -34,7 +34,7 @@ public class Player implements Target {
     }
 
     public void drawToHand(int amount) {
-        for (int i =0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
             Optional<Card> card = deckAndDiscardPile.draw();
             if (card.isEmpty()) {
                 return;
