@@ -1,6 +1,7 @@
-package jrh.game.card;
+package jrh.game.deck;
 
 import com.google.common.collect.ForwardingList;
+import jrh.game.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;

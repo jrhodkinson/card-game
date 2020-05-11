@@ -1,4 +1,8 @@
-package jrh.game.card;
+package jrh.game.deck;
+
+import jrh.game.card.Card;
+import jrh.game.card.DamageCard;
+import jrh.game.card.MoneyCard;
 
 import java.util.Random;
 

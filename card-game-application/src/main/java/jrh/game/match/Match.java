@@ -1,8 +1,8 @@
 package jrh.game.match;
 
 import jrh.game.action.Action;
-import jrh.game.card.DiscardPile;
-import jrh.game.card.Store;
+import jrh.game.deck.DiscardPile;
+import jrh.game.deck.Store;
 import jrh.game.util.Constants;
 
 public class Match {

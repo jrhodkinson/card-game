@@ -1,8 +1,8 @@
 package jrh.game.match;
 
 import jrh.game.card.Card;
-import jrh.game.card.DeckAndDiscardPile;
-import jrh.game.card.Hand;
+import jrh.game.deck.DeckAndDiscardPile;
+import jrh.game.deck.Hand;
 import jrh.game.util.Constants;
 
 import java.util.Optional;
