@@ -44,6 +44,7 @@ public class Application {
             Hand hand = match.getActivePlayer().getHand();
             System.out.print(Colors.BLUE);
             String optionFormat = "%d: %-15s";
+            System.out.printf(optionFormat, 0, "Play all");
             for (int i = 0; i < hand.size(); i++) {
                 System.out.printf(optionFormat, i + 1, hand.get(i));
             }
@@ -56,17 +57,12 @@ public class Application {
             System.out.printf("%n" + optionFormat + optionFormat + "%n", storefront.size() + hand.size() + 1, "End turn", storefront.size() + hand.size() + 2, "Quit");
             System.out.print(Colors.RESET);
             int option = scanner.nextInt();
-            if (option > 0 && option < hand.size() + 1) {
-                Card card = hand.get(option - 1);
-                if (card instanceof DamageCard) {
-                    match.accept(new PlayCard(card, match.getInactivePlayer()));
-                } else if (card instanceof MoneyCard) {
-                    match.accept(new PlayCard(card, null));
-                } else if (card instanceof DrawCard) {
-                    match.accept(new PlayCard(card, null));
-                } else {
-                    throw new NotImplementedException("Not implemented yet");
+            if (option == 0) {
+                while (hand.size() > 0) {
+                    playCard(match, hand.get(0));
                 }
+            } else if (option > 0 && option < hand.size() + 1) {
+                playCard(match, hand.get(option - 1));
             } else if (option >= hand.size() + 1 && option < hand.size() + storefront.size() + 1) {
                 Card card = storefront.get(option - 1 - hand.size());
                 match.accept(new BuyCard(card));
@@ -76,5 +72,17 @@ public class Application {
             System.out.println();
         }
         System.out.println(Colors.GREEN + "Winner: " + match.getWinner().getUser());
+    }
+
+    private void playCard(Match match, Card card) {
+        if (card instanceof DamageCard) {
+            match.accept(new PlayCard(card, match.getInactivePlayer()));
+        } else if (card instanceof MoneyCard) {
+            match.accept(new PlayCard(card, null));
+        } else if (card instanceof DrawCard) {
+            match.accept(new PlayCard(card, null));
+        } else {
+            throw new NotImplementedException("Not implemented yet");
+        }
     }
 }
