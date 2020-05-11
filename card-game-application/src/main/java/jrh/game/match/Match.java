@@ -14,6 +14,8 @@ public class Match {
     private final Player secondPlayer;
     private boolean firstPlayerIsActive;
     private Turn currentTurn;
+    private boolean isOver = false;
+    private Player winner = null;
 
     public Match(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
@@ -22,7 +24,12 @@ public class Match {
     }
 
     public void accept(Action action) {
-        action.applyTo(this);
+        if (!isOver) {
+            action.applyTo(this);
+            if (matchShouldEnd()) {
+                end();
+            }
+        }
     }
 
     public void start() {
@@ -55,6 +62,27 @@ public class Match {
 
     public Player getInactivePlayer() {
         return firstPlayerIsActive ? secondPlayer : firstPlayer;
+    }
+
+    public boolean isOver() {
+        return isOver;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    private boolean matchShouldEnd() {
+        return getActivePlayer().getHealth() <= 0 || getInactivePlayer().getHealth() <= 0;
+    }
+
+    private void end() {
+        isOver = true;
+        if (getInactivePlayer().getHealth() <= 0) {
+            winner = getActivePlayer();
+        } else {
+            winner = getInactivePlayer();
+        }
     }
 
     @Override

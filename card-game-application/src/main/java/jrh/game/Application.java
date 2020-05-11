@@ -38,8 +38,7 @@ public class Application {
 
     private void simulateGame(Match match) {
         Scanner scanner = new Scanner(System.in);
-        boolean running = true;
-        while (running) {
+        while (!match.isOver()) {
             System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
@@ -73,10 +72,9 @@ public class Application {
                 match.accept(new BuyCard(card));
             } else if (option == hand.size() + storefront.size() + 1) {
                 match.accept(new EndTurn());
-            } else {
-                running = false;
             }
             System.out.println();
         }
+        System.out.println(Colors.GREEN + "Winner: " + match.getWinner().getName());
     }
 }
