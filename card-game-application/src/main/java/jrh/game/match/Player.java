@@ -1,5 +1,6 @@
 package jrh.game.match;
 
+import jrh.game.User;
 import jrh.game.card.Card;
 import jrh.game.deck.Deck;
 import jrh.game.deck.DeckAndDiscardPile;
@@ -10,18 +11,18 @@ import java.util.Optional;
 
 public class Player implements Target {
 
-    private final String name;
+    private final User user;
     private final Hand hand = new Hand();
     private final DeckAndDiscardPile deckAndDiscardPile;
     private int health = Constants.HEALTH;
 
-    public Player(String name, Deck deck) {
-        this.name = name;
+    public Player(User user, Deck deck) {
+        this.user = user;
         this.deckAndDiscardPile = new DeckAndDiscardPile(deck);
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
     public Hand getHand() {

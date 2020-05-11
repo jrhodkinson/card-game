@@ -87,10 +87,10 @@ public class Match {
 
     @Override
     public String toString() {
-        return getInactivePlayer().getName() + " (" + getInactivePlayer().getHealth() + ")\n" +
+        return getInactivePlayer().getUser() + " (" + getInactivePlayer().getHealth() + ")\n" +
+                currentTurn.getMoney() + " money, " +
                 currentTurn.getPlayedCards() + " played\n" +
-                getActivePlayer().getDeckAndDiscardPile().getDeck().size() + " in deck\n" +
-                getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard\n" +
-                currentTurn.getMoney() + " money";
+                getActivePlayer().getDeckAndDiscardPile().getDeck().size() + " in deck, " +
+                getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard";
     }
 }

@@ -29,8 +29,8 @@ public class Application {
     }
 
     void start() {
-        Player hero = new Player("Hero", CardFactory.startingDeck());
-        Player villain = new Player("Villain", CardFactory.startingDeck());
+        Player hero = new Player(new User("Hero"), CardFactory.startingDeck());
+        Player villain = new Player(new User("Villain"), CardFactory.startingDeck());
         Match match = new Match(hero, villain);
         match.start();
         simulateGame(match);
@@ -75,6 +75,6 @@ public class Application {
             }
             System.out.println();
         }
-        System.out.println(Colors.GREEN + "Winner: " + match.getWinner().getName());
+        System.out.println(Colors.GREEN + "Winner: " + match.getWinner().getUser());
     }
 }
