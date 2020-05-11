@@ -42,20 +42,17 @@ public class Application {
             System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
-            System.out.print(Colors.BLUE);
-            String optionFormat = "%d: %-15s";
-            System.out.printf(optionFormat, 0, "Play all");
+            String optionFormat = "%2d: %-25s";
+            System.out.printf(optionFormat, 0, option("Play all"));
             for (int i = 0; i < hand.size(); i++) {
                 System.out.printf(optionFormat, i + 1, hand.get(i));
             }
-            System.out.println(Colors.YELLOW);
+            System.out.println();
             Storefront storefront = match.getStore().getStorefront();
             for (int i = 0; i < storefront.size(); i++) {
                 System.out.printf(optionFormat, i + 1 + hand.size(), storefront.get(i));
             }
-            System.out.print(Colors.RED);
-            System.out.printf("%n" + optionFormat + optionFormat + "%n", storefront.size() + hand.size() + 1, "End turn", storefront.size() + hand.size() + 2, "Quit");
-            System.out.print(Colors.RESET);
+            System.out.printf("%n" + optionFormat + optionFormat + "%n", storefront.size() + hand.size() + 1, option("End turn"), storefront.size() + hand.size() + 2, option("Quit"));
             int option = scanner.nextInt();
             if (option == 0) {
                 while (hand.size() > 0) {
@@ -84,5 +81,9 @@ public class Application {
         } else {
             throw new NotImplementedException("Not implemented yet");
         }
+    }
+
+    private String option(String plainText) {
+        return Colors.CYAN + plainText + Colors.RESET;
     }
 }

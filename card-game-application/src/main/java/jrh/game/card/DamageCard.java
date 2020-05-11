@@ -3,6 +3,7 @@ package jrh.game.card;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Target;
+import jrh.game.util.Colors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,6 +29,6 @@ public class DamageCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("%d damage (%d)", damage, getCost());
+        return String.format("%s%d damage (%d)%s", Colors.RED, damage, getCost(), Colors.RESET);
     }
 }

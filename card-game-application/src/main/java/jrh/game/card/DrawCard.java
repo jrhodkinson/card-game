@@ -2,6 +2,7 @@ package jrh.game.card;
 
 import jrh.game.match.Match;
 import jrh.game.match.Target;
+import jrh.game.util.Colors;
 
 public class DrawCard extends Card {
 
@@ -19,6 +20,6 @@ public class DrawCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("draw %d (%d)", amountToDraw, getCost());
+        return String.format("%sdraw %d (%d)%s", Colors.BLUE, amountToDraw, getCost(), Colors.RESET);
     }
 }

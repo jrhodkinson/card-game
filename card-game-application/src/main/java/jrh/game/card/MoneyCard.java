@@ -2,6 +2,7 @@ package jrh.game.card;
 
 import jrh.game.match.Match;
 import jrh.game.match.Target;
+import jrh.game.util.Colors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,6 +24,6 @@ public class MoneyCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("%d money (%d)", amount, getCost());
+        return String.format("%s%d money (%d)%s", Colors.YELLOW, amount, getCost(), Colors.RESET);
     }
 }
