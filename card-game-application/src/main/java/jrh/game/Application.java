@@ -5,16 +5,13 @@ import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
 import jrh.game.card.CardFactory;
-import jrh.game.card.DamageCard;
-import jrh.game.card.DrawCard;
-import jrh.game.card.MoneyCard;
+import jrh.game.card.behaviour.BasicBehaviour;
 import jrh.game.deck.Hand;
 import jrh.game.deck.Storefront;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Turn;
-import jrh.game.util.Colors;
-import org.apache.commons.lang3.NotImplementedException;
+import jrh.game.util.Color;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +39,7 @@ public class Application {
             System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
-            String optionFormat = "%2d: %-25s";
+            String optionFormat = "%2d: %-30s";
             System.out.printf(optionFormat, 0, option("Play all"));
             for (int i = 0; i < hand.size(); i++) {
                 System.out.printf(optionFormat, i + 1, hand.get(i));
@@ -56,7 +53,7 @@ public class Application {
                     option("End turn"), storefront.size() + hand.size() + 2, option("Quit"));
             int option = scanner.nextInt();
             if (option == 0) {
-                while (hand.size() > 0) {
+                while (hand.size() > 0 && !match.isOver()) {
                     playCard(match, hand.get(0));
                 }
             } else if (option > 0 && option < hand.size() + 1) {
@@ -69,22 +66,18 @@ public class Application {
             }
             System.out.println();
         }
-        System.out.println(Colors.GREEN + "Winner: " + match.getWinner().getUser());
+        System.out.println(Color.GREEN + "Winner: " + match.getWinner().getUser());
     }
 
     private void playCard(Match match, Card card) {
-        if (card instanceof DamageCard) {
-            match.accept(new PlayCard(card, match.getInactivePlayer()));
-        } else if (card instanceof MoneyCard) {
-            match.accept(new PlayCard(card, null));
-        } else if (card instanceof DrawCard) {
+        if (card instanceof BasicBehaviour) {
             match.accept(new PlayCard(card, null));
         } else {
-            throw new NotImplementedException("Not implemented yet");
+            match.accept(new PlayCard(card, match.getInactivePlayer()));
         }
     }
 
     private String option(String plainText) {
-        return Colors.CYAN + plainText + Colors.RESET;
+        return Color.CYAN + plainText + Color.RESET;
     }
 }

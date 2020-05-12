@@ -17,22 +17,16 @@ public class CardFactory {
     public static Deck startingDeck() {
         Deck deck = new Deck();
         for (int i = 0; i < Constants.INITIAL_MONEY; i++) {
-            deck.add(new MoneyCard(1));
+            deck.add(Library.getCard("Copper"));
         }
         for (int i = 0; i < Constants.INITIAL_DAMAGE; i++) {
-            deck.add(new DamageCard(1));
+            deck.add(Library.getCard("Knife"));
         }
         Collections.shuffle(deck);
         return deck;
     }
 
     public Card randomCard() {
-        double rand = random.nextDouble();
-        if (rand < 0.333) {
-            return new DamageCard(1 + random.nextInt(5));
-        } else if (rand < 0.667) {
-            return new MoneyCard(1 + random.nextInt(3));
-        }
-        return new DrawCard(1 + random.nextInt(2));
+        return Library.CARDS.get(random.nextInt(Library.CARDS.size()));
     }
 }

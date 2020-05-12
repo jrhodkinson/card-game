@@ -1,6 +1,6 @@
 package jrh.game.util;
 
-public enum Colors {
+public enum Color {
     // Color end string, color reset
     RESET("\033[0m"),
 
@@ -76,7 +76,7 @@ public enum Colors {
 
     private final String code;
 
-    Colors(String code) {
+    Color(String code) {
         this.code = code;
     }
 

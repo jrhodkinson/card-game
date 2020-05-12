@@ -1,20 +1,18 @@
-package jrh.game.card;
+package jrh.game.card.behaviour;
 
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Target;
-import jrh.game.util.Colors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class DamageCard extends Card {
+public class DamageBehaviour implements Behaviour {
 
-    private static final Logger logger = LogManager.getLogger(DamageCard.class);
+    private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
 
     private final int damage;
 
-    public DamageCard(int damage) {
-        super(1);
+    public DamageBehaviour(int damage) {
         this.damage = damage;
     }
 
@@ -25,10 +23,5 @@ public class DamageCard extends Card {
         } else {
             logger.error("Invalid target");
         }
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s%d damage (%d)%s", Colors.RED, damage, getCost(), Colors.RESET);
     }
 }
