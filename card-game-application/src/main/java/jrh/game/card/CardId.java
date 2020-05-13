@@ -19,7 +19,7 @@ public final class CardId {
 
     private final String cardId;
 
-    private CardId(String cardId) {
+    public CardId(String cardId) {
         this.cardId = cardId;
     }
 
