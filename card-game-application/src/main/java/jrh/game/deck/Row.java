@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.RandomAccess;
 
-public class Storefront extends ForwardingList<Card> implements RandomAccess {
+public class Row extends ForwardingList<Card> implements RandomAccess {
 
-    private final List<Card> storefront = new ArrayList<>();
+    private final List<Card> storeRow = new ArrayList<>();
 
     @Override
     protected List<Card> delegate() {
-        return storefront;
+        return storeRow;
     }
 
     @Override
     public String toString() {
-        return storefront.toString();
+        return storeRow.toString();
     }
 }

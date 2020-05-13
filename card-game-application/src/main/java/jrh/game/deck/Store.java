@@ -3,32 +3,55 @@ package jrh.game.deck;
 import jrh.game.card.Card;
 import jrh.game.card.CardFactory;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class Store {
 
     private final CardFactory cardFactory = new CardFactory(new Random());
-    private final Storefront storefront = new Storefront();
+    private final Row row;
+    private final List<Pile> permanentPiles;
 
-    public Store(int storefrontSize) {
-        populateStorefront(storefrontSize);
+    public Store(int rowSize, List<Pile> permanentPiles) {
+        this.row = new Row();
+        this.permanentPiles = permanentPiles;
+        populateRow(rowSize);
     }
 
-    public Storefront getStorefront() {
-        return storefront;
+    public boolean removeFromPile(Card card) {
+        Optional<Pile> optionalPile = permanentPiles.stream()
+                .filter(pile -> pile.getCard().equals(card) && !pile.isEmpty())
+                .findFirst();
+        if (optionalPile.isPresent()) {
+            optionalPile.get().take();
+            return true;
+        }
+        return false;
     }
 
-    public void removeFromStorefront(Card card) {
-        int index = storefront.indexOf(card);
+    public boolean removeFromRow(Card card) {
+        int index = row.indexOf(card);
         if (index != -1) {
-            storefront.remove(card);
-            storefront.add(index, cardFactory.randomCard());
+            row.remove(card);
+            row.add(index, cardFactory.randomCard());
+            return true;
+        }
+        return false;
+    }
+
+    private void populateRow(int size) {
+        while (row.size() < size) {
+            row.add(cardFactory.randomCard());
         }
     }
 
-    private void populateStorefront(int size) {
-        while (storefront.size() < size) {
-            storefront.add(cardFactory.randomCard());
-        }
+    public Row getRow() {
+        return row;
     }
+
+    public List<Pile> getPermanentPiles() {
+        return permanentPiles;
+    }
+
 }

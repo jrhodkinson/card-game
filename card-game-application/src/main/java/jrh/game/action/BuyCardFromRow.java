@@ -5,13 +5,13 @@ import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BuyCard implements Action {
+public class BuyCardFromRow implements Action {
 
-    private static final Logger logger = LogManager.getLogger(BuyCard.class);
+    private static final Logger logger = LogManager.getLogger(BuyCardFromRow.class);
 
     private final Card card;
 
-    public BuyCard(Card card) {
+    public BuyCardFromRow(Card card) {
         this.card = card;
     }
 
@@ -23,12 +23,11 @@ public class BuyCard implements Action {
             logger.error("Not enough money to buy card (money={}, cost={})", money, cost);
             return;
         }
-        if (!match.getStore().getStorefront().contains(card)) {
-            logger.error("Card={} is not in the storefront", card);
+        if (!match.getStore().removeFromRow(card)) {
+            logger.error("Card={} is not in the store row", card);
             return;
         }
         match.getCurrentTurn().setMoney(money - cost);
-        match.getStore().removeFromStorefront(card);
         match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
     }
 }

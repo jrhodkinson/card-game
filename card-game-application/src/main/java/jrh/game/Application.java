@@ -1,20 +1,26 @@
 package jrh.game;
 
-import jrh.game.action.BuyCard;
+import jrh.game.action.BuyCardFromPermanentPile;
+import jrh.game.action.BuyCardFromRow;
 import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
 import jrh.game.card.CardFactory;
+import jrh.game.card.Library;
 import jrh.game.card.behaviour.BasicBehaviour;
 import jrh.game.deck.Hand;
-import jrh.game.deck.Storefront;
+import jrh.game.deck.Pile;
+import jrh.game.deck.Row;
+import jrh.game.deck.Store;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Turn;
 import jrh.game.util.Color;
+import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -26,9 +32,10 @@ public class Application {
     }
 
     void start() {
+        Store store = new Store(Constants.STORE_SIZE, List.of(new Pile(Library.getCard("Copper"), 10)));
         Player hero = new Player(new User("Hero"), CardFactory.startingDeck());
         Player villain = new Player(new User("Villain"), CardFactory.startingDeck());
-        Match match = new Match(hero, villain);
+        Match match = new Match(store, hero, villain);
         match.start();
         simulateGame(match);
     }
@@ -45,12 +52,16 @@ public class Application {
                 System.out.printf(optionFormat, i + 1, hand.get(i));
             }
             System.out.println();
-            Storefront storefront = match.getStore().getStorefront();
-            for (int i = 0; i < storefront.size(); i++) {
-                System.out.printf(optionFormat, i + 1 + hand.size(), storefront.get(i));
+            Row row = match.getStore().getRow();
+            for (int i = 0; i < row.size(); i++) {
+                System.out.printf(optionFormat, i + 1 + hand.size(), row.get(i));
             }
-            System.out.printf("%n" + optionFormat + optionFormat + "%n", storefront.size() + hand.size() + 1,
-                    option("End turn"), storefront.size() + hand.size() + 2, option("Quit"));
+            List<Pile> permanentPiles = match.getStore().getPermanentPiles();
+            for (int i = 0; i < permanentPiles.size(); i++) {
+                System.out.printf(optionFormat, i + 1 + hand.size() + row.size(), permanentPiles.get(i).getCard() + " - " + permanentPiles.get(i).getQuantity());
+            }
+            System.out.printf("%n" + optionFormat + optionFormat + "%n", permanentPiles.size() + row.size() + hand.size() + 1,
+                    option("End turn"), permanentPiles.size() + row.size() + hand.size() + 2, option("Quit"));
             int option = scanner.nextInt();
             if (option == 0) {
                 while (hand.size() > 0 && !match.isOver()) {
@@ -58,10 +69,13 @@ public class Application {
                 }
             } else if (option > 0 && option < hand.size() + 1) {
                 playCard(match, hand.get(option - 1));
-            } else if (option >= hand.size() + 1 && option < hand.size() + storefront.size() + 1) {
-                Card card = storefront.get(option - 1 - hand.size());
-                match.accept(new BuyCard(card));
-            } else if (option == hand.size() + storefront.size() + 1) {
+            } else if (option >= hand.size() + 1 && option < hand.size() + row.size() + 1) {
+                Card card = row.get(option - 1 - hand.size());
+                match.accept(new BuyCardFromRow(card));
+            } else if (option >= hand.size() + row.size() + 1 && option < hand.size() + row.size() + permanentPiles.size() + 1) {
+                Card card = permanentPiles.get(option - 1 - hand.size() - row.size()).getCard();
+                match.accept(new BuyCardFromPermanentPile(card));
+            } else if (option == hand.size() + row.size() + permanentPiles.size() + 1) {
                 match.accept(new EndTurn());
             }
             System.out.println();

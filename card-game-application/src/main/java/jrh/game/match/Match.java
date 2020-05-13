@@ -9,7 +9,7 @@ import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
 public class Match {
 
-    private final Store store = new Store(Constants.STORE_SIZE);
+    private final Store store;
     private final Player firstPlayer;
     private final Player secondPlayer;
     private boolean firstPlayerIsActive;
@@ -17,7 +17,8 @@ public class Match {
     private boolean isOver = false;
     private Player winner = null;
 
-    public Match(Player firstPlayer, Player secondPlayer) {
+    public Match(Store store, Player firstPlayer, Player secondPlayer) {
+        this.store = store;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.currentTurn = new Turn();
