@@ -1,0 +1,9 @@
+{
+  "id" : "silver",
+  "name" : "Silver",
+  "cost" : 3,
+  "color" : "YELLOW",
+  "behaviours" : {
+    "money" : 2
+  }
+}

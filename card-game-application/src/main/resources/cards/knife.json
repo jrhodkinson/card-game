@@ -1,0 +1,9 @@
+{
+  "id" : "knife",
+  "name" : "Knife",
+  "cost" : 1,
+  "color" : "RED",
+  "behaviours" : {
+    "damage" : 1
+  }
+}

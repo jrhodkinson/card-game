@@ -1,5 +1,6 @@
 package jrh.game.card.behaviour;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Target;
@@ -10,6 +11,7 @@ public class DamageBehaviour implements Behaviour {
 
     private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
 
+    @JsonValue
     private final int damage;
 
     public DamageBehaviour(int damage) {

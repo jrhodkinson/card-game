@@ -1,0 +1,9 @@
+{
+  "id" : "draw-2",
+  "name" : "Draw 2",
+  "cost" : 5,
+  "color" : "BLUE",
+  "behaviours" : {
+    "draw" : 2
+  }
+}
