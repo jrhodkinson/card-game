@@ -4,29 +4,33 @@ import jrh.game.deck.Deck;
 import jrh.game.util.Constants;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class CardFactory {
 
+    private final Library library;
     private final Random random;
 
-    public CardFactory(Random random) {
+    public CardFactory(Library library, Random random) {
+        this.library = library;
         this.random = random;
     }
 
-    public static Deck startingDeck() {
+    public Deck startingDeck() {
         Deck deck = new Deck();
         for (int i = 0; i < Constants.INITIAL_MONEY; i++) {
-            deck.add(Library.getCard("Copper"));
+            deck.add(library.getCard(CardId.COPPER));
         }
         for (int i = 0; i < Constants.INITIAL_DAMAGE; i++) {
-            deck.add(Library.getCard("Knife"));
+            deck.add(library.getCard(CardId.KNIFE));
         }
         Collections.shuffle(deck);
         return deck;
     }
 
     public Card randomCard() {
-        return Library.CARDS.get(random.nextInt(Library.CARDS.size()));
+        List<Card> allCards = library.getAllCards();
+        return allCards.get(random.nextInt(allCards.size()));
     }
 }

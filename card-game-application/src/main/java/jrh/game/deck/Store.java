@@ -5,15 +5,15 @@ import jrh.game.card.CardFactory;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 public class Store {
 
-    private final CardFactory cardFactory = new CardFactory(new Random());
+    private final CardFactory cardFactory;
     private final Row row;
     private final List<Pile> permanentPiles;
 
-    public Store(int rowSize, List<Pile> permanentPiles) {
+    public Store(CardFactory cardFactory, int rowSize, List<Pile> permanentPiles) {
+        this.cardFactory = cardFactory;
         this.row = new Row();
         this.permanentPiles = permanentPiles;
         populateRow(rowSize);

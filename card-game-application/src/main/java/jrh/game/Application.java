@@ -6,6 +6,8 @@ import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
 import jrh.game.card.CardFactory;
+import jrh.game.card.CardId;
+import jrh.game.card.FileSystemLibrary;
 import jrh.game.card.Library;
 import jrh.game.card.behaviour.BasicBehaviour;
 import jrh.game.deck.Hand;
@@ -21,6 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -32,9 +35,11 @@ public class Application {
     }
 
     void start() {
-        Store store = new Store(Constants.STORE_SIZE, List.of(new Pile(Library.getCard("Copper"), 10)));
-        Player hero = new Player(new User("Hero"), CardFactory.startingDeck());
-        Player villain = new Player(new User("Villain"), CardFactory.startingDeck());
+        Library library = new FileSystemLibrary(Constants.CARDS_DIRECTORY);
+        CardFactory cardFactory = new CardFactory(library, new Random());
+        Store store = new Store(cardFactory, Constants.STORE_SIZE, List.of(new Pile(library.getCard(CardId.COPPER), 10)));
+        Player hero = new Player(new User("Hero"), cardFactory.startingDeck());
+        Player villain = new Player(new User("Villain"), cardFactory.startingDeck());
         Match match = new Match(store, hero, villain);
         match.start();
         simulateGame(match);

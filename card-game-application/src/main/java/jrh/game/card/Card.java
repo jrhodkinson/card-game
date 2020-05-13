@@ -1,5 +1,6 @@
 package jrh.game.card;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jrh.game.card.behaviour.Behaviour;
 import jrh.game.match.Match;
@@ -9,6 +10,7 @@ import jrh.game.util.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonDeserialize(using = CardDeserializer.class)
 @JsonSerialize(using = CardSerializer.class)
 public class Card {
 
