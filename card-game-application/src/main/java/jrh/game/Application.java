@@ -14,7 +14,6 @@ import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.deck.Store;
-import jrh.game.event.bus.EventBus;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Turn;
@@ -31,11 +30,9 @@ public class Application {
 
     private static final Logger logger = LogManager.getLogger(Application.class);
 
-    private final EventBus eventBus;
     private final Library library;
 
     Application() {
-        this.eventBus = new EventBus();
         this.library = new FileSystemLibrary(Constants.CARDS_DIRECTORY);
     }
 
@@ -44,14 +41,15 @@ public class Application {
         Store store = new Store(cardFactory, Constants.STORE_SIZE, List.of(new Pile(library.getCard(CardId.COPPER), 10)));
         Player hero = new Player(new User("Hero"), cardFactory.startingDeck());
         Player villain = new Player(new User("Villain"), cardFactory.startingDeck());
-        Match match = new Match(eventBus, store, hero, villain);
+        Match match = new Match(store, hero, villain);
         match.getMatchFlowManager().startMatch();
         simulateGame(match);
     }
 
     private void simulateGame(Match match) {
         Scanner scanner = new Scanner(System.in);
-        while (!match.isOver()) {
+        boolean isRunning = true;
+        while (!match.isOver() && isRunning) {
             System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
@@ -86,10 +84,14 @@ public class Application {
                 (new BuyCardFromPermanentPile(match, match.getActivePlayer(), card)).perform();
             } else if (option == hand.size() + row.size() + permanentPiles.size() + 1) {
                 (new EndTurn(match)).perform();
+            } else {
+                isRunning = false;
             }
             System.out.println();
         }
-        System.out.println(Color.GREEN + "Winner: " + match.getWinner().getUser());
+        if (match.isOver()) {
+            System.out.println(Color.GREEN + "Winner: " + match.getWinner().getUser());
+        }
     }
 
     private void playCard(Match match, Card card) {

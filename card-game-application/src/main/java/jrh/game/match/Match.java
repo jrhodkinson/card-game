@@ -8,6 +8,7 @@ import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
 public class Match implements EventHandler {
 
+    private final EventBus eventBus;
     private final CardFlowManager cardFlowManager;
     private final MatchFlowManager matchFlowManager;
     private final Store store;
@@ -18,13 +19,18 @@ public class Match implements EventHandler {
     private boolean isOver = false;
     private Player winner = null;
 
-    public Match(EventBus eventBus, Store store, Player firstPlayer, Player secondPlayer) {
-        this.cardFlowManager = new CardFlowManager(eventBus, this);
-        this.matchFlowManager = new MatchFlowManager(eventBus, this);
+    public Match(Store store, Player firstPlayer, Player secondPlayer) {
+        this.eventBus = new EventBus();
+        this.cardFlowManager = new CardFlowManager(this);
+        this.matchFlowManager = new MatchFlowManager(this);
         this.store = store;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.currentTurn = new Turn();
+    }
+
+    public EventBus getEventBus() {
+        return eventBus;
     }
 
     public CardFlowManager getCardFlowManager() {

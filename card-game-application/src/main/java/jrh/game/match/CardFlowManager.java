@@ -2,8 +2,6 @@ package jrh.game.match;
 
 import jrh.game.card.Card;
 import jrh.game.deck.DiscardPile;
-import jrh.game.event.EventHandler;
-import jrh.game.event.bus.EventBus;
 import jrh.game.event.impl.DiscardedCard;
 import jrh.game.event.impl.DrewCard;
 import jrh.game.event.impl.PlayedCard;
@@ -12,14 +10,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class CardFlowManager implements EventHandler {
+public class CardFlowManager {
 
     private static final Logger logger = LogManager.getLogger(CardFlowManager.class);
-    private final EventBus eventBus;
     private final Match match;
 
-    public CardFlowManager(EventBus eventBus, Match match) {
-        this.eventBus = eventBus;
+    public CardFlowManager(Match match) {
         this.match = match;
     }
 
@@ -34,12 +30,12 @@ public class CardFlowManager implements EventHandler {
         }
         card.play(match, target);
         match.getCurrentTurn().addPlayedCard(card);
-        eventBus.dispatch(new PlayedCard(match, player, card));
+        match.getEventBus().dispatch(new PlayedCard(player, card));
     }
 
     public void drawCard(Player player) {
         Optional<Card> card = player.drawToHand();
-        card.ifPresent(value -> eventBus.dispatch(new DrewCard(match, player, value)));
+        card.ifPresent(value -> match.getEventBus().dispatch(new DrewCard(player, value)));
     }
 
     public void drawCards(Player player, int numberToDraw) {
@@ -90,7 +86,7 @@ public class CardFlowManager implements EventHandler {
         DiscardPile discardPile = player.getDeckAndDiscardPile().getDiscardPile();
         if (player.getHand().remove(card)) {
             discardPile.add(card);
-            eventBus.dispatch(new DiscardedCard(match, player, card));
+            match.getEventBus().dispatch(new DiscardedCard(player, card));
         }
     }
 
