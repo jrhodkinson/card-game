@@ -23,7 +23,7 @@ public class Turn {
         return Collections.unmodifiableList(playedCards);
     }
 
-    public void addPlayedCard(Card card) {
+    void addPlayedCard(Card card) {
         playedCards.add(card);
     }
 

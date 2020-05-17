@@ -1,6 +1,5 @@
 package jrh.game.match;
 
-import jrh.game.action.Action;
 import jrh.game.deck.Store;
 import jrh.game.event.EventHandler;
 import jrh.game.event.bus.EventBus;
@@ -10,6 +9,7 @@ import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 public class Match implements EventHandler {
 
     private final CardFlowManager cardFlowManager;
+    private final MatchFlowManager matchFlowManager;
     private final Store store;
     private final Player firstPlayer;
     private final Player secondPlayer;
@@ -20,32 +20,19 @@ public class Match implements EventHandler {
 
     public Match(EventBus eventBus, Store store, Player firstPlayer, Player secondPlayer) {
         this.cardFlowManager = new CardFlowManager(eventBus, this);
+        this.matchFlowManager = new MatchFlowManager(eventBus, this);
         this.store = store;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.currentTurn = new Turn();
     }
 
-    public void accept(Action action) {
-        if (!isOver) {
-            action.applyTo(this);
-            if (matchShouldEnd()) {
-                end();
-            }
-        }
-    }
-
-    void start() {
-        firstPlayerIsActive = nextBoolean();
-    }
-
-    void advanceToNextTurn() {
-        firstPlayerIsActive = !firstPlayerIsActive;
-        currentTurn = new Turn();
-    }
-
     public CardFlowManager getCardFlowManager() {
-        return this.cardFlowManager;
+        return cardFlowManager;
+    }
+
+    public MatchFlowManager getMatchFlowManager() {
+        return matchFlowManager;
     }
 
     public Store getStore() {
@@ -70,6 +57,23 @@ public class Match implements EventHandler {
 
     public Player getWinner() {
         return winner;
+    }
+
+    public void accept() {
+        if (!isOver) {
+            if (matchShouldEnd()) {
+                end();
+            }
+        }
+    }
+
+    void start() {
+        firstPlayerIsActive = nextBoolean();
+    }
+
+    void advanceToNextTurn() {
+        firstPlayerIsActive = !firstPlayerIsActive;
+        currentTurn = new Turn();
     }
 
     private boolean matchShouldEnd() {

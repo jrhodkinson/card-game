@@ -2,6 +2,7 @@ package jrh.game;
 
 import jrh.game.action.BuyCardFromPermanentPile;
 import jrh.game.action.BuyCardFromRow;
+import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
 import jrh.game.card.CardFactory;
@@ -14,10 +15,7 @@ import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.deck.Store;
 import jrh.game.event.bus.EventBus;
-import jrh.game.event.impl.EndedTurn;
-import jrh.game.event.impl.StartedMatch;
 import jrh.game.match.Match;
-import jrh.game.match.MatchFlowHandler;
 import jrh.game.match.Player;
 import jrh.game.match.Turn;
 import jrh.game.util.Color;
@@ -41,18 +39,13 @@ public class Application {
         this.library = new FileSystemLibrary(Constants.CARDS_DIRECTORY);
     }
 
-    void registerHandlers() {
-        eventBus.register(new MatchFlowHandler());
-    }
-
     void start() {
-        registerHandlers();
         CardFactory cardFactory = new CardFactory(library, new Random());
         Store store = new Store(cardFactory, Constants.STORE_SIZE, List.of(new Pile(library.getCard(CardId.COPPER), 10)));
         Player hero = new Player(new User("Hero"), cardFactory.startingDeck());
         Player villain = new Player(new User("Villain"), cardFactory.startingDeck());
         Match match = new Match(eventBus, store, hero, villain);
-        eventBus.dispatch(new StartedMatch(match));
+        match.getMatchFlowManager().startMatch();
         simulateGame(match);
     }
 
@@ -87,13 +80,12 @@ public class Application {
                 playCard(match, hand.get(option - 1));
             } else if (option >= hand.size() + 1 && option < hand.size() + row.size() + 1) {
                 Card card = row.get(option - 1 - hand.size());
-                match.accept(new BuyCardFromRow(card));
+                (new BuyCardFromRow(match, match.getActivePlayer(), card)).perform();
             } else if (option >= hand.size() + row.size() + 1 && option < hand.size() + row.size() + permanentPiles.size() + 1) {
                 Card card = permanentPiles.get(option - 1 - hand.size() - row.size()).getCard();
-                match.accept(new BuyCardFromPermanentPile(card));
+                (new BuyCardFromPermanentPile(match, match.getActivePlayer(), card)).perform();
             } else if (option == hand.size() + row.size() + permanentPiles.size() + 1) {
-                EndedTurn endedTurn = new EndedTurn(match);
-                eventBus.dispatch(endedTurn);
+                (new EndTurn(match)).perform();
             }
             System.out.println();
         }
@@ -102,9 +94,9 @@ public class Application {
 
     private void playCard(Match match, Card card) {
         if (card instanceof BasicBehaviour) {
-            match.accept(new PlayCard(card, null));
+            (new PlayCard(match, match.getActivePlayer(), card, null)).perform();
         } else {
-            match.accept(new PlayCard(card, match.getInactivePlayer()));
+            (new PlayCard(match, match.getActivePlayer(), card, match.getInactivePlayer())).perform();
         }
     }
 

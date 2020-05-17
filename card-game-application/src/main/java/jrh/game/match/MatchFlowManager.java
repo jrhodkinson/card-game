@@ -1,40 +1,36 @@
 package jrh.game.match;
 
-import jrh.game.event.EventHandler;
-import jrh.game.event.bus.Callback;
-import jrh.game.event.bus.Subscribe;
-import jrh.game.event.impl.AdvancedToNextTurn;
+import jrh.game.event.bus.EventBus;
 import jrh.game.event.impl.EndedTurn;
 import jrh.game.event.impl.StartedMatch;
 import jrh.game.util.Constants;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-public class MatchFlowHandler implements EventHandler {
+public class MatchFlowManager {
 
-    private static final Logger logger = LogManager.getLogger(MatchFlowHandler.class);
+    private final EventBus eventBus;
+    private final Match match;
 
-    @Subscribe
-    private void startedMatch(StartedMatch startedMatch) {
-        logger.info("RX event={}", startedMatch);
-        Match match = startedMatch.getMatch();
+    public MatchFlowManager(EventBus eventBus, Match match) {
+        this.match = match;
+        this.eventBus = eventBus;
+    }
+
+    public void startMatch() {
         CardFlowManager cardFlowManager = match.getCardFlowManager();
         cardFlowManager.drawCards(match.getActivePlayer(), Constants.INITIAL_HAND_SIZE);
         cardFlowManager.drawCards(match.getInactivePlayer(), Constants.INITIAL_HAND_SIZE);
+        eventBus.dispatch(new StartedMatch(match));
     }
 
-    @Subscribe
-    private void endedTurn(EndedTurn endedTurn, Callback callback) {
-        logger.info("RX event={}", endedTurn);
-        Match match = endedTurn.getMatch();
+    public void endTurn() {
         Player activePlayer = match.getActivePlayer();
         CardFlowManager cardFlowManager = match.getCardFlowManager();
         cardFlowManager.discardAllPlayedCards(activePlayer);
         new ArrayList<>(activePlayer.getHand()).forEach(card -> cardFlowManager.discardCard(activePlayer, card));
         cardFlowManager.drawCards(activePlayer, Constants.INITIAL_HAND_SIZE - activePlayer.getHand().size());
         match.advanceToNextTurn();
-        callback.enqueue(new AdvancedToNextTurn(match));
+        eventBus.dispatch(new EndedTurn(match));
     }
 }
