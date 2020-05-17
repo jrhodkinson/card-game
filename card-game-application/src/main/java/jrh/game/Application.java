@@ -13,9 +13,11 @@ import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.deck.Store;
-import jrh.game.event.EndTurnEvent;
 import jrh.game.event.bus.EventBus;
+import jrh.game.event.impl.EndedTurn;
+import jrh.game.event.impl.StartedMatch;
 import jrh.game.match.Match;
+import jrh.game.match.MatchFlowHandler;
 import jrh.game.match.Player;
 import jrh.game.match.Turn;
 import jrh.game.util.Color;
@@ -39,14 +41,18 @@ public class Application {
         this.library = new FileSystemLibrary(Constants.CARDS_DIRECTORY);
     }
 
+    void registerHandlers() {
+        eventBus.register(new MatchFlowHandler());
+    }
+
     void start() {
+        registerHandlers();
         CardFactory cardFactory = new CardFactory(library, new Random());
         Store store = new Store(cardFactory, Constants.STORE_SIZE, List.of(new Pile(library.getCard(CardId.COPPER), 10)));
         Player hero = new Player(new User("Hero"), cardFactory.startingDeck());
         Player villain = new Player(new User("Villain"), cardFactory.startingDeck());
-        Match match = new Match(store, hero, villain);
-        match.start();
-        match.registerWith(eventBus);
+        Match match = new Match(eventBus, store, hero, villain);
+        eventBus.dispatch(new StartedMatch(match));
         simulateGame(match);
     }
 
@@ -86,8 +92,8 @@ public class Application {
                 Card card = permanentPiles.get(option - 1 - hand.size() - row.size()).getCard();
                 match.accept(new BuyCardFromPermanentPile(card));
             } else if (option == hand.size() + row.size() + permanentPiles.size() + 1) {
-                EndTurnEvent endTurnEvent = new EndTurnEvent(match, match.getActivePlayer());
-                eventBus.dispatch(endTurnEvent);
+                EndedTurn endedTurn = new EndedTurn(match);
+                eventBus.dispatch(endedTurn);
             }
             System.out.println();
         }

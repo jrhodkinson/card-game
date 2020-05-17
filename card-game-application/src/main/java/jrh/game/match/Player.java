@@ -33,21 +33,17 @@ public class Player implements Target {
         return deckAndDiscardPile;
     }
 
-    public void drawToHand(int amount) {
-        for (int i = 0; i < amount; i++) {
-            Optional<Card> card = deckAndDiscardPile.draw();
-            if (card.isEmpty()) {
-                return;
-            }
-            hand.add(card.get());
-        }
-    }
-
     public int getHealth() {
         return health;
     }
 
     public void damage(int amount) {
         health -= amount;
+    }
+
+    Optional<Card> drawToHand() {
+        Optional<Card> card = deckAndDiscardPile.draw();
+        card.ifPresent(hand::add);
+        return card;
     }
 }

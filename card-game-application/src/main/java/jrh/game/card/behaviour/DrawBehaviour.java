@@ -14,6 +14,6 @@ public class DrawBehaviour implements BasicBehaviour {
 
     @Override
     public void play(Match match) {
-        match.getActivePlayer().drawToHand(amountToDraw);
+        match.getCardFlowManager().drawCards(match.getActivePlayer(), amountToDraw);
     }
 }

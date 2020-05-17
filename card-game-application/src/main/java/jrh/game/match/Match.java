@@ -1,17 +1,15 @@
 package jrh.game.match;
 
 import jrh.game.action.Action;
-import jrh.game.deck.DiscardPile;
 import jrh.game.deck.Store;
-import jrh.game.event.EndTurnEvent;
 import jrh.game.event.EventHandler;
-import jrh.game.event.bus.Subscribe;
-import jrh.game.util.Constants;
+import jrh.game.event.bus.EventBus;
 
 import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
 public class Match implements EventHandler {
 
+    private final CardFlowManager cardFlowManager;
     private final Store store;
     private final Player firstPlayer;
     private final Player secondPlayer;
@@ -20,7 +18,8 @@ public class Match implements EventHandler {
     private boolean isOver = false;
     private Player winner = null;
 
-    public Match(Store store, Player firstPlayer, Player secondPlayer) {
+    public Match(EventBus eventBus, Store store, Player firstPlayer, Player secondPlayer) {
+        this.cardFlowManager = new CardFlowManager(eventBus, this);
         this.store = store;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
@@ -36,23 +35,17 @@ public class Match implements EventHandler {
         }
     }
 
-    public void start() {
+    void start() {
         firstPlayerIsActive = nextBoolean();
-        getActivePlayer().drawToHand(Constants.INITIAL_HAND_SIZE);
-        getInactivePlayer().drawToHand(Constants.INITIAL_HAND_SIZE);
     }
 
-    @Subscribe
-    public void advanceToNextTurn(EndTurnEvent endTurnEvent) {
-        if (endTurnEvent.getMatch().equals(this) && endTurnEvent.getPlayer().equals(getActivePlayer())) {
-            DiscardPile discardPile = getActivePlayer().getDeckAndDiscardPile().getDiscardPile();
-            discardPile.addAll(getCurrentTurn().getPlayedCards());
-            discardPile.addAll(getActivePlayer().getHand());
-            getActivePlayer().getHand().clear();
-            getActivePlayer().drawToHand(Constants.INITIAL_HAND_SIZE);
-            firstPlayerIsActive = !firstPlayerIsActive;
-            currentTurn = new Turn();
-        }
+    void advanceToNextTurn() {
+        firstPlayerIsActive = !firstPlayerIsActive;
+        currentTurn = new Turn();
+    }
+
+    public CardFlowManager getCardFlowManager() {
+        return this.cardFlowManager;
     }
 
     public Store getStore() {

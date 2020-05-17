@@ -2,6 +2,8 @@ package jrh.game.event.bus;
 
 import jrh.game.event.Event;
 import jrh.game.event.EventHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.stream.Collectors;
 
 public class SubscriberRegistry {
 
+    private static final Logger logger = LogManager.getLogger(SubscriberRegistry.class);
+
     private final List<Subscriber> subscribers = new ArrayList<>();
 
     SubscriberRegistry() {
@@ -17,7 +21,8 @@ public class SubscriberRegistry {
     }
 
     void register(EventHandler eventHandler) {
-        Method[] allMethods = eventHandler.getClass().getMethods();
+        logger.info("Registering event handler of type={}", eventHandler.getClass().getSimpleName());
+        Method[] allMethods = eventHandler.getClass().getDeclaredMethods();
         for (Method method : allMethods){
             if (method.isAnnotationPresent(Subscribe.class)) {
                 if (method.getParameterCount() == 0 || method.getParameterCount() > 2) {
@@ -30,7 +35,9 @@ public class SubscriberRegistry {
                 if (parameterTypes.length == 2 && !Callback.class.equals(parameterTypes[1])) {
                     throw new EventBusException("Second parameter of Subscriber, if present, must be Callback");
                 }
-                subscribers.add(new Subscriber(eventHandler, method));
+                Subscriber subscriber = new Subscriber(eventHandler, method);
+                logger.info("Registering subscriber={}", subscriber);
+                subscribers.add(subscriber);
             }
         }
     }

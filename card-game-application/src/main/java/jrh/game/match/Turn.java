@@ -19,11 +19,19 @@ public class Turn {
         this.money = money;
     }
 
+    public List<Card> getPlayedCards() {
+        return Collections.unmodifiableList(playedCards);
+    }
+
     public void addPlayedCard(Card card) {
         playedCards.add(card);
     }
 
-    public List<Card> getPlayedCards() {
-        return Collections.unmodifiableList(playedCards);
+    boolean removePlayedCard(Card card) {
+       return playedCards.remove(card);
+    }
+
+    void clearPlayedCards() {
+        playedCards.clear();
     }
 }
