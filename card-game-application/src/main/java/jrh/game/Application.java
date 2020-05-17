@@ -2,7 +2,6 @@ package jrh.game;
 
 import jrh.game.action.BuyCardFromPermanentPile;
 import jrh.game.action.BuyCardFromRow;
-import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
 import jrh.game.card.CardFactory;
@@ -14,6 +13,8 @@ import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.deck.Store;
+import jrh.game.event.EndTurnEvent;
+import jrh.game.event.bus.EventBus;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import jrh.game.match.Turn;
@@ -30,18 +31,22 @@ public class Application {
 
     private static final Logger logger = LogManager.getLogger(Application.class);
 
-    Application() {
+    private final EventBus eventBus;
+    private final Library library;
 
+    Application() {
+        this.eventBus = new EventBus();
+        this.library = new FileSystemLibrary(Constants.CARDS_DIRECTORY);
     }
 
     void start() {
-        Library library = new FileSystemLibrary(Constants.CARDS_DIRECTORY);
         CardFactory cardFactory = new CardFactory(library, new Random());
         Store store = new Store(cardFactory, Constants.STORE_SIZE, List.of(new Pile(library.getCard(CardId.COPPER), 10)));
         Player hero = new Player(new User("Hero"), cardFactory.startingDeck());
         Player villain = new Player(new User("Villain"), cardFactory.startingDeck());
         Match match = new Match(store, hero, villain);
         match.start();
+        match.registerWith(eventBus);
         simulateGame(match);
     }
 
@@ -81,7 +86,8 @@ public class Application {
                 Card card = permanentPiles.get(option - 1 - hand.size() - row.size()).getCard();
                 match.accept(new BuyCardFromPermanentPile(card));
             } else if (option == hand.size() + row.size() + permanentPiles.size() + 1) {
-                match.accept(new EndTurn());
+                EndTurnEvent endTurnEvent = new EndTurnEvent(match, match.getActivePlayer());
+                eventBus.dispatch(endTurnEvent);
             }
             System.out.println();
         }

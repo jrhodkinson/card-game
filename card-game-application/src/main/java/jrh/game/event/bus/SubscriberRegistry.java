@@ -1,6 +1,7 @@
 package jrh.game.event.bus;
 
 import jrh.game.event.Event;
+import jrh.game.event.EventHandler;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class SubscriberRegistry {
 
     }
 
-    void register(Object listener) {
-        Method[] allMethods = listener.getClass().getMethods();
+    void register(EventHandler eventHandler) {
+        Method[] allMethods = eventHandler.getClass().getMethods();
         for (Method method : allMethods){
             if (method.isAnnotationPresent(Subscribe.class)) {
                 if (method.getParameterCount() == 0 || method.getParameterCount() > 2) {
@@ -29,7 +30,7 @@ public class SubscriberRegistry {
                 if (parameterTypes.length == 2 && !Callback.class.equals(parameterTypes[1])) {
                     throw new EventBusException("Second parameter of Subscriber, if present, must be Callback");
                 }
-                subscribers.add(new Subscriber(listener, method));
+                subscribers.add(new Subscriber(eventHandler, method));
             }
         }
     }

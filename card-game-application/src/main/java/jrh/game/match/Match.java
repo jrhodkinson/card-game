@@ -3,11 +3,14 @@ package jrh.game.match;
 import jrh.game.action.Action;
 import jrh.game.deck.DiscardPile;
 import jrh.game.deck.Store;
+import jrh.game.event.EndTurnEvent;
+import jrh.game.event.EventHandler;
+import jrh.game.event.bus.Subscribe;
 import jrh.game.util.Constants;
 
 import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
-public class Match {
+public class Match implements EventHandler {
 
     private final Store store;
     private final Player firstPlayer;
@@ -39,14 +42,17 @@ public class Match {
         getInactivePlayer().drawToHand(Constants.INITIAL_HAND_SIZE);
     }
 
-    public void advanceToNextTurn() {
-        DiscardPile discardPile = getActivePlayer().getDeckAndDiscardPile().getDiscardPile();
-        discardPile.addAll(getCurrentTurn().getPlayedCards());
-        discardPile.addAll(getActivePlayer().getHand());
-        getActivePlayer().getHand().clear();
-        getActivePlayer().drawToHand(Constants.INITIAL_HAND_SIZE);
-        firstPlayerIsActive = !firstPlayerIsActive;
-        currentTurn = new Turn();
+    @Subscribe
+    public void advanceToNextTurn(EndTurnEvent endTurnEvent) {
+        if (endTurnEvent.getMatch().equals(this) && endTurnEvent.getPlayer().equals(getActivePlayer())) {
+            DiscardPile discardPile = getActivePlayer().getDeckAndDiscardPile().getDiscardPile();
+            discardPile.addAll(getCurrentTurn().getPlayedCards());
+            discardPile.addAll(getActivePlayer().getHand());
+            getActivePlayer().getHand().clear();
+            getActivePlayer().drawToHand(Constants.INITIAL_HAND_SIZE);
+            firstPlayerIsActive = !firstPlayerIsActive;
+            currentTurn = new Turn();
+        }
     }
 
     public Store getStore() {
