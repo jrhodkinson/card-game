@@ -2,6 +2,7 @@ package jrh.game.event.bus;
 
 import jrh.game.event.Event;
 import jrh.game.event.EventHandler;
+import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,16 +26,7 @@ public class SubscriberRegistry {
         Method[] allMethods = eventHandler.getClass().getDeclaredMethods();
         for (Method method : allMethods){
             if (method.isAnnotationPresent(Subscribe.class)) {
-                if (method.getParameterCount() == 0 || method.getParameterCount() > 2) {
-                    throw new EventBusException("Subscriber must have either one or two parameters");
-                }
-                Class<?>[] parameterTypes = method.getParameterTypes();
-                if (!Event.class.isAssignableFrom(parameterTypes[0])) {
-                    throw new EventBusException("Event must be assignable from Subscriber's first parameter");
-                }
-                if (parameterTypes.length == 2 && !Callback.class.equals(parameterTypes[1])) {
-                    throw new EventBusException("Second parameter of Subscriber, if present, must be Callback");
-                }
+                verifyTypeSignature(method);
                 Subscriber subscriber = new Subscriber(eventHandler, method);
                 logger.info("Registering subscriber={}", subscriber);
                 subscribers.add(subscriber);
@@ -46,5 +38,21 @@ public class SubscriberRegistry {
         return subscribers.stream()
                 .filter(subscriber -> subscriber.getEventType().isAssignableFrom(eventType))
                 .collect(Collectors.toList());
+    }
+
+    private void verifyTypeSignature(Method method) {
+        if (method.getParameterCount() == 0 || method.getParameterCount() > 3) {
+            throw new EventBusException("Subscriber must have either between one and three (inclusive) parameters");
+        }
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        if (!Event.class.isAssignableFrom(parameterTypes[0])) {
+            throw new EventBusException("Event must be assignable from Subscriber's first parameter");
+        }
+        if (parameterTypes.length > 1 && !Match.class.equals(parameterTypes[1])) {
+            throw new EventBusException("Second parameter of Subscriber, if present, must be of type Match");
+        }
+        if (parameterTypes.length == 3 && !Callback.class.equals(parameterTypes[2])) {
+            throw new EventBusException("Third parameter of Subscriber, if present, must be of type Callback");
+        }
     }
 }

@@ -20,7 +20,7 @@ public class Match implements EventHandler {
     private Player winner = null;
 
     public Match(Store store, Player firstPlayer, Player secondPlayer) {
-        this.eventBus = new EventBus();
+        this.eventBus = new EventBus(this);
         this.cardFlowManager = new CardFlowManager(this);
         this.matchFlowManager = new MatchFlowManager(this);
         this.store = store;

@@ -2,6 +2,7 @@ package jrh.game.event.bus;
 
 import jrh.game.event.Event;
 import jrh.game.event.EventHandler;
+import jrh.game.match.Match;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;
@@ -17,14 +18,14 @@ public class Subscriber {
     private final EventHandler handler;
     private final Method method;
     private final Class<? extends Event> eventType;
-    private final boolean canCallback;
+    private final int parameterCount;
 
     @SuppressWarnings("unchecked")
     Subscriber(EventHandler handler, Method method) {
         this.handler = handler;
         this.method = method;
         this.eventType = (Class<? extends Event>) method.getParameterTypes()[0];
-        this.canCallback = method.getParameterCount() == 2;
+        this.parameterCount = method.getParameterCount();
         method.setAccessible(true);
     }
 
@@ -36,11 +37,13 @@ public class Subscriber {
         return eventType;
     }
 
-    public void dispatch(Event event, Callback callback) {
+    public void dispatch(Event event, Match match, Callback callback) {
         try {
-            if (canCallback) {
-                method.invoke(handler, event, callback);
-            } else {
+            if (parameterCount == 3) {
+                method.invoke(handler, event, match, callback);
+            } else if (parameterCount == 2) {
+                method.invoke(handler, event, match);
+            } else if (parameterCount == 1) {
                 method.invoke(handler, event);
             }
         } catch (IllegalAccessException e) {
@@ -56,7 +59,7 @@ public class Subscriber {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("method", method)
                 .append("eventType", eventType)
-                .append("canCallback", canCallback)
+                .append("parameterCount", parameterCount)
                 .toString();
     }
 }

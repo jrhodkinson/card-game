@@ -2,6 +2,7 @@ package jrh.game.event.bus;
 
 import jrh.game.event.Event;
 import jrh.game.event.EventHandler;
+import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,10 +15,12 @@ public class EventBus {
     private static final Logger logger = LogManager.getLogger(EventBus.class);
 
     private final SubscriberRegistry subscriberRegistry = new SubscriberRegistry();
+    private final Match match;
     private final Callback callback;
 
-    public EventBus() {
-        callback = new Callback(this);
+    public EventBus(Match match) {
+        this.match = match;
+        this.callback = new Callback(this);
     }
 
     public void register(EventHandler eventHandler) {
@@ -33,7 +36,7 @@ public class EventBus {
             List<Subscriber> subscribers = subscriberRegistry.getSubscribers(event.getClass());
             for (Subscriber subscriber : subscribers) {
                 logger.debug("TX event={} to subscriber of type={}", event, subscriber.getHandlerClass());
-                subscriber.dispatch(event, callback);
+                subscriber.dispatch(event, match, callback);
                 if (callback.isDirty()) {
                     events.addAll(callback.getEnqueuedEvents());
                     callback.reset();
