@@ -34,7 +34,7 @@ public class Card {
 
     public void play(Match match, Player player) {
         for (Behaviour behaviour : behaviours) {
-            behaviour.play(match, player);
+            behaviour.play(match, player, this);
         }
     }
 

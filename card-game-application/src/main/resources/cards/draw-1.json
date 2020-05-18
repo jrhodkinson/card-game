@@ -1,9 +1,12 @@
 {
-  "id" : "draw-1",
-  "name" : "Draw 1",
-  "cost" : 3,
-  "color" : "BLUE",
-  "behaviours" : {
-    "draw" : 1
-  }
+  "id": "draw-1",
+  "name": "Draw 1",
+  "cost": 3,
+  "color": "BLUE",
+  "behaviours": [
+    [
+      "draw",
+      1
+    ]
+  ]
 }

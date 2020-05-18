@@ -7,12 +7,24 @@ import java.util.Queue;
 
 public class Callback {
 
-    private final Queue<Event> enqueuedEvents = new LinkedList<>();
     private final EventBus eventBus;
     private boolean dirty = false;
 
+    private final Queue<Event> enqueuedEvents = new LinkedList<>();
+    private boolean unregistered = false;
+
     Callback(EventBus eventBus) {
         this.eventBus = eventBus;
+    }
+
+    boolean isDirty() {
+        return dirty;
+    }
+
+    void reset() {
+        this.enqueuedEvents.clear();
+        this.unregistered = false;
+        this.dirty = false;
     }
 
     public void resolve(Event event) {
@@ -24,17 +36,17 @@ public class Callback {
         this.enqueuedEvents.add(event);
     }
 
-    void reset() {
-        this.enqueuedEvents.clear();
-        this.dirty = false;
-    }
-
-    boolean isDirty() {
-        return dirty;
+    public void unregister() {
+        this.dirty = true;
+        this.unregistered = true;
     }
 
     Queue<Event> getEnqueuedEvents() {
         return this.enqueuedEvents;
+    }
+
+    boolean didUnregister() {
+        return unregistered;
     }
 
 }

@@ -1,9 +1,12 @@
 {
-  "id" : "gold",
-  "name" : "Gold",
-  "cost" : 6,
-  "color" : "YELLOW",
-  "behaviours" : {
-    "money" : 3
-  }
+  "id": "gold",
+  "name": "Gold",
+  "cost": 6,
+  "color": "YELLOW",
+  "behaviours": [
+    [
+      "money",
+      3
+    ]
+  ]
 }

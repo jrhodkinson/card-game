@@ -1,0 +1,13 @@
+{
+  "id" : "vanishing-gold",
+  "name" : "Vanishing Gold",
+  "cost" : 2,
+  "color" : "YELLOW",
+  "behaviours": [
+    [
+      "money",
+      3
+    ],
+    [ "vanishing" ]
+  ]
+}

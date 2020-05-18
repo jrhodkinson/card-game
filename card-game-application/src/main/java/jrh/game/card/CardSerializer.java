@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import jrh.game.card.behaviour.Behaviour;
 import jrh.game.card.behaviour.BehaviourSerializationKeys;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class CardSerializer extends StdSerializer<Card> {
 
@@ -21,11 +23,16 @@ public class CardSerializer extends StdSerializer<Card> {
         gen.writeObjectField("name", card.getName());
         gen.writeObjectField("cost", card.getCost());
         gen.writeObjectField("color", card.getColor());
-        gen.writeObjectFieldStart("behaviours");
+        gen.writeArrayFieldStart("behaviours");
         for (Behaviour behaviour : card.getBehaviours()) {
-            gen.writeObjectField(BehaviourSerializationKeys.getKey(behaviour.getClass()), behaviour);
+            gen.writeStartArray();
+            gen.writeString(BehaviourSerializationKeys.getKey(behaviour.getClass()));
+            if (Arrays.stream(behaviour.getClass().getDeclaredFields()).anyMatch(field -> !field.getType().equals(Logger.class))) {
+                gen.writeObject(behaviour);
+            }
+            gen.writeEndArray();
         }
-        gen.writeEndObject();
+        gen.writeEndArray();
         gen.writeEndObject();
     }
 

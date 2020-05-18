@@ -34,6 +34,17 @@ public class SubscriberRegistry {
         }
     }
 
+    void unregister(EventHandler eventHandler) {
+        logger.info("Unregistering event handler of type={}", eventHandler.getClass().getSimpleName());
+        subscribers.removeIf(subscriber -> {
+            if (subscriber.getHandler().equals(eventHandler)) {
+                logger.info("Unregistering subscriber={}", subscriber);
+                return true;
+            }
+            return false;
+        });
+    }
+
     List<Subscriber> getSubscribers(Class<? extends Event> eventType) {
         return subscribers.stream()
                 .filter(subscriber -> subscriber.getEventType().isAssignableFrom(eventType))

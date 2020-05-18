@@ -9,6 +9,7 @@ public final class CardId {
     public static final CardId COPPER = new CardId("copper");
     public static final CardId SILVER = new CardId("silver");
     public static final CardId GOLD = new CardId("gold");
+    public static final CardId VANISHING_GOLD = new CardId("vanishing-gold");
 
     public static final CardId KNIFE = new CardId("knife");
     public static final CardId SWORD = new CardId("sword");

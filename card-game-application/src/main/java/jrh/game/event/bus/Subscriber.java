@@ -29,15 +29,15 @@ public class Subscriber {
         method.setAccessible(true);
     }
 
-    public Class<? extends EventHandler> getHandlerClass() {
-        return handler.getClass();
+    EventHandler getHandler() {
+        return handler;
     }
 
-    public Class<? extends Event> getEventType() {
+    Class<? extends Event> getEventType() {
         return eventType;
     }
 
-    public void dispatch(Event event, Match match, Callback callback) {
+    void dispatch(Event event, Match match, Callback callback) {
         try {
             if (parameterCount == 3) {
                 method.invoke(handler, event, match, callback);

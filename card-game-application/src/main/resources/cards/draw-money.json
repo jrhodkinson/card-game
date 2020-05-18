@@ -1,10 +1,16 @@
 {
-  "id" : "draw-money",
-  "name" : "Double dip",
-  "cost" : 8,
-  "color" : "GREEN",
-  "behaviours" : {
-    "money" : 2,
-    "draw" : 1
-  }
+  "id": "draw-money",
+  "name": "Double dip",
+  "cost": 8,
+  "color": "GREEN",
+  "behaviours": [
+    [
+      "money",
+      2
+    ],
+    [
+      "draw",
+      1
+    ]
+  ]
 }

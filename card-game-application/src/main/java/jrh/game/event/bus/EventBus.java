@@ -27,6 +27,10 @@ public class EventBus {
         subscriberRegistry.register(eventHandler);
     }
 
+    public void unregister(EventHandler eventHandler) {
+        subscriberRegistry.unregister(eventHandler);
+    }
+
     public void dispatch(Event initialEvent) {
         Queue<Event> events = new LinkedList<>();
         events.add(initialEvent);
@@ -35,10 +39,13 @@ public class EventBus {
             logger.debug("Processing event={}", event);
             List<Subscriber> subscribers = subscriberRegistry.getSubscribers(event.getClass());
             for (Subscriber subscriber : subscribers) {
-                logger.debug("TX event={} to subscriber of type={}", event, subscriber.getHandlerClass());
+                logger.debug("TX event={} to subscriber of type={}", event, subscriber.getHandler().getClass());
                 subscriber.dispatch(event, match, callback);
                 if (callback.isDirty()) {
                     events.addAll(callback.getEnqueuedEvents());
+                    if (callback.didUnregister()) {
+                        subscriberRegistry.unregister(subscriber.getHandler());
+                    }
                     callback.reset();
                 }
             }

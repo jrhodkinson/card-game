@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.lang.reflect.InvocationTargetException;
 
 public class CardDeserializer extends StdDeserializer<Card> {
 
@@ -30,11 +30,22 @@ public class CardDeserializer extends StdDeserializer<Card> {
         Color color = tree.get("color").traverse(jp.getCodec()).readValueAs(Color.class);
         Card.Builder cardBuilder = Card.card(id).withName(name).withCost(cost).withColor(color);
         JsonNode behaviours = tree.get("behaviours");
-        for (Iterator<String> it = behaviours.fieldNames(); it.hasNext();) {
-            String field = it.next();
-            Class<? extends Behaviour> behaviourClass = BehaviourSerializationKeys.getClass(field);
-            Behaviour behaviour = behaviours.get(field).traverse(jp.getCodec()).readValueAs(behaviourClass);
-            cardBuilder.withBehaviour(behaviour);
+        for (int i = 0; i < behaviours.size(); i++) {
+            JsonNode behaviourJson = behaviours.get(i);
+            String behaviourKey = behaviourJson.get(0).asText();
+            Class<? extends Behaviour> behaviourClass = BehaviourSerializationKeys.getClass(behaviourKey);
+            if (behaviourJson.size() == 1) {
+                try {
+                    cardBuilder.withBehaviour(behaviourClass.getConstructor().newInstance());
+                } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    logger.error("Error instantiating behaviour={} for cardId={} with no-args constructor", behaviourJson, tree.get("id"), e);
+                }
+            } else if (behaviourJson.size() == 2) {
+                Behaviour behaviour = behaviourJson.get(1).traverse(jp.getCodec()).readValueAs(behaviourClass);
+                cardBuilder.withBehaviour(behaviour);
+            } else {
+                logger.error("Invalid behaviour={} for cardId={}, too many elements in array", behaviourJson, tree.get("id"));
+            }
         }
         return cardBuilder.build();
     }

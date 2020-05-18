@@ -97,4 +97,8 @@ public class CardFlowController {
             match.getCurrentTurn().clearPlayedCards();
         }
     }
+
+    public void vanishPlayedCard(Card card) {
+        match.getCurrentTurn().removePlayedCard(card);
+    }
 }
