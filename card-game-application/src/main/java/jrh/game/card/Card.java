@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jrh.game.card.behaviour.Behaviour;
 import jrh.game.match.Match;
-import jrh.game.match.Target;
+import jrh.game.match.Player;
 import jrh.game.util.Color;
 
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ public class Card {
         return new Builder(cardId);
     }
 
-    public void play(Match match, Target target) {
+    public void play(Match match, Player player) {
         for (Behaviour behaviour : behaviours) {
-            behaviour.play(match, target);
+            behaviour.play(match, player);
         }
     }
 

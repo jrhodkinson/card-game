@@ -18,6 +18,6 @@ public class BuyCardFromPermanentPile implements Action {
 
     @Override
     public void perform() {
-        match.getCardFlowManager().buyCardFromPermanentPile(player, card);
+        match.getCardFlowController().buyCardFromPermanentPile(player, card);
     }
 }

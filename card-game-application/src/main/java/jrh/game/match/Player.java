@@ -9,7 +9,7 @@ import jrh.game.util.Constants;
 
 import java.util.Optional;
 
-public class Player implements Target {
+public class Player {
 
     private final User user;
     private final Hand hand = new Hand();
@@ -37,7 +37,7 @@ public class Player implements Target {
         return health;
     }
 
-    public void damage(int amount) {
+    void damage(int amount) {
         health -= amount;
     }
 

@@ -12,6 +12,6 @@ public class EndTurn implements Action {
 
     @Override
     public void perform() {
-        match.getMatchFlowManager().endTurn();
+        match.getMatchStateController().endTurn();
     }
 }

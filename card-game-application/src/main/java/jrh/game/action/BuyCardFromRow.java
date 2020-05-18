@@ -18,6 +18,6 @@ public class BuyCardFromRow implements Action {
 
     @Override
     public void perform() {
-        match.getCardFlowManager().buyCardFromRow(player, card);
+        match.getCardFlowController().buyCardFromRow(player, card);
     }
 }

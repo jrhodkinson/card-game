@@ -1,16 +1,16 @@
 package jrh.game.match;
 
 import jrh.game.deck.Store;
-import jrh.game.event.EventHandler;
 import jrh.game.event.bus.EventBus;
 
 import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
-public class Match implements EventHandler {
+public class Match {
 
     private final EventBus eventBus;
-    private final CardFlowManager cardFlowManager;
-    private final MatchFlowManager matchFlowManager;
+    private final CardFlowController cardFlowController;
+    private final MatchStateController matchStateController;
+    private final DamageController damageController;
     private final Store store;
     private final Player firstPlayer;
     private final Player secondPlayer;
@@ -21,8 +21,10 @@ public class Match implements EventHandler {
 
     public Match(Store store, Player firstPlayer, Player secondPlayer) {
         this.eventBus = new EventBus(this);
-        this.cardFlowManager = new CardFlowManager(this);
-        this.matchFlowManager = new MatchFlowManager(this);
+        this.cardFlowController = new CardFlowController(this);
+        this.matchStateController = new MatchStateController(this);
+        matchStateController.registerWith(eventBus);
+        this.damageController = new DamageController(this);
         this.store = store;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
@@ -33,12 +35,16 @@ public class Match implements EventHandler {
         return eventBus;
     }
 
-    public CardFlowManager getCardFlowManager() {
-        return cardFlowManager;
+    public CardFlowController getCardFlowController() {
+        return cardFlowController;
     }
 
-    public MatchFlowManager getMatchFlowManager() {
-        return matchFlowManager;
+    public MatchStateController getMatchStateController() {
+        return matchStateController;
+    }
+
+    public DamageController getDamageController() {
+        return damageController;
     }
 
     public Store getStore() {
@@ -65,14 +71,6 @@ public class Match implements EventHandler {
         return winner;
     }
 
-    public void accept() {
-        if (!isOver) {
-            if (matchShouldEnd()) {
-                end();
-            }
-        }
-    }
-
     void start() {
         firstPlayerIsActive = nextBoolean();
     }
@@ -82,11 +80,7 @@ public class Match implements EventHandler {
         currentTurn = new Turn();
     }
 
-    private boolean matchShouldEnd() {
-        return getActivePlayer().getHealth() <= 0 || getInactivePlayer().getHealth() <= 0;
-    }
-
-    private void end() {
+    void end() {
         isOver = true;
         if (getInactivePlayer().getHealth() <= 0) {
             winner = getActivePlayer();

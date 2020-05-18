@@ -10,16 +10,16 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class CardFlowManager {
+public class CardFlowController {
 
-    private static final Logger logger = LogManager.getLogger(CardFlowManager.class);
+    private static final Logger logger = LogManager.getLogger(CardFlowController.class);
     private final Match match;
 
-    public CardFlowManager(Match match) {
+    public CardFlowController(Match match) {
         this.match = match;
     }
 
-    public void playCard(Player player, Card card, Target target) {
+    public void playCard(Player player, Card card, Player target) {
         if (!match.getActivePlayer().equals(player)) {
             logger.error("Player wasn't the active player");
             return;

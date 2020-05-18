@@ -3,13 +3,8 @@ package jrh.game.card.behaviour;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
-import jrh.game.match.Target;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class DamageBehaviour implements Behaviour {
-
-    private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
 
     @JsonValue
     private final int damage;
@@ -19,11 +14,7 @@ public class DamageBehaviour implements Behaviour {
     }
 
     @Override
-    public void play(Match match, Target target) {
-        if (target instanceof Player) {
-            ((Player) target).damage(this.damage);
-        } else {
-            logger.error("Invalid target");
-        }
+    public void play(Match match, Player player) {
+        match.getDamageController().damage(player, this.damage);
     }
 }

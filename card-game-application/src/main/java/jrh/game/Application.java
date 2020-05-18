@@ -42,7 +42,7 @@ public class Application {
         Player hero = new Player(new User("Hero"), cardFactory.startingDeck());
         Player villain = new Player(new User("Villain"), cardFactory.startingDeck());
         Match match = new Match(store, hero, villain);
-        match.getMatchFlowManager().startMatch();
+        match.getMatchStateController().startMatch();
         simulateGame(match);
     }
 
