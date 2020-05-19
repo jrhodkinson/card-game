@@ -2,5 +2,6 @@
   "money": "jrh.game.card.behaviour.MoneyBehaviour",
   "damage": "jrh.game.card.behaviour.DamageBehaviour",
   "draw": "jrh.game.card.behaviour.DrawBehaviour",
-  "vanishing": "jrh.game.card.behaviour.VanishingBehaviour"
+  "vanishing": "jrh.game.card.behaviour.VanishingBehaviour",
+  "sticky": "jrh.game.card.behaviour.StickyBehaviour"
 }
