@@ -1,0 +1,12 @@
+{
+  "id": "debug:draw",
+  "name": "DEBUG Draw 5",
+  "cost": 0,
+  "color": "MAGENTA_BRIGHT",
+  "behaviours": [
+    [
+      "draw",
+      5
+    ]
+  ]
+}

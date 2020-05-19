@@ -30,6 +30,10 @@ public final class CardId {
         return cardId;
     }
 
+    public boolean isDebugId() {
+        return cardId.startsWith(Debug.PREFIX + ":");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,4 +53,17 @@ public final class CardId {
                 .append(cardId)
                 .toHashCode();
     }
+
+    public static class Debug {
+        public static final String PREFIX = "debug";
+
+        public static final CardId MONEY = new CardId("debug:money");
+        public static final CardId DRAW = new CardId("debug:draw");
+        public static final CardId DAMAGE = new CardId("debug:damage");
+
+        private Debug() {
+            // not instantiable
+        }
+    }
+
 }

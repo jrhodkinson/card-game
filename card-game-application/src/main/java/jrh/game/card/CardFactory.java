@@ -1,7 +1,6 @@
 package jrh.game.card;
 
 import jrh.game.deck.Deck;
-import jrh.game.util.Constants;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,13 +18,9 @@ public class CardFactory {
 
     public Deck startingDeck() {
         Deck deck = new Deck();
-        for (int i = 0; i < Constants.INITIAL_MONEY - 1; i++) {
-            deck.add(library.getCard(CardId.COPPER));
-        }
-        deck.add(library.getCard(CardId.VANISHING_GOLD));
-        for (int i = 0; i < Constants.INITIAL_DAMAGE; i++) {
-            deck.add(library.getCard(CardId.KNIFE));
-        }
+        deck.add(library.getDebugCard(CardId.Debug.MONEY));
+        deck.add(library.getDebugCard(CardId.Debug.DAMAGE));
+        deck.add(library.getDebugCard(CardId.Debug.DRAW));
         Collections.shuffle(deck);
         return deck;
     }

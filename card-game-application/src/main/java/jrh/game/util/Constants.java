@@ -12,6 +12,4 @@ public class Constants {
     public static final int HEALTH = 10;
 
     public static final int INITIAL_HAND_SIZE = 5;
-    public static final int INITIAL_MONEY = 7;
-    public static final int INITIAL_DAMAGE = 3;
 }

@@ -1,0 +1,12 @@
+{
+  "id": "debug:damage",
+  "name": "DEBUG Damage 100",
+  "cost": 0,
+  "color": "MAGENTA_BRIGHT",
+  "behaviours": [
+    [
+      "damage",
+      100
+    ]
+  ]
+}

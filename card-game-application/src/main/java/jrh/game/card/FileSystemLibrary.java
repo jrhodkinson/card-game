@@ -16,10 +16,11 @@ public class FileSystemLibrary implements Library {
 
     private static final Logger logger = LogManager.getLogger(FileSystemLibrary.class);
 
-    private final Map<CardId, Card> cards;
+    private final Map<CardId, Card> cards = new HashMap<>();
+    private final Map<CardId, Card> debugCards = new HashMap<>();
 
     public FileSystemLibrary(File cardDirectory) {
-        this.cards = loadCards(cardDirectory);
+        loadCards(cardDirectory);
     }
 
     @Override
@@ -28,28 +29,35 @@ public class FileSystemLibrary implements Library {
     }
 
     @Override
+    public Card getDebugCard(CardId cardId) {
+        return debugCards.get(cardId);
+    }
+
+    @Override
     public List<Card> getAllCards() {
         return List.copyOf(cards.values());
     }
 
-    private Map<CardId, Card> loadCards(File library) {
+    private void loadCards(File library) {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
-        Map<CardId, Card> cards = new HashMap<>();
-        addCardsFromDirectory(library, cards, objectMapper);
-        return cards;
+        addCardsFromDirectory(library, objectMapper);
     }
 
-    private void addCardsFromDirectory(File directory, Map<CardId, Card> cardMap, ObjectMapper objectMapper) {
+    private void addCardsFromDirectory(File directory, ObjectMapper objectMapper) {
         for (File file : Objects.requireNonNull(directory.listFiles())) {
             if (file.isHidden()) {
                 continue;
             }
             if (file.isDirectory()) {
-                addCardsFromDirectory(file, cardMap, objectMapper);
+                addCardsFromDirectory(file, objectMapper);
             } else {
                 try {
                     Card card = objectMapper.readValue(file, Card.class);
-                    cardMap.put(card.getId(), card);
+                    if (card.getId().isDebugId()) {
+                        debugCards.put(card.getId(), card);
+                    } else {
+                        cards.put(card.getId(), card);
+                    }
                 } catch (IOException e) {
                     logger.error("Error reading card from file={}", file, e);
                 }

@@ -1,0 +1,12 @@
+{
+  "id": "debug:money",
+  "name": "DEBUG $100",
+  "cost": 0,
+  "color": "MAGENTA_BRIGHT",
+  "behaviours": [
+    [
+      "money",
+      100
+    ]
+  ]
+}
