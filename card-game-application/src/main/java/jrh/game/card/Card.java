@@ -3,12 +3,13 @@ package jrh.game.card;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jrh.game.card.behaviour.Behaviour;
-import jrh.game.match.Match;
-import jrh.game.match.Player;
+import jrh.game.event.bus.EventBus;
 import jrh.game.util.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @JsonDeserialize(using = CardDeserializer.class)
 @JsonSerialize(using = CardSerializer.class)
@@ -18,24 +19,25 @@ public class Card {
     private final String name;
     private final int cost;
     private final Color color;
-    private final List<Behaviour> behaviours;
+    private final Map<Class<? extends Behaviour>, Behaviour> behaviours = new HashMap<>();
 
     private Card(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.cost = builder.cost;
         this.color = builder.color;
-        this.behaviours = builder.behaviours;
     }
 
     public static NameSetter card(CardId cardId) {
         return new Builder(cardId);
     }
 
-    public void play(Match match, Player player) {
-        for (Behaviour behaviour : behaviours) {
-            behaviour.play(match, player, this);
-        }
+    public void registerBehaviours(EventBus eventBus) {
+        behaviours.values().forEach(behaviour -> behaviour.registerWith(eventBus));
+    }
+
+    public void unregisterBehaviours(EventBus eventBus) {
+        behaviours.values().forEach(behaviour -> behaviour.unregisterWith(eventBus));
     }
 
     public CardId getId() {
@@ -54,8 +56,21 @@ public class Card {
         return color;
     }
 
-    public List<Behaviour> getBehaviours() {
-        return behaviours;
+    public void addBehaviour(Behaviour behaviour) {
+        behaviours.put(behaviour.getClass(), behaviour);
+        behaviour.forCard(this);
+    }
+
+    public boolean hasBehaviour(Class<? extends Behaviour> behaviourClass) {
+        return behaviours.containsKey(behaviourClass);
+    }
+
+    Collection<Behaviour> getBehaviours() {
+        return Collections.unmodifiableCollection(behaviours.values());
+    }
+
+    public Behaviour getBehaviour(Class<? extends Behaviour> behaviourClass) {
+        return behaviours.get(behaviourClass);
     }
 
     @Override
@@ -81,7 +96,6 @@ public class Card {
         private String name;
         private int cost;
         private Color color;
-        private final List<Behaviour> behaviours = new ArrayList<>();
 
         private Builder(CardId id) {
             this.id = id;
@@ -99,11 +113,6 @@ public class Card {
 
         public Builder withColor(Color color) {
             this.color = color;
-            return this;
-        }
-
-        public Builder withBehaviour(Behaviour behaviour) {
-            this.behaviours.add(behaviour);
             return this;
         }
 

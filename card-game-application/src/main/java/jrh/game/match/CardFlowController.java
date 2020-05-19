@@ -2,9 +2,12 @@ package jrh.game.match;
 
 import jrh.game.card.Card;
 import jrh.game.deck.DiscardPile;
+import jrh.game.event.impl.CardBought;
+import jrh.game.event.impl.CardDestroyed;
+import jrh.game.event.impl.CardPlayed;
+import jrh.game.event.impl.CardResolved;
 import jrh.game.event.impl.DiscardedCard;
 import jrh.game.event.impl.DrewCard;
-import jrh.game.event.impl.PlayedCard;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,9 +31,9 @@ public class CardFlowController {
             logger.error("Player's hand did not contain card");
             return;
         }
-        card.play(match, target);
+        match.getEventBus().dispatch(new CardPlayed(player, target, card));
         match.getCurrentTurn().addPlayedCard(card);
-        match.getEventBus().dispatch(new PlayedCard(player, card));
+        match.getEventBus().dispatch(new CardResolved(player, card));
     }
 
     public void drawCard(Player player) {
@@ -61,6 +64,7 @@ public class CardFlowController {
         }
         match.getCurrentTurn().setMoney(money - cost);
         match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
+        match.getEventBus().dispatch(new CardBought(match.getActivePlayer(), card));
     }
 
     public void buyCardFromPermanentPile(Player player, Card card) {
@@ -80,6 +84,7 @@ public class CardFlowController {
         }
         match.getCurrentTurn().setMoney(money - cost);
         match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
+        match.getEventBus().dispatch(new CardBought(match.getActivePlayer(), card));
     }
 
     public void discardCard(Player player, Card card) {
@@ -98,7 +103,8 @@ public class CardFlowController {
         }
     }
 
-    public void vanishPlayedCard(Card card) {
+    public void destroyPlayedCard(Card card) {
         match.getCurrentTurn().removePlayedCard(card);
+        match.getEventBus().dispatch(new CardDestroyed(card));
     }
 }

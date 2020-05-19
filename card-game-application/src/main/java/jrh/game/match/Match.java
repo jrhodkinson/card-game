@@ -1,7 +1,15 @@
 package jrh.game.match;
 
+import jrh.game.User;
+import jrh.game.card.CardBehaviourRegistrar;
+import jrh.game.card.CardFactory;
+import jrh.game.card.Library;
 import jrh.game.deck.Store;
 import jrh.game.event.bus.EventBus;
+import jrh.game.util.Constants;
+
+import java.util.Collections;
+import java.util.Random;
 
 import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
@@ -11,6 +19,7 @@ public class Match {
     private final CardFlowController cardFlowController;
     private final MatchStateController matchStateController;
     private final DamageController damageController;
+    private final CardFactory cardFactory;
     private final Store store;
     private final Player firstPlayer;
     private final Player secondPlayer;
@@ -19,15 +28,17 @@ public class Match {
     private boolean isOver = false;
     private Player winner = null;
 
-    public Match(Store store, Player firstPlayer, Player secondPlayer) {
+    public Match(Library library, User firstUser, User secondUser) {
         this.eventBus = new EventBus(this);
         this.cardFlowController = new CardFlowController(this);
         this.matchStateController = new MatchStateController(this);
         matchStateController.registerWith(eventBus);
         this.damageController = new DamageController(this);
-        this.store = store;
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
+        eventBus.register(new CardBehaviourRegistrar());
+        this.cardFactory = new CardFactory(eventBus, library, new Random());
+        this.store = new Store(cardFactory, Constants.STORE_SIZE, Collections.emptyList());
+        this.firstPlayer = new Player(firstUser, cardFactory.startingDeck());
+        this.secondPlayer = new Player(secondUser, cardFactory.startingDeck());
         this.currentTurn = new Turn();
     }
 

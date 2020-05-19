@@ -1,9 +1,17 @@
 package jrh.game.card.behaviour;
 
 import jrh.game.card.Card;
-import jrh.game.match.Match;
-import jrh.game.match.Player;
+import jrh.game.event.EventHandler;
 
-public interface Behaviour {
-    void play(Match match, Player player, Card card);
+public abstract class Behaviour implements EventHandler {
+
+    private Card card;
+
+    public final void forCard(Card card) {
+        this.card = card;
+    }
+
+    protected final Card getCard() {
+        return card;
+    }
 }

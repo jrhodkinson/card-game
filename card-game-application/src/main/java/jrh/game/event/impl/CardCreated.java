@@ -2,20 +2,13 @@ package jrh.game.event.impl;
 
 import jrh.game.card.Card;
 import jrh.game.event.Event;
-import jrh.game.match.Player;
 
-public class PlayedCard implements Event {
+public class CardCreated implements Event {
 
-    private final Player player;
     private final Card card;
 
-    public PlayedCard(Player player, Card card) {
-        this.player = player;
+    public CardCreated(Card card) {
         this.card = card;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public Card getCard() {

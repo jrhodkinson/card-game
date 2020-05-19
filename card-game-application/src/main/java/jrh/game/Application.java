@@ -5,17 +5,12 @@ import jrh.game.action.BuyCardFromRow;
 import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
-import jrh.game.card.CardFactory;
-import jrh.game.card.CardId;
 import jrh.game.card.FileSystemLibrary;
 import jrh.game.card.Library;
-import jrh.game.card.behaviour.BasicBehaviour;
 import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
-import jrh.game.deck.Store;
 import jrh.game.match.Match;
-import jrh.game.match.Player;
 import jrh.game.match.Turn;
 import jrh.game.util.Color;
 import jrh.game.util.Constants;
@@ -23,7 +18,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -37,11 +31,7 @@ public class Application {
     }
 
     void start() {
-        CardFactory cardFactory = new CardFactory(library, new Random());
-        Store store = new Store(cardFactory, Constants.STORE_SIZE, List.of(new Pile(library.getCard(CardId.COPPER), 10)));
-        Player hero = new Player(new User("Hero"), cardFactory.startingDeck());
-        Player villain = new Player(new User("Villain"), cardFactory.startingDeck());
-        Match match = new Match(store, hero, villain);
+        Match match = new Match(library, new User("Hero"), new User("Villain"));
         match.getMatchStateController().startMatch();
         simulateGame(match);
     }
@@ -95,11 +85,7 @@ public class Application {
     }
 
     private void playCard(Match match, Card card) {
-        if (card instanceof BasicBehaviour) {
-            (new PlayCard(match, match.getActivePlayer(), card, null)).perform();
-        } else {
-            (new PlayCard(match, match.getActivePlayer(), card, match.getInactivePlayer())).perform();
-        }
+        (new PlayCard(match, match.getActivePlayer(), card, match.getInactivePlayer())).perform();
     }
 
     private String option(String plainText) {

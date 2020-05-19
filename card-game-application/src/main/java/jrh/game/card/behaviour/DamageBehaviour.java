@@ -1,11 +1,11 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.card.Card;
+import jrh.game.event.bus.Subscribe;
+import jrh.game.event.impl.CardPlayed;
 import jrh.game.match.Match;
-import jrh.game.match.Player;
 
-public class DamageBehaviour implements Behaviour {
+public class DamageBehaviour extends Behaviour {
 
     @JsonValue
     private final int damage;
@@ -14,8 +14,10 @@ public class DamageBehaviour implements Behaviour {
         this.damage = damage;
     }
 
-    @Override
-    public void play(Match match, Player player, Card card) {
-        match.getDamageController().damage(player, this.damage);
+    @Subscribe
+    private void cardPlayed(CardPlayed cardPlayed, Match match) {
+        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
+            match.getDamageController().damage(cardPlayed.getTarget().get(), this.damage);
+        }
     }
 }
