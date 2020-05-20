@@ -14,4 +14,6 @@ public abstract class Behaviour implements EventHandler {
     protected final Card getCard() {
         return card;
     }
+
+    abstract public Behaviour duplicate();
 }

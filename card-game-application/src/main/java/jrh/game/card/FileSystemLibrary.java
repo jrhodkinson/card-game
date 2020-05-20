@@ -53,10 +53,10 @@ public class FileSystemLibrary implements Library {
             } else {
                 try {
                     Card card = objectMapper.readValue(file, Card.class);
-                    if (card.getId().isDebugId()) {
-                        debugCards.put(card.getId(), card);
+                    if (card.getCardId().isDebugId()) {
+                        debugCards.put(card.getCardId(), card);
                     } else {
-                        cards.put(card.getId(), card);
+                        cards.put(card.getCardId(), card);
                     }
                 } catch (IOException e) {
                     logger.error("Error reading card from file={}", file, e);

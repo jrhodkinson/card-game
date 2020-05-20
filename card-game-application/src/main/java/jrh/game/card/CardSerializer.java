@@ -19,7 +19,7 @@ public class CardSerializer extends StdSerializer<Card> {
     @Override
     public void serialize(Card card, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
-        gen.writeObjectField("id", card.getId());
+        gen.writeObjectField("id", card.getCardId());
         gen.writeObjectField("name", card.getName());
         gen.writeObjectField("cost", card.getCost());
         gen.writeObjectField("color", card.getColor());

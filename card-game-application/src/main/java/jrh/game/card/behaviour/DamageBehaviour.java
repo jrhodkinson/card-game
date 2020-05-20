@@ -20,4 +20,9 @@ public class DamageBehaviour extends Behaviour {
             match.getDamageController().damage(cardPlayed.getTarget().get(), this.damage);
         }
     }
+
+    @Override
+    public DamageBehaviour duplicate() {
+        return new DamageBehaviour(damage);
+    }
 }

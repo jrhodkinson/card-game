@@ -22,9 +22,9 @@ public class CardFactory {
 
     public Deck startingDeck() {
         Deck deck = new Deck();
-        deck.add(library.getDebugCard(CardId.Debug.MONEY));
-        deck.add(library.getDebugCard(CardId.Debug.DAMAGE));
-        deck.add(library.getDebugCard(CardId.Debug.DRAW));
+        deck.add(library.getDebugCard(CardId.Debug.MONEY).duplicate());
+        deck.add(library.getDebugCard(CardId.Debug.DAMAGE).duplicate());
+        deck.add(library.getDebugCard(CardId.Debug.DRAW).duplicate());
         Collections.shuffle(deck);
         deck.forEach(card -> eventBus.dispatch(new CardCreated(card)));
         return deck;
@@ -32,7 +32,7 @@ public class CardFactory {
 
     public Card randomCard() {
         List<Card> allCards = library.getAllCards();
-        Card card = allCards.get(random.nextInt(allCards.size()));
+        Card card = allCards.get(random.nextInt(allCards.size())).duplicate();
         eventBus.dispatch(new CardCreated(card));
         return card;
     }

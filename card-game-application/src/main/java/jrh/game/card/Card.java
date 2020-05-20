@@ -10,19 +10,21 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @JsonDeserialize(using = CardDeserializer.class)
 @JsonSerialize(using = CardSerializer.class)
 public class Card {
 
-    private final CardId id;
+    private final UUID instanceId = UUID.randomUUID();
+    private final CardId cardId;
     private final String name;
     private final int cost;
     private final Color color;
     private final Map<Class<? extends Behaviour>, Behaviour> behaviours = new HashMap<>();
 
     private Card(Builder builder) {
-        this.id = builder.id;
+        this.cardId = builder.cardId;
         this.name = builder.name;
         this.cost = builder.cost;
         this.color = builder.color;
@@ -40,8 +42,12 @@ public class Card {
         behaviours.values().forEach(behaviour -> behaviour.unregisterWith(eventBus));
     }
 
-    public CardId getId() {
-        return id;
+    public UUID getInstanceId() {
+        return instanceId;
+    }
+
+    public CardId getCardId() {
+        return cardId;
     }
 
     public String getName() {
@@ -73,9 +79,33 @@ public class Card {
         return behaviours.get(behaviourClass);
     }
 
+    Card duplicate() {
+        Card duplicate = Card.card(cardId)
+                .withName(name)
+                .withCost(cost)
+                .withColor(color)
+                .build();
+        for (Behaviour behaviour : behaviours.values()) {
+            duplicate.addBehaviour(behaviour.duplicate());
+        }
+        return duplicate;
+    }
+
     @Override
     public String toString() {
         return String.format("%s%s (%d)%s", color, name, cost, Color.RESET);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return this.instanceId.equals(((Card) o).instanceId);
+    }
+
+    @Override
+    public int hashCode() {
+        return instanceId.hashCode();
     }
 
     public interface NameSetter {
@@ -92,13 +122,13 @@ public class Card {
 
     public static class Builder implements NameSetter, CostSetter, ColorSetter {
 
-        private final CardId id;
+        private final CardId cardId;
         private String name;
         private int cost;
         private Color color;
 
-        private Builder(CardId id) {
-            this.id = id;
+        private Builder(CardId cardId) {
+            this.cardId = cardId;
         }
 
         public Builder withName(String name) {

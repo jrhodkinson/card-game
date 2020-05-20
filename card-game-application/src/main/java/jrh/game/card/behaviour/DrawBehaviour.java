@@ -20,4 +20,9 @@ public class DrawBehaviour extends Behaviour {
             match.getCardFlowController().drawCards(match.getActivePlayer(), amountToDraw);
         }
     }
+
+    @Override
+    public DrawBehaviour duplicate() {
+        return new DrawBehaviour(amountToDraw);
+    }
 }

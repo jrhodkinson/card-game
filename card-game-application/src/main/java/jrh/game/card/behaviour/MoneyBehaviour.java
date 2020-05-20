@@ -20,4 +20,9 @@ public class MoneyBehaviour extends Behaviour {
             match.getCurrentTurn().setMoney(match.getCurrentTurn().getMoney() + amount);
         }
     }
+
+    @Override
+    public MoneyBehaviour duplicate() {
+        return new MoneyBehaviour(amount);
+    }
 }

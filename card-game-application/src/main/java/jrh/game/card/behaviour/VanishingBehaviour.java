@@ -20,4 +20,9 @@ public class VanishingBehaviour extends Behaviour implements EventHandler {
             callback.unregister();
         }
     }
+
+    @Override
+    public VanishingBehaviour duplicate() {
+        return new VanishingBehaviour();
+    }
 }
