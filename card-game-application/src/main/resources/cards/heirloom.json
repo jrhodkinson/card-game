@@ -1,0 +1,15 @@
+{
+  "id": "heirloom",
+  "name": "Heirloom",
+  "cost": 4,
+  "color": "YELLOW",
+  "behaviours": [
+    [
+      "incrementing-money",
+      {
+        "amount": 1,
+        "increment": 1
+      }
+    ]
+  ]
+}

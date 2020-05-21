@@ -33,7 +33,7 @@ public class MatchStateController implements EventHandler {
         new ArrayList<>(activePlayer.getHand()).forEach(card -> cardFlowController.discardCard(activePlayer, card));
         cardFlowController.drawCards(activePlayer, Constants.INITIAL_HAND_SIZE - activePlayer.getHand().size());
         match.advanceToNextTurn();
-        match.getEventBus().dispatch(new TurnEnded());
+        match.getEventBus().dispatch(new TurnEnded(match.getInactivePlayer(), match.getActivePlayer()));
     }
 
     @Subscribe

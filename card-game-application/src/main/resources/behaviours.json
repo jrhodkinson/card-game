@@ -4,5 +4,6 @@
   "draw": "jrh.game.card.behaviour.DrawBehaviour",
   "vanishing": "jrh.game.card.behaviour.VanishingBehaviour",
   "incrementing-damage": "jrh.game.card.behaviour.IncrementingDamageBehaviour",
+  "incrementing-money": "jrh.game.card.behaviour.IncrementingMoneyBehaviour",
   "unplayable": "jrh.game.card.behaviour.UnplayableBehaviour"
 }

@@ -9,38 +9,38 @@ import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class IncrementingDamageBehaviour extends Behaviour {
+public class IncrementingMoneyBehaviour extends Behaviour {
 
-    private static final Logger logger = LogManager.getLogger(IncrementingDamageBehaviour.class);
+    private static final Logger logger = LogManager.getLogger(IncrementingMoneyBehaviour.class);
 
     @JsonProperty
-    private int damage;
+    private int amount;
 
     @JsonProperty
     private final int increment;
 
-    public IncrementingDamageBehaviour(@JsonProperty("damage") int damage, @JsonProperty("increment") int increment) {
-        this.damage = damage;
+    public IncrementingMoneyBehaviour(@JsonProperty("amount") int amount, @JsonProperty("increment") int increment) {
+        this.amount = amount;
         this.increment = increment;
     }
 
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
-            match.getDamageController().damage(cardPlayed.getTarget().get(), this.damage);
+            match.getCurrentTurn().setMoney(match.getCurrentTurn().getMoney() + amount);
         }
     }
 
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
         if (cardResolved.getCard().equals(this.getCard())) {
-            logger.info("Increasing damage of {} from {} by {}", this.getCard().getInstanceId(), damage, damage + increment);
-            this.damage += increment;
+            logger.info("Increasing money of {} from {} by {}", this.getCard().getInstanceId(), amount, amount + increment);
+            this.amount += increment;
         }
     }
 
     @Override
-    public IncrementingDamageBehaviour duplicate() {
-        return new IncrementingDamageBehaviour(damage, increment);
+    public IncrementingMoneyBehaviour duplicate() {
+        return new IncrementingMoneyBehaviour(amount, increment);
     }
 }
