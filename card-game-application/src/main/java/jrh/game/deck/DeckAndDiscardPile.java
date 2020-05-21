@@ -22,6 +22,10 @@ public class DeckAndDiscardPile {
         return discardPile;
     }
 
+    public boolean contains(Card card) {
+        return deck.contains(card) || discardPile.contains(card);
+    }
+
     public Optional<Card> draw() {
         if (deck.size() == 0) {
             if (discardPile.size() == 0) {

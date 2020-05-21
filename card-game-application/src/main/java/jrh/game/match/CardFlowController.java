@@ -23,6 +23,16 @@ public class CardFlowController {
         this.match = match;
     }
 
+    public Optional<Player> getOwner(Card card) {
+        if (match.getActivePlayer().getHand().contains(card) || match.getActivePlayer().getDeckAndDiscardPile().contains(card)) {
+            return Optional.of(match.getActivePlayer());
+        }
+        if (match.getInactivePlayer().getHand().contains(card) || match.getInactivePlayer().getDeckAndDiscardPile().contains(card)) {
+            return Optional.of(match.getActivePlayer());
+        }
+        return Optional.empty();
+    }
+
     public void playCard(Player player, Card card, Player target) {
         if (!match.getActivePlayer().equals(player)) {
             logger.error("Player wasn't the active player");

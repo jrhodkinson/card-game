@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jrh.game.event.bus.Callback;
 import jrh.game.event.bus.Subscribe;
 import jrh.game.event.impl.CardPlayed;
-import jrh.game.event.impl.CardResolved;
+import jrh.game.event.impl.TurnEnded;
 import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,8 +32,8 @@ public class IncrementingDamageBehaviour extends Behaviour {
     }
 
     @Subscribe
-    private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
-        if (cardResolved.getCard().equals(this.getCard())) {
+    private void turnEnded(TurnEnded turnEnded, Match match, Callback callback) {
+        if (match.getInactivePlayer().equals(match.getCardFlowController().getOwner(this.getCard()).orElse(null))) {
             logger.info("Incrementing damage of this card from {} by {}", damage, increment);
             this.damage += increment;
         }
