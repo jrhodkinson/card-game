@@ -3,5 +3,5 @@
   "damage": "jrh.game.card.behaviour.DamageBehaviour",
   "draw": "jrh.game.card.behaviour.DrawBehaviour",
   "vanishing": "jrh.game.card.behaviour.VanishingBehaviour",
-  "sticky": "jrh.game.card.behaviour.StickyBehaviour"
+  "incrementing-damage": "jrh.game.card.behaviour.IncrementingDamageBehaviour"
 }

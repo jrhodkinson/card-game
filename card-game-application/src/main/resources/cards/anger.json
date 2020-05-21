@@ -1,0 +1,15 @@
+{
+  "id": "anger",
+  "name": "Anger",
+  "cost": 3,
+  "color": "RED",
+  "behaviours": [
+    [
+      "incrementing-damage",
+      {
+        "damage": 1,
+        "increment": 2
+      }
+    ]
+  ]
+}

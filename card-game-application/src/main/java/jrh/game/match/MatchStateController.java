@@ -3,7 +3,7 @@ package jrh.game.match;
 import jrh.game.event.EventHandler;
 import jrh.game.event.bus.Callback;
 import jrh.game.event.bus.Subscribe;
-import jrh.game.event.impl.EndedTurn;
+import jrh.game.event.impl.TurnEnded;
 import jrh.game.event.impl.MatchEnded;
 import jrh.game.event.impl.MatchStarted;
 import jrh.game.event.impl.PlayerTookDamage;
@@ -33,7 +33,7 @@ public class MatchStateController implements EventHandler {
         new ArrayList<>(activePlayer.getHand()).forEach(card -> cardFlowController.discardCard(activePlayer, card));
         cardFlowController.drawCards(activePlayer, Constants.INITIAL_HAND_SIZE - activePlayer.getHand().size());
         match.advanceToNextTurn();
-        match.getEventBus().dispatch(new EndedTurn());
+        match.getEventBus().dispatch(new TurnEnded());
     }
 
     @Subscribe
