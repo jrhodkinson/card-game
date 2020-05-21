@@ -1,0 +1,16 @@
+{
+  "id": "contingency-plan",
+  "name": "Contingency Plan",
+  "cost": 7,
+  "color": "GREEN",
+  "behaviours": [
+    [
+      "draw",
+      1
+    ],
+    [
+      "heal",
+      3
+    ]
+  ]
+}

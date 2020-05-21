@@ -7,6 +7,9 @@ import jrh.game.action.PlayCard;
 import jrh.game.card.Card;
 import jrh.game.card.FileSystemLibrary;
 import jrh.game.card.Library;
+import jrh.game.card.behaviour.DamageBehaviour;
+import jrh.game.card.behaviour.HealBehaviour;
+import jrh.game.card.behaviour.IncrementingDamageBehaviour;
 import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
@@ -85,7 +88,13 @@ public class Application {
     }
 
     private void playCard(Match match, Card card) {
-        (new PlayCard(match, match.getActivePlayer(), card, match.getInactivePlayer())).perform();
+        if (card.hasBehaviour(HealBehaviour.class)) {
+            (new PlayCard(match, match.getActivePlayer(), card, match.getActivePlayer())).perform();
+        } else if (card.hasBehaviour(DamageBehaviour.class) || card.hasBehaviour(IncrementingDamageBehaviour.class)) {
+            (new PlayCard(match, match.getActivePlayer(), card, match.getInactivePlayer())).perform();
+        } else {
+            (new PlayCard(match, match.getActivePlayer(), card, null)).perform();
+        }
     }
 
     private String option(String plainText) {

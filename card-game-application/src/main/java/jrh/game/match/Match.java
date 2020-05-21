@@ -18,7 +18,7 @@ public class Match {
     private final EventBus eventBus;
     private final CardFlowController cardFlowController;
     private final MatchStateController matchStateController;
-    private final DamageController damageController;
+    private final HealthController healthController;
     private final CardFactory cardFactory;
     private final Store store;
     private final Player firstPlayer;
@@ -33,7 +33,7 @@ public class Match {
         this.cardFlowController = new CardFlowController(this);
         this.matchStateController = new MatchStateController(this);
         matchStateController.registerWith(eventBus);
-        this.damageController = new DamageController(this);
+        this.healthController = new HealthController(this);
         eventBus.register(new CardBehaviourRegistrar());
         this.cardFactory = new CardFactory(eventBus, library, new Random());
         this.store = new Store(cardFactory, Constants.STORE_SIZE, Collections.emptyList());
@@ -54,8 +54,8 @@ public class Match {
         return matchStateController;
     }
 
-    public DamageController getDamageController() {
-        return damageController;
+    public HealthController getHealthController() {
+        return healthController;
     }
 
     public Store getStore() {

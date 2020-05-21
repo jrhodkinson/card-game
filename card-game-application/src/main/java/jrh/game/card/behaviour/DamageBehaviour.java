@@ -17,7 +17,7 @@ public class DamageBehaviour extends Behaviour {
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
-            match.getDamageController().damage(cardPlayed.getTarget().get(), this.damage);
+            match.getHealthController().damage(cardPlayed.getTarget().get(), this.damage);
         }
     }
 

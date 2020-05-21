@@ -6,10 +6,14 @@ import jrh.game.deck.Deck;
 import jrh.game.deck.DeckAndDiscardPile;
 import jrh.game.deck.Hand;
 import jrh.game.util.Constants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
 public class Player {
+
+    private static final Logger logger = LogManager.getLogger(Player.class);
 
     private final User user;
     private final Hand hand = new Hand();
@@ -37,13 +41,17 @@ public class Player {
         return health;
     }
 
-    void damage(int amount) {
-        health -= amount;
+    void changeHealth(int amount) {
+        health += amount;
     }
 
     Optional<Card> drawToHand() {
         Optional<Card> card = deckAndDiscardPile.draw();
-        card.ifPresent(hand::add);
+        if (card.isPresent()) {
+            hand.add(card.get());
+        } else {
+            logger.info("Unable to draw card, empty deck and discard pile");
+        }
         return card;
     }
 }
