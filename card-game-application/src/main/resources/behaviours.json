@@ -3,5 +3,6 @@
   "damage": "jrh.game.card.behaviour.DamageBehaviour",
   "draw": "jrh.game.card.behaviour.DrawBehaviour",
   "vanishing": "jrh.game.card.behaviour.VanishingBehaviour",
-  "incrementing-damage": "jrh.game.card.behaviour.IncrementingDamageBehaviour"
+  "incrementing-damage": "jrh.game.card.behaviour.IncrementingDamageBehaviour",
+  "unplayable": "jrh.game.card.behaviour.UnplayableBehaviour"
 }

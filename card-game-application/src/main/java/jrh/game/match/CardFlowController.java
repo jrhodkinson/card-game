@@ -1,6 +1,7 @@
 package jrh.game.match;
 
 import jrh.game.card.Card;
+import jrh.game.card.behaviour.UnplayableBehaviour;
 import jrh.game.deck.DiscardPile;
 import jrh.game.event.impl.CardBought;
 import jrh.game.event.impl.CardDestroyed;
@@ -25,6 +26,10 @@ public class CardFlowController {
     public void playCard(Player player, Card card, Player target) {
         if (!match.getActivePlayer().equals(player)) {
             logger.error("Player wasn't the active player");
+            return;
+        }
+        if (card.hasBehaviour(UnplayableBehaviour.class)) {
+            logger.error("Card has UnplayableBehaviour");
             return;
         }
         if (!match.getActivePlayer().getHand().remove(card)) {
