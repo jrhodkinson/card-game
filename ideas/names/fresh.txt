@@ -23,7 +23,6 @@ Option
 Crash
 Burn
 Authority
-Inflation
 Monetary policy
 Thief
 Ivory
@@ -52,3 +51,4 @@ Regulate
 Integrity
 Praise
 Temple
+Altruism

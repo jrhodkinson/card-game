@@ -1,0 +1,16 @@
+{
+  "id": "blood-money",
+  "name": "Blood Money",
+  "cost": 3,
+  "color": "YELLOW",
+  "behaviours": [
+    [
+      "sacrifice",
+      1
+    ],
+    [
+      "money",
+      3
+    ]
+  ]
+}
