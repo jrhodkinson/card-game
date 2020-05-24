@@ -6,6 +6,7 @@ import jrh.game.event.bus.Subscribe;
 import jrh.game.event.impl.CardPlayed;
 import jrh.game.event.impl.CardResolved;
 import jrh.game.match.Match;
+import jrh.game.match.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +28,9 @@ public class IncrementingDamageBehaviour extends Behaviour {
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
-            match.getHealthController().damage(cardPlayed.getTarget().get(), this.damage);
+            Player target = cardPlayed.getTarget().get();
+            logger.info("Damaging player={} by amount={}", target, damage);
+            match.getHealthController().damage(target, this.damage);
         }
     }
 
