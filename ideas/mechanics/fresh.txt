@@ -1,0 +1,2 @@
+Cards that modify costs of other cards
+Cards where you gain more than one card when you gain them
