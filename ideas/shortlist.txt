@@ -1,2 +1,1 @@
 Inflation: All cards now cost 1 more
-Ill-gotten gains: 3, 2 money, on purchasing, deal 2 damage to your opponent

@@ -46,14 +46,16 @@ public class Application {
             System.out.println(match.toString());
             Turn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
-            String optionFormat = "%2d: %-30s";
+            String optionFormat = "%2d: %-32s";
             System.out.printf(optionFormat, 0, option("Play all"));
             for (int i = 0; i < hand.size(); i++) {
                 System.out.printf(optionFormat, i + 1, hand.get(i));
             }
-            System.out.println();
             Row row = match.getStore().getRow();
             for (int i = 0; i < row.size(); i++) {
+                if (i % 7 == 0) {
+                    System.out.println();
+                }
                 System.out.printf(optionFormat, i + 1 + hand.size(), row.get(i));
             }
             List<Pile> permanentPiles = match.getStore().getPermanentPiles();

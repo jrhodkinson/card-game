@@ -3,7 +3,7 @@ package jrh.game.match;
 import jrh.game.card.Card;
 import jrh.game.card.behaviour.UnplayableBehaviour;
 import jrh.game.deck.DiscardPile;
-import jrh.game.event.impl.CardBought;
+import jrh.game.event.impl.CardPurchased;
 import jrh.game.event.impl.CardDestroyed;
 import jrh.game.event.impl.CardPlayed;
 import jrh.game.event.impl.CardResolved;
@@ -79,7 +79,7 @@ public class CardFlowController {
         }
         match.getCurrentTurn().setMoney(money - cost);
         match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
-        match.getEventBus().dispatch(new CardBought(match.getActivePlayer(), card));
+        match.getEventBus().dispatch(new CardPurchased(match.getActivePlayer(), card));
     }
 
     public void buyCardFromPermanentPile(Player player, Card card) {
@@ -99,7 +99,7 @@ public class CardFlowController {
         }
         match.getCurrentTurn().setMoney(money - cost);
         match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
-        match.getEventBus().dispatch(new CardBought(match.getActivePlayer(), card));
+        match.getEventBus().dispatch(new CardPurchased(match.getActivePlayer(), card));
     }
 
     public void discardCard(Player player, Card card) {

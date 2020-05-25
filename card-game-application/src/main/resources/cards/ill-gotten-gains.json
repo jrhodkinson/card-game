@@ -1,0 +1,16 @@
+{
+  "id": "ill-gotten-gains",
+  "name": "Ill-gotten gains",
+  "cost": 4,
+  "color": "YELLOW",
+  "behaviours": [
+    [
+      "damage-on-purchase",
+      3
+    ],
+    [
+      "money",
+      2
+    ]
+  ]
+}

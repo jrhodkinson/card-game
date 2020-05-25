@@ -74,6 +74,13 @@ public class Match {
         return firstPlayerIsActive ? secondPlayer : firstPlayer;
     }
 
+    public Player getOtherPlayer(Player player) {
+        if (player.equals(firstPlayer)) {
+            return secondPlayer;
+        }
+        return firstPlayer;
+    }
+
     public boolean isOver() {
         return isOver;
     }

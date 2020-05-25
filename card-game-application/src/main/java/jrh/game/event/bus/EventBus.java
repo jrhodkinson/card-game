@@ -39,7 +39,7 @@ public class EventBus {
             logger.debug("Processing event={}", event);
             List<Subscriber> subscribers = subscriberRegistry.getSubscribers(event.getClass());
             for (Subscriber subscriber : subscribers) {
-                logger.debug("TX event={} to subscriber of type={}", event, subscriber.getHandler().getClass());
+                logger.trace("TX event={} to subscriber of type={}", event, subscriber.getHandler().getClass());
                 subscriber.dispatch(event, match, callback);
                 if (callback.isDirty()) {
                     events.addAll(callback.getEnqueuedEvents());

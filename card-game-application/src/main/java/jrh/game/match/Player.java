@@ -54,4 +54,9 @@ public class Player {
         }
         return card;
     }
+
+    @Override
+    public String toString() {
+        return user.toString();
+    }
 }

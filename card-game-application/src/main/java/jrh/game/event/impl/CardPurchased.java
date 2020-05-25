@@ -4,12 +4,12 @@ import jrh.game.card.Card;
 import jrh.game.event.Event;
 import jrh.game.match.Player;
 
-public class CardBought implements Event {
+public class CardPurchased implements Event {
 
     private final Player player;
     private final Card card;
 
-    public CardBought(Player player, Card card) {
+    public CardPurchased(Player player, Card card) {
         this.player = player;
         this.card = card;
     }
