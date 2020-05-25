@@ -13,3 +13,29 @@ Metronome
 Trojan horse
 Revelation
 Thunder
+
+7 Deadly Sins
+Lust
+ - In accordance with the words of Henry Edward Manning, the impurity of lust transforms one into "a slave of the devil".
+ - Card which *must* be played, does something interesting
+Gluttony
+ - Gain three money cards?
+Greed
+Sloth
+Wrath
+Envy
+ - Dante defined envy as "a desire to deprive other men of theirs". In Dante's Purgatory,
+   the punishment for the envious is to have their eyes sewn shut with wire because they gained
+   sinful pleasure from seeing others brought low.
+ - Steal a card from opponent, once?
+ - Downside, can't see new items in the shop for X turns?
+Pride
+
+7 Heavenly Virtues
+Prudence
+Justice
+Temperance
+Courage
+Faith
+Hope
+Charity

@@ -1,2 +1,2 @@
 Inflation: All cards now cost 1 more
-Ill-gotten gains: Free, 2 money, but gain an unplayable '{flavour-y name}' which clogs up deck
+Ill-gotten gains: 3, 2 money, on purchasing, deal 2 damage to your opponent
