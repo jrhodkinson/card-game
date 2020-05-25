@@ -1,3 +1,7 @@
 Cards that modify costs of other cards
 Cards where you gain more than one card when you gain them
 Card where you gain a bad card at the same time
+Poison
+Strength
+Status effect that allows person to buy things cheaper
+Card which gives choices

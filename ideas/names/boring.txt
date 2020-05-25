@@ -59,3 +59,40 @@ Two-way mirror
 Knight
 Lance
 Lightning Bolt
+Thief
+Turntable
+Acid
+Whip
+Golem
+Goliath
+Happiness
+Happy talk
+Firework
+Petard
+Trebuchet
+Award
+Medal
+Music box
+Decoration
+Crash
+Burn
+Monetary policy
+Authority
+Black market
+Modulation
+Judas
+Mesh
+Solitude
+Camp
+Vocation
+Hell
+Blood
+Fade
+Cobbled Alley
+Abuse
+Boycott
+Enzyme
+Praise
+Temple
+Altruism
+Haven
