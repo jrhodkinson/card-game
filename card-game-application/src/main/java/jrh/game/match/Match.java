@@ -80,9 +80,10 @@ public class Match {
         return winner;
     }
 
-    void start() {
+    public void start() {
         setUpControllers();
         firstPlayerIsActive = nextBoolean();
+        getController(MatchStateController.class).startMatch();
     }
 
     void advanceToNextTurn() {
@@ -111,9 +112,11 @@ public class Match {
 
     @Override
     public String toString() {
-        return getInactivePlayer().getUser() + " (" + getInactivePlayer().getHealth() + ")\n" + currentTurn.getMoney()
+        return getActivePlayer().getUser() + " (" + getActivePlayer().getHealth() + ") vs " + getInactivePlayer().getUser() + " (" + getInactivePlayer().getHealth() + ")\n" + currentTurn.getMoney()
                 + " money, " + currentTurn.getPlayedCards() + " played\n"
                 + getActivePlayer().getDeckAndDiscardPile().getDeck().size() + " in deck, "
-                + getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard";
+                + getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard\n"
+                + "active structures: " + getActivePlayer().getStructures().toString() + "\n"
+                + "inactive structures: " + getInactivePlayer().getStructures().toString();
     }
 }

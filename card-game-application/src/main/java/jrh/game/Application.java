@@ -36,7 +36,7 @@ public class Application {
 
     void start() {
         Match match = new Match(library, new User("Hero"), new User("Villain"));
-        match.getController(MatchStateController.class).startMatch();
+        match.start();
         simulateGame(match);
     }
 

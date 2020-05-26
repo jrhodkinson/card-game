@@ -5,6 +5,7 @@ import jrh.game.card.Card;
 import jrh.game.deck.Deck;
 import jrh.game.deck.DeckAndDiscardPile;
 import jrh.game.deck.Hand;
+import jrh.game.structure.Structures;
 import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ public class Player {
     private final User user;
     private final Hand hand = new Hand();
     private final DeckAndDiscardPile deckAndDiscardPile;
+    private final Structures structures = new Structures();
     private int health = Constants.HEALTH;
 
     public Player(User user, Deck deck) {
@@ -35,6 +37,10 @@ public class Player {
 
     public DeckAndDiscardPile getDeckAndDiscardPile() {
         return deckAndDiscardPile;
+    }
+
+    public Structures getStructures() {
+        return structures;
     }
 
     public int getHealth() {
