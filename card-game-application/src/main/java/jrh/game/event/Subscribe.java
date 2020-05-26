@@ -1,4 +1,4 @@
-package jrh.game.event.bus;
+package jrh.game.event;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

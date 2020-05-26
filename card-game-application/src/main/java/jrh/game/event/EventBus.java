@@ -1,7 +1,5 @@
-package jrh.game.event.bus;
+package jrh.game.event;
 
-import jrh.game.event.Event;
-import jrh.game.event.EventHandler;
 import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

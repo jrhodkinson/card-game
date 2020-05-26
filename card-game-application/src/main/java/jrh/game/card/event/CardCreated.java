@@ -1,4 +1,4 @@
-package jrh.game.event.impl;
+package jrh.game.card.event;
 
 import jrh.game.card.Card;
 import jrh.game.event.Event;

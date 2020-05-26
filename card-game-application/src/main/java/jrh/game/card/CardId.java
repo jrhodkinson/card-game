@@ -36,22 +36,20 @@ public final class CardId {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         CardId cardId1 = (CardId) o;
 
-        return new EqualsBuilder()
-                .append(cardId, cardId1.cardId)
-                .isEquals();
+        return new EqualsBuilder().append(cardId, cardId1.cardId).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(cardId)
-                .toHashCode();
+        return new HashCodeBuilder(17, 37).append(cardId).toHashCode();
     }
 
     public static class Debug {

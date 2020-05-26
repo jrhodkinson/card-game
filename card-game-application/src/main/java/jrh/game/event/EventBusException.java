@@ -1,4 +1,4 @@
-package jrh.game.event.bus;
+package jrh.game.event;
 
 public class EventBusException extends RuntimeException {
 

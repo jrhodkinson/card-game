@@ -3,7 +3,7 @@ package jrh.game.card;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jrh.game.card.behaviour.Behaviour;
-import jrh.game.event.bus.EventBus;
+import jrh.game.event.EventBus;
 import jrh.game.util.Color;
 
 import java.util.Collection;
@@ -80,11 +80,7 @@ public class Card {
     }
 
     Card duplicate() {
-        Card duplicate = Card.card(cardId)
-                .withName(name)
-                .withCost(cost)
-                .withColor(color)
-                .build();
+        Card duplicate = Card.card(cardId).withName(name).withCost(cost).withColor(color).build();
         for (Behaviour behaviour : behaviours.values()) {
             duplicate.addBehaviour(behaviour.duplicate());
         }
@@ -98,8 +94,10 @@ public class Card {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         return this.instanceId.equals(((Card) o).instanceId);
     }
 

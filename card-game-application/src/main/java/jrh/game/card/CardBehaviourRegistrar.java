@@ -1,9 +1,9 @@
 package jrh.game.card;
 
 import jrh.game.event.EventHandler;
-import jrh.game.event.bus.Subscribe;
-import jrh.game.event.impl.CardCreated;
-import jrh.game.event.impl.CardDestroyed;
+import jrh.game.event.Subscribe;
+import jrh.game.card.event.CardCreated;
+import jrh.game.card.event.CardDestroyed;
 import jrh.game.match.Match;
 
 public class CardBehaviourRegistrar implements EventHandler {

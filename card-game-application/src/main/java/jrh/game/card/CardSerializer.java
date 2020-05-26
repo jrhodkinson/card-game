@@ -27,7 +27,8 @@ public class CardSerializer extends StdSerializer<Card> {
         for (Behaviour behaviour : card.getBehaviours()) {
             gen.writeStartArray();
             gen.writeString(BehaviourSerializationKeys.getKey(behaviour.getClass()));
-            if (Arrays.stream(behaviour.getClass().getDeclaredFields()).anyMatch(field -> !field.getType().equals(Logger.class) && !field.getType().equals(Card.class))) {
+            if (Arrays.stream(behaviour.getClass().getDeclaredFields())
+                    .anyMatch(field -> !field.getType().equals(Logger.class) && !field.getType().equals(Card.class))) {
                 gen.writeObject(behaviour);
             }
             gen.writeEndArray();

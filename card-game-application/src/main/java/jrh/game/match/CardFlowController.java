@@ -3,12 +3,12 @@ package jrh.game.match;
 import jrh.game.card.Card;
 import jrh.game.card.behaviour.UnplayableBehaviour;
 import jrh.game.deck.DiscardPile;
-import jrh.game.event.impl.CardPurchased;
-import jrh.game.event.impl.CardDestroyed;
-import jrh.game.event.impl.CardPlayed;
-import jrh.game.event.impl.CardResolved;
-import jrh.game.event.impl.DiscardedCard;
-import jrh.game.event.impl.DrewCard;
+import jrh.game.match.event.CardPurchased;
+import jrh.game.card.event.CardDestroyed;
+import jrh.game.card.event.CardPlayed;
+import jrh.game.card.event.CardResolved;
+import jrh.game.match.event.DiscardedCard;
+import jrh.game.match.event.DrewCard;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,10 +24,12 @@ public class CardFlowController {
     }
 
     public Optional<Player> getOwner(Card card) {
-        if (match.getActivePlayer().getHand().contains(card) || match.getActivePlayer().getDeckAndDiscardPile().contains(card)) {
+        if (match.getActivePlayer().getHand().contains(card)
+                || match.getActivePlayer().getDeckAndDiscardPile().contains(card)) {
             return Optional.of(match.getActivePlayer());
         }
-        if (match.getInactivePlayer().getHand().contains(card) || match.getInactivePlayer().getDeckAndDiscardPile().contains(card)) {
+        if (match.getInactivePlayer().getHand().contains(card)
+                || match.getInactivePlayer().getDeckAndDiscardPile().contains(card)) {
             return Optional.of(match.getActivePlayer());
         }
         return Optional.empty();

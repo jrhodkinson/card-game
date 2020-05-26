@@ -1,6 +1,4 @@
-package jrh.game.event.bus;
-
-import jrh.game.event.Event;
+package jrh.game.event;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -60,10 +60,12 @@ public class Application {
             }
             List<Pile> permanentPiles = match.getStore().getPermanentPiles();
             for (int i = 0; i < permanentPiles.size(); i++) {
-                System.out.printf(optionFormat, i + 1 + hand.size() + row.size(), permanentPiles.get(i).getCard() + " - " + permanentPiles.get(i).getQuantity());
+                System.out.printf(optionFormat, i + 1 + hand.size() + row.size(),
+                        permanentPiles.get(i).getCard() + " - " + permanentPiles.get(i).getQuantity());
             }
-            System.out.printf("%n" + optionFormat + optionFormat + "%n", permanentPiles.size() + row.size() + hand.size() + 1,
-                    option("End turn"), permanentPiles.size() + row.size() + hand.size() + 2, option("Quit"));
+            System.out.printf("%n" + optionFormat + optionFormat + "%n",
+                    permanentPiles.size() + row.size() + hand.size() + 1, option("End turn"),
+                    permanentPiles.size() + row.size() + hand.size() + 2, option("Quit"));
             int option = scanner.nextInt();
             if (option == 0) {
                 while (hand.size() > 0 && !match.isOver()) {
@@ -74,7 +76,8 @@ public class Application {
             } else if (option >= hand.size() + 1 && option < hand.size() + row.size() + 1) {
                 Card card = row.get(option - 1 - hand.size());
                 (new BuyCardFromRow(match, match.getActivePlayer(), card)).perform();
-            } else if (option >= hand.size() + row.size() + 1 && option < hand.size() + row.size() + permanentPiles.size() + 1) {
+            } else if (option >= hand.size() + row.size() + 1
+                    && option < hand.size() + row.size() + permanentPiles.size() + 1) {
                 Card card = permanentPiles.get(option - 1 - hand.size() - row.size()).getCard();
                 (new BuyCardFromPermanentPile(match, match.getActivePlayer(), card)).perform();
             } else if (option == hand.size() + row.size() + permanentPiles.size() + 1) {

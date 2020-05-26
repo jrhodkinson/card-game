@@ -1,14 +1,21 @@
-package jrh.game.event.impl;
+package jrh.game.match.event;
 
 import jrh.game.card.Card;
 import jrh.game.event.Event;
+import jrh.game.match.Player;
 
-public class CardDestroyed implements Event {
+public class DrewCard implements Event {
 
+    private final Player player;
     private final Card card;
 
-    public CardDestroyed(Card card) {
+    public DrewCard(Player player, Card card) {
+        this.player = player;
         this.card = card;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public Card getCard() {

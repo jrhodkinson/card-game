@@ -1,7 +1,5 @@
-package jrh.game.event.bus;
+package jrh.game.event;
 
-import jrh.game.event.Event;
-import jrh.game.event.EventHandler;
 import jrh.game.match.Match;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -56,10 +54,7 @@ public class Subscriber {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("method", method)
-                .append("eventType", eventType)
-                .append("parameterCount", parameterCount)
-                .toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("method", method)
+                .append("eventType", eventType).append("parameterCount", parameterCount).toString();
     }
 }

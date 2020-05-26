@@ -1,8 +1,8 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.event.bus.Subscribe;
-import jrh.game.event.impl.CardPlayed;
+import jrh.game.event.Subscribe;
+import jrh.game.card.event.CardPlayed;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +24,7 @@ public class SacrificeBehaviour extends Behaviour {
         if (cardPlayed.getCard().equals(this.getCard())) {
             Player target = cardPlayed.getPlayer();
             logger.info("Damaging player={} by amount={}", target, damage);
-            match.getHealthController().damage(target, this.damage);
+            match.getPlayerHealthController().damage(target, this.damage);
         }
     }
 

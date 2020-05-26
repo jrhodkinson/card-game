@@ -38,14 +38,17 @@ public class CardDeserializer extends StdDeserializer<Card> {
             if (behaviourJson.size() == 1) {
                 try {
                     card.addBehaviour(behaviourClass.getConstructor().newInstance());
-                } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    logger.error("Error instantiating behaviour={} for cardId={} with no-args constructor", behaviourJson, tree.get("id"), e);
+                } catch (InstantiationException | NoSuchMethodException | IllegalAccessException
+                        | InvocationTargetException e) {
+                    logger.error("Error instantiating behaviour={} for cardId={} with no-args constructor",
+                            behaviourJson, tree.get("id"), e);
                 }
             } else if (behaviourJson.size() == 2) {
                 Behaviour behaviour = behaviourJson.get(1).traverse(jp.getCodec()).readValueAs(behaviourClass);
                 card.addBehaviour(behaviour);
             } else {
-                logger.error("Invalid behaviour={} for cardId={}, too many elements in array", behaviourJson, tree.get("id"));
+                logger.error("Invalid behaviour={} for cardId={}, too many elements in array", behaviourJson,
+                        tree.get("id"));
             }
         }
         return card;

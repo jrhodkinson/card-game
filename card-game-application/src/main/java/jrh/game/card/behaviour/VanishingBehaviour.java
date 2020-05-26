@@ -1,9 +1,9 @@
 package jrh.game.card.behaviour;
 
 import jrh.game.event.EventHandler;
-import jrh.game.event.bus.Callback;
-import jrh.game.event.bus.Subscribe;
-import jrh.game.event.impl.CardResolved;
+import jrh.game.event.Callback;
+import jrh.game.event.Subscribe;
+import jrh.game.card.event.CardResolved;
 import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,29 +1,21 @@
-package jrh.game.event.impl;
+package jrh.game.match.event;
 
 import jrh.game.card.Card;
 import jrh.game.event.Event;
 import jrh.game.match.Player;
 
-import java.util.Optional;
-
-public class CardPlayed implements Event {
+public class CardPurchased implements Event {
 
     private final Player player;
-    private final Player target;
     private final Card card;
 
-    public CardPlayed(Player player, Player target, Card card) {
+    public CardPurchased(Player player, Card card) {
         this.player = player;
-        this.target = target;
         this.card = card;
     }
 
     public Player getPlayer() {
         return player;
-    }
-
-    public Optional<Player> getTarget() {
-        return Optional.ofNullable(target);
     }
 
     public Card getCard() {

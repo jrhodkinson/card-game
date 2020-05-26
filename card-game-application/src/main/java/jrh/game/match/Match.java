@@ -5,7 +5,7 @@ import jrh.game.card.CardBehaviourRegistrar;
 import jrh.game.card.CardFactory;
 import jrh.game.card.Library;
 import jrh.game.deck.Store;
-import jrh.game.event.bus.EventBus;
+import jrh.game.event.EventBus;
 import jrh.game.util.Constants;
 
 import java.util.Collections;
@@ -18,7 +18,7 @@ public class Match {
     private final EventBus eventBus;
     private final CardFlowController cardFlowController;
     private final MatchStateController matchStateController;
-    private final HealthController healthController;
+    private final PlayerHealthController playerHealthController;
     private final CardFactory cardFactory;
     private final Store store;
     private final Player firstPlayer;
@@ -33,7 +33,7 @@ public class Match {
         this.cardFlowController = new CardFlowController(this);
         this.matchStateController = new MatchStateController(this);
         matchStateController.registerWith(eventBus);
-        this.healthController = new HealthController(this);
+        this.playerHealthController = new PlayerHealthController(this);
         eventBus.register(new CardBehaviourRegistrar());
         this.cardFactory = new CardFactory(eventBus, library, new Random());
         this.store = new Store(cardFactory, Constants.STORE_SIZE, Collections.emptyList());
@@ -54,8 +54,8 @@ public class Match {
         return matchStateController;
     }
 
-    public HealthController getHealthController() {
-        return healthController;
+    public PlayerHealthController getPlayerHealthController() {
+        return playerHealthController;
     }
 
     public Store getStore() {

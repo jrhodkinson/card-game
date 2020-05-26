@@ -1,8 +1,8 @@
 package jrh.game.card;
 
 import jrh.game.deck.Deck;
-import jrh.game.event.bus.EventBus;
-import jrh.game.event.impl.CardCreated;
+import jrh.game.event.EventBus;
+import jrh.game.card.event.CardCreated;
 
 import java.util.Collections;
 import java.util.List;

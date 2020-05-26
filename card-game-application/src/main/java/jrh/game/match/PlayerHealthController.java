@@ -1,16 +1,16 @@
 package jrh.game.match;
 
-import jrh.game.event.impl.PlayerTookDamage;
+import jrh.game.match.event.PlayerTookDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class HealthController {
+public class PlayerHealthController {
 
-    private static final Logger logger = LogManager.getLogger(HealthController.class);
+    private static final Logger logger = LogManager.getLogger(PlayerHealthController.class);
 
     private final Match match;
 
-    public HealthController(Match match) {
+    public PlayerHealthController(Match match) {
         this.match = match;
     }
 

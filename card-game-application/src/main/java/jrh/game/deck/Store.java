@@ -21,8 +21,7 @@ public class Store {
 
     public boolean removeFromPile(Card card) {
         Optional<Pile> optionalPile = permanentPiles.stream()
-                .filter(pile -> pile.getCard().equals(card) && !pile.isEmpty())
-                .findFirst();
+                .filter(pile -> pile.getCard().equals(card) && !pile.isEmpty()).findFirst();
         if (optionalPile.isPresent()) {
             optionalPile.get().take();
             return true;

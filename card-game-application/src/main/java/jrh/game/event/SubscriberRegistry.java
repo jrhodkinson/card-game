@@ -1,7 +1,5 @@
-package jrh.game.event.bus;
+package jrh.game.event;
 
-import jrh.game.event.Event;
-import jrh.game.event.EventHandler;
 import jrh.game.match.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +22,7 @@ public class SubscriberRegistry {
     void register(EventHandler eventHandler) {
         logger.info("Registering event handler of type={}", eventHandler.getClass().getSimpleName());
         Method[] allMethods = eventHandler.getClass().getDeclaredMethods();
-        for (Method method : allMethods){
+        for (Method method : allMethods) {
             if (method.isAnnotationPresent(Subscribe.class)) {
                 verifyTypeSignature(method);
                 Subscriber subscriber = new Subscriber(eventHandler, method);
@@ -46,8 +44,7 @@ public class SubscriberRegistry {
     }
 
     List<Subscriber> getSubscribers(Class<? extends Event> eventType) {
-        return subscribers.stream()
-                .filter(subscriber -> subscriber.getEventType().isAssignableFrom(eventType))
+        return subscribers.stream().filter(subscriber -> subscriber.getEventType().isAssignableFrom(eventType))
                 .collect(Collectors.toList());
     }
 

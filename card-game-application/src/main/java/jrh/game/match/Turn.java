@@ -28,7 +28,7 @@ public class Turn {
     }
 
     boolean removePlayedCard(Card card) {
-       return playedCards.remove(card);
+        return playedCards.remove(card);
     }
 
     void clearPlayedCards() {
