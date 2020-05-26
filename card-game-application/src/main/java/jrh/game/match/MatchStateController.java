@@ -11,7 +11,7 @@ import jrh.game.util.Constants;
 
 import java.util.ArrayList;
 
-public class MatchStateController implements EventHandler {
+public class MatchStateController implements Controller, EventHandler {
 
     private final Match match;
 
@@ -19,8 +19,13 @@ public class MatchStateController implements EventHandler {
         this.match = match;
     }
 
+    @Override
+    public void initialise() {
+        match.getEventBus().register(this);
+    }
+
     public void startMatch() {
-        CardFlowController cardFlowController = match.getCardFlowController();
+        CardFlowController cardFlowController = match.getController(CardFlowController.class);
         cardFlowController.drawCards(match.getActivePlayer(), Constants.INITIAL_HAND_SIZE);
         cardFlowController.drawCards(match.getInactivePlayer(), Constants.INITIAL_HAND_SIZE);
         match.getEventBus().dispatch(new MatchStarted());
@@ -28,7 +33,7 @@ public class MatchStateController implements EventHandler {
 
     public void endTurn() {
         Player activePlayer = match.getActivePlayer();
-        CardFlowController cardFlowController = match.getCardFlowController();
+        CardFlowController cardFlowController = match.getController(CardFlowController.class);
         cardFlowController.discardAllPlayedCards(activePlayer);
         new ArrayList<>(activePlayer.getHand()).forEach(card -> cardFlowController.discardCard(activePlayer, card));
         cardFlowController.drawCards(activePlayer, Constants.INITIAL_HAND_SIZE - activePlayer.getHand().size());

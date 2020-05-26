@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class CardFlowController {
+public class CardFlowController implements Controller {
 
     private static final Logger logger = LogManager.getLogger(CardFlowController.class);
     private final Match match;

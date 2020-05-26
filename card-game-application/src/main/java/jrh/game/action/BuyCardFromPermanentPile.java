@@ -1,6 +1,7 @@
 package jrh.game.action;
 
 import jrh.game.card.Card;
+import jrh.game.match.CardFlowController;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 
@@ -18,6 +19,6 @@ public class BuyCardFromPermanentPile implements Action {
 
     @Override
     public void perform() {
-        match.getCardFlowController().buyCardFromPermanentPile(player, card);
+        match.getController(CardFlowController.class).buyCardFromPermanentPile(player, card);
     }
 }

@@ -1,6 +1,7 @@
 package jrh.game.action;
 
 import jrh.game.card.Card;
+import jrh.game.match.CardFlowController;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
 import org.apache.logging.log4j.LogManager;
@@ -24,6 +25,6 @@ public class PlayCard implements Action {
 
     @Override
     public void perform() {
-        match.getCardFlowController().playCard(player, card, target);
+        match.getController(CardFlowController.class).playCard(player, card, target);
     }
 }

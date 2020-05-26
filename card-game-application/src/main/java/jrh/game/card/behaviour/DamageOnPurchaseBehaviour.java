@@ -2,9 +2,10 @@ package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.event.Subscribe;
-import jrh.game.match.event.CardPurchased;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
+import jrh.game.match.PlayerHealthController;
+import jrh.game.match.event.CardPurchased;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +25,7 @@ public class DamageOnPurchaseBehaviour extends Behaviour {
         if (cardPurchased.getCard().equals(this.getCard())) {
             Player target = match.getOtherPlayer(cardPurchased.getPlayer());
             logger.info("Damaging player={} by amount={}", target, damage);
-            match.getPlayerHealthController().damage(target, this.damage);
+            match.getController(PlayerHealthController.class).damage(target, this.damage);
         }
     }
 

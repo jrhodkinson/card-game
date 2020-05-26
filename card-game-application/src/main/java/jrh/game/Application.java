@@ -14,6 +14,7 @@ import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.match.Match;
+import jrh.game.match.MatchStateController;
 import jrh.game.match.Turn;
 import jrh.game.util.Color;
 import jrh.game.util.Constants;
@@ -35,7 +36,7 @@ public class Application {
 
     void start() {
         Match match = new Match(library, new User("Hero"), new User("Villain"));
-        match.getMatchStateController().startMatch();
+        match.getController(MatchStateController.class).startMatch();
         simulateGame(match);
     }
 

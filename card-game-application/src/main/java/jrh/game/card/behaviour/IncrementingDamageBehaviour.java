@@ -1,12 +1,13 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jrh.game.event.Callback;
-import jrh.game.event.Subscribe;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
+import jrh.game.event.Callback;
+import jrh.game.event.Subscribe;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
+import jrh.game.match.PlayerHealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +31,7 @@ public class IncrementingDamageBehaviour extends Behaviour {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
             Player target = cardPlayed.getTarget().get();
             logger.info("Damaging player={} by amount={}", target, damage);
-            match.getPlayerHealthController().damage(target, this.damage);
+            match.getController(PlayerHealthController.class).damage(target, this.damage);
         }
     }
 

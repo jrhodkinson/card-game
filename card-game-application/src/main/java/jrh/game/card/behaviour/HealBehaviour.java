@@ -1,9 +1,10 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.event.Subscribe;
 import jrh.game.card.event.CardPlayed;
+import jrh.game.event.Subscribe;
 import jrh.game.match.Match;
+import jrh.game.match.PlayerHealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ public class HealBehaviour extends Behaviour {
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
             logger.info("Increasing health of {} by {}", cardPlayed.getTarget().get(), this.health);
-            match.getPlayerHealthController().heal(cardPlayed.getTarget().get(), this.health);
+            match.getController(PlayerHealthController.class).heal(cardPlayed.getTarget().get(), this.health);
         }
     }
 

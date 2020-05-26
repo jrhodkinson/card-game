@@ -1,6 +1,7 @@
 package jrh.game.action;
 
 import jrh.game.match.Match;
+import jrh.game.match.MatchStateController;
 
 public class EndTurn implements Action {
 
@@ -12,6 +13,6 @@ public class EndTurn implements Action {
 
     @Override
     public void perform() {
-        match.getMatchStateController().endTurn();
+        match.getController(MatchStateController.class).endTurn();
     }
 }
