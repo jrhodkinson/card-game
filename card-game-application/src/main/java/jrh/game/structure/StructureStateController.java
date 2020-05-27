@@ -34,8 +34,9 @@ public class StructureStateController implements Controller, EventHandler {
         }
     }
 
-    public void construct(Structure structure, Player player) {
-        logger.info("Assigning structure={} to player={}", structure, player);
+    public void construct(StructureId structureId, Player player) {
+        logger.info("Assigning structure={} to player={}", structureId, player);
+        Structure structure = new Structure(structureId);
         player.getStructures().add(structure);
         match.getEventBus().dispatch(new StructureConstructed(structure, player));
     }

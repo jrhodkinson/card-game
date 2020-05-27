@@ -7,6 +7,7 @@ import jrh.game.card.Library;
 import jrh.game.deck.Store;
 import jrh.game.event.EventBus;
 import jrh.game.structure.StructureHealthController;
+import jrh.game.structure.StructureStateController;
 import jrh.game.util.Constants;
 
 import java.util.Collections;
@@ -102,7 +103,7 @@ public class Match {
 
     private void setUpControllers() {
         List.of(new CardFlowController(this), new MatchStateController(this), new PlayerHealthController(this),
-                new StructureHealthController(this)).forEach(this::putController);
+                new StructureHealthController(this), new StructureStateController(this)).forEach(this::putController);
         controllers.values().forEach(Controller::initialise);
     }
 

@@ -48,7 +48,7 @@ public class Subscriber {
             // This shouldn't be able to happen
             logger.error("IllegalAccessException trying to access method={}", method, e);
         } catch (InvocationTargetException e) {
-            logger.error("InvocationTargetException in method={} causedBy={}", method, e.getCause(), e);
+            logger.error("InvocationTargetException invoking method={}", method, e.getCause());
         }
     }
 
