@@ -6,18 +6,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class CardId {
 
-    public static final CardId COPPER = new CardId("copper");
-    public static final CardId SILVER = new CardId("silver");
-    public static final CardId GOLD = new CardId("gold");
-    public static final CardId VANISHING_GOLD = new CardId("vanishing-gold");
-
-    public static final CardId KNIFE = new CardId("knife");
-    public static final CardId SWORD = new CardId("sword");
-
-    public static final CardId DRAW_1 = new CardId("draw-1");
-    public static final CardId DRAW_2 = new CardId("draw-2");
-    public static final CardId DRAW_MONEY = new CardId("draw-money");
-
     private final String cardId;
 
     public CardId(String cardId) {
