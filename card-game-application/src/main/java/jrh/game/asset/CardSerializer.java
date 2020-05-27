@@ -1,8 +1,9 @@
-package jrh.game.card;
+package jrh.game.asset;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import jrh.game.card.Card;
 import jrh.game.card.behaviour.Behaviour;
 import jrh.game.card.behaviour.BehaviourSerializationKeys;
 import org.apache.logging.log4j.Logger;

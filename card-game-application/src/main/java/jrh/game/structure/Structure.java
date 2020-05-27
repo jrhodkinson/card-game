@@ -13,7 +13,7 @@ public class Structure {
         return health;
     }
 
-    void changeHealth(int amount) {
+    public void changeHealth(int amount) {
         health += amount;
     }
 

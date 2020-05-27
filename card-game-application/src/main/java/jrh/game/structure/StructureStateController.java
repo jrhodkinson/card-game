@@ -2,9 +2,9 @@ package jrh.game.structure;
 
 import jrh.game.event.EventHandler;
 import jrh.game.event.Subscribe;
-import jrh.game.match.Controller;
 import jrh.game.match.Match;
 import jrh.game.match.Player;
+import jrh.game.match.Controller;
 import jrh.game.structure.event.StructureConstructed;
 import jrh.game.structure.event.StructureDestroyed;
 import jrh.game.structure.event.StructureTookDamage;
@@ -16,9 +16,11 @@ public class StructureStateController implements Controller, EventHandler {
     private static final Logger logger = LogManager.getLogger(StructureStateController.class);
 
     private final Match match;
+    private final StructureFactory factory;
 
-    public StructureStateController(Match match) {
+    public StructureStateController(Match match, StructureFactory factory) {
         this.match = match;
+        this.factory = factory;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class StructureStateController implements Controller, EventHandler {
 
     public void construct(StructureId structureId, Player player) {
         logger.info("Assigning structure={} to player={}", structureId, player);
-        Structure structure = new Structure(structureId);
+        Structure structure = factory.create(structureId);
         player.getStructures().add(structure);
         match.getEventBus().dispatch(new StructureConstructed(structure, player));
     }

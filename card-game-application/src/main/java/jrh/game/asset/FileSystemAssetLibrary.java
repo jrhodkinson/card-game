@@ -1,6 +1,8 @@
-package jrh.game.card;
+package jrh.game.asset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jrh.game.card.Card;
+import jrh.game.card.CardId;
 import jrh.game.util.ObjectMapperFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,14 +14,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class FileSystemLibrary implements Library {
+public class FileSystemAssetLibrary implements AssetLibrary {
 
-    private static final Logger logger = LogManager.getLogger(FileSystemLibrary.class);
+    private static final Logger logger = LogManager.getLogger(FileSystemAssetLibrary.class);
 
     private final Map<CardId, Card> cards = new HashMap<>();
     private final Map<CardId, Card> debugCards = new HashMap<>();
 
-    public FileSystemLibrary(File cardDirectory) {
+    public FileSystemAssetLibrary(File cardDirectory) {
         loadCards(cardDirectory);
     }
 

@@ -1,13 +1,14 @@
 package jrh.game.match;
 
 import jrh.game.User;
+import jrh.game.asset.AssetLibrary;
 import jrh.game.card.CardBehaviourRegistrar;
 import jrh.game.card.CardFactory;
-import jrh.game.card.Library;
 import jrh.game.deck.Store;
 import jrh.game.event.EventBus;
 import jrh.game.structure.StructureHealthController;
 import jrh.game.structure.StructureStateController;
+import jrh.game.structure.StructureFactory;
 import jrh.game.util.Constants;
 
 import java.util.Collections;
@@ -23,6 +24,7 @@ public class Match {
     private final EventBus eventBus;
     private final Map<Class<? extends Controller>, Controller> controllers = new HashMap<>();
     private final CardFactory cardFactory;
+    private final StructureFactory structureFactory;
     private final Store store;
     private final Player firstPlayer;
     private final Player secondPlayer;
@@ -31,10 +33,11 @@ public class Match {
     private boolean isOver = false;
     private Player winner = null;
 
-    public Match(Library library, User firstUser, User secondUser) {
+    public Match(AssetLibrary assetLibrary, User firstUser, User secondUser) {
         this.eventBus = new EventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
-        this.cardFactory = new CardFactory(eventBus, library, new Random());
+        this.cardFactory = new CardFactory(eventBus, assetLibrary, new Random());
+        this.structureFactory = new StructureFactory(eventBus, assetLibrary);
         this.store = new Store(cardFactory, Constants.STORE_SIZE, Collections.emptyList());
         this.firstPlayer = new Player(firstUser, cardFactory.startingDeck());
         this.secondPlayer = new Player(secondUser, cardFactory.startingDeck());
@@ -87,12 +90,12 @@ public class Match {
         getController(MatchStateController.class).startMatch();
     }
 
-    void advanceToNextTurn() {
+    public void advanceToNextTurn() {
         firstPlayerIsActive = !firstPlayerIsActive;
         currentTurn = new Turn();
     }
 
-    void end() {
+    public void end() {
         isOver = true;
         if (getInactivePlayer().getHealth() <= 0) {
             winner = getActivePlayer();
@@ -103,7 +106,7 @@ public class Match {
 
     private void setUpControllers() {
         List.of(new CardFlowController(this), new MatchStateController(this), new PlayerHealthController(this),
-                new StructureHealthController(this), new StructureStateController(this)).forEach(this::putController);
+                new StructureHealthController(this), new StructureStateController(this, structureFactory)).forEach(this::putController);
         controllers.values().forEach(Controller::initialise);
     }
 

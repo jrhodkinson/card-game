@@ -47,7 +47,7 @@ public class Player {
         return health;
     }
 
-    void changeHealth(int amount) {
+    public void changeHealth(int amount) {
         health += amount;
     }
 

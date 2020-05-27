@@ -2,6 +2,8 @@ package jrh.game.card;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jrh.game.asset.CardDeserializer;
+import jrh.game.asset.CardSerializer;
 import jrh.game.card.behaviour.Behaviour;
 import jrh.game.event.EventBus;
 import jrh.game.util.Color;
@@ -71,7 +73,7 @@ public class Card {
         return behaviours.containsKey(behaviourClass);
     }
 
-    Collection<Behaviour> getBehaviours() {
+    public Collection<Behaviour> getBehaviours() {
         return Collections.unmodifiableCollection(behaviours.values());
     }
 

@@ -1,9 +1,11 @@
-package jrh.game.card;
+package jrh.game.asset;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import jrh.game.card.Card;
+import jrh.game.card.CardId;
 import jrh.game.card.behaviour.Behaviour;
 import jrh.game.card.behaviour.BehaviourSerializationKeys;
 import jrh.game.util.Color;

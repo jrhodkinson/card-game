@@ -1,8 +1,11 @@
-package jrh.game.card;
+package jrh.game.asset;
+
+import jrh.game.card.Card;
+import jrh.game.card.CardId;
 
 import java.util.List;
 
-public interface Library {
+public interface CardLibrary {
 
     Card getCard(CardId cardId);
 

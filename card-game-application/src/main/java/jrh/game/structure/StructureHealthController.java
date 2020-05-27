@@ -1,7 +1,7 @@
 package jrh.game.structure;
 
-import jrh.game.match.Controller;
 import jrh.game.match.Match;
+import jrh.game.match.Controller;
 import jrh.game.structure.event.StructureTookDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

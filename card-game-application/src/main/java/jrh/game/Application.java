@@ -4,9 +4,9 @@ import jrh.game.action.BuyCardFromPermanentPile;
 import jrh.game.action.BuyCardFromRow;
 import jrh.game.action.EndTurn;
 import jrh.game.action.PlayCard;
+import jrh.game.asset.AssetLibrary;
+import jrh.game.asset.FileSystemAssetLibrary;
 import jrh.game.card.Card;
-import jrh.game.card.FileSystemLibrary;
-import jrh.game.card.Library;
 import jrh.game.card.behaviour.DamageBehaviour;
 import jrh.game.card.behaviour.HealBehaviour;
 import jrh.game.card.behaviour.IncrementingDamageBehaviour;
@@ -14,7 +14,6 @@ import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.match.Match;
-import jrh.game.match.MatchStateController;
 import jrh.game.match.Turn;
 import jrh.game.util.Color;
 import jrh.game.util.Constants;
@@ -28,14 +27,14 @@ public class Application {
 
     private static final Logger logger = LogManager.getLogger(Application.class);
 
-    private final Library library;
+    private final AssetLibrary assetLibrary;
 
     Application() {
-        this.library = new FileSystemLibrary(Constants.CARDS_DIRECTORY);
+        this.assetLibrary = new FileSystemAssetLibrary(Constants.CARDS_DIRECTORY);
     }
 
     void start() {
-        Match match = new Match(library, new User("Hero"), new User("Villain"));
+        Match match = new Match(assetLibrary, new User("Hero"), new User("Villain"));
         match.start();
         simulateGame(match);
     }
