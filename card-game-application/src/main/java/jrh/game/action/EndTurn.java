@@ -1,13 +1,13 @@
 package jrh.game.action;
 
-import jrh.game.match.MutableMatch;
 import jrh.game.match.MatchStateController;
+import jrh.game.match.api.Match;
 
 public class EndTurn implements Action {
 
-    private final MutableMatch match;
+    private final Match match;
 
-    public EndTurn(MutableMatch match) {
+    public EndTurn(Match match) {
         this.match = match;
     }
 

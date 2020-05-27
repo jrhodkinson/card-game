@@ -2,16 +2,16 @@ package jrh.game.action;
 
 import jrh.game.card.Card;
 import jrh.game.match.CardFlowController;
-import jrh.game.match.MutableMatch;
-import jrh.game.match.MutablePlayer;
+import jrh.game.match.api.Match;
+import jrh.game.match.api.Player;
 
 public class BuyCardFromPermanentPile implements Action {
 
-    private final MutableMatch match;
-    private final MutablePlayer player;
+    private final Match match;
+    private final Player player;
     private final Card card;
 
-    public BuyCardFromPermanentPile(MutableMatch match, MutablePlayer player, Card card) {
+    public BuyCardFromPermanentPile(Match match, Player player, Card card) {
         this.match = match;
         this.player = player;
         this.card = card;

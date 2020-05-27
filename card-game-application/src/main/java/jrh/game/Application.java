@@ -15,6 +15,7 @@ import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.match.MutableMatch;
 import jrh.game.match.MutableTurn;
+import jrh.game.match.api.Match;
 import jrh.game.util.Color;
 import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
@@ -92,7 +93,7 @@ public class Application {
         }
     }
 
-    private void playCard(MutableMatch match, Card card) {
+    private void playCard(Match match, Card card) {
         if (card.hasBehaviour(HealBehaviour.class)) {
             (new PlayCard(match, match.getActivePlayer(), card, match.getActivePlayer())).perform();
         } else if (card.hasBehaviour(DamageBehaviour.class) || card.hasBehaviour(IncrementingDamageBehaviour.class)) {
