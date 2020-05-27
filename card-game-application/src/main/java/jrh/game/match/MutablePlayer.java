@@ -5,6 +5,7 @@ import jrh.game.card.Card;
 import jrh.game.deck.Deck;
 import jrh.game.deck.DeckAndDiscardPile;
 import jrh.game.deck.Hand;
+import jrh.game.match.api.Player;
 import jrh.game.structure.Structures;
 import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
@@ -12,9 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class Player {
+public class MutablePlayer implements Player {
 
-    private static final Logger logger = LogManager.getLogger(Player.class);
+    private static final Logger logger = LogManager.getLogger(MutablePlayer.class);
 
     private final User user;
     private final Hand hand = new Hand();
@@ -22,7 +23,7 @@ public class Player {
     private final Structures structures = new Structures();
     private int health = Constants.HEALTH;
 
-    public Player(User user, Deck deck) {
+    public MutablePlayer(User user, Deck deck) {
         this.user = user;
         this.deckAndDiscardPile = new DeckAndDiscardPile(deck);
     }
@@ -47,7 +48,7 @@ public class Player {
         return health;
     }
 
-    public void changeHealth(int amount) {
+    void changeHealth(int amount) {
         health += amount;
     }
 

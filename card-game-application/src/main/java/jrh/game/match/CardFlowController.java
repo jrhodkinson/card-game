@@ -2,11 +2,12 @@ package jrh.game.match;
 
 import jrh.game.card.Card;
 import jrh.game.card.behaviour.UnplayableBehaviour;
-import jrh.game.deck.DiscardPile;
-import jrh.game.match.event.CardPurchased;
 import jrh.game.card.event.CardDestroyed;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
+import jrh.game.deck.DiscardPile;
+import jrh.game.match.api.Player;
+import jrh.game.match.event.CardPurchased;
 import jrh.game.match.event.DiscardedCard;
 import jrh.game.match.event.DrewCard;
 import org.apache.logging.log4j.LogManager;
@@ -17,9 +18,9 @@ import java.util.Optional;
 public class CardFlowController implements Controller {
 
     private static final Logger logger = LogManager.getLogger(CardFlowController.class);
-    private final Match match;
+    private final MutableMatch match;
 
-    public CardFlowController(Match match) {
+    public CardFlowController(MutableMatch match) {
         this.match = match;
     }
 
@@ -54,7 +55,7 @@ public class CardFlowController implements Controller {
     }
 
     public void drawCard(Player player) {
-        Optional<Card> card = player.drawToHand();
+        Optional<Card> card = match.getPlayerAsMutable(player).drawToHand();
         card.ifPresent(value -> match.getEventBus().dispatch(new DrewCard(player, value)));
     }
 
@@ -105,15 +106,16 @@ public class CardFlowController implements Controller {
     }
 
     public void discardCard(Player player, Card card) {
-        DiscardPile discardPile = player.getDeckAndDiscardPile().getDiscardPile();
-        if (player.getHand().remove(card)) {
+        MutablePlayer mutablePlayer = match.getPlayerAsMutable(player);
+        DiscardPile discardPile = mutablePlayer.getDeckAndDiscardPile().getDiscardPile();
+        if (mutablePlayer.getHand().remove(card)) {
             discardPile.add(card);
             match.getEventBus().dispatch(new DiscardedCard(player, card));
         }
     }
 
     public void discardAllPlayedCards(Player player) {
-        DiscardPile discardPile = player.getDeckAndDiscardPile().getDiscardPile();
+        DiscardPile discardPile = match.getPlayerAsMutable(player).getDeckAndDiscardPile().getDiscardPile();
         if (match.getActivePlayer().equals(player)) {
             discardPile.addAll(match.getCurrentTurn().getPlayedCards());
             match.getCurrentTurn().clearPlayedCards();

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.event.Subscribe;
-import jrh.game.match.Match;
+import jrh.game.match.api.Match;
 import jrh.game.structure.StructureId;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;

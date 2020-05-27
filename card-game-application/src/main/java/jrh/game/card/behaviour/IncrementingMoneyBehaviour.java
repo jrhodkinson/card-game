@@ -1,11 +1,12 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jrh.game.event.Callback;
-import jrh.game.event.Subscribe;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
-import jrh.game.match.Match;
+import jrh.game.event.Callback;
+import jrh.game.event.Subscribe;
+import jrh.game.match.TurnController;
+import jrh.game.match.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +29,7 @@ public class IncrementingMoneyBehaviour extends Behaviour {
     private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
             logger.info("Adding {} money to current turn", amount);
-            match.getCurrentTurn().setMoney(match.getCurrentTurn().getMoney() + amount);
+            match.getController(TurnController.class).changeMoney(amount);
         }
     }
 

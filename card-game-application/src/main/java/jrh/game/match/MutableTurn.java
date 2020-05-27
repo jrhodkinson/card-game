@@ -1,12 +1,13 @@
 package jrh.game.match;
 
 import jrh.game.card.Card;
+import jrh.game.match.api.Turn;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Turn {
+public class MutableTurn implements Turn {
 
     private int money = 0;
     private List<Card> playedCards = new ArrayList<>();
@@ -19,6 +20,7 @@ public class Turn {
         this.money = money;
     }
 
+    @Override
     public List<Card> getPlayedCards() {
         return Collections.unmodifiableList(playedCards);
     }

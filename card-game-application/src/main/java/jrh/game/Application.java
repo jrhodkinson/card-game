@@ -13,8 +13,8 @@ import jrh.game.card.behaviour.IncrementingDamageBehaviour;
 import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
-import jrh.game.match.Match;
-import jrh.game.match.Turn;
+import jrh.game.match.MutableMatch;
+import jrh.game.match.MutableTurn;
 import jrh.game.util.Color;
 import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
@@ -34,17 +34,17 @@ public class Application {
     }
 
     void start() {
-        Match match = new Match(assetLibrary, new User("Hero"), new User("Villain"));
+        MutableMatch match = new MutableMatch(assetLibrary, new User("Hero"), new User("Villain"));
         match.start();
         simulateGame(match);
     }
 
-    private void simulateGame(Match match) {
+    private void simulateGame(MutableMatch match) {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
         while (!match.isOver() && isRunning) {
             System.out.println(match.toString());
-            Turn currentTurn = match.getCurrentTurn();
+            MutableTurn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
             String optionFormat = "%2d: %-32s";
             System.out.printf(optionFormat, 0, option("Play all"));
@@ -92,7 +92,7 @@ public class Application {
         }
     }
 
-    private void playCard(Match match, Card card) {
+    private void playCard(MutableMatch match, Card card) {
         if (card.hasBehaviour(HealBehaviour.class)) {
             (new PlayCard(match, match.getActivePlayer(), card, match.getActivePlayer())).perform();
         } else if (card.hasBehaviour(DamageBehaviour.class) || card.hasBehaviour(IncrementingDamageBehaviour.class)) {

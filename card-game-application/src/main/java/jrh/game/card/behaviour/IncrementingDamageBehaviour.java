@@ -5,9 +5,9 @@ import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
 import jrh.game.event.Callback;
 import jrh.game.event.Subscribe;
-import jrh.game.match.Match;
-import jrh.game.match.Player;
 import jrh.game.match.PlayerHealthController;
+import jrh.game.match.api.Match;
+import jrh.game.match.api.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

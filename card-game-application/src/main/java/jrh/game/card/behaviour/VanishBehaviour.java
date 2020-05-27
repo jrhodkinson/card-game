@@ -5,7 +5,7 @@ import jrh.game.event.Callback;
 import jrh.game.event.EventHandler;
 import jrh.game.event.Subscribe;
 import jrh.game.match.CardFlowController;
-import jrh.game.match.Match;
+import jrh.game.match.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,6 +1,6 @@
 package jrh.game.structure;
 
-import jrh.game.match.Match;
+import jrh.game.match.MutableMatch;
 import jrh.game.match.Controller;
 import jrh.game.structure.event.StructureTookDamage;
 import org.apache.logging.log4j.LogManager;
@@ -10,9 +10,9 @@ public class StructureHealthController implements Controller {
 
     private static final Logger logger = LogManager.getLogger(StructureHealthController.class);
 
-    private final Match match;
+    private final MutableMatch match;
 
-    public StructureHealthController(Match match) {
+    public StructureHealthController(MutableMatch match) {
         this.match = match;
     }
 

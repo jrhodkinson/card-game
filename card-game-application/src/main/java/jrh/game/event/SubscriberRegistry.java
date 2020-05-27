@@ -1,6 +1,6 @@
 package jrh.game.event;
 
-import jrh.game.match.Match;
+import jrh.game.match.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,7 +57,7 @@ public class SubscriberRegistry {
             throw new EventBusException("Event must be assignable from Subscriber's first parameter");
         }
         if (parameterTypes.length > 1 && !Match.class.equals(parameterTypes[1])) {
-            throw new EventBusException("Second parameter of Subscriber, if present, must be of type Match");
+            throw new EventBusException("Second parameter of Subscriber, if present, must be of type MatchControllers");
         }
         if (parameterTypes.length == 3 && !Callback.class.equals(parameterTypes[2])) {
             throw new EventBusException("Third parameter of Subscriber, if present, must be of type Callback");

@@ -2,7 +2,7 @@ package jrh.game.card.event;
 
 import jrh.game.card.Card;
 import jrh.game.event.Event;
-import jrh.game.match.Player;
+import jrh.game.match.api.Player;
 
 import java.util.Optional;
 
