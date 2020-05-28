@@ -19,4 +19,8 @@ public class Structure implements Damageable {
         health += amount;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s (%d)", structureId.toString(), health);
+    }
 }

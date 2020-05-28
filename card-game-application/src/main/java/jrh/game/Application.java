@@ -7,15 +7,12 @@ import jrh.game.action.PlayCard;
 import jrh.game.asset.AssetLibrary;
 import jrh.game.asset.FileSystemAssetLibrary;
 import jrh.game.card.Card;
-import jrh.game.card.behaviour.DamageBehaviour;
-import jrh.game.card.behaviour.HealBehaviour;
-import jrh.game.card.behaviour.IncrementingDamageBehaviour;
 import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.match.MutableMatch;
 import jrh.game.match.MutableTurn;
-import jrh.game.match.api.Match;
+import jrh.game.match.api.Damageable;
 import jrh.game.util.Color;
 import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
@@ -27,11 +24,14 @@ import java.util.Scanner;
 public class Application {
 
     private static final Logger logger = LogManager.getLogger(Application.class);
+    private static final String OPTION_FORMAT = "%2d: %-32s";
 
     private final AssetLibrary assetLibrary;
+    private final Scanner scanner;
 
     Application() {
         this.assetLibrary = new FileSystemAssetLibrary(Constants.CARDS_DIRECTORY);
+        this.scanner = new Scanner(System.in);
     }
 
     void start() {
@@ -41,32 +41,30 @@ public class Application {
     }
 
     private void simulateGame(MutableMatch match) {
-        Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
         while (!match.isOver() && isRunning) {
             System.out.println(match.toString());
             MutableTurn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
-            String optionFormat = "%2d: %-32s";
-            System.out.printf(optionFormat, 0, option("Play all"));
+            System.out.printf(OPTION_FORMAT, 0, optionString("Play all"));
             for (int i = 0; i < hand.size(); i++) {
-                System.out.printf(optionFormat, i + 1, hand.get(i));
+                System.out.printf(OPTION_FORMAT, i + 1, hand.get(i));
             }
             Row row = match.getStore().getRow();
             for (int i = 0; i < row.size(); i++) {
                 if (i % 7 == 0) {
                     System.out.println();
                 }
-                System.out.printf(optionFormat, i + 1 + hand.size(), row.get(i));
+                System.out.printf(OPTION_FORMAT, i + 1 + hand.size(), row.get(i));
             }
             List<Pile> permanentPiles = match.getStore().getPermanentPiles();
             for (int i = 0; i < permanentPiles.size(); i++) {
-                System.out.printf(optionFormat, i + 1 + hand.size() + row.size(),
+                System.out.printf(OPTION_FORMAT, i + 1 + hand.size() + row.size(),
                         permanentPiles.get(i).getCard() + " - " + permanentPiles.get(i).getQuantity());
             }
-            System.out.printf("%n" + optionFormat + optionFormat + "%n",
-                    permanentPiles.size() + row.size() + hand.size() + 1, option("End turn"),
-                    permanentPiles.size() + row.size() + hand.size() + 2, option("Quit"));
+            System.out.printf("%n" + OPTION_FORMAT + OPTION_FORMAT + "%n",
+                    permanentPiles.size() + row.size() + hand.size() + 1, optionString("End turn"),
+                    permanentPiles.size() + row.size() + hand.size() + 2, optionString("Quit"));
             int option = scanner.nextInt();
             if (option == 0) {
                 while (hand.size() > 0 && !match.isOver()) {
@@ -93,17 +91,41 @@ public class Application {
         }
     }
 
-    private void playCard(Match match, Card card) {
-        if (card.hasBehaviour(HealBehaviour.class)) {
-            (new PlayCard(match, match.getActivePlayer(), card, match.getActivePlayer())).perform();
-        } else if (card.hasBehaviour(DamageBehaviour.class) || card.hasBehaviour(IncrementingDamageBehaviour.class)) {
-            (new PlayCard(match, match.getActivePlayer(), card, match.getInactivePlayer())).perform();
+    private void playCard(MutableMatch match, Card card) {
+        if (card.requiresTarget()) {
+            (new PlayCard(match, match.getActivePlayer(), card, getTarget(match))).perform();
         } else {
             (new PlayCard(match, match.getActivePlayer(), card, null)).perform();
         }
     }
 
-    private String option(String plainText) {
+    private Damageable getTarget(MutableMatch match) {
+        System.out.println(option(1, match.getActivePlayer().getUser().toString()));
+        System.out.println(option(2, match.getInactivePlayer().getUser().toString()));
+        for (int i = 0; i < match.getActivePlayer().getStructures().size(); i++) {
+            System.out.println(option(i + 3, "A - " + match.getActivePlayer().getStructures().get(i)));
+        }
+        for (int i = 0; i < match.getInactivePlayer().getStructures().size(); i++) {
+            System.out.println(option(i + match.getActivePlayer().getStructures().size() + 3, "I - " + match.getActivePlayer().getStructures().get(i)));
+        }
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            return match.getActivePlayer();
+        }
+        if (choice == 2) {
+            return match.getInactivePlayer();
+        }
+        if (choice > 2 && choice < match.getActivePlayer().getStructures().size() + 3) {
+            return match.getActivePlayer().getStructures().get(choice - 3);
+        }
+        return match.getInactivePlayer().getStructures().get(choice - 3 - match.getActivePlayer().getStructures().size());
+    }
+
+    private String option(int number, String text) {
+        return String.format(OPTION_FORMAT, number, text);
+    }
+
+    private String optionString(String plainText) {
         return Color.CYAN + plainText + Color.RESET;
     }
 }
