@@ -5,7 +5,7 @@ import jrh.game.match.event.PlayerTookDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class PlayerHealthController implements Controller {
+public class PlayerHealthController {
 
     private static final Logger logger = LogManager.getLogger(PlayerHealthController.class);
 

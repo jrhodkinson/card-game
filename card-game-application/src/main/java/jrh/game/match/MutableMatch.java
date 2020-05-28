@@ -125,7 +125,7 @@ public class MutableMatch implements Match {
     }
 
     private void setUpControllers() {
-        List.of(new CardFlowController(this), new MatchStateController(this), new PlayerHealthController(this),
+        List.of(new CardFlowController(this), new MatchStateController(this), new HealthController(this),
                 new StructureHealthController(this), new StructureStateController(this, structureFactory),
                 new TurnController(this)).forEach(this::putController);
         controllers.values().forEach(Controller::initialise);

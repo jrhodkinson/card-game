@@ -6,6 +6,7 @@ import jrh.game.card.event.CardDestroyed;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
 import jrh.game.deck.DiscardPile;
+import jrh.game.match.api.Damageable;
 import jrh.game.match.api.Player;
 import jrh.game.match.event.CardPurchased;
 import jrh.game.match.event.DiscardedCard;
@@ -36,7 +37,7 @@ public class CardFlowController implements Controller {
         return Optional.empty();
     }
 
-    public void playCard(Player player, Card card, Player target) {
+    public void playCard(Player player, Card card, Damageable target) {
         if (!match.getActivePlayer().equals(player)) {
             logger.error("Player wasn't the active player");
             return;

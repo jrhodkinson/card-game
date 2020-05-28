@@ -1,6 +1,8 @@
 package jrh.game.structure;
 
-public class Structure {
+import jrh.game.match.api.Damageable;
+
+public class Structure implements Damageable {
 
     private final StructureId structureId;
     private int health;

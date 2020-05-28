@@ -2,6 +2,7 @@ package jrh.game.action;
 
 import jrh.game.card.Card;
 import jrh.game.match.CardFlowController;
+import jrh.game.match.api.Damageable;
 import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
 import org.apache.logging.log4j.LogManager;
@@ -14,9 +15,9 @@ public class PlayCard implements Action {
     private final Match match;
     private final Player player;
     private final Card card;
-    private final Player target;
+    private final Damageable target;
 
-    public PlayCard(Match match, Player player, Card card, Player target) {
+    public PlayCard(Match match, Player player, Card card, Damageable target) {
         this.match = match;
         this.player = player;
         this.card = card;
