@@ -13,6 +13,10 @@ public class VanishBehaviour extends Behaviour implements EventHandler {
 
     private static final Logger logger = LogManager.getLogger(VanishBehaviour.class);
 
+    public VanishBehaviour() {
+        super(false);
+    }
+
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
         if (cardResolved.getCard().equals(this.getCard())) {

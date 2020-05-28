@@ -19,6 +19,7 @@ public class ConstructBehaviour extends Behaviour {
 
     @JsonCreator
     public ConstructBehaviour(StructureId structureId) {
+        super(false);
         this.structureId = structureId;
     }
 

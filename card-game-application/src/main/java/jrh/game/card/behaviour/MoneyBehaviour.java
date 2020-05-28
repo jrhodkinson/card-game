@@ -16,6 +16,7 @@ public class MoneyBehaviour extends Behaviour {
     private final int amount;
 
     public MoneyBehaviour(int amount) {
+        super(false);
         this.amount = amount;
     }
 

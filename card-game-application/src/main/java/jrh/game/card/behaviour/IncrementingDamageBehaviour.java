@@ -22,6 +22,7 @@ public class IncrementingDamageBehaviour extends Behaviour {
     private final int increment;
 
     public IncrementingDamageBehaviour(@JsonProperty("damage") int damage, @JsonProperty("increment") int increment) {
+        super(true);
         this.damage = damage;
         this.increment = increment;
     }

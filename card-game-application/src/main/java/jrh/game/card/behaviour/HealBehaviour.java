@@ -16,6 +16,7 @@ public class HealBehaviour extends Behaviour {
     private final int health;
 
     public HealBehaviour(int health) {
+        super(true);
         this.health = health;
     }
 

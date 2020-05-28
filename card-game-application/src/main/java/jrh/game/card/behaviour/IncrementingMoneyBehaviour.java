@@ -21,6 +21,7 @@ public class IncrementingMoneyBehaviour extends Behaviour {
     private final int increment;
 
     public IncrementingMoneyBehaviour(@JsonProperty("amount") int amount, @JsonProperty("increment") int increment) {
+        super(false);
         this.amount = amount;
         this.increment = increment;
     }

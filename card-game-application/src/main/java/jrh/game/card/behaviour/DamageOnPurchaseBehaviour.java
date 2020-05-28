@@ -17,6 +17,7 @@ public class DamageOnPurchaseBehaviour extends Behaviour {
     private final int damage;
 
     public DamageOnPurchaseBehaviour(int damage) {
+        super(false);
         this.damage = damage;
     }
 

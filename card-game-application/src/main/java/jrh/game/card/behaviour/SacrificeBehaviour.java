@@ -17,6 +17,7 @@ public class SacrificeBehaviour extends Behaviour {
     private final int damage;
 
     public SacrificeBehaviour(int damage) {
+        super(false);
         this.damage = damage;
     }
 

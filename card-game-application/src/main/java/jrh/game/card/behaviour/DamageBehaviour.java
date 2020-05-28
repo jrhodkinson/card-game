@@ -17,6 +17,7 @@ public class DamageBehaviour extends Behaviour {
     private final int damage;
 
     public DamageBehaviour(int damage) {
+        super(true);
         this.damage = damage;
     }
 

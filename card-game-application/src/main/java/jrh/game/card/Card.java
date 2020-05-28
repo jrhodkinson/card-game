@@ -81,6 +81,10 @@ public class Card {
         return behaviours.get(behaviourClass);
     }
 
+    public boolean requiresTarget() {
+        return behaviours.values().stream().anyMatch(Behaviour::requiresTarget);
+    }
+
     Card duplicate() {
         Card duplicate = Card.card(cardId).withName(name).withCost(cost).withColor(color).build();
         for (Behaviour behaviour : behaviours.values()) {

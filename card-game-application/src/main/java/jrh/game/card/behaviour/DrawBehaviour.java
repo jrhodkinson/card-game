@@ -16,6 +16,7 @@ public class DrawBehaviour extends Behaviour {
     private final int amountToDraw;
 
     public DrawBehaviour(int amountToDraw) {
+        super(false);
         this.amountToDraw = amountToDraw;
     }
 
