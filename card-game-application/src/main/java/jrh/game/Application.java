@@ -30,7 +30,7 @@ public class Application {
     private final Scanner scanner;
 
     Application() {
-        this.assetLibrary = new FileSystemAssetLibrary(Constants.CARDS_DIRECTORY);
+        this.assetLibrary = new FileSystemAssetLibrary(Constants.ASSETS_DIRECTORY);
         this.scanner = new Scanner(System.in);
     }
 

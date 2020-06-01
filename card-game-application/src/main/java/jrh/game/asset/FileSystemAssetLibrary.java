@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +22,10 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     private static final Logger logger = LogManager.getLogger(FileSystemAssetLibrary.class);
 
     private final Map<CardId, Card> cards = new HashMap<>();
+    private final Map<StructureId, Structure> structures = new HashMap<>();
 
-    public FileSystemAssetLibrary(File cardDirectory) {
-        loadCards(cardDirectory);
+    public FileSystemAssetLibrary(Path assetsDirectory) {
+        loadAssets(assetsDirectory);
     }
 
     @Override
@@ -39,17 +40,18 @@ public class FileSystemAssetLibrary implements AssetLibrary {
 
     @Override
     public Structure getStructure(StructureId structureId) {
-        return new Structure(structureId);
+        return structures.get(structureId);
     }
 
     @Override
     public List<Structure> getAllStructures() {
-        return Collections.emptyList();
+        return List.copyOf(structures.values());
     }
 
-    private void loadCards(File library) {
+    private void loadAssets(Path assetsDirectory) {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
-        addCardsFromDirectory(library, objectMapper);
+        addCardsFromDirectory(assetsDirectory.resolve("cards").toFile(), objectMapper);
+        addStructuresFromDirectory(assetsDirectory.resolve("structures").toFile(), objectMapper);
     }
 
     private void addCardsFromDirectory(File directory, ObjectMapper objectMapper) {
@@ -65,6 +67,24 @@ public class FileSystemAssetLibrary implements AssetLibrary {
                     cards.put(card.getCardId(), card);
                 } catch (IOException e) {
                     logger.error("Error reading card from file={}", file, e);
+                }
+            }
+        }
+    }
+
+    private void addStructuresFromDirectory(File directory, ObjectMapper objectMapper) {
+        for (File file : Objects.requireNonNull(directory.listFiles())) {
+            if (file.isHidden()) {
+                continue;
+            }
+            if (file.isDirectory()) {
+                addStructuresFromDirectory(file, objectMapper);
+            } else {
+                try {
+                    Structure structure = objectMapper.readValue(file, Structure.class);
+                    structures.put(structure.getStructureId(), structure);
+                } catch (IOException e) {
+                    logger.error("Error reading structure from file={}", file, e);
                 }
             }
         }
