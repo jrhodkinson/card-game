@@ -7,7 +7,7 @@ public class Constants {
 
     public static final File CARDS_DIRECTORY = Paths.get("card-game-application/src/main/resources/cards").toFile();
 
-    public static final int STORE_SIZE = 21;
+    public static final int STORE_SIZE = 28;
 
     public static final int HEALTH = 10;
 

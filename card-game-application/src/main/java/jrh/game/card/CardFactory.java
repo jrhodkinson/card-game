@@ -23,9 +23,9 @@ public class CardFactory {
 
     public Deck startingDeck() {
         Deck deck = new Deck();
-        deck.add(cardLibrary.getDebugCard(CardId.Debug.MONEY).duplicate());
-        deck.add(cardLibrary.getDebugCard(CardId.Debug.DAMAGE).duplicate());
-        deck.add(cardLibrary.getDebugCard(CardId.Debug.DRAW).duplicate());
+        deck.add(cardLibrary.getCard(CardId.Debug.MONEY).duplicate());
+        deck.add(cardLibrary.getCard(CardId.Debug.DAMAGE).duplicate());
+        deck.add(cardLibrary.getCard(CardId.Debug.DRAW).duplicate());
         Collections.shuffle(deck);
         deck.forEach(card -> eventBus.dispatch(new CardCreated(card)));
         return deck;

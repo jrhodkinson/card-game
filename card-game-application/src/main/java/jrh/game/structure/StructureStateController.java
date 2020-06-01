@@ -37,8 +37,8 @@ public class StructureStateController implements Controller, EventHandler {
     }
 
     public void construct(StructureId structureId, Player player) {
-        logger.info("Assigning structure={} to player={}", structureId, player);
         Structure structure = factory.create(structureId);
+        logger.info("Assigning structure={} to player={}", structure, player);
         match.getPlayerAsMutable(player).getStructures().add(structure);
         match.getEventBus().dispatch(new StructureConstructed(structure, player));
     }

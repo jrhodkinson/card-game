@@ -9,7 +9,5 @@ public interface CardLibrary {
 
     Card getCard(CardId cardId);
 
-    Card getDebugCard(CardId cardId);
-
     List<Card> getAllCards();
 }
