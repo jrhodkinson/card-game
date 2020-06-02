@@ -2,15 +2,28 @@ package jrh.game.structure;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jrh.game.asset.StructureDeserializer;
+import jrh.game.asset.StructureSerializer;
+import jrh.game.event.EventBus;
 import jrh.game.match.api.Damageable;
+import jrh.game.structure.power.Power;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
+@JsonDeserialize(using = StructureDeserializer.class)
+@JsonSerialize(using = StructureSerializer.class)
 public class Structure implements Damageable {
 
     private final UUID instanceId = UUID.randomUUID();
     private final StructureId structureId;
     private final String name;
+    private final Map<Class<? extends Power>, Power> powers = new HashMap<>();
     private int health;
 
     @JsonCreator
@@ -18,6 +31,14 @@ public class Structure implements Damageable {
         this.structureId = structureId;
         this.name = name;
         this.health = health;
+    }
+
+    public void registerPowers(EventBus eventBus) {
+        powers.values().forEach(power -> power.registerWith(eventBus));
+    }
+
+    public void unregisterPowers(EventBus eventBus) {
+        powers.values().forEach(power -> power.unregisterWith(eventBus));
     }
 
     public UUID getInstanceId() {
@@ -38,6 +59,23 @@ public class Structure implements Damageable {
 
     public void changeHealth(int amount) {
         health += amount;
+    }
+
+    public void addPower(Power power) {
+        powers.put(power.getClass(), power);
+        power.forStructure(this);
+    }
+
+    public boolean hasPower(Class<? extends Power> powerClass) {
+        return powers.containsKey(powerClass);
+    }
+
+    public Collection<Power> getPowers() {
+        return Collections.unmodifiableCollection(powers.values());
+    }
+
+    public Power getPower(Class<? extends Power> powerClass) {
+        return powers.get(powerClass);
     }
 
     Structure duplicate() {

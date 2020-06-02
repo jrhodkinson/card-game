@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import jrh.game.card.Card;
 import jrh.game.card.CardId;
 import jrh.game.card.behaviour.Behaviour;
-import jrh.game.card.behaviour.BehaviourSerializationKeys;
 import jrh.game.util.Color;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +35,7 @@ public class CardDeserializer extends StdDeserializer<Card> {
         for (int i = 0; i < behaviours.size(); i++) {
             JsonNode behaviourJson = behaviours.get(i);
             String behaviourKey = behaviourJson.get(0).asText();
-            Class<? extends Behaviour> behaviourClass = BehaviourSerializationKeys.getClass(behaviourKey);
+            Class<? extends Behaviour> behaviourClass = SerializationKeys.getBehaviourClass(behaviourKey);
             if (behaviourJson.size() == 1) {
                 try {
                     card.addBehaviour(behaviourClass.getConstructor().newInstance());

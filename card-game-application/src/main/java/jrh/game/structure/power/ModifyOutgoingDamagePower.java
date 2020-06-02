@@ -1,6 +1,8 @@
 package jrh.game.structure.power;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.match.api.Damageable;
+import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +12,7 @@ public class ModifyOutgoingDamagePower extends Power {
 
     private static final Logger logger = LogManager.getLogger(ModifyOutgoingDamagePower.class);
 
+    @JsonValue
     private final int amount;
 
     public ModifyOutgoingDamagePower(int amount) {
@@ -17,8 +20,8 @@ public class ModifyOutgoingDamagePower extends Power {
     }
 
     @Override
-    public int modifyDamage(Player source, Damageable target, int damage) {
-        if (!source.equals(getMatch().getController(StructureStateController.class).getOwner(getStructure()))) {
+    public int modifyDamage(Match match, Player source, Damageable target, int damage) {
+        if (!source.equals(match.getController(StructureStateController.class).getOwner(getStructure()))) {
             return damage;
         }
         int modifiedDamage = damage + amount;

@@ -2,7 +2,10 @@
   "id": "camp",
   "name": "Camp",
   "health": 3,
-  "modify-damage": {
-
-  }
+  "powers": [
+    [
+      "modify-outgoing-damage",
+      1
+    ]
+  ]
 }
