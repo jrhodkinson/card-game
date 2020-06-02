@@ -57,7 +57,7 @@ public class Structure implements Damageable {
         return health;
     }
 
-    public void changeHealth(int amount) {
+    void changeHealth(int amount) {
         health += amount;
     }
 
