@@ -79,7 +79,11 @@ public class Structure implements Damageable {
     }
 
     Structure duplicate() {
-        return new Structure(structureId, name, health);
+        Structure duplicate = new Structure(structureId, name, health);
+        for (Power power : powers.values()) {
+            duplicate.addPower(power.duplicate());
+        }
+        return duplicate;
     }
 
     @Override

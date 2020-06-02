@@ -25,7 +25,9 @@ public class ModifyOutgoingDamagePower extends Power {
             return damage;
         }
         int modifiedDamage = damage + amount;
-        return Math.max(modifiedDamage, 0);
+        int finalDamage = Math.max(modifiedDamage, 0);
+        logger.debug("Modifying initial damage {} by {}. Result: {}", damage, amount, finalDamage);
+        return finalDamage;
     }
 
     @Override

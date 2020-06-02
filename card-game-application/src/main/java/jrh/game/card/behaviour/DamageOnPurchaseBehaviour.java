@@ -26,7 +26,7 @@ public class DamageOnPurchaseBehaviour extends Behaviour {
         if (cardPurchased.getCard().equals(this.getCard())) {
             Damageable target = match.getOtherPlayer(cardPurchased.getPlayer());
             logger.info("Damaging player={} by amount={}", target, damage);
-            match.getController(HealthController.class).damage(target, this.damage);
+            match.getController(HealthController.class).damage(cardPurchased.getPlayer(), target, this.damage);
         }
     }
 

@@ -21,6 +21,7 @@ public class StructureHealthController implements Controller {
             logger.error("Unable to damage structure={} by amount={}", structure, amount);
             return;
         }
+        logger.info("Applying damage={} to structure={}", amount, structure);
         structure.changeHealth(-amount);
         match.getEventBus().dispatch(new StructureTookDamage(structure));
     }
@@ -30,6 +31,7 @@ public class StructureHealthController implements Controller {
             logger.error("Unable to heal structure={} by amount={}", structure, amount);
             return;
         }
+        logger.info("Applying heal={} to structure={}", amount, structure);
         structure.changeHealth(amount);
     }
 }

@@ -11,25 +11,28 @@ public class HealthController implements Controller {
 
     private static final Logger logger = LogManager.getLogger(HealthController.class);
 
+    private final HealthModificationComputer healthModificationComputer;
     private final PlayerHealthController playerHealthController;
     private final StructureHealthController structureHealthController;
 
     HealthController(MutableMatch mutableMatch) {
+        this.healthModificationComputer = new HealthModificationComputer(mutableMatch);
         this.playerHealthController = new PlayerHealthController(mutableMatch);
         this.structureHealthController = new StructureHealthController(mutableMatch);
     }
 
-    public void damage(Damageable damageable, int amount) {
+    public void damage(Player source, Damageable damageable, int amount) {
+        int finalAmount = healthModificationComputer.computeModifiedDamage(source, damageable, amount);
         if (damageable instanceof Player) {
-            playerHealthController.damage((Player) damageable, amount);
+            playerHealthController.damage((Player) damageable, finalAmount);
         } else if (damageable instanceof Structure) {
-            structureHealthController.damage((Structure) damageable, amount);
+            structureHealthController.damage((Structure) damageable, finalAmount);
         } else {
             logger.error("Unknown damageable={} of type={}", damageable, damageable.getClass());
         }
     }
 
-    public void heal(Damageable damageable, int amount) {
+    public void heal(Player source, Damageable damageable, int amount) {
         if (damageable instanceof Player) {
             playerHealthController.heal((Player) damageable, amount);
         } else if (damageable instanceof Structure) {

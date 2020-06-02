@@ -2,6 +2,9 @@ package jrh.game.match.api;
 
 import jrh.game.event.EventBus;
 import jrh.game.match.Controller;
+import jrh.game.structure.Structure;
+
+import java.util.Collection;
 
 public interface Match {
 
@@ -18,4 +21,6 @@ public interface Match {
     Player getOtherPlayer(Player player);
 
     Turn getCurrentTurn();
+
+    Collection<Structure> getAllStructures();
 }

@@ -26,7 +26,7 @@ public class DamageBehaviour extends Behaviour {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
             Damageable target = cardPlayed.getTarget().get();
             logger.info("Damaging target={} by amount={}", target, damage);
-            match.getController(HealthController.class).damage(target, this.damage);
+            match.getController(HealthController.class).damage(cardPlayed.getPlayer(), target, this.damage);
         }
     }
 

@@ -26,7 +26,7 @@ public class SacrificeBehaviour extends Behaviour {
         if (cardPlayed.getCard().equals(this.getCard())) {
             Player target = cardPlayed.getPlayer();
             logger.info("Damaging player={} by amount={}", target, damage);
-            match.getController(HealthController.class).damage(target, this.damage);
+            match.getController(HealthController.class).damage(cardPlayed.getPlayer(), target, this.damage);
         }
     }
 

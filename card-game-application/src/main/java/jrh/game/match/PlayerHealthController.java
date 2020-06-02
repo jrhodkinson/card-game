@@ -20,6 +20,7 @@ public class PlayerHealthController {
             logger.error("Unable to damage player={} by amount={}", player, amount);
             return;
         }
+        logger.info("Applying damage={} to player={}", amount, player);
         match.getPlayerAsMutable(player).changeHealth(-amount);
         match.getEventBus().dispatch(new PlayerTookDamage(player));
     }
@@ -29,6 +30,7 @@ public class PlayerHealthController {
             logger.error("Unable to heal player={} by amount={}", player, amount);
             return;
         }
+        logger.info("Applying heal={} to player={}", amount, player);
         match.getPlayerAsMutable(player).changeHealth(amount);
     }
 }

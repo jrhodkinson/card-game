@@ -8,18 +8,22 @@ import jrh.game.deck.Store;
 import jrh.game.event.EventBus;
 import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
+import jrh.game.structure.Structure;
 import jrh.game.structure.StructureFactory;
 import jrh.game.structure.StructureHealthController;
 import jrh.game.structure.StructurePowerRegistrar;
 import jrh.game.structure.StructureStateController;
 import jrh.game.util.Constants;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toUnmodifiableList;
 import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
 public class MutableMatch implements Match {
@@ -96,6 +100,13 @@ public class MutableMatch implements Match {
             return firstPlayer;
         }
         return secondPlayer;
+    }
+
+    @Override
+    public Collection<Structure> getAllStructures() {
+        return Stream.of(firstPlayer.getStructures(), secondPlayer.getStructures())
+                .flatMap(Collection::stream)
+                .collect(toUnmodifiableList());
     }
 
     public boolean isOver() {
