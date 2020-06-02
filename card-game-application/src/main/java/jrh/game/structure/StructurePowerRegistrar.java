@@ -2,19 +2,25 @@ package jrh.game.structure;
 
 import jrh.game.event.EventHandler;
 import jrh.game.event.Subscribe;
-import jrh.game.match.api.Match;
+import jrh.game.match.MutableMatch;
 import jrh.game.structure.event.StructureCreated;
 import jrh.game.structure.event.StructureDestroyed;
 
 public class StructurePowerRegistrar implements EventHandler {
 
-    @Subscribe
-    private void structureCreated(StructureCreated structureCreated, Match match) {
-        structureCreated.getStructure().registerPowers(match.getEventBus());
+    private final MutableMatch match;
+
+    public StructurePowerRegistrar(MutableMatch match) {
+        this.match = match;
     }
 
     @Subscribe
-    private void structureDestroyed(StructureDestroyed structureDestroyed, Match match) {
-        structureDestroyed.getStructure().unregisterPowers(match.getEventBus());
+    private void structureCreated(StructureCreated structureCreated) {
+        match.getStructureAsMutable(structureCreated.getStructure()).registerPowers(match.getEventBus());
+    }
+
+    @Subscribe
+    private void structureDestroyed(StructureDestroyed structureDestroyed) {
+        match.getStructureAsMutable(structureDestroyed.getStructure()).unregisterPowers(match.getEventBus());
     }
 }

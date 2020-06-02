@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jrh.game.asset.StructureDeserializer;
-import jrh.game.asset.StructureSerializer;
+import jrh.game.asset.MutableStructureDeserializer;
+import jrh.game.asset.MutableStructureSerializer;
 import jrh.game.event.EventBus;
-import jrh.game.match.api.Damageable;
+import jrh.game.structure.api.Structure;
 import jrh.game.structure.power.Power;
 
 import java.util.Collection;
@@ -16,9 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@JsonDeserialize(using = StructureDeserializer.class)
-@JsonSerialize(using = StructureSerializer.class)
-public class Structure implements Damageable {
+@JsonDeserialize(using = MutableStructureDeserializer.class)
+@JsonSerialize(using = MutableStructureSerializer.class)
+public class MutableStructure implements Structure {
 
     private final UUID instanceId = UUID.randomUUID();
     private final StructureId structureId;
@@ -27,7 +27,7 @@ public class Structure implements Damageable {
     private int health;
 
     @JsonCreator
-    public Structure(@JsonProperty("id") StructureId structureId, @JsonProperty("name") String name, @JsonProperty("health") int health) {
+    public MutableStructure(@JsonProperty("id") StructureId structureId, @JsonProperty("name") String name, @JsonProperty("health") int health) {
         this.structureId = structureId;
         this.name = name;
         this.health = health;
@@ -41,18 +41,22 @@ public class Structure implements Damageable {
         powers.values().forEach(power -> power.unregisterWith(eventBus));
     }
 
+    @Override
     public UUID getInstanceId() {
         return instanceId;
     }
 
+    @Override
     public StructureId getStructureId() {
         return structureId;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public int getHealth() {
         return health;
     }
@@ -66,20 +70,23 @@ public class Structure implements Damageable {
         power.forStructure(this);
     }
 
+    @Override
     public boolean hasPower(Class<? extends Power> powerClass) {
         return powers.containsKey(powerClass);
     }
 
+    @Override
     public Collection<Power> getPowers() {
         return Collections.unmodifiableCollection(powers.values());
     }
 
+    @Override
     public Power getPower(Class<? extends Power> powerClass) {
         return powers.get(powerClass);
     }
 
-    Structure duplicate() {
-        Structure duplicate = new Structure(structureId, name, health);
+    MutableStructure duplicate() {
+        MutableStructure duplicate = new MutableStructure(structureId, name, health);
         for (Power power : powers.values()) {
             duplicate.addPower(power.duplicate());
         }
@@ -97,7 +104,7 @@ public class Structure implements Damageable {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        return this.instanceId.equals(((Structure) o).instanceId);
+        return this.instanceId.equals(((MutableStructure) o).instanceId);
     }
 
     @Override

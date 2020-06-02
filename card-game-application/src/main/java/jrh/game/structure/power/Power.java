@@ -4,7 +4,7 @@ import jrh.game.event.EventHandler;
 import jrh.game.match.api.Damageable;
 import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
-import jrh.game.structure.Structure;
+import jrh.game.structure.api.Structure;
 
 public abstract class Power implements EventHandler {
 

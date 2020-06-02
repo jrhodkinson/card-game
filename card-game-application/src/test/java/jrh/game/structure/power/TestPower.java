@@ -1,7 +1,7 @@
 package jrh.game.structure.power;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jrh.game.structure.Structure;
+import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureId;
 import jrh.game.util.ObjectMapperFactory;
 import org.apache.logging.log4j.Logger;
@@ -19,9 +19,9 @@ public class TestPower {
     public static void roundTripsViaJson(Power power) {
         try {
             Class<? extends Power> powerClass = power.getClass();
-            Structure structure = new Structure(new StructureId("test"), "Test", 1);
+            MutableStructure structure = new MutableStructure(new StructureId("test"), "Test", 1);
             structure.addPower(power);
-            Structure parsed = objectMapper.readValue(objectMapper.writeValueAsString(structure), Structure.class);
+            MutableStructure parsed = objectMapper.readValue(objectMapper.writeValueAsString(structure), MutableStructure.class);
             Power parsedPower = parsed.getPower(powerClass);
             for (Field field : powerClass.getDeclaredFields()) {
                 if (field.getType().equals(Logger.class)) {

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import jrh.game.card.Card;
-import jrh.game.structure.Structure;
+import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureId;
 import jrh.game.structure.power.Power;
 import org.apache.logging.log4j.LogManager;
@@ -14,21 +14,21 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-public class StructureDeserializer extends StdDeserializer<Structure> {
+public class MutableStructureDeserializer extends StdDeserializer<MutableStructure> {
 
-    private static final Logger logger = LogManager.getLogger(StructureDeserializer.class);
+    private static final Logger logger = LogManager.getLogger(MutableStructureDeserializer.class);
 
-    protected StructureDeserializer() {
+    protected MutableStructureDeserializer() {
         super(Card.class);
     }
 
     @Override
-    public Structure deserialize(JsonParser jp, DeserializationContext context) throws IOException {
+    public MutableStructure deserialize(JsonParser jp, DeserializationContext context) throws IOException {
         JsonNode tree = jp.readValueAsTree();
         StructureId id = tree.get("id").traverse(jp.getCodec()).readValueAs(StructureId.class);
         String name = tree.get("name").traverse(jp.getCodec()).readValueAs(String.class);
         Integer health = tree.get("health").traverse(jp.getCodec()).readValueAs(Integer.class);
-        Structure structure = new Structure(id, name, health);
+        MutableStructure structure = new MutableStructure(id, name, health);
         JsonNode powers = tree.get("powers");
         for (int i = 0; i < powers.size(); i++) {
             JsonNode powerJson = powers.get(i);

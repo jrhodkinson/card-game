@@ -5,6 +5,7 @@ import jrh.game.event.Subscribe;
 import jrh.game.match.Controller;
 import jrh.game.match.MutableMatch;
 import jrh.game.match.api.Player;
+import jrh.game.structure.api.Structure;
 import jrh.game.structure.event.StructureConstructed;
 import jrh.game.structure.event.StructureDestroyed;
 import jrh.game.structure.event.StructureTookDamage;
@@ -29,7 +30,7 @@ public class StructureStateController implements Controller, EventHandler {
     }
 
     public Player getOwner(Structure structure) {
-        if (match.getActivePlayer().getStructures().contains(structure)) {
+        if (match.getActivePlayer().getStructures().contains(structure.getInstanceId())) {
             return match.getActivePlayer();
         } else {
             return match.getInactivePlayer();
@@ -37,7 +38,7 @@ public class StructureStateController implements Controller, EventHandler {
     }
 
     public void construct(StructureId structureId, Player player) {
-        Structure structure = factory.create(structureId);
+        MutableStructure structure = factory.create(structureId);
         logger.info("Assigning structure={} to player={}", structure, player);
         match.getPlayerAsMutable(player).getStructures().add(structure);
         match.getEventBus().dispatch(new StructureConstructed(structure, player));
@@ -48,7 +49,7 @@ public class StructureStateController implements Controller, EventHandler {
         Structure structure = structureTookDamage.getStructure();
         if (structure.getHealth() <= 0) {
             logger.info("Structure={} has health <= 0, destroying structure", structure);
-            match.getPlayerAsMutable(getOwner(structure)).getStructures().remove(structure);
+            match.getPlayerAsMutable(getOwner(structure)).getStructures().remove(structure.getInstanceId());
             match.getEventBus().dispatch(new StructureDestroyed(structure));
         }
     }

@@ -3,7 +3,7 @@ package jrh.game.asset;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jrh.game.card.Card;
 import jrh.game.card.CardId;
-import jrh.game.structure.Structure;
+import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureId;
 import jrh.game.util.ObjectMapperFactory;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +22,7 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     private static final Logger logger = LogManager.getLogger(FileSystemAssetLibrary.class);
 
     private final Map<CardId, Card> cards = new HashMap<>();
-    private final Map<StructureId, Structure> structures = new HashMap<>();
+    private final Map<StructureId, MutableStructure> structures = new HashMap<>();
 
     public FileSystemAssetLibrary(Path assetsDirectory) {
         loadAssets(assetsDirectory);
@@ -39,12 +39,12 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     }
 
     @Override
-    public Structure getStructure(StructureId structureId) {
+    public MutableStructure getStructure(StructureId structureId) {
         return structures.get(structureId);
     }
 
     @Override
-    public List<Structure> getAllStructures() {
+    public List<MutableStructure> getAllStructures() {
         return List.copyOf(structures.values());
     }
 
@@ -81,7 +81,7 @@ public class FileSystemAssetLibrary implements AssetLibrary {
                 addStructuresFromDirectory(file, objectMapper);
             } else {
                 try {
-                    Structure structure = objectMapper.readValue(file, Structure.class);
+                    MutableStructure structure = objectMapper.readValue(file, MutableStructure.class);
                     structures.put(structure.getStructureId(), structure);
                 } catch (IOException e) {
                     logger.error("Error reading structure from file={}", file, e);

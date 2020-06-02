@@ -1,7 +1,8 @@
 package jrh.game.structure;
 
-import jrh.game.match.MutableMatch;
 import jrh.game.match.Controller;
+import jrh.game.match.MutableMatch;
+import jrh.game.structure.api.Structure;
 import jrh.game.structure.event.StructureTookDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +23,7 @@ public class StructureHealthController implements Controller {
             return;
         }
         logger.info("Applying damage={} to structure={}", amount, structure);
-        structure.changeHealth(-amount);
+        match.getStructureAsMutable(structure).changeHealth(-amount);
         match.getEventBus().dispatch(new StructureTookDamage(structure));
     }
 
@@ -32,6 +33,6 @@ public class StructureHealthController implements Controller {
             return;
         }
         logger.info("Applying heal={} to structure={}", amount, structure);
-        structure.changeHealth(amount);
+        match.getStructureAsMutable(structure).changeHealth(amount);
     }
 }

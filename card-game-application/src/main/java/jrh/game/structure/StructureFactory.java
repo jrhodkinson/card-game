@@ -14,8 +14,8 @@ public class StructureFactory {
         this.structureLibrary = structureLibrary;
     }
 
-    public Structure create(StructureId structureId) {
-        Structure structure = structureLibrary.getStructure(structureId).duplicate();
+    public MutableStructure create(StructureId structureId) {
+        MutableStructure structure = structureLibrary.getStructure(structureId).duplicate();
         eventBus.dispatch(new StructureCreated(structure));
         return structure;
     }

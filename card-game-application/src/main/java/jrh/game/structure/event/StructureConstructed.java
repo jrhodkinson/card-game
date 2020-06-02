@@ -2,7 +2,7 @@ package jrh.game.structure.event;
 
 import jrh.game.event.Event;
 import jrh.game.match.api.Player;
-import jrh.game.structure.Structure;
+import jrh.game.structure.api.Structure;
 
 public class StructureConstructed implements Event {
 

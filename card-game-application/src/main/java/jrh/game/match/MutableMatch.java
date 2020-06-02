@@ -8,11 +8,13 @@ import jrh.game.deck.Store;
 import jrh.game.event.EventBus;
 import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
-import jrh.game.structure.Structure;
+import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureFactory;
 import jrh.game.structure.StructureHealthController;
 import jrh.game.structure.StructurePowerRegistrar;
 import jrh.game.structure.StructureStateController;
+import jrh.game.structure.Structures;
+import jrh.game.structure.api.Structure;
 import jrh.game.util.Constants;
 
 import java.util.Collection;
@@ -43,7 +45,7 @@ public class MutableMatch implements Match {
     public MutableMatch(AssetLibrary assetLibrary, User firstUser, User secondUser) {
         this.eventBus = new EventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
-        eventBus.register(new StructurePowerRegistrar());
+        eventBus.register(new StructurePowerRegistrar(this));
         this.cardFactory = new CardFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);
         this.store = new Store(cardFactory, Constants.STORE_SIZE, Collections.emptyList());
@@ -102,10 +104,18 @@ public class MutableMatch implements Match {
         return secondPlayer;
     }
 
+    public MutableStructure getStructureAsMutable(Structure structure) {
+        return Stream.of(firstPlayer.getStructures(), secondPlayer.getStructures())
+                .flatMap(Structures::stream)
+                .filter(mutableStructure -> structure.getInstanceId().equals(mutableStructure.getInstanceId()))
+                .findFirst()
+                .orElseThrow();
+    }
+
     @Override
     public Collection<Structure> getAllStructures() {
         return Stream.of(firstPlayer.getStructures(), secondPlayer.getStructures())
-                .flatMap(Collection::stream)
+                .flatMap(Structures::stream)
                 .collect(toUnmodifiableList());
     }
 

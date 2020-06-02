@@ -4,21 +4,21 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import jrh.game.card.Card;
-import jrh.game.structure.Structure;
+import jrh.game.structure.MutableStructure;
 import jrh.game.structure.power.Power;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-public class StructureSerializer extends StdSerializer<Structure> {
+public class MutableStructureSerializer extends StdSerializer<MutableStructure> {
 
-    protected StructureSerializer() {
-        super(Structure.class);
+    protected MutableStructureSerializer() {
+        super(MutableStructure.class);
     }
 
     @Override
-    public void serialize(Structure structure, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(MutableStructure structure, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
         gen.writeObjectField("id", structure.getStructureId());
         gen.writeObjectField("name", structure.getName());
