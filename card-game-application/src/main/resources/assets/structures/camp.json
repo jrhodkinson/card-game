@@ -1,5 +1,8 @@
 {
   "id": "camp",
   "name": "Camp",
-  "health": 3
+  "health": 3,
+  "modify-damage": {
+
+  }
 }
