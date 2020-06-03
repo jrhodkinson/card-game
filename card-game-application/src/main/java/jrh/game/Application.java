@@ -15,8 +15,10 @@ import jrh.game.match.MutableTurn;
 import jrh.game.match.api.Damageable;
 import jrh.game.util.Color;
 import jrh.game.util.Constants;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -28,6 +30,7 @@ public class Application {
 
     private final AssetLibrary assetLibrary;
     private final Scanner scanner;
+    private MutableMatch match;
 
     Application() {
         this.assetLibrary = new FileSystemAssetLibrary(Constants.ASSETS_DIRECTORY);
@@ -35,14 +38,15 @@ public class Application {
     }
 
     void start() {
-        MutableMatch match = new MutableMatch(assetLibrary, new User("Hero"), new User("Villain"));
+        match = new MutableMatch(assetLibrary, new User("Hero"), new User("Villain"));
         match.start();
-        simulateGame(match);
+        simulateGame();
     }
 
-    private void simulateGame(MutableMatch match) {
+    private void simulateGame() {
         boolean isRunning = true;
         while (!match.isOver() && isRunning) {
+            Configurator.setLevel("jrh", Level.ERROR);
             System.out.println(match.toString());
             MutableTurn currentTurn = match.getCurrentTurn();
             Hand hand = match.getActivePlayer().getHand();
@@ -55,23 +59,24 @@ public class Application {
                 if (i % 7 == 0) {
                     System.out.println();
                 }
-                System.out.printf(OPTION_FORMAT, i + 1 + hand.size(), row.get(i));
+                System.out.printf(OPTION_FORMAT, i + 1 + hand.size(), cardString(row.get(i)));
             }
             List<Pile> permanentPiles = match.getStore().getPermanentPiles();
             for (int i = 0; i < permanentPiles.size(); i++) {
                 System.out.printf(OPTION_FORMAT, i + 1 + hand.size() + row.size(),
-                        permanentPiles.get(i).getCard() + " - " + permanentPiles.get(i).getQuantity());
+                        cardString(permanentPiles.get(i).getCard()) + " - " + permanentPiles.get(i).getQuantity());
             }
             System.out.printf("%n" + OPTION_FORMAT + OPTION_FORMAT + "%n",
                     permanentPiles.size() + row.size() + hand.size() + 1, optionString("End turn"),
                     permanentPiles.size() + row.size() + hand.size() + 2, optionString("Quit"));
+            Configurator.setLevel("jrh", Level.DEBUG);
             int option = scanner.nextInt();
             if (option == 0) {
                 while (hand.size() > 0 && !match.isOver()) {
-                    playCard(match, hand.get(0));
+                    playCard(hand.get(0));
                 }
             } else if (option > 0 && option < hand.size() + 1) {
-                playCard(match, hand.get(option - 1));
+                playCard(hand.get(option - 1));
             } else if (option >= hand.size() + 1 && option < hand.size() + row.size() + 1) {
                 Card card = row.get(option - 1 - hand.size());
                 (new BuyCardFromRow(match, match.getActivePlayer(), card)).perform();
@@ -91,22 +96,22 @@ public class Application {
         }
     }
 
-    private void playCard(MutableMatch match, Card card) {
+    private void playCard(Card card) {
         if (card.requiresTarget()) {
-            (new PlayCard(match, match.getActivePlayer(), card, getTarget(match))).perform();
+            (new PlayCard(match, match.getActivePlayer(), card, getTarget())).perform();
         } else {
             (new PlayCard(match, match.getActivePlayer(), card, null)).perform();
         }
     }
 
-    private Damageable getTarget(MutableMatch match) {
+    private Damageable getTarget() {
         System.out.println(option(1, match.getActivePlayer().getUser().toString()));
         System.out.println(option(2, match.getInactivePlayer().getUser().toString()));
         for (int i = 0; i < match.getActivePlayer().getStructures().size(); i++) {
             System.out.println(option(i + 3, "A - " + match.getActivePlayer().getStructures().get(i)));
         }
         for (int i = 0; i < match.getInactivePlayer().getStructures().size(); i++) {
-            System.out.println(option(i + match.getActivePlayer().getStructures().size() + 3, "I - " + match.getActivePlayer().getStructures().get(i)));
+            System.out.println(option(i + match.getActivePlayer().getStructures().size() + 3, "I - " + match.getInactivePlayer().getStructures().get(i)));
         }
         int choice = scanner.nextInt();
         if (choice == 1) {
@@ -127,5 +132,9 @@ public class Application {
 
     private String optionString(String plainText) {
         return Color.CYAN + plainText + Color.RESET;
+    }
+
+    private String cardString(Card card) {
+        return String.format("%s%s (%d)%s", card.getColor(), card.getName(), match.getModificationComputer().computeModifiedCost(match.getActivePlayer(), card), Color.RESET);
     }
 }

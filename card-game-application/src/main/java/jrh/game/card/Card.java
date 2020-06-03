@@ -95,7 +95,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return String.format("%s%s (%d)%s", color, name, cost, Color.RESET);
+        return String.format("%s%s%s", color, name, Color.RESET);
     }
 
     @Override

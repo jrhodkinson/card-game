@@ -11,7 +11,6 @@ import jrh.game.match.api.Player;
 import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureFactory;
 import jrh.game.structure.StructureHealthController;
-import jrh.game.structure.StructurePowerRegistrar;
 import jrh.game.structure.StructureStateController;
 import jrh.game.structure.Structures;
 import jrh.game.structure.api.Structure;
@@ -46,7 +45,6 @@ public class MutableMatch implements Match {
     public MutableMatch(AssetLibrary assetLibrary, User firstUser, User secondUser) {
         this.eventBus = new EventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
-        eventBus.register(new StructurePowerRegistrar(this));
         this.modificationComputer = new ModificationComputer(this);
         this.cardFactory = new CardFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);

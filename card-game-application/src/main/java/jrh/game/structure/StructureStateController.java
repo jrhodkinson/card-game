@@ -39,6 +39,7 @@ public class StructureStateController implements Controller, EventHandler {
 
     public void construct(StructureId structureId, Player player) {
         MutableStructure structure = factory.create(structureId);
+        structure.registerPowers(match.getEventBus());
         logger.info("Assigning structure={} to player={}", structure, player);
         match.getPlayerAsMutable(player).getStructures().add(structure);
         match.getEventBus().dispatch(new StructureConstructed(structure, player));
@@ -49,6 +50,7 @@ public class StructureStateController implements Controller, EventHandler {
         Structure structure = structureTookDamage.getStructure();
         if (structure.getHealth() <= 0) {
             logger.info("Structure={} has health <= 0, destroying structure", structure);
+            match.getStructureAsMutable(structureTookDamage.getStructure()).unregisterPowers(match.getEventBus());
             match.getPlayerAsMutable(getOwner(structure)).getStructures().remove(structure.getInstanceId());
             match.getEventBus().dispatch(new StructureDestroyed(structure));
         }
