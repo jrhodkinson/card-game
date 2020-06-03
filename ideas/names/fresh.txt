@@ -59,3 +59,7 @@ Save
 Tariff
 Trade
 Yield
+Cartel
+Trade union
+Secret society
+Artisan

@@ -72,7 +72,7 @@ public class CardFlowController implements Controller {
             return;
         }
         int money = match.getCurrentTurn().getMoney();
-        int cost = card.getCost();
+        int cost = match.getModificationComputer().computeModifiedCost(player, card);
         if (money < cost) {
             logger.error("Not enough money to buy card (money={}, cost={})", money, cost);
             return;
@@ -92,7 +92,7 @@ public class CardFlowController implements Controller {
             return;
         }
         int money = match.getCurrentTurn().getMoney();
-        int cost = card.getCost();
+        int cost = match.getModificationComputer().computeModifiedCost(player, card);
         if (money < cost) {
             logger.error("Not enough money to buy card (money={}, cost={})", money, cost);
             return;

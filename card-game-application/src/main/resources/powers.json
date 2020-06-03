@@ -1,3 +1,4 @@
 {
-  "modify-outgoing-damage": "jrh.game.structure.power.ModifyOutgoingDamagePower"
+  "modify-outgoing-damage": "jrh.game.structure.power.ModifyOutgoingDamagePower",
+  "modify-cost": "jrh.game.structure.power.ModifyCostPower"
 }

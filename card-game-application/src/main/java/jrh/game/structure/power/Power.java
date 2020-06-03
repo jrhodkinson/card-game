@@ -1,5 +1,6 @@
 package jrh.game.structure.power;
 
+import jrh.game.card.CardId;
 import jrh.game.event.EventHandler;
 import jrh.game.match.api.Damageable;
 import jrh.game.match.api.Match;
@@ -22,5 +23,9 @@ public abstract class Power implements EventHandler {
 
     public int modifyDamage(Match match, Player source, Damageable target, int damage) {
         return damage;
+    }
+
+    public int modifyCost(Match match, Player purchaser, CardId cardId, int currentCost) {
+        return currentCost;
     }
 }

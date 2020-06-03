@@ -1,0 +1,14 @@
+{
+  "id": "merchants-guild",
+  "name": "Merchants' Guild",
+  "health": 6,
+  "powers": [
+    [
+      "modify-cost",
+      {
+        "targets": [ "SELF" ],
+        "amount": -1
+      }
+    ]
+  ]
+}

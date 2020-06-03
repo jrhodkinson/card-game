@@ -1,12 +1,12 @@
 {
-  "id": "construct-camp",
-  "name": "Encamp",
+  "id": "construct:merchants-guild",
+  "name": "Construct Guild",
   "cost": 1,
   "color": "CYAN",
   "behaviours": [
     [
       "construct",
-      "camp"
+      "merchants-guild"
     ],
     [ "vanish" ]
   ]

@@ -1,6 +1,7 @@
 package jrh.game.match;
 
 import jrh.game.match.api.Damageable;
+import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
 import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureHealthController;
@@ -11,18 +12,18 @@ public class HealthController implements Controller {
 
     private static final Logger logger = LogManager.getLogger(HealthController.class);
 
-    private final HealthModificationComputer healthModificationComputer;
+    private final Match match;
     private final PlayerHealthController playerHealthController;
     private final StructureHealthController structureHealthController;
 
     HealthController(MutableMatch mutableMatch) {
-        this.healthModificationComputer = new HealthModificationComputer(mutableMatch);
+        this.match = mutableMatch;
         this.playerHealthController = new PlayerHealthController(mutableMatch);
         this.structureHealthController = new StructureHealthController(mutableMatch);
     }
 
     public void damage(Player source, Damageable damageable, int amount) {
-        int finalAmount = healthModificationComputer.computeModifiedDamage(source, damageable, amount);
+        int finalAmount = match.getModificationComputer().computeModifiedDamage(source, damageable, amount);
         if (damageable instanceof Player) {
             playerHealthController.damage((Player) damageable, finalAmount);
         } else if (damageable instanceof MutableStructure) {

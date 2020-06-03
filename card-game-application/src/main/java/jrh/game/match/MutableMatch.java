@@ -32,6 +32,7 @@ public class MutableMatch implements Match {
 
     private final EventBus eventBus;
     private final Map<Class<? extends Controller>, Controller> controllers = new HashMap<>();
+    private final ModificationComputer modificationComputer;
     private final CardFactory cardFactory;
     private final StructureFactory structureFactory;
     private final Store store;
@@ -46,6 +47,7 @@ public class MutableMatch implements Match {
         this.eventBus = new EventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
         eventBus.register(new StructurePowerRegistrar(this));
+        this.modificationComputer = new ModificationComputer(this);
         this.cardFactory = new CardFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);
         this.store = new Store(cardFactory, Constants.STORE_SIZE, Collections.emptyList());
@@ -117,6 +119,11 @@ public class MutableMatch implements Match {
         return Stream.of(firstPlayer.getStructures(), secondPlayer.getStructures())
                 .flatMap(Structures::stream)
                 .collect(toUnmodifiableList());
+    }
+
+    @Override
+    public ModificationComputer getModificationComputer() {
+        return modificationComputer;
     }
 
     public boolean isOver() {
