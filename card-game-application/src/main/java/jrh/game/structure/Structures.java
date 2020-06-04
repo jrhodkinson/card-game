@@ -1,6 +1,10 @@
 package jrh.game.structure;
 
+import jrh.game.structure.api.Structure;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -36,5 +40,9 @@ public class Structures {
     @Override
     public String toString() {
         return structures.toString();
+    }
+
+    public Collection<Structure> unmodifiable() {
+        return Collections.unmodifiableCollection(structures);
     }
 }

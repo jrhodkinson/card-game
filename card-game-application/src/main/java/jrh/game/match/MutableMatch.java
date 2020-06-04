@@ -105,7 +105,7 @@ public class MutableMatch implements Match {
     }
 
     public MutableStructure getStructureAsMutable(Structure structure) {
-        return Stream.of(firstPlayer.getStructures(), secondPlayer.getStructures())
+        return Stream.of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
                 .flatMap(Structures::stream)
                 .filter(mutableStructure -> structure.getInstanceId().equals(mutableStructure.getInstanceId()))
                 .findFirst()
@@ -114,7 +114,7 @@ public class MutableMatch implements Match {
 
     @Override
     public Collection<Structure> getAllStructures() {
-        return Stream.of(firstPlayer.getStructures(), secondPlayer.getStructures())
+        return Stream.of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
                 .flatMap(Structures::stream)
                 .collect(toUnmodifiableList());
     }
@@ -169,7 +169,7 @@ public class MutableMatch implements Match {
                 + " money, " + currentTurn.getPlayedCards() + " played\n"
                 + getActivePlayer().getDeckAndDiscardPile().getDeck().size() + " in deck, "
                 + getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard\n"
-                + "active structures: " + getActivePlayer().getStructures().toString() + "\n"
-                + "inactive structures: " + getInactivePlayer().getStructures().toString();
+                + "active structures: " + getActivePlayer().getStructuresAsMutable().toString() + "\n"
+                + "inactive structures: " + getInactivePlayer().getStructuresAsMutable().toString();
     }
 }

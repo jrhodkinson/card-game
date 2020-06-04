@@ -7,10 +7,12 @@ import jrh.game.deck.DeckAndDiscardPile;
 import jrh.game.deck.Hand;
 import jrh.game.match.api.Player;
 import jrh.game.structure.Structures;
+import jrh.game.structure.api.Structure;
 import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public class MutablePlayer implements Player {
@@ -40,7 +42,12 @@ public class MutablePlayer implements Player {
         return deckAndDiscardPile;
     }
 
-    public Structures getStructures() {
+    @Override
+    public Collection<Structure> getStructures() {
+        return structures.unmodifiable();
+    }
+
+    public Structures getStructuresAsMutable() {
         return structures;
     }
 

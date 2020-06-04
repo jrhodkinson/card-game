@@ -2,6 +2,7 @@
   "money": "jrh.game.card.behaviour.MoneyBehaviour",
   "damage": "jrh.game.card.behaviour.DamageBehaviour",
   "damage-on-purchase": "jrh.game.card.behaviour.DamageOnPurchaseBehaviour",
+  "damage-group": "jrh.game.card.behaviour.DamageGroupBehaviour",
   "heal": "jrh.game.card.behaviour.HealBehaviour",
   "draw": "jrh.game.card.behaviour.DrawBehaviour",
   "vanish": "jrh.game.card.behaviour.VanishBehaviour",

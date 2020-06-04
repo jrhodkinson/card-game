@@ -107,11 +107,11 @@ public class Application {
     private Damageable getTarget() {
         System.out.println(option(1, match.getActivePlayer().getUser().toString()));
         System.out.println(option(2, match.getInactivePlayer().getUser().toString()));
-        for (int i = 0; i < match.getActivePlayer().getStructures().size(); i++) {
-            System.out.println(option(i + 3, "A - " + match.getActivePlayer().getStructures().get(i)));
+        for (int i = 0; i < match.getActivePlayer().getStructuresAsMutable().size(); i++) {
+            System.out.println(option(i + 3, "A - " + match.getActivePlayer().getStructuresAsMutable().get(i)));
         }
-        for (int i = 0; i < match.getInactivePlayer().getStructures().size(); i++) {
-            System.out.println(option(i + match.getActivePlayer().getStructures().size() + 3, "I - " + match.getInactivePlayer().getStructures().get(i)));
+        for (int i = 0; i < match.getInactivePlayer().getStructuresAsMutable().size(); i++) {
+            System.out.println(option(i + match.getActivePlayer().getStructuresAsMutable().size() + 3, "I - " + match.getInactivePlayer().getStructuresAsMutable().get(i)));
         }
         int choice = scanner.nextInt();
         if (choice == 1) {
@@ -120,10 +120,10 @@ public class Application {
         if (choice == 2) {
             return match.getInactivePlayer();
         }
-        if (choice > 2 && choice < match.getActivePlayer().getStructures().size() + 3) {
-            return match.getActivePlayer().getStructures().get(choice - 3);
+        if (choice > 2 && choice < match.getActivePlayer().getStructuresAsMutable().size() + 3) {
+            return match.getActivePlayer().getStructuresAsMutable().get(choice - 3);
         }
-        return match.getInactivePlayer().getStructures().get(choice - 3 - match.getActivePlayer().getStructures().size());
+        return match.getInactivePlayer().getStructuresAsMutable().get(choice - 3 - match.getActivePlayer().getStructuresAsMutable().size());
     }
 
     private String option(int number, String text) {
