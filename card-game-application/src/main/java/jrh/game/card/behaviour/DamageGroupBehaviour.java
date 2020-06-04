@@ -23,20 +23,20 @@ public class DamageGroupBehaviour extends Behaviour {
     private final List<Target> targets;
 
     @JsonValue
-    private final int damage;
+    private final int amount;
 
-    public DamageGroupBehaviour(@JsonProperty("targets") List<Target> targets, @JsonProperty("damage") int damage) {
+    public DamageGroupBehaviour(@JsonProperty("targets") List<Target> targets, @JsonProperty("amount") int amount) {
         super(false);
         this.targets = targets;
-        this.damage = damage;
+        this.amount = amount;
     }
 
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard())) {
             List<Damageable> realTargets = computeRealTargets(match, cardPlayed.getPlayer());
-            logger.info("Damaging targets={} by amount={}", realTargets, damage);
-            realTargets.forEach((target) -> match.getController(HealthController.class).damage(cardPlayed.getPlayer(), target, this.damage));
+            logger.info("Damaging targets={} by amount={}", realTargets, amount);
+            realTargets.forEach((target) -> match.getController(HealthController.class).damage(cardPlayed.getPlayer(), target, this.amount));
         }
     }
 
@@ -59,6 +59,6 @@ public class DamageGroupBehaviour extends Behaviour {
 
     @Override
     public DamageGroupBehaviour duplicate() {
-        return null;
+        return new DamageGroupBehaviour(List.copyOf(targets), amount);
     }
 }
