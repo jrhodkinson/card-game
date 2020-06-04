@@ -1,65 +1,20 @@
 Rose thorn
-Ironstone china
-Church
-Granary
 Academy
+Granary
 Barracks
-Stable
-Palisade
 Brewery
 Marketplace
 Treasury
-Stroke of genius
-Floodgates
-Exodus
 Pestilence
+Exodus
 Darkness
-Death
-Graveyard
-Mutual aid
 Guild
-Mill
-Clock tower
 Outpost
-Observatory
-Hut
 Stone circle
 Library
-Windmill
-Publicity stunt
-Rivalry
-Chase
-Lake
-Mountain
-Boat
-Ship
-Genus
-Octagon
-Rise up
-Resurrect
-Life steal
 Balance
-React
-Oracle
-Charity
-Confidence
-Beggar
-Pawn
 Scrounge
-Chariot
-Warship
-Commodity
 Credit
-Debt
-Interest
-Asset
 Monopoly
-Opportunity cost
-Save
-Tariff
-Trade
 Yield
 Cartel
-Trade union
-Secret society
-Artisan

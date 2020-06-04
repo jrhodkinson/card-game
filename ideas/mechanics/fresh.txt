@@ -5,3 +5,4 @@ Poison
 Strength
 Status effect that allows person to buy things cheaper
 Card which gives choices
+Life steal
