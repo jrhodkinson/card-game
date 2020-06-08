@@ -1,6 +1,7 @@
 package jrh.game.structure.power;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jrh.game.asset.JsonKey;
 import jrh.game.card.CardId;
 import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
@@ -14,6 +15,7 @@ import java.util.List;
 import static jrh.game.match.api.Target.OTHER;
 import static jrh.game.match.api.Target.SELF;
 
+@JsonKey("modify-cost")
 public class ModifyCostPower extends Power {
 
     private static final Logger logger = LogManager.getLogger(ModifyCostPower.class);

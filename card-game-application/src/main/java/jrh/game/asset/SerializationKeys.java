@@ -1,68 +1,57 @@
 package jrh.game.asset;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import jrh.game.card.behaviour.Behaviour;
 import jrh.game.structure.power.Power;
-import jrh.game.util.ObjectMapperFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.reflections.Reflections;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
-import java.util.Map;
+import java.util.Set;
 
 public class SerializationKeys {
 
     private static final Logger logger = LogManager.getLogger(SerializationKeys.class);
-    private static final String BEHAVIOURS = "behaviours.json";
-    private static final String POWERS = "powers.json";
-    private static final BiMap<String, Class<? extends Behaviour>> behaviourClasses = load(Behaviour.class, BEHAVIOURS);
-    private static final BiMap<String, Class<? extends Power>> powerClasses = load(Power.class, POWERS);
 
-    private SerializationKeys() {
+    private static final BiMap<String, Class<? extends Behaviour>> BEHAVIOURS = HashBiMap.create();
+    private static final BiMap<String, Class<? extends Power>> POWERS = HashBiMap.create();
 
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T> BiMap<String, Class<? extends T>> load(Class<T> clazz, String location) {
-        try {
-            File file = Paths.get(ClassLoader.getSystemResource(location).toURI()).toFile();
-            ObjectMapper objectMapper = ObjectMapperFactory.create();
-            Map<String, String> fullyQualifiedClasses = objectMapper.readValue(file, new TypeReference<>() {
-            });
-            BiMap<String, Class<? extends T>> classes = HashBiMap.create();
-            for (Map.Entry<String, String> entry : fullyQualifiedClasses.entrySet()) {
-                Class<? extends T> componentClass = (Class<? extends T>) Class
-                        .forName(entry.getValue());
-                classes.put(entry.getKey(), componentClass);
+    static {
+        Reflections reflections = new Reflections("jrh.game");
+        Set<Class<?>> serializableClasses = reflections.getTypesAnnotatedWith(JsonKey.class);
+        for (Class<?> serializableClass : serializableClasses) {
+            String key = serializableClass.getAnnotation(JsonKey.class).value();
+            System.out.println(key + " " + serializableClass.toString());
+            if (Behaviour.class.isAssignableFrom(serializableClass)) {
+                BEHAVIOURS.put(key, serializableClass.asSubclass(Behaviour.class));
+            } else if (Power.class.isAssignableFrom(serializableClass)) {
+                POWERS.put(key, serializableClass.asSubclass(Power.class));
+            } else {
+                logger.error("Unsupported @JsonKey annotation on " + serializableClass.toString());
             }
-            logger.info("Loaded type {}: {} from {}", clazz, classes, location);
-            return classes;
-        } catch (IOException | ClassNotFoundException | URISyntaxException e) {
-            logger.error(e);
-            System.exit(1);
         }
-        return null;
+        logger.info("Loaded behaviours: {}", BEHAVIOURS);
+        logger.info("Loaded powers: {}", POWERS);
     }
 
     public static Class<? extends Behaviour> getBehaviourClass(String key) {
-        return behaviourClasses.get(key);
+        return BEHAVIOURS.get(key);
     }
 
     public static String getBehaviourKey(Class<? extends Behaviour> behaviourClass) {
-        return behaviourClasses.inverse().get(behaviourClass);
+        return BEHAVIOURS.inverse().get(behaviourClass);
     }
 
     public static Class<? extends Power> getPowerClass(String key) {
-        return powerClasses.get(key);
+        return POWERS.get(key);
     }
 
     public static String getPowerKey(Class<? extends Power> powerClass) {
-        return powerClasses.inverse().get(powerClass);
+        return POWERS.inverse().get(powerClass);
+    }
+
+    private SerializationKeys() {
+        // not instantiable
     }
 }

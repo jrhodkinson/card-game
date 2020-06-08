@@ -2,6 +2,7 @@ package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.event.Subscribe;
 import jrh.game.match.HealthController;
@@ -15,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonKey("damage-group")
 public class DamageGroupBehaviour extends Behaviour {
 
     private static final Logger logger = LogManager.getLogger(DamageGroupBehaviour.class);

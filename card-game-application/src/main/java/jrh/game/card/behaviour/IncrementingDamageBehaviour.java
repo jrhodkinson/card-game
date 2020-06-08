@@ -1,6 +1,7 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
 import jrh.game.event.Callback;
@@ -11,6 +12,7 @@ import jrh.game.match.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@JsonKey("incrementing-damage")
 public class IncrementingDamageBehaviour extends Behaviour {
 
     private static final Logger logger = LogManager.getLogger(IncrementingDamageBehaviour.class);

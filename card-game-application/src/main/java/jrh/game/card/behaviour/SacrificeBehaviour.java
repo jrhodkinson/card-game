@@ -1,6 +1,7 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.event.Subscribe;
 import jrh.game.match.HealthController;
@@ -9,6 +10,7 @@ import jrh.game.match.api.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@JsonKey("sacrifice")
 public class SacrificeBehaviour extends Behaviour {
 
     private static final Logger logger = LogManager.getLogger(SacrificeBehaviour.class);

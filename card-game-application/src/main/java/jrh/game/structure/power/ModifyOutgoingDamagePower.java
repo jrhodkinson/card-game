@@ -1,6 +1,7 @@
 package jrh.game.structure.power;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import jrh.game.asset.JsonKey;
 import jrh.game.match.api.Damageable;
 import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
@@ -8,6 +9,7 @@ import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@JsonKey("modify-outgoing-damage")
 public class ModifyOutgoingDamagePower extends Power {
 
     private static final Logger logger = LogManager.getLogger(ModifyOutgoingDamagePower.class);

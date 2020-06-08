@@ -1,6 +1,7 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import jrh.game.asset.JsonKey;
 import jrh.game.event.Subscribe;
 import jrh.game.match.HealthController;
 import jrh.game.match.api.Damageable;
@@ -9,6 +10,7 @@ import jrh.game.match.event.CardPurchased;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@JsonKey("damage-on-purchase")
 public class DamageOnPurchaseBehaviour extends Behaviour {
 
     private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);

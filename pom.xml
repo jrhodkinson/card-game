@@ -13,6 +13,7 @@
         <version.guava>28.2-jre</version.guava>
         <version.javalin>3.7.0</version.javalin>
         <version.jackson>2.10.2</version.jackson>
+        <version.reflections>0.9.12</version.reflections>
         <version.logging.log4j>2.13.1</version.logging.log4j>
         <version.test.junit>5.4.2</version.test.junit>
         <version.test.hamcrest>2.2</version.test.hamcrest>
@@ -94,10 +95,16 @@
                 <version>${version.guava}</version>
             </dependency>
             <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${version.reflections}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${version.commons.lang}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>

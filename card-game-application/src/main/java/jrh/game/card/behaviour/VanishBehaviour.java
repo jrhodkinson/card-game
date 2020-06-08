@@ -1,5 +1,6 @@
 package jrh.game.card.behaviour;
 
+import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardResolved;
 import jrh.game.event.Callback;
 import jrh.game.event.EventHandler;
@@ -9,6 +10,7 @@ import jrh.game.match.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@JsonKey("vanish")
 public class VanishBehaviour extends Behaviour implements EventHandler {
 
     private static final Logger logger = LogManager.getLogger(VanishBehaviour.class);
