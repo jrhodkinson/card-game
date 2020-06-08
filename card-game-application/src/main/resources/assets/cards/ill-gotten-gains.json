@@ -6,7 +6,10 @@
   "behaviours": [
     [
       "damage-on-purchase",
-      3
+      {
+        "amount": 3,
+        "targets": ["other"]
+      }
     ],
     [
       "money",
