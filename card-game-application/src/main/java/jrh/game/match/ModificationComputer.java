@@ -23,7 +23,8 @@ public class ModificationComputer implements Controller {
     }
 
     public int computeModifiedDamage(Player source, Damageable target, int initialAmount) {
-        logger.debug("Computing modified damage for source={} target={} and initialAmount={}", source, target, initialAmount);
+        logger.debug("Computing modified damage for source={} target={} and initialAmount={}", source, target,
+                initialAmount);
         int finalAmount = initialAmount;
         for (Power power : powers()) {
             finalAmount = power.modifyDamage(match, source, target, finalAmount);
@@ -41,8 +42,6 @@ public class ModificationComputer implements Controller {
     }
 
     private List<Power> powers() {
-        return match.getAllStructures().stream()
-                .flatMap(structure -> structure.getPowers().stream())
-                .collect(toList());
+        return match.getAllStructures().stream().flatMap(structure -> structure.getPowers().stream()).collect(toList());
     }
 }

@@ -20,21 +20,19 @@ public final class StructureId {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         StructureId that = (StructureId) o;
 
-        return new EqualsBuilder()
-                .append(structureId, that.structureId)
-                .isEquals();
+        return new EqualsBuilder().append(structureId, that.structureId).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(structureId)
-                .toHashCode();
+        return new HashCodeBuilder(17, 37).append(structureId).toHashCode();
     }
 }

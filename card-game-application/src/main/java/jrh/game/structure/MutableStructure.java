@@ -27,7 +27,8 @@ public class MutableStructure implements Structure {
     private int health;
 
     @JsonCreator
-    public MutableStructure(@JsonProperty("id") StructureId structureId, @JsonProperty("name") String name, @JsonProperty("health") int health) {
+    public MutableStructure(@JsonProperty("id") StructureId structureId, @JsonProperty("name") String name,
+            @JsonProperty("health") int health) {
         this.structureId = structureId;
         this.name = name;
         this.health = health;

@@ -111,7 +111,8 @@ public class Application {
             System.out.println(option(i + 3, "A - " + match.getActivePlayer().getStructuresAsMutable().get(i)));
         }
         for (int i = 0; i < match.getInactivePlayer().getStructuresAsMutable().size(); i++) {
-            System.out.println(option(i + match.getActivePlayer().getStructuresAsMutable().size() + 3, "I - " + match.getInactivePlayer().getStructuresAsMutable().get(i)));
+            System.out.println(option(i + match.getActivePlayer().getStructuresAsMutable().size() + 3,
+                    "I - " + match.getInactivePlayer().getStructuresAsMutable().get(i)));
         }
         int choice = scanner.nextInt();
         if (choice == 1) {
@@ -123,7 +124,8 @@ public class Application {
         if (choice > 2 && choice < match.getActivePlayer().getStructuresAsMutable().size() + 3) {
             return match.getActivePlayer().getStructuresAsMutable().get(choice - 3);
         }
-        return match.getInactivePlayer().getStructuresAsMutable().get(choice - 3 - match.getActivePlayer().getStructuresAsMutable().size());
+        return match.getInactivePlayer().getStructuresAsMutable()
+                .get(choice - 3 - match.getActivePlayer().getStructuresAsMutable().size());
     }
 
     private String option(int number, String text) {
@@ -135,6 +137,7 @@ public class Application {
     }
 
     private String cardString(Card card) {
-        return String.format("%s%s (%d)%s", card.getColor(), card.getName(), match.getModificationComputer().computeModifiedCost(match.getActivePlayer(), card), Color.RESET);
+        return String.format("%s%s (%d)%s", card.getColor(), card.getName(),
+                match.getModificationComputer().computeModifiedCost(match.getActivePlayer(), card), Color.RESET);
     }
 }

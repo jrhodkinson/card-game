@@ -33,7 +33,7 @@ public class ModifyCostPower extends Power {
 
     @Override
     public int modifyCost(Match match, Player purchaser, CardId cardId, int cost) {
-        if (!shouldModifyCost(match, purchaser)){
+        if (!shouldModifyCost(match, purchaser)) {
             return cost;
         }
         int modifiedCost = cost + amount;
@@ -44,7 +44,8 @@ public class ModifyCostPower extends Power {
 
     private boolean shouldModifyCost(Match match, Player purchaser) {
         Player owner = match.getController(StructureStateController.class).getOwner(getStructure());
-        return (owner.equals(purchaser) && targets.contains(SELF)) || (!owner.equals(purchaser) && targets.contains(OTHER));
+        return (owner.equals(purchaser) && targets.contains(SELF))
+                || (!owner.equals(purchaser) && targets.contains(OTHER));
     }
 
     @Override

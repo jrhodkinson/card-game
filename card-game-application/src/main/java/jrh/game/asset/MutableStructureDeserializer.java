@@ -39,8 +39,8 @@ public class MutableStructureDeserializer extends StdDeserializer<MutableStructu
                     structure.addPower(powerClass.getConstructor().newInstance());
                 } catch (InstantiationException | NoSuchMethodException | IllegalAccessException
                         | InvocationTargetException e) {
-                    logger.error("Error instantiating power={} for structureId={} with no-args constructor",
-                            powerJson, tree.get("id"), e);
+                    logger.error("Error instantiating power={} for structureId={} with no-args constructor", powerJson,
+                            tree.get("id"), e);
                 }
             } else if (powerJson.size() == 2) {
                 Power power = powerJson.get(1).traverse(jp.getCodec()).readValueAs(powerClass);

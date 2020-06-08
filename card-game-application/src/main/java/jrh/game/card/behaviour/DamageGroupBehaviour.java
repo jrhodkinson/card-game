@@ -38,7 +38,8 @@ public class DamageGroupBehaviour extends Behaviour {
         if (cardPlayed.getCard().equals(this.getCard())) {
             List<Damageable> realTargets = computeRealTargets(match, cardPlayed.getPlayer());
             logger.info("Damaging targets={} by amount={}", realTargets, amount);
-            realTargets.forEach((target) -> match.getController(HealthController.class).damage(cardPlayed.getPlayer(), target, this.amount));
+            realTargets.forEach((target) -> match.getController(HealthController.class).damage(cardPlayed.getPlayer(),
+                    target, this.amount));
         }
     }
 

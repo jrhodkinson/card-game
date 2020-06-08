@@ -108,15 +108,13 @@ public class MutableMatch implements Match {
         return Stream.of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
                 .flatMap(Structures::stream)
                 .filter(mutableStructure -> structure.getInstanceId().equals(mutableStructure.getInstanceId()))
-                .findFirst()
-                .orElseThrow();
+                .findFirst().orElseThrow();
     }
 
     @Override
     public Collection<Structure> getAllStructures() {
         return Stream.of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
-                .flatMap(Structures::stream)
-                .collect(toUnmodifiableList());
+                .flatMap(Structures::stream).collect(toUnmodifiableList());
     }
 
     @Override
@@ -165,11 +163,12 @@ public class MutableMatch implements Match {
 
     @Override
     public String toString() {
-        return getActivePlayer().getUser() + " (" + getActivePlayer().getHealth() + ") vs " + getInactivePlayer().getUser() + " (" + getInactivePlayer().getHealth() + ")\n" + currentTurn.getMoney()
-                + " money, " + currentTurn.getPlayedCards() + " played\n"
+        return getActivePlayer().getUser() + " (" + getActivePlayer().getHealth() + ") vs "
+                + getInactivePlayer().getUser() + " (" + getInactivePlayer().getHealth() + ")\n"
+                + currentTurn.getMoney() + " money, " + currentTurn.getPlayedCards() + " played\n"
                 + getActivePlayer().getDeckAndDiscardPile().getDeck().size() + " in deck, "
-                + getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard\n"
-                + "active structures: " + getActivePlayer().getStructuresAsMutable().toString() + "\n"
-                + "inactive structures: " + getInactivePlayer().getStructuresAsMutable().toString();
+                + getActivePlayer().getDeckAndDiscardPile().getDiscardPile() + " in discard\n" + "active structures: "
+                + getActivePlayer().getStructuresAsMutable().toString() + "\n" + "inactive structures: "
+                + getInactivePlayer().getStructuresAsMutable().toString();
     }
 }

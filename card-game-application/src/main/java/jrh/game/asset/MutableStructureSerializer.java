@@ -18,7 +18,8 @@ public class MutableStructureSerializer extends StdSerializer<MutableStructure> 
     }
 
     @Override
-    public void serialize(MutableStructure structure, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(MutableStructure structure, JsonGenerator gen, SerializerProvider provider)
+            throws IOException {
         gen.writeStartObject();
         gen.writeObjectField("id", structure.getStructureId());
         gen.writeObjectField("name", structure.getName());
