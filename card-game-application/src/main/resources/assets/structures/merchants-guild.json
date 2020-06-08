@@ -6,7 +6,7 @@
     [
       "modify-cost",
       {
-        "targets": [ "SELF" ],
+        "targets": [ "self" ],
         "amount": -1
       }
     ]

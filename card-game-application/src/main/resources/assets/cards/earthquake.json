@@ -7,7 +7,7 @@
     [
       "damage-group",
       {
-        "targets": ["OWN_STRUCTURES", "OTHER_STRUCTURES"],
+        "targets": ["own-structures", "other-structures"],
         "amount": 4
       }
     ],

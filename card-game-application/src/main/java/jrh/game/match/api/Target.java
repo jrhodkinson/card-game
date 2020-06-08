@@ -1,5 +1,10 @@
 package jrh.game.match.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum Target {
-    SELF, OTHER, OWN_STRUCTURES, OTHER_STRUCTURES
+    @JsonProperty("self") SELF,
+    @JsonProperty("other") OTHER,
+    @JsonProperty("own-structures") OWN_STRUCTURES,
+    @JsonProperty("other-structures") OTHER_STRUCTURES
 }

@@ -22,7 +22,6 @@ public class SerializationKeys {
         Set<Class<?>> serializableClasses = reflections.getTypesAnnotatedWith(JsonKey.class);
         for (Class<?> serializableClass : serializableClasses) {
             String key = serializableClass.getAnnotation(JsonKey.class).value();
-            System.out.println(key + " " + serializableClass.toString());
             if (Behaviour.class.isAssignableFrom(serializableClass)) {
                 BEHAVIOURS.put(key, serializableClass.asSubclass(Behaviour.class));
             } else if (Power.class.isAssignableFrom(serializableClass)) {
