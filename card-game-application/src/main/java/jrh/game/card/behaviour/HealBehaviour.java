@@ -25,7 +25,7 @@ public class HealBehaviour extends Behaviour {
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
-            logger.info("Increasing health of {} by {}", cardPlayed.getTarget().get(), this.health);
+            logger.info("Healing {} by {}", cardPlayed.getTarget().get(), this.health);
             match.getController(HealthController.class).heal(cardPlayed.getPlayer(), cardPlayed.getTarget().get(),
                     this.health);
         }

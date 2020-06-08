@@ -3,3 +3,4 @@ Heirloom: Worth 1 money + 1 money per turn
 Blood money: Worth 3 money, but damages the user every time its played
 Ill-gotten gains: Cost 4, 2 money, on purchasing, deal 3 damage to your opponent
 Earthquake: Deal 4 damage to all structures
+Life Steal: Deal 2 damage to opponent, heal 2

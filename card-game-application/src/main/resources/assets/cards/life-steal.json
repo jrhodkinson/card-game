@@ -1,0 +1,22 @@
+{
+  "id": "life-steal",
+  "name": "Life Steal",
+  "cost": 2,
+  "color": "RED",
+  "behaviours": [
+    [
+      "damage-group",
+      {
+        "amount": 2,
+        "targets": ["other"]
+      }
+    ],
+    [
+      "heal-group",
+      {
+        "amount": 2,
+        "targets": ["self"]
+      }
+    ]
+  ]
+}
