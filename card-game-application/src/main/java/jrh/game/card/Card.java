@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @JsonDeserialize(using = CardDeserializer.class)
 @JsonSerialize(using = CardSerializer.class)
@@ -62,6 +63,14 @@ public class Card {
 
     public Color getColor() {
         return color;
+    }
+
+    public CardDescription getDescription() {
+        return CardDescription.fromBehaviourDescriptions(
+                getBehaviours().stream()
+                        .map(Behaviour::getDescription)
+                        .collect(Collectors.toList())
+        );
     }
 
     public void addBehaviour(Behaviour behaviour) {

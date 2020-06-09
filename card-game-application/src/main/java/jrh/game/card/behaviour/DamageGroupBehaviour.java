@@ -33,6 +33,15 @@ public class DamageGroupBehaviour extends Behaviour {
         this.amount = amount;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Damage")
+                .plainString(targets.toString())
+                .number(amount)
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard())) {

@@ -24,5 +24,7 @@ public abstract class Behaviour implements EventHandler {
         return requiresTarget;
     }
 
+    abstract public BehaviourDescription getDescription();
+
     abstract public Behaviour duplicate();
 }

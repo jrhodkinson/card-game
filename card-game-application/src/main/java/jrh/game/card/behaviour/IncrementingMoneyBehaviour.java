@@ -28,6 +28,16 @@ public class IncrementingMoneyBehaviour extends Behaviour {
         this.increment = increment;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Gain")
+                .number(amount)
+                .plainString("then increase future gain by")
+                .number(increment)
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {

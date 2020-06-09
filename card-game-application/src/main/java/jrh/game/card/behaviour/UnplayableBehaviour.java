@@ -10,6 +10,11 @@ public class UnplayableBehaviour extends Behaviour {
     }
 
     @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.keyword("Unplayable");
+    }
+
+    @Override
     public UnplayableBehaviour duplicate() {
         return new UnplayableBehaviour();
     }

@@ -22,6 +22,14 @@ public class DrawBehaviour extends Behaviour {
         this.amountToDraw = amountToDraw;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Draw")
+                .number(amountToDraw)
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard())) {

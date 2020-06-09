@@ -23,6 +23,15 @@ public class SacrificeBehaviour extends Behaviour {
         this.damage = damage;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Damage")
+                .plainString("self")
+                .number(damage)
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard())) {

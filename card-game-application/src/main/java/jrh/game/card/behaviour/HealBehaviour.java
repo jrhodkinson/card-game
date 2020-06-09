@@ -22,6 +22,14 @@ public class HealBehaviour extends Behaviour {
         this.health = health;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Heal")
+                .number(health)
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {

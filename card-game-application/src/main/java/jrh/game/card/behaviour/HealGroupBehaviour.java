@@ -33,6 +33,15 @@ public class HealGroupBehaviour extends Behaviour {
         this.amount = amount;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Heal")
+                .plainString(targets.toString())
+                .number(amount)
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard())) {

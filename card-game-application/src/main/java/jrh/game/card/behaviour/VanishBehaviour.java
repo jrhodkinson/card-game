@@ -19,6 +19,11 @@ public class VanishBehaviour extends Behaviour implements EventHandler {
         super(false);
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.keyword("Vanishes");
+    }
+
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
         if (cardResolved.getCard().equals(this.getCard())) {

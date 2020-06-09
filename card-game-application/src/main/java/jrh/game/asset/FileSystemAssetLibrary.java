@@ -65,6 +65,7 @@ public class FileSystemAssetLibrary implements AssetLibrary {
                 try {
                     Card card = objectMapper.readValue(file, Card.class);
                     cards.put(card.getCardId(), card);
+                    logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription());
                 } catch (IOException e) {
                     logger.error("Error reading card from file={}", file, e);
                 }

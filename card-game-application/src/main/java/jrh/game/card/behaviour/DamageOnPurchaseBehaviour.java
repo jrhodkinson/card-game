@@ -33,6 +33,16 @@ public class DamageOnPurchaseBehaviour extends Behaviour {
         this.amount = amount;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .plainString("On purchase,")
+                .keyword("damage")
+                .plainString("self")
+                .number(amount)
+                .build();
+    }
+
     @Subscribe
     private void cardPurchased(CardPurchased cardPurchased, Match match) {
         if (cardPurchased.getCard().equals(this.getCard())) {

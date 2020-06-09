@@ -25,6 +25,14 @@ public class ConstructBehaviour extends Behaviour {
         this.structureId = structureId;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Construct")
+                .plainString(structureId.toString())
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard())) {

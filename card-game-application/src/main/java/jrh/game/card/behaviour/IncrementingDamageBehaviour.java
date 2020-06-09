@@ -29,6 +29,16 @@ public class IncrementingDamageBehaviour extends Behaviour {
         this.increment = increment;
     }
 
+    @Override
+    public BehaviourDescription getDescription() {
+        return BehaviourDescription.builder()
+                .keyword("Damage")
+                .number(damage)
+                .plainString("then increase future damage by")
+                .number(increment)
+                .build();
+    }
+
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
