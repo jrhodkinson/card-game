@@ -1,1 +1,7 @@
 Inflation: All cards now cost 1 more
+Rapture: Clear the store, deal 77 damage to all own structures, gain 10 money, vanish
+Opponent can buy cards for 1 cheaper, but whenever they buy a card, they lose 2 health
+Temperance: Gain 5, you may not attack this turn
+Regulate: All cards cost 3
+Cartel: Worth a traingular / square number depending how many you have
+Duplicate a card
