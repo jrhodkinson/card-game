@@ -10,7 +10,7 @@ import jrh.game.util.Color;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -24,13 +24,15 @@ public class Card {
     private final String name;
     private final int cost;
     private final Color color;
-    private final Map<Class<? extends Behaviour>, Behaviour> behaviours = new HashMap<>();
+    private final Map<Class<? extends Behaviour>, Behaviour> behaviours;
 
     private Card(Builder builder) {
         this.cardId = builder.cardId;
         this.name = builder.name;
         this.cost = builder.cost;
         this.color = builder.color;
+        this.behaviours = builder.behaviours;
+        this.behaviours.values().forEach(behaviour -> behaviour.forCard(this));
     }
 
     public static NameSetter card(CardId cardId) {
@@ -73,11 +75,6 @@ public class Card {
         );
     }
 
-    public void addBehaviour(Behaviour behaviour) {
-        behaviours.put(behaviour.getClass(), behaviour);
-        behaviour.forCard(this);
-    }
-
     public boolean hasBehaviour(Class<? extends Behaviour> behaviourClass) {
         return behaviours.containsKey(behaviourClass);
     }
@@ -95,11 +92,9 @@ public class Card {
     }
 
     Card duplicate() {
-        Card duplicate = Card.card(cardId).withName(name).withCost(cost).withColor(color).build();
-        for (Behaviour behaviour : behaviours.values()) {
-            duplicate.addBehaviour(behaviour.duplicate());
-        }
-        return duplicate;
+        Card.Builder duplicateBuilder = Card.card(cardId).withName(name).withCost(cost).withColor(color);
+        behaviours.values().forEach(behaviour -> duplicateBuilder.withBehaviour(behaviour.duplicate()));
+        return duplicateBuilder.build();
     }
 
     @Override
@@ -139,6 +134,7 @@ public class Card {
         private String name;
         private int cost;
         private Color color;
+        private final LinkedHashMap<Class<? extends Behaviour>, Behaviour> behaviours = new LinkedHashMap<>();
 
         private Builder(CardId cardId) {
             this.cardId = cardId;
@@ -156,6 +152,11 @@ public class Card {
 
         public Builder withColor(Color color) {
             this.color = color;
+            return this;
+        }
+
+        public Builder withBehaviour(Behaviour behaviour) {
+            behaviours.put(behaviour.getClass(), behaviour);
             return this;
         }
 

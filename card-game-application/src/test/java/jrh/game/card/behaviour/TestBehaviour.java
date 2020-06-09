@@ -20,8 +20,12 @@ public class TestBehaviour {
     public static void roundTripsViaJson(Behaviour behaviour) {
         try {
             Class<? extends Behaviour> behaviourClass = behaviour.getClass();
-            Card card = Card.card(new CardId("test")).withName("Test").withCost(1).withColor(Color.BLACK).build();
-            card.addBehaviour(behaviour);
+            Card card = Card.card(new CardId("test"))
+                    .withName("Test")
+                    .withCost(1)
+                    .withColor(Color.BLACK)
+                    .withBehaviour(behaviour)
+                    .build();
             Card parsed = objectMapper.readValue(objectMapper.writeValueAsString(card), Card.class);
             Behaviour parsedBehaviour = parsed.getBehaviour(behaviourClass);
             for (Field field : behaviourClass.getDeclaredFields()) {

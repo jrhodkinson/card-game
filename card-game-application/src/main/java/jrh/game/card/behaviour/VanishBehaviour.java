@@ -21,7 +21,7 @@ public class VanishBehaviour extends Behaviour implements EventHandler {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.keyword("Vanishes");
+        return BehaviourDescription.keyword("Vanish");
     }
 
     @Subscribe

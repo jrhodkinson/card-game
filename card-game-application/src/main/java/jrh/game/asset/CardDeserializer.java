@@ -30,7 +30,6 @@ public class CardDeserializer extends StdDeserializer<Card> {
         Integer cost = tree.get("cost").traverse(jp.getCodec()).readValueAs(Integer.class);
         Color color = tree.get("color").traverse(jp.getCodec()).readValueAs(Color.class);
         Card.Builder cardBuilder = Card.card(id).withName(name).withCost(cost).withColor(color);
-        Card card = cardBuilder.build();
         JsonNode behaviours = tree.get("behaviours");
         for (int i = 0; i < behaviours.size(); i++) {
             JsonNode behaviourJson = behaviours.get(i);
@@ -38,7 +37,7 @@ public class CardDeserializer extends StdDeserializer<Card> {
             Class<? extends Behaviour> behaviourClass = SerializationKeys.getBehaviourClass(behaviourKey);
             if (behaviourJson.size() == 1) {
                 try {
-                    card.addBehaviour(behaviourClass.getConstructor().newInstance());
+                    cardBuilder.withBehaviour(behaviourClass.getConstructor().newInstance());
                 } catch (InstantiationException | NoSuchMethodException | IllegalAccessException
                         | InvocationTargetException e) {
                     logger.error("Error instantiating behaviour={} for cardId={} with no-args constructor",
@@ -46,13 +45,13 @@ public class CardDeserializer extends StdDeserializer<Card> {
                 }
             } else if (behaviourJson.size() == 2) {
                 Behaviour behaviour = behaviourJson.get(1).traverse(jp.getCodec()).readValueAs(behaviourClass);
-                card.addBehaviour(behaviour);
+                cardBuilder.withBehaviour(behaviour);
             } else {
                 logger.error("Invalid behaviour={} for cardId={}, too many elements in array", behaviourJson,
                         tree.get("id"));
             }
         }
-        return card;
+        return cardBuilder.build();
     }
 
 }
