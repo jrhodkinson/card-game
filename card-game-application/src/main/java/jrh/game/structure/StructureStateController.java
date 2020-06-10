@@ -7,9 +7,9 @@ import jrh.game.api.Controller;
 import jrh.game.match.MutableMatch;
 import jrh.game.api.Player;
 import jrh.game.api.Structure;
-import jrh.game.structure.event.StructureConstructed;
-import jrh.game.structure.event.StructureDestroyed;
-import jrh.game.structure.event.StructureTookDamage;
+import jrh.game.api.event.StructureConstructed;
+import jrh.game.api.event.StructureDestroyed;
+import jrh.game.api.event.StructureTookDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

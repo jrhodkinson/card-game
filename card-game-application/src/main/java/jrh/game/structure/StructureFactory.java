@@ -3,7 +3,7 @@ package jrh.game.structure;
 import jrh.game.common.StructureId;
 import jrh.game.asset.MutableStructureLibrary;
 import jrh.game.event.EventBus;
-import jrh.game.structure.event.StructureCreated;
+import jrh.game.api.event.StructureCreated;
 
 public class StructureFactory {
 

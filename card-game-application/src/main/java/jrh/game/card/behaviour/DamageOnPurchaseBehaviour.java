@@ -10,7 +10,7 @@ import jrh.game.api.Damageable;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
 import jrh.game.common.Target;
-import jrh.game.match.event.CardPurchased;
+import jrh.game.api.event.CardPurchased;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

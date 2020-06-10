@@ -1,15 +1,15 @@
-package jrh.game.card.event;
+package jrh.game.api.event;
 
 import jrh.game.api.Card;
 import jrh.game.api.Player;
-import jrh.game.event.Event;
+import jrh.game.common.Event;
 
-public class CardResolved implements Event {
+public class DiscardedCard implements Event {
 
     private final Player player;
     private final Card card;
 
-    public CardResolved(Player player, Card card) {
+    public DiscardedCard(Player player, Card card) {
         this.player = player;
         this.card = card;
     }

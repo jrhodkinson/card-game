@@ -2,8 +2,8 @@ package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jrh.game.asset.JsonKey;
-import jrh.game.card.event.CardPlayed;
-import jrh.game.card.event.CardResolved;
+import jrh.game.api.event.CardPlayed;
+import jrh.game.api.event.CardResolved;
 import jrh.game.common.BehaviourDescription;
 import jrh.game.event.Callback;
 import jrh.game.event.Subscribe;

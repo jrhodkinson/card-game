@@ -1,6 +1,6 @@
-package jrh.game.match.event;
+package jrh.game.api.event;
 
-import jrh.game.event.Event;
+import jrh.game.common.Event;
 import jrh.game.api.Player;
 
 public class PlayerTookDamage implements Event {

@@ -1,7 +1,7 @@
 package jrh.game.card.behaviour;
 
 import jrh.game.asset.JsonKey;
-import jrh.game.card.event.CardResolved;
+import jrh.game.api.event.CardResolved;
 import jrh.game.common.BehaviourDescription;
 import jrh.game.event.Callback;
 import jrh.game.common.EventHandler;

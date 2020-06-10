@@ -1,6 +1,7 @@
 package jrh.game.event;
 
 import jrh.game.api.Match;
+import jrh.game.common.Event;
 import jrh.game.common.EventHandler;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

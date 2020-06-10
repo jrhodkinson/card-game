@@ -1,8 +1,8 @@
 package jrh.game.card;
 
 import jrh.game.api.Match;
-import jrh.game.card.event.CardCreated;
-import jrh.game.card.event.CardDestroyed;
+import jrh.game.api.event.CardCreated;
+import jrh.game.api.event.CardDestroyed;
 import jrh.game.event.Callback;
 import jrh.game.common.EventHandler;
 import jrh.game.event.Subscribe;

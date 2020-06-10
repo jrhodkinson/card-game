@@ -1,7 +1,7 @@
 package jrh.game.match;
 
 import jrh.game.api.Player;
-import jrh.game.match.event.PlayerTookDamage;
+import jrh.game.api.event.PlayerTookDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

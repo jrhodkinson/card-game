@@ -1,13 +1,13 @@
-package jrh.game.structure.event;
+package jrh.game.api.event;
 
-import jrh.game.event.Event;
+import jrh.game.common.Event;
 import jrh.game.api.Structure;
 
-public class StructureDestroyed implements Event {
+public class StructureTookDamage implements Event {
 
     private final Structure structure;
 
-    public StructureDestroyed(Structure structure) {
+    public StructureTookDamage(Structure structure) {
         this.structure = structure;
     }
 

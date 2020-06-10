@@ -1,15 +1,15 @@
-package jrh.game.match.event;
+package jrh.game.api.event;
 
 import jrh.game.api.Card;
 import jrh.game.api.Player;
-import jrh.game.event.Event;
+import jrh.game.common.Event;
 
-public class DrewCard implements Event {
+public class CardPurchased implements Event {
 
     private final Player player;
     private final Card card;
 
-    public DrewCard(Player player, Card card) {
+    public CardPurchased(Player player, Card card) {
         this.player = player;
         this.card = card;
     }

@@ -1,5 +1,6 @@
 package jrh.game.event;
 
+import jrh.game.common.Event;
 import jrh.game.common.EventHandler;
 
 import java.util.ArrayList;
