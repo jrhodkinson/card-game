@@ -1,7 +1,8 @@
 package jrh.game.match;
 
-import jrh.game.match.api.Damageable;
-import jrh.game.match.api.Player;
+import jrh.game.api.Controller;
+import jrh.game.api.Damageable;
+import jrh.game.api.Player;
 import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureHealthController;
 import org.apache.logging.log4j.LogManager;

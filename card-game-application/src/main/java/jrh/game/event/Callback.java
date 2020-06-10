@@ -1,6 +1,10 @@
 package jrh.game.event;
 
+import jrh.game.common.EventHandler;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Callback {
@@ -9,7 +13,8 @@ public class Callback {
     private boolean dirty = false;
 
     private final Queue<Event> enqueuedEvents = new LinkedList<>();
-    private boolean unregistered = false;
+    private final List<EventHandler> registeredEventHandlers = new ArrayList<>();
+    private final List<EventHandler> unregisteredEventHandlers = new ArrayList<>();
 
     Callback(EventBus eventBus) {
         this.eventBus = eventBus;
@@ -20,9 +25,10 @@ public class Callback {
     }
 
     void reset() {
-        this.enqueuedEvents.clear();
-        this.unregistered = false;
-        this.dirty = false;
+        enqueuedEvents.clear();
+        registeredEventHandlers.clear();
+        unregisteredEventHandlers.clear();
+        dirty = false;
     }
 
     public void resolve(Event event) {
@@ -30,21 +36,29 @@ public class Callback {
     }
 
     public void enqueue(Event event) {
-        this.dirty = true;
-        this.enqueuedEvents.add(event);
+        dirty = true;
+        enqueuedEvents.add(event);
     }
 
-    public void unregister() {
-        this.dirty = true;
-        this.unregistered = true;
+    public void register(EventHandler eventHandler) {
+        dirty = true;
+        registeredEventHandlers.add(eventHandler);
+    }
+
+    public void unregister(EventHandler eventHandler) {
+        dirty = true;
+        unregisteredEventHandlers.add(eventHandler);
     }
 
     Queue<Event> getEnqueuedEvents() {
-        return this.enqueuedEvents;
+        return enqueuedEvents;
     }
 
-    boolean didUnregister() {
-        return unregistered;
+    List<EventHandler> getRegisteredEventHandlers() {
+        return unregisteredEventHandlers;
     }
 
+    List<EventHandler> getUnregisteredEventHandlers() {
+        return unregisteredEventHandlers;
+    }
 }

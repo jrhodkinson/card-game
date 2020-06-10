@@ -4,10 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import jrh.game.card.Card;
+import jrh.game.common.StructureId;
 import jrh.game.structure.MutableStructure;
-import jrh.game.structure.StructureId;
-import jrh.game.structure.power.Power;
+import jrh.game.structure.power.AbstractPower;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +18,7 @@ public class MutableStructureDeserializer extends StdDeserializer<MutableStructu
     private static final Logger logger = LogManager.getLogger(MutableStructureDeserializer.class);
 
     protected MutableStructureDeserializer() {
-        super(Card.class);
+        super(MutableStructure.class);
     }
 
     @Override
@@ -33,7 +32,8 @@ public class MutableStructureDeserializer extends StdDeserializer<MutableStructu
         for (int i = 0; i < powers.size(); i++) {
             JsonNode powerJson = powers.get(i);
             String powerKey = powerJson.get(0).asText();
-            Class<? extends Power> powerClass = SerializationKeys.getPowerClass(powerKey);
+            Class<? extends AbstractPower> powerClass = SerializationKeys.getPowerClass(powerKey)
+                    .asSubclass(AbstractPower.class);
             if (powerJson.size() == 1) {
                 try {
                     structure.addPower(powerClass.getConstructor().newInstance());
@@ -43,7 +43,7 @@ public class MutableStructureDeserializer extends StdDeserializer<MutableStructu
                             tree.get("id"), e);
                 }
             } else if (powerJson.size() == 2) {
-                Power power = powerJson.get(1).traverse(jp.getCodec()).readValueAs(powerClass);
+                AbstractPower power = powerJson.get(1).traverse(jp.getCodec()).readValueAs(powerClass);
                 structure.addPower(power);
             } else {
                 logger.error("Invalid power={} for structureId={}, too many elements in array", powerJson,

@@ -1,4 +1,4 @@
 package jrh.game.asset;
 
-public interface AssetLibrary extends CardLibrary, StructureLibrary {
+public interface AssetLibrary extends CardImplLibrary, MutableStructureLibrary {
 }

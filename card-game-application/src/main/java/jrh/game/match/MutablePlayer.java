@@ -1,14 +1,14 @@
 package jrh.game.match;
 
-import jrh.game.User;
-import jrh.game.card.Card;
+import jrh.game.Constants;
+import jrh.game.api.Card;
+import jrh.game.api.Player;
+import jrh.game.api.Structure;
+import jrh.game.common.User;
 import jrh.game.deck.Deck;
 import jrh.game.deck.DeckAndDiscardPile;
 import jrh.game.deck.Hand;
-import jrh.game.match.api.Player;
 import jrh.game.structure.Structures;
-import jrh.game.structure.api.Structure;
-import jrh.game.util.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,10 +1,7 @@
 package jrh.game.card.behaviour;
 
-import jrh.game.structure.StructureId;
+import jrh.game.common.StructureId;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 public class ConstructBehaviourTest {
 

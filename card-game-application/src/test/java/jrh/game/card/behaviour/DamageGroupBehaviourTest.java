@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static jrh.game.match.api.Target.OWN_STRUCTURES;
-import static jrh.game.match.api.Target.SELF;
+import static jrh.game.common.Target.OWN_STRUCTURES;
+import static jrh.game.common.Target.SELF;
 
 public class DamageGroupBehaviourTest {
 

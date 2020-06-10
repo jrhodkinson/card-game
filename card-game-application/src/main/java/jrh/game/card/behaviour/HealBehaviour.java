@@ -3,14 +3,15 @@ package jrh.game.card.behaviour;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardPlayed;
+import jrh.game.common.BehaviourDescription;
 import jrh.game.event.Subscribe;
 import jrh.game.match.HealthController;
-import jrh.game.match.api.Match;
+import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @JsonKey("heal")
-public class HealBehaviour extends Behaviour {
+public class HealBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(HealBehaviour.class);
 
@@ -24,10 +25,7 @@ public class HealBehaviour extends Behaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder()
-                .keyword("Heal")
-                .number(health)
-                .build();
+        return BehaviourDescription.builder().keyword("Heal").number(health).build();
     }
 
     @Subscribe

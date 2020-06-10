@@ -1,9 +1,10 @@
 package jrh.game.card.behaviour;
 
 import jrh.game.asset.JsonKey;
+import jrh.game.common.BehaviourDescription;
 
 @JsonKey("unplayable")
-public class UnplayableBehaviour extends Behaviour {
+public class UnplayableBehaviour extends AbstractBehaviour {
 
     public UnplayableBehaviour() {
         super(false);

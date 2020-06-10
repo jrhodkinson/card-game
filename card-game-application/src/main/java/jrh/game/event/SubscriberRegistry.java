@@ -1,6 +1,7 @@
 package jrh.game.event;
 
-import jrh.game.match.api.Match;
+import jrh.game.api.Match;
+import jrh.game.common.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

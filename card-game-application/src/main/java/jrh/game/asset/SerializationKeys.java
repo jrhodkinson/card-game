@@ -2,8 +2,10 @@ package jrh.game.asset;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import jrh.game.card.behaviour.Behaviour;
-import jrh.game.structure.power.Power;
+import jrh.game.api.Behaviour;
+import jrh.game.api.Power;
+import jrh.game.card.behaviour.AbstractBehaviour;
+import jrh.game.structure.power.AbstractPower;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.reflections.Reflections;
@@ -14,18 +16,18 @@ public class SerializationKeys {
 
     private static final Logger logger = LogManager.getLogger(SerializationKeys.class);
 
-    private static final BiMap<String, Class<? extends Behaviour>> BEHAVIOURS = HashBiMap.create();
-    private static final BiMap<String, Class<? extends Power>> POWERS = HashBiMap.create();
+    private static final BiMap<String, Class<? extends AbstractBehaviour>> BEHAVIOURS = HashBiMap.create();
+    private static final BiMap<String, Class<? extends AbstractPower>> POWERS = HashBiMap.create();
 
     static {
         Reflections reflections = new Reflections("jrh.game");
         Set<Class<?>> serializableClasses = reflections.getTypesAnnotatedWith(JsonKey.class);
         for (Class<?> serializableClass : serializableClasses) {
             String key = serializableClass.getAnnotation(JsonKey.class).value();
-            if (Behaviour.class.isAssignableFrom(serializableClass)) {
-                BEHAVIOURS.put(key, serializableClass.asSubclass(Behaviour.class));
-            } else if (Power.class.isAssignableFrom(serializableClass)) {
-                POWERS.put(key, serializableClass.asSubclass(Power.class));
+            if (AbstractBehaviour.class.isAssignableFrom(serializableClass)) {
+                BEHAVIOURS.put(key, serializableClass.asSubclass(AbstractBehaviour.class));
+            } else if (AbstractPower.class.isAssignableFrom(serializableClass)) {
+                POWERS.put(key, serializableClass.asSubclass(AbstractPower.class));
             } else {
                 logger.error("Unsupported @JsonKey annotation on " + serializableClass.toString());
             }
@@ -34,7 +36,7 @@ public class SerializationKeys {
         logger.info("Loaded powers: {}", POWERS);
     }
 
-    public static Class<? extends Behaviour> getBehaviourClass(String key) {
+    public static Class<? extends AbstractBehaviour> getBehaviourClass(String key) {
         return BEHAVIOURS.get(key);
     }
 
@@ -42,7 +44,7 @@ public class SerializationKeys {
         return BEHAVIOURS.inverse().get(behaviourClass);
     }
 
-    public static Class<? extends Power> getPowerClass(String key) {
+    public static Class<? extends AbstractPower> getPowerClass(String key) {
         return POWERS.get(key);
     }
 

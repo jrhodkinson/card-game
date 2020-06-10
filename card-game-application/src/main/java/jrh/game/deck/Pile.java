@@ -1,6 +1,6 @@
 package jrh.game.deck;
 
-import jrh.game.card.Card;
+import jrh.game.api.Card;
 
 public class Pile {
 

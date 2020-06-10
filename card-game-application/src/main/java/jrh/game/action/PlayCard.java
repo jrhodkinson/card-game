@@ -1,10 +1,10 @@
 package jrh.game.action;
 
-import jrh.game.card.Card;
+import jrh.game.api.Card;
+import jrh.game.api.Damageable;
+import jrh.game.api.Match;
+import jrh.game.api.Player;
 import jrh.game.match.CardFlowController;
-import jrh.game.match.api.Damageable;
-import jrh.game.match.api.Match;
-import jrh.game.match.api.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

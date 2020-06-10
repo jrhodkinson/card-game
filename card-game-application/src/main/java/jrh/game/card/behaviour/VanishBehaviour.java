@@ -2,16 +2,17 @@ package jrh.game.card.behaviour;
 
 import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardResolved;
+import jrh.game.common.BehaviourDescription;
 import jrh.game.event.Callback;
-import jrh.game.event.EventHandler;
+import jrh.game.common.EventHandler;
 import jrh.game.event.Subscribe;
 import jrh.game.match.CardFlowController;
-import jrh.game.match.api.Match;
+import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @JsonKey("vanish")
-public class VanishBehaviour extends Behaviour implements EventHandler {
+public class VanishBehaviour extends AbstractBehaviour implements EventHandler {
 
     private static final Logger logger = LogManager.getLogger(VanishBehaviour.class);
 
@@ -29,7 +30,7 @@ public class VanishBehaviour extends Behaviour implements EventHandler {
         if (cardResolved.getCard().equals(this.getCard())) {
             logger.info("Vanishing played card={}", cardResolved.getCard());
             match.getController(CardFlowController.class).destroyPlayedCard(this.getCard());
-            callback.unregister();
+            callback.unregister(this);
         }
     }
 

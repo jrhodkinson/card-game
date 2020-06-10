@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardPlayed;
+import jrh.game.common.BehaviourDescription;
 import jrh.game.event.Subscribe;
-import jrh.game.match.api.Match;
-import jrh.game.structure.StructureId;
+import jrh.game.api.Match;
+import jrh.game.common.StructureId;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @JsonKey("construct")
-public class ConstructBehaviour extends Behaviour {
+public class ConstructBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(ConstructBehaviour.class);
 
@@ -27,10 +28,7 @@ public class ConstructBehaviour extends Behaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder()
-                .keyword("Construct")
-                .plainString(structureId.toString())
-                .build();
+        return BehaviourDescription.builder().keyword("Construct").plainString(structureId.toString()).build();
     }
 
     @Subscribe

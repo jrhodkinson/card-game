@@ -1,11 +1,11 @@
 package jrh.game.asset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jrh.game.card.Card;
-import jrh.game.card.CardId;
+import jrh.game.card.CardImpl;
+import jrh.game.common.CardId;
 import jrh.game.structure.MutableStructure;
-import jrh.game.structure.StructureId;
-import jrh.game.util.ObjectMapperFactory;
+import jrh.game.common.StructureId;
+import jrh.game.common.ObjectMapperFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +21,7 @@ public class FileSystemAssetLibrary implements AssetLibrary {
 
     private static final Logger logger = LogManager.getLogger(FileSystemAssetLibrary.class);
 
-    private final Map<CardId, Card> cards = new HashMap<>();
+    private final Map<CardId, CardImpl> cards = new HashMap<>();
     private final Map<StructureId, MutableStructure> structures = new HashMap<>();
 
     public FileSystemAssetLibrary(Path assetsDirectory) {
@@ -29,12 +29,12 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     }
 
     @Override
-    public Card getCard(CardId cardId) {
+    public CardImpl getCard(CardId cardId) {
         return cards.get(cardId);
     }
 
     @Override
-    public List<Card> getAllCards() {
+    public List<CardImpl> getAllCards() {
         return List.copyOf(cards.values());
     }
 
@@ -63,7 +63,7 @@ public class FileSystemAssetLibrary implements AssetLibrary {
                 addCardsFromDirectory(file, objectMapper);
             } else {
                 try {
-                    Card card = objectMapper.readValue(file, Card.class);
+                    CardImpl card = objectMapper.readValue(file, CardImpl.class);
                     cards.put(card.getCardId(), card);
                     logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription());
                 } catch (IOException e) {

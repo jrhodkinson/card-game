@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
+import jrh.game.common.BehaviourDescription;
 import jrh.game.event.Callback;
 import jrh.game.event.Subscribe;
 import jrh.game.match.TurnController;
-import jrh.game.match.api.Match;
+import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @JsonKey("incrementing-money")
-public class IncrementingMoneyBehaviour extends Behaviour {
+public class IncrementingMoneyBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(IncrementingMoneyBehaviour.class);
 
@@ -30,12 +31,8 @@ public class IncrementingMoneyBehaviour extends Behaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder()
-                .keyword("Gain")
-                .number(amount)
-                .plainString("then increase future gain by")
-                .number(increment)
-                .build();
+        return BehaviourDescription.builder().keyword("Gain").number(amount).plainString("then increase future gain by")
+                .number(increment).build();
     }
 
     @Subscribe

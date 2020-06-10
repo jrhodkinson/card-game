@@ -1,6 +1,6 @@
 package jrh.game.match.event;
 
-import jrh.game.User;
+import jrh.game.common.User;
 import jrh.game.event.Event;
 
 public class MatchEnded implements Event {

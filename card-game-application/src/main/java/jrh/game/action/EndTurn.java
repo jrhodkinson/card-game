@@ -1,7 +1,7 @@
 package jrh.game.action;
 
 import jrh.game.match.MatchStateController;
-import jrh.game.match.api.Match;
+import jrh.game.api.Match;
 
 public class EndTurn implements Action {
 

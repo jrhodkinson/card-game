@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jrh.game.api.Power;
+import jrh.game.api.Structure;
 import jrh.game.asset.MutableStructureDeserializer;
 import jrh.game.asset.MutableStructureSerializer;
-import jrh.game.event.EventBus;
-import jrh.game.structure.api.Structure;
-import jrh.game.structure.power.Power;
+import jrh.game.common.StructureId;
+import jrh.game.structure.power.AbstractPower;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -23,7 +24,7 @@ public class MutableStructure implements Structure {
     private final UUID instanceId = UUID.randomUUID();
     private final StructureId structureId;
     private final String name;
-    private final Map<Class<? extends Power>, Power> powers = new HashMap<>();
+    private final Map<Class<? extends AbstractPower>, AbstractPower> powers = new HashMap<>();
     private int health;
 
     @JsonCreator
@@ -32,14 +33,6 @@ public class MutableStructure implements Structure {
         this.structureId = structureId;
         this.name = name;
         this.health = health;
-    }
-
-    public void registerPowers(EventBus eventBus) {
-        powers.values().forEach(power -> power.registerWith(eventBus));
-    }
-
-    public void unregisterPowers(EventBus eventBus) {
-        powers.values().forEach(power -> power.unregisterWith(eventBus));
     }
 
     @Override
@@ -66,7 +59,7 @@ public class MutableStructure implements Structure {
         health += amount;
     }
 
-    public void addPower(Power power) {
+    public void addPower(AbstractPower power) {
         powers.put(power.getClass(), power);
         power.forStructure(this);
     }
@@ -88,7 +81,7 @@ public class MutableStructure implements Structure {
 
     MutableStructure duplicate() {
         MutableStructure duplicate = new MutableStructure(structureId, name, health);
-        for (Power power : powers.values()) {
+        for (AbstractPower power : powers.values()) {
             duplicate.addPower(power.duplicate());
         }
         return duplicate;

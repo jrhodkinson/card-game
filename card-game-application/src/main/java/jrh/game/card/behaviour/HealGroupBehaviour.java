@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.card.event.CardPlayed;
+import jrh.game.common.BehaviourDescription;
 import jrh.game.event.Subscribe;
 import jrh.game.match.HealthController;
-import jrh.game.match.api.Damageable;
-import jrh.game.match.api.Match;
-import jrh.game.match.api.Player;
-import jrh.game.match.api.Target;
+import jrh.game.api.Damageable;
+import jrh.game.api.Match;
+import jrh.game.api.Player;
+import jrh.game.common.Target;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonKey("heal-group")
-public class HealGroupBehaviour extends Behaviour {
+public class HealGroupBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(HealGroupBehaviour.class);
 
@@ -35,11 +36,7 @@ public class HealGroupBehaviour extends Behaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder()
-                .keyword("Heal")
-                .plainString(targets.toString())
-                .number(amount)
-                .build();
+        return BehaviourDescription.builder().keyword("Heal").plainString(targets.toString()).number(amount).build();
     }
 
     @Subscribe

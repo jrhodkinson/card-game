@@ -1,6 +1,6 @@
 package jrh.game.structure;
 
-import jrh.game.structure.api.Structure;
+import jrh.game.api.Structure;
 
 import java.util.ArrayList;
 import java.util.Collection;

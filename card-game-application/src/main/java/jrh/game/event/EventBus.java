@@ -1,6 +1,7 @@
 package jrh.game.event;
 
-import jrh.game.match.api.Match;
+import jrh.game.api.Match;
+import jrh.game.common.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,9 +42,8 @@ public class EventBus {
                 subscriber.dispatch(event, match, callback);
                 if (callback.isDirty()) {
                     events.addAll(callback.getEnqueuedEvents());
-                    if (callback.didUnregister()) {
-                        subscriberRegistry.unregister(subscriber.getHandler());
-                    }
+                    callback.getUnregisteredEventHandlers().forEach(subscriberRegistry::unregister);
+                    callback.getRegisteredEventHandlers().forEach(subscriberRegistry::register);
                     callback.reset();
                 }
             }

@@ -1,7 +1,7 @@
 package jrh.game.match;
 
-import jrh.game.card.Card;
-import jrh.game.match.api.Turn;
+import jrh.game.api.Card;
+import jrh.game.api.Turn;
 
 import java.util.ArrayList;
 import java.util.Collections;

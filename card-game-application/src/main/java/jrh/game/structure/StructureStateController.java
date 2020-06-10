@@ -1,11 +1,12 @@
 package jrh.game.structure;
 
-import jrh.game.event.EventHandler;
+import jrh.game.common.StructureId;
+import jrh.game.common.EventHandler;
 import jrh.game.event.Subscribe;
-import jrh.game.match.Controller;
+import jrh.game.api.Controller;
 import jrh.game.match.MutableMatch;
-import jrh.game.match.api.Player;
-import jrh.game.structure.api.Structure;
+import jrh.game.api.Player;
+import jrh.game.api.Structure;
 import jrh.game.structure.event.StructureConstructed;
 import jrh.game.structure.event.StructureDestroyed;
 import jrh.game.structure.event.StructureTookDamage;
@@ -39,7 +40,7 @@ public class StructureStateController implements Controller, EventHandler {
 
     public void construct(StructureId structureId, Player player) {
         MutableStructure structure = factory.create(structureId);
-        structure.registerPowers(match.getEventBus());
+        structure.getPowers().forEach(power -> match.getEventBus().register(power));
         logger.info("Assigning structure={} to player={}", structure, player);
         match.getPlayerAsMutable(player).getStructuresAsMutable().add(structure);
         match.getEventBus().dispatch(new StructureConstructed(structure, player));
@@ -50,7 +51,8 @@ public class StructureStateController implements Controller, EventHandler {
         Structure structure = structureTookDamage.getStructure();
         if (structure.getHealth() <= 0) {
             logger.info("Structure={} has health <= 0, destroying structure", structure);
-            match.getStructureAsMutable(structureTookDamage.getStructure()).unregisterPowers(match.getEventBus());
+            match.getStructureAsMutable(structureTookDamage.getStructure()).getPowers()
+                    .forEach(power -> match.getEventBus().unregister(power));
             match.getPlayerAsMutable(getOwner(structure)).getStructuresAsMutable().remove(structure.getInstanceId());
             match.getEventBus().dispatch(new StructureDestroyed(structure));
         }

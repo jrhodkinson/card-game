@@ -1,6 +1,6 @@
 package jrh.game.deck;
 
-import jrh.game.card.Card;
+import jrh.game.api.Card;
 
 import java.util.Collections;
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package jrh.game.deck;
 
 import com.google.common.collect.ForwardingList;
-import jrh.game.card.Card;
+import jrh.game.api.Card;
 
 import java.util.ArrayList;
 import java.util.List;

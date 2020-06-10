@@ -23,6 +23,7 @@
     <modules>
         <module>card-game-api</module>
         <module>card-game-application</module>
+        <module>card-game-common</module>
     </modules>
 
     <build>
@@ -63,6 +64,11 @@
             <dependency>
                 <groupId>jrh</groupId>
                 <artifactId>card-game-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jrh</groupId>
+                <artifactId>card-game-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -1,6 +1,6 @@
 package jrh.game.structure.power;
 
-import jrh.game.match.api.Target;
+import jrh.game.common.Target;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

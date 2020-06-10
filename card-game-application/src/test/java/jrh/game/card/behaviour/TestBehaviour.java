@@ -1,10 +1,12 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jrh.game.card.Card;
-import jrh.game.card.CardId;
-import jrh.game.util.Color;
-import jrh.game.util.ObjectMapperFactory;
+import jrh.game.api.Behaviour;
+import jrh.game.api.Card;
+import jrh.game.card.CardImpl;
+import jrh.game.common.CardId;
+import jrh.game.common.Color;
+import jrh.game.common.ObjectMapperFactory;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
@@ -17,15 +19,11 @@ public class TestBehaviour {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public static void roundTripsViaJson(Behaviour behaviour) {
+    public static void roundTripsViaJson(AbstractBehaviour behaviour) {
         try {
-            Class<? extends Behaviour> behaviourClass = behaviour.getClass();
-            Card card = Card.card(new CardId("test"))
-                    .withName("Test")
-                    .withCost(1)
-                    .withColor(Color.BLACK)
-                    .withBehaviour(behaviour)
-                    .build();
+            Class<? extends AbstractBehaviour> behaviourClass = behaviour.getClass();
+            Card card = CardImpl.card(new CardId("test")).withName("Test").withCost(1).withColor(Color.BLACK)
+                    .withBehaviour(behaviour).build();
             Card parsed = objectMapper.readValue(objectMapper.writeValueAsString(card), Card.class);
             Behaviour parsedBehaviour = parsed.getBehaviour(behaviourClass);
             for (Field field : behaviourClass.getDeclaredFields()) {

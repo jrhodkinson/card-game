@@ -3,9 +3,8 @@ package jrh.game.asset;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import jrh.game.card.Card;
+import jrh.game.api.Power;
 import jrh.game.structure.MutableStructure;
-import jrh.game.structure.power.Power;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
@@ -29,7 +28,8 @@ public class MutableStructureSerializer extends StdSerializer<MutableStructure> 
             gen.writeStartArray();
             gen.writeString(SerializationKeys.getPowerKey(power.getClass()));
             if (Arrays.stream(power.getClass().getDeclaredFields())
-                    .anyMatch(field -> !field.getType().equals(Logger.class) && !field.getType().equals(Card.class))) {
+                    .anyMatch(field -> !field.getType().equals(Logger.class)
+                            && !field.getType().equals(MutableStructure.class))) {
                 gen.writeObject(power);
             }
             gen.writeEndArray();

@@ -1,5 +1,7 @@
 package jrh.game.match;
 
+import jrh.game.api.Controller;
+
 public class TurnController implements Controller {
 
     private final MutableMatch match;

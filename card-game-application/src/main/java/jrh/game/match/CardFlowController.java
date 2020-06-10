@@ -1,13 +1,14 @@
 package jrh.game.match;
 
-import jrh.game.card.Card;
+import jrh.game.api.Card;
+import jrh.game.api.Controller;
+import jrh.game.api.Damageable;
+import jrh.game.api.Player;
 import jrh.game.card.behaviour.UnplayableBehaviour;
 import jrh.game.card.event.CardDestroyed;
 import jrh.game.card.event.CardPlayed;
 import jrh.game.card.event.CardResolved;
 import jrh.game.deck.DiscardPile;
-import jrh.game.match.api.Damageable;
-import jrh.game.match.api.Player;
 import jrh.game.match.event.CardPurchased;
 import jrh.game.match.event.DiscardedCard;
 import jrh.game.match.event.DrewCard;

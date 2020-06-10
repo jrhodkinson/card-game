@@ -2,21 +2,21 @@ package jrh.game.structure.power;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jrh.game.asset.JsonKey;
-import jrh.game.card.CardId;
-import jrh.game.match.api.Match;
-import jrh.game.match.api.Player;
-import jrh.game.match.api.Target;
+import jrh.game.common.CardId;
+import jrh.game.api.Match;
+import jrh.game.api.Player;
+import jrh.game.common.Target;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-import static jrh.game.match.api.Target.OTHER;
-import static jrh.game.match.api.Target.SELF;
+import static jrh.game.common.Target.OTHER;
+import static jrh.game.common.Target.SELF;
 
 @JsonKey("modify-cost")
-public class ModifyCostPower extends Power {
+public class ModifyCostPower extends AbstractPower {
 
     private static final Logger logger = LogManager.getLogger(ModifyCostPower.class);
 

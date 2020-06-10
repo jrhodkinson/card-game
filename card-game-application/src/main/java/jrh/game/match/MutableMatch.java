@@ -1,20 +1,21 @@
 package jrh.game.match;
 
-import jrh.game.User;
+import jrh.game.common.User;
+import jrh.game.api.Controller;
 import jrh.game.asset.AssetLibrary;
 import jrh.game.card.CardBehaviourRegistrar;
-import jrh.game.card.CardFactory;
+import jrh.game.card.CardImplFactory;
 import jrh.game.deck.Store;
 import jrh.game.event.EventBus;
-import jrh.game.match.api.Match;
-import jrh.game.match.api.Player;
+import jrh.game.api.Match;
+import jrh.game.api.Player;
 import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureFactory;
 import jrh.game.structure.StructureHealthController;
 import jrh.game.structure.StructureStateController;
 import jrh.game.structure.Structures;
-import jrh.game.structure.api.Structure;
-import jrh.game.util.Constants;
+import jrh.game.api.Structure;
+import jrh.game.Constants;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +33,7 @@ public class MutableMatch implements Match {
     private final EventBus eventBus;
     private final Map<Class<? extends Controller>, Controller> controllers = new HashMap<>();
     private final ModificationComputer modificationComputer;
-    private final CardFactory cardFactory;
+    private final CardImplFactory cardImplFactory;
     private final StructureFactory structureFactory;
     private final Store store;
     private final MutablePlayer firstPlayer;
@@ -46,15 +47,14 @@ public class MutableMatch implements Match {
         this.eventBus = new EventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
         this.modificationComputer = new ModificationComputer(this);
-        this.cardFactory = new CardFactory(eventBus, assetLibrary, new Random());
+        this.cardImplFactory = new CardImplFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);
-        this.store = new Store(cardFactory, Constants.STORE_SIZE, Collections.emptyList());
-        this.firstPlayer = new MutablePlayer(firstUser, cardFactory.startingDeck());
-        this.secondPlayer = new MutablePlayer(secondUser, cardFactory.startingDeck());
+        this.store = new Store(cardImplFactory, Constants.STORE_SIZE, Collections.emptyList());
+        this.firstPlayer = new MutablePlayer(firstUser, cardImplFactory.startingDeck());
+        this.secondPlayer = new MutablePlayer(secondUser, cardImplFactory.startingDeck());
         this.currentTurn = new MutableTurn();
     }
 
-    @Override
     public EventBus getEventBus() {
         return eventBus;
     }

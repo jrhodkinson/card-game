@@ -1,9 +1,9 @@
 package jrh.game.card.event;
 
-import jrh.game.card.Card;
+import jrh.game.api.Card;
+import jrh.game.api.Damageable;
+import jrh.game.api.Player;
 import jrh.game.event.Event;
-import jrh.game.match.api.Damageable;
-import jrh.game.match.api.Player;
 
 import java.util.Optional;
 
