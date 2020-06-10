@@ -40,15 +40,15 @@ public class CardFlowController implements Controller {
 
     public void playCard(Player player, Card card, Damageable target) {
         if (!match.getActivePlayer().equals(player)) {
-            logger.error("Player wasn't the active player");
+            logger.warn("Not playing card={}, player={} wasn't the active player", card, player);
             return;
         }
         if (card.hasBehaviour(UnplayableBehaviour.class)) {
-            logger.error("Card has UnplayableBehaviour");
+            logger.info("Not playing card={}, it has UnplayableBehaviour", card);
             return;
         }
         if (!match.getActivePlayer().getHand().remove(card)) {
-            logger.error("Player's hand did not contain card");
+            logger.warn("Not playing card={}, player={} hand did not contain card", card, player);
             return;
         }
         match.getEventBus().dispatch(new CardPlayed(player, target, card));
