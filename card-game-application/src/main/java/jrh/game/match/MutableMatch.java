@@ -117,7 +117,6 @@ public class MutableMatch implements Match {
                 .flatMap(Structures::stream).collect(toUnmodifiableList());
     }
 
-    @Override
     public ModificationComputer getModificationComputer() {
         return modificationComputer;
     }

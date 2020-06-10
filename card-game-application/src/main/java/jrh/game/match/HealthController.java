@@ -1,7 +1,6 @@
 package jrh.game.match;
 
 import jrh.game.match.api.Damageable;
-import jrh.game.match.api.Match;
 import jrh.game.match.api.Player;
 import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureHealthController;
@@ -12,7 +11,7 @@ public class HealthController implements Controller {
 
     private static final Logger logger = LogManager.getLogger(HealthController.class);
 
-    private final Match match;
+    private final MutableMatch match;
     private final PlayerHealthController playerHealthController;
     private final StructureHealthController structureHealthController;
 

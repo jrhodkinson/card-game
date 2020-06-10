@@ -21,6 +21,7 @@
     </properties>
 
     <modules>
+        <module>card-game-api</module>
         <module>card-game-application</module>
     </modules>
 
@@ -59,6 +60,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>jrh</groupId>
+                <artifactId>card-game-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.javalin</groupId>
                 <artifactId>javalin</artifactId>
