@@ -19,5 +19,9 @@
             <groupId>jrh</groupId>
             <artifactId>card-game-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+        </dependency>
     </dependencies>
 </project>
