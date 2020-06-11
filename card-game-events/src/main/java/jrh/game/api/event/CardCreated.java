@@ -1,7 +1,7 @@
 package jrh.game.api.event;
 
 import jrh.game.api.Card;
-import jrh.game.common.Event;
+import jrh.game.common.event.Event;
 
 public class CardCreated implements Event {
 

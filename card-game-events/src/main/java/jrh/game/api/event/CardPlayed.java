@@ -3,7 +3,7 @@ package jrh.game.api.event;
 import jrh.game.api.Card;
 import jrh.game.api.Damageable;
 import jrh.game.api.Player;
-import jrh.game.common.Event;
+import jrh.game.common.event.Event;
 
 import java.util.Optional;
 

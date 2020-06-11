@@ -1,7 +1,8 @@
 package jrh.game.event;
 
-import jrh.game.common.Event;
-import jrh.game.common.EventHandler;
+import jrh.game.common.event.Callback;
+import jrh.game.common.event.Event;
+import jrh.game.common.event.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,9 +11,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Callback {
+public class CallbackImpl implements Callback {
 
-    private static final Logger logger = LogManager.getLogger(Callback.class);
+    private static final Logger logger = LogManager.getLogger(CallbackImpl.class);
 
     private final EventBus eventBus;
     private boolean dirty = false;
@@ -21,7 +22,7 @@ public class Callback {
     private final List<EventHandler> registeredEventHandlers = new ArrayList<>();
     private final List<EventHandler> unregisteredEventHandlers = new ArrayList<>();
 
-    Callback(EventBus eventBus) {
+    CallbackImpl(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
@@ -36,22 +37,26 @@ public class Callback {
         dirty = false;
     }
 
+    @Override
     public void resolve(Event event) {
         eventBus.dispatch(event);
     }
 
+    @Override
     public void enqueue(Event event) {
         logger.debug("Enqueueing event={}", event);
         dirty = true;
         enqueuedEvents.add(event);
     }
 
+    @Override
     public void register(EventHandler eventHandler) {
         logger.debug("Will register new event handler={}", eventHandler);
         dirty = true;
         registeredEventHandlers.add(eventHandler);
     }
 
+    @Override
     public void unregister(EventHandler eventHandler) {
         logger.debug("Will unregister event handler={}", eventHandler);
         dirty = true;

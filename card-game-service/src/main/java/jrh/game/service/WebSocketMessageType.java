@@ -11,7 +11,7 @@ public class WebSocketMessageType<T> {
 
     private final Class<T> payloadType;
 
-    public WebSocketMessageType(String type, Class<T> payloadType) {
+    WebSocketMessageType(String type, Class<T> payloadType) {
         this.type = type;
         this.payloadType = payloadType;
     }
@@ -31,10 +31,11 @@ public class WebSocketMessageType<T> {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        WebSocketMessageType that = (WebSocketMessageType) o;
+        WebSocketMessageType<?> that = (WebSocketMessageType<?>) o;
 
         return new EqualsBuilder()
                 .append(type, that.type)
+                .append(payloadType, that.payloadType)
                 .isEquals();
     }
 
@@ -42,6 +43,7 @@ public class WebSocketMessageType<T> {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(type)
+                .append(payloadType)
                 .toHashCode();
     }
 }

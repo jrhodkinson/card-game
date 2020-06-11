@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.common.BehaviourDescription;
-import jrh.game.event.Subscribe;
+import jrh.game.common.event.Subscribe;
 import jrh.game.api.Match;
 import jrh.game.common.StructureId;
 import jrh.game.structure.StructureStateController;

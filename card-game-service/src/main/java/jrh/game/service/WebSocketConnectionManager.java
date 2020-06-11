@@ -37,6 +37,7 @@ public class WebSocketConnectionManager {
     public void broadcast(WebSocketMessage<?> webSocketMessage) {
         try {
             String messageJson = objectMapper.writeValueAsString(webSocketMessage);
+            logger.debug("Broadcasting to all clients: message={}", messageJson);
             webSocketClients.forEach(ctx -> ctx.send(messageJson));
         } catch (JsonProcessingException e) {
             logger.error("Failed to broadcast websocket message: could not convertmessage={} to json", webSocketMessage, e);

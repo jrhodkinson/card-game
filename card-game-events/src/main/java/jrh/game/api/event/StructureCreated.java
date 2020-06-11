@@ -1,6 +1,6 @@
 package jrh.game.api.event;
 
-import jrh.game.common.Event;
+import jrh.game.common.event.Event;
 import jrh.game.api.Structure;
 
 public class StructureCreated implements Event {

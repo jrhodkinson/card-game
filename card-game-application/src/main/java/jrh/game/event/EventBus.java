@@ -1,8 +1,8 @@
 package jrh.game.event;
 
 import jrh.game.api.Match;
-import jrh.game.common.Event;
-import jrh.game.common.EventHandler;
+import jrh.game.common.event.Event;
+import jrh.game.common.event.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,11 +16,11 @@ public class EventBus {
 
     private final SubscriberRegistry subscriberRegistry = new SubscriberRegistry();
     private final Match match;
-    private final Callback callback;
+    private final CallbackImpl callback;
 
     public EventBus(Match match) {
         this.match = match;
-        this.callback = new Callback(this);
+        this.callback = new CallbackImpl(this);
     }
 
     public void register(EventHandler eventHandler) {

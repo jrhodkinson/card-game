@@ -1,4 +1,4 @@
-package jrh.game.common;
+package jrh.game.common.event;
 
 public interface EventHandler {
 

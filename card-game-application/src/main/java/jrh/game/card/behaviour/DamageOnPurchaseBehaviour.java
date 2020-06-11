@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.BehaviourDescription;
-import jrh.game.event.Subscribe;
+import jrh.game.common.event.Subscribe;
 import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;

@@ -1,8 +1,8 @@
 package jrh.game.structure;
 
 import jrh.game.common.StructureId;
-import jrh.game.common.EventHandler;
-import jrh.game.event.Subscribe;
+import jrh.game.common.event.EventHandler;
+import jrh.game.common.event.Subscribe;
 import jrh.game.api.Controller;
 import jrh.game.match.MutableMatch;
 import jrh.game.api.Player;
