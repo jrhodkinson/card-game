@@ -1,7 +1,7 @@
-package jrh.game.api.event;
+package jrh.game.api.event.impl;
 
 import jrh.game.common.User;
-import jrh.game.common.event.Event;
+import jrh.game.api.event.Event;
 
 public class MatchEnded implements Event {
 

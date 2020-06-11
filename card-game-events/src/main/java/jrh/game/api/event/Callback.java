@@ -1,4 +1,6 @@
-package jrh.game.common.event;
+package jrh.game.api.event;
+
+import jrh.game.common.EventHandler;
 
 public interface Callback {
 

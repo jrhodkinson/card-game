@@ -1,7 +1,7 @@
 package jrh.game.api;
 
 import jrh.game.common.CardId;
-import jrh.game.common.event.EventHandler;
+import jrh.game.common.EventHandler;
 
 public interface Power extends EventHandler {
 

@@ -1,9 +1,9 @@
 package jrh.game.event;
 
 import jrh.game.api.Match;
-import jrh.game.common.event.Callback;
-import jrh.game.common.event.Event;
-import jrh.game.common.event.EventHandler;
+import jrh.game.api.event.Callback;
+import jrh.game.api.event.Event;
+import jrh.game.common.EventHandler;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;

@@ -1,13 +1,13 @@
 package jrh.game.match;
 
 import jrh.game.api.Controller;
-import jrh.game.common.event.Callback;
-import jrh.game.common.event.EventHandler;
-import jrh.game.common.event.Subscribe;
-import jrh.game.api.event.MatchEnded;
-import jrh.game.api.event.MatchStarted;
-import jrh.game.api.event.PlayerTookDamage;
-import jrh.game.api.event.TurnEnded;
+import jrh.game.api.event.Callback;
+import jrh.game.common.EventHandler;
+import jrh.game.api.event.Subscribe;
+import jrh.game.api.event.impl.MatchEnded;
+import jrh.game.api.event.impl.MatchStarted;
+import jrh.game.api.event.impl.PlayerTookDamage;
+import jrh.game.api.event.impl.TurnEnded;
 import jrh.game.api.Match;
 import jrh.game.Constants;
 

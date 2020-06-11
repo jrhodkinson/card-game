@@ -1,10 +1,10 @@
 package jrh.game.event;
 
 import jrh.game.api.Match;
-import jrh.game.common.event.Callback;
-import jrh.game.common.event.Event;
-import jrh.game.common.event.EventHandler;
-import jrh.game.common.event.Subscribe;
+import jrh.game.api.event.Callback;
+import jrh.game.api.event.Event;
+import jrh.game.common.EventHandler;
+import jrh.game.api.event.Subscribe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

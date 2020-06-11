@@ -1,11 +1,11 @@
 package jrh.game.card.behaviour;
 
 import jrh.game.asset.JsonKey;
-import jrh.game.api.event.CardResolved;
+import jrh.game.api.event.impl.CardResolved;
 import jrh.game.common.BehaviourDescription;
-import jrh.game.common.event.Callback;
-import jrh.game.common.event.EventHandler;
-import jrh.game.common.event.Subscribe;
+import jrh.game.api.event.Callback;
+import jrh.game.common.EventHandler;
+import jrh.game.api.event.Subscribe;
 import jrh.game.match.CardFlowController;
 import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;

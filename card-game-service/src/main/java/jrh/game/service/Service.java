@@ -1,7 +1,7 @@
 package jrh.game.service;
 
 import io.javalin.Javalin;
-import jrh.game.common.event.EventBus;
+import jrh.game.api.event.EventBus;
 
 public class Service {
 

@@ -1,11 +1,11 @@
 package jrh.game.card;
 
 import jrh.game.api.Match;
-import jrh.game.api.event.CardCreated;
-import jrh.game.api.event.CardDestroyed;
-import jrh.game.common.event.Callback;
-import jrh.game.common.event.EventHandler;
-import jrh.game.common.event.Subscribe;
+import jrh.game.api.event.impl.CardCreated;
+import jrh.game.api.event.impl.CardDestroyed;
+import jrh.game.api.event.Callback;
+import jrh.game.common.EventHandler;
+import jrh.game.api.event.Subscribe;
 
 public class CardBehaviourRegistrar implements EventHandler {
 

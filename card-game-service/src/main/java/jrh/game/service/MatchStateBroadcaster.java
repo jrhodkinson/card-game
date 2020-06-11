@@ -1,9 +1,9 @@
 package jrh.game.service;
 
 import jrh.game.api.Match;
-import jrh.game.api.event.CardResolved;
-import jrh.game.common.event.EventHandler;
-import jrh.game.common.event.Subscribe;
+import jrh.game.api.event.impl.CardResolved;
+import jrh.game.common.EventHandler;
+import jrh.game.api.event.Subscribe;
 import jrh.game.service.dto.MatchDto;
 
 import static jrh.game.service.WebSocketMessageTypes.MATCH_STATE;

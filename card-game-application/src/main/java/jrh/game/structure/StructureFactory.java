@@ -2,8 +2,8 @@ package jrh.game.structure;
 
 import jrh.game.common.StructureId;
 import jrh.game.asset.MutableStructureLibrary;
-import jrh.game.common.event.EventBus;
-import jrh.game.api.event.StructureCreated;
+import jrh.game.api.event.EventBus;
+import jrh.game.api.event.impl.StructureCreated;
 
 public class StructureFactory {
 

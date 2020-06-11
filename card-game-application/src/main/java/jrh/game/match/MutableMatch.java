@@ -6,7 +6,7 @@ import jrh.game.asset.AssetLibrary;
 import jrh.game.card.CardBehaviourRegistrar;
 import jrh.game.card.CardImplFactory;
 import jrh.game.deck.Store;
-import jrh.game.common.event.EventBus;
+import jrh.game.api.event.EventBus;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
 import jrh.game.event.MatchEventBus;
