@@ -25,6 +25,7 @@
         <module>card-game-application</module>
         <module>card-game-common</module>
         <module>card-game-events</module>
+        <module>card-game-service</module>
     </modules>
 
     <build>
