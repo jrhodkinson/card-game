@@ -12,7 +12,7 @@ public class MatchStateBroadcaster implements EventHandler {
 
     private final WebSocketConnectionManager webSocketConnectionManager;
 
-    public MatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager, Match match) {
+    public MatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager) {
         this.webSocketConnectionManager = webSocketConnectionManager;
     }
 

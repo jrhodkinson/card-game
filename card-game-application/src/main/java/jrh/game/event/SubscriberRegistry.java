@@ -1,6 +1,7 @@
 package jrh.game.event;
 
 import jrh.game.api.Match;
+import jrh.game.common.event.Callback;
 import jrh.game.common.event.Event;
 import jrh.game.common.event.EventHandler;
 import jrh.game.common.event.Subscribe;
@@ -59,10 +60,10 @@ public class SubscriberRegistry {
         if (!Event.class.isAssignableFrom(parameterTypes[0])) {
             throw new EventBusException("Event must be assignable from Subscriber's first parameter");
         }
-        if (parameterTypes.length > 1 && !Match.class.equals(parameterTypes[1])) {
-            throw new EventBusException("Second parameter of Subscriber, if present, must be of type MatchControllers");
+        if (parameterTypes.length > 1 && !Match.class.isAssignableFrom(parameterTypes[1])) {
+            throw new EventBusException("Second parameter of Subscriber, if present, must be of type Match");
         }
-        if (parameterTypes.length == 3 && !CallbackImpl.class.equals(parameterTypes[2])) {
+        if (parameterTypes.length == 3 && !Callback.class.isAssignableFrom(parameterTypes[2])) {
             throw new EventBusException("Third parameter of Subscriber, if present, must be of type Callback");
         }
     }

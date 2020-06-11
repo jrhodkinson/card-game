@@ -28,6 +28,10 @@
             <artifactId>card-game-events</artifactId>
         </dependency>
         <dependency>
+            <groupId>jrh</groupId>
+            <artifactId>card-game-service</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>

@@ -15,6 +15,7 @@ import jrh.game.deck.Pile;
 import jrh.game.deck.Row;
 import jrh.game.match.MutableMatch;
 import jrh.game.match.MutableTurn;
+import jrh.game.service.Service;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,6 +41,8 @@ public class Application {
     void start() {
         match = new MutableMatch(assetLibrary, new User("Hero"), new User("Villain"));
         match.start();
+        Service service = new Service(7000);
+        service.start(match.getEventBus());
         simulateGame();
     }
 

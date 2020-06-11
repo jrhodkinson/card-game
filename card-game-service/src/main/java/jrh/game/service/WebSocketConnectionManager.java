@@ -37,7 +37,7 @@ public class WebSocketConnectionManager {
     public void broadcast(WebSocketMessage<?> webSocketMessage) {
         try {
             String messageJson = objectMapper.writeValueAsString(webSocketMessage);
-            logger.debug("Broadcasting to all clients: message={}", messageJson);
+            logger.debug("Broadcasting to {} clients: message={}", webSocketClients.size(), messageJson);
             webSocketClients.forEach(ctx -> ctx.send(messageJson));
         } catch (JsonProcessingException e) {
             logger.error("Failed to broadcast websocket message: could not convertmessage={} to json", webSocketMessage, e);
@@ -46,7 +46,7 @@ public class WebSocketConnectionManager {
 
     private void handleConnect(WsConnectContext wsConnectContext) {
         logger.info("Websocket connected: session={}", wsConnectContext.getSessionId());
-        webSocketClients.remove(wsConnectContext);
+        webSocketClients.add(wsConnectContext);
     }
 
     private void handleClose(WsCloseContext wsCloseContext) {
