@@ -9,7 +9,7 @@ import jrh.game.deck.Store;
 import jrh.game.api.event.EventBus;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
-import jrh.game.event.MatchEventBus;
+import jrh.game.event.SingleMatchEventBus;
 import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureFactory;
 import jrh.game.structure.StructureHealthController;
@@ -45,7 +45,7 @@ public class MutableMatch implements Match {
     private MutablePlayer winner = null;
 
     public MutableMatch(AssetLibrary assetLibrary, User firstUser, User secondUser) {
-        this.eventBus = new MatchEventBus(this);
+        this.eventBus = new SingleMatchEventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
         this.modificationComputer = new ModificationComputer(this);
         this.cardImplFactory = new CardImplFactory(eventBus, assetLibrary, new Random());

@@ -11,15 +11,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class MatchEventBus implements EventBus {
+public class SingleMatchEventBus implements EventBus {
 
-    private static final Logger logger = LogManager.getLogger(MatchEventBus.class);
+    private static final Logger logger = LogManager.getLogger(SingleMatchEventBus.class);
 
     private final SubscriberRegistry subscriberRegistry = new SubscriberRegistry();
     private final Match match;
     private final CallbackImpl callback;
 
-    public MatchEventBus(Match match) {
+    public SingleMatchEventBus(Match match) {
         this.match = match;
         this.callback = new CallbackImpl(this);
     }
