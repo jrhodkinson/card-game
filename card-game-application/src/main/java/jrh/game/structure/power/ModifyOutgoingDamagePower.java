@@ -9,7 +9,7 @@ import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@JsonKey("modify-outgoing-damage")
+@JsonKey("modifyOutgoingDamage")
 public class ModifyOutgoingDamagePower extends AbstractPower {
 
     private static final Logger logger = LogManager.getLogger(ModifyOutgoingDamagePower.class);

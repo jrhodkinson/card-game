@@ -27,23 +27,19 @@ public class WebSocketMessageType<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         WebSocketMessageType<?> that = (WebSocketMessageType<?>) o;
 
-        return new EqualsBuilder()
-                .append(type, that.type)
-                .append(payloadType, that.payloadType)
-                .isEquals();
+        return new EqualsBuilder().append(type, that.type).append(payloadType, that.payloadType).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(type)
-                .append(payloadType)
-                .toHashCode();
+        return new HashCodeBuilder(17, 37).append(type).append(payloadType).toHashCode();
     }
 }

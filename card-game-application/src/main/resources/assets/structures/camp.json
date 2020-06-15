@@ -1,10 +1,10 @@
 {
-  "id": "camp",
+  "id": "CAMP",
   "name": "Camp",
   "health": 3,
   "powers": [
     [
-      "modify-outgoing-damage",
+      "modifyOutgoingDamage",
       1
     ]
   ]

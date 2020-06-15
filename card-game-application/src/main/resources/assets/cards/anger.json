@@ -1,11 +1,11 @@
 {
-  "id": "anger",
+  "id": "ANGER",
   "name": "Anger",
   "cost": 3,
   "color": "RED",
   "behaviours": [
     [
-      "incrementing-damage",
+      "incrementingDamage",
       {
         "damage": 1,
         "increment": 2

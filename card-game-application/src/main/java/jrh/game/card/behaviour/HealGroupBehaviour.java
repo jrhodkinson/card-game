@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonKey("heal-group")
+@JsonKey("healGroup")
 public class HealGroupBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(HealGroupBehaviour.class);

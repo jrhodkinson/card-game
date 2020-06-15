@@ -1,12 +1,12 @@
 {
-  "id": "merchants-guild",
+  "id": "MERCHANTS_GUILD",
   "name": "Merchants' Guild",
   "health": 6,
   "powers": [
     [
-      "modify-cost",
+      "modifyCost",
       {
-        "targets": [ "self" ],
+        "purchasers": [ "SELF" ],
         "amount": -1
       }
     ]

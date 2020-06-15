@@ -1,14 +1,14 @@
 {
-  "id": "ill-gotten-gains",
+  "id": "ILL_GOTTEN_GAINS",
   "name": "Ill-gotten gains",
   "cost": 4,
   "color": "YELLOW",
   "behaviours": [
     [
-      "damage-on-purchase",
+      "damageOnPurchase",
       {
         "amount": 3,
-        "targets": ["other"]
+        "targets": ["OTHER"]
       }
     ],
     [

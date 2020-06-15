@@ -13,7 +13,7 @@ import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@JsonKey("incrementing-damage")
+@JsonKey("incrementingDamage")
 public class IncrementingDamageBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(IncrementingDamageBehaviour.class);

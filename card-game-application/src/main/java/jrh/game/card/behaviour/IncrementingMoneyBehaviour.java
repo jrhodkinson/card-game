@@ -12,7 +12,7 @@ import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@JsonKey("incrementing-money")
+@JsonKey("incrementingMoney")
 public class IncrementingMoneyBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(IncrementingMoneyBehaviour.class);

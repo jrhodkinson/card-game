@@ -15,19 +15,19 @@ import java.util.List;
 import static jrh.game.common.Target.OTHER;
 import static jrh.game.common.Target.SELF;
 
-@JsonKey("modify-cost")
+@JsonKey("modifyCost")
 public class ModifyCostPower extends AbstractPower {
 
     private static final Logger logger = LogManager.getLogger(ModifyCostPower.class);
 
     @JsonProperty
-    private final List<Target> targets;
+    private final List<Target> purchasers;
 
     @JsonProperty
     private final int amount;
 
-    public ModifyCostPower(@JsonProperty("targets") List<Target> targets, @JsonProperty("amount") int amount) {
-        this.targets = targets;
+    public ModifyCostPower(@JsonProperty("purchasers") List<Target> purchasers, @JsonProperty("amount") int amount) {
+        this.purchasers = purchasers;
         this.amount = amount;
     }
 
@@ -44,12 +44,12 @@ public class ModifyCostPower extends AbstractPower {
 
     private boolean shouldModifyCost(Match match, Player purchaser) {
         Player owner = match.getController(StructureStateController.class).getOwner(getStructure());
-        return (owner.equals(purchaser) && targets.contains(SELF))
-                || (!owner.equals(purchaser) && targets.contains(OTHER));
+        return (owner.equals(purchaser) && purchasers.contains(SELF))
+                || (!owner.equals(purchaser) && purchasers.contains(OTHER));
     }
 
     @Override
     public ModifyCostPower duplicate() {
-        return new ModifyCostPower(List.copyOf(targets), amount);
+        return new ModifyCostPower(List.copyOf(purchasers), amount);
     }
 }

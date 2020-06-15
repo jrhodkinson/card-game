@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonKey("damage-group")
+@JsonKey("damageGroup")
 public class DamageGroupBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(DamageGroupBehaviour.class);

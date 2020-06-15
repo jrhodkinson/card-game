@@ -40,7 +40,8 @@ public class WebSocketConnectionManager {
             logger.debug("Broadcasting to {} clients: message={}", webSocketClients.size(), messageJson);
             webSocketClients.forEach(ctx -> ctx.send(messageJson));
         } catch (JsonProcessingException e) {
-            logger.error("Failed to broadcast websocket message: could not convertmessage={} to json", webSocketMessage, e);
+            logger.error("Failed to broadcast websocket message: could not convertmessage={} to json", webSocketMessage,
+                    e);
         }
     }
 

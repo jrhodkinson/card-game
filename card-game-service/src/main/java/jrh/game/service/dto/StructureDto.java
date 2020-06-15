@@ -20,7 +20,8 @@ public class StructureDto {
     }
 
     public static StructureDto fromStructure(Structure structure) {
-        return new StructureDto(structure.getInstanceId(), structure.getStructureId(), structure.getName(), structure.getHealth());
+        return new StructureDto(structure.getInstanceId(), structure.getStructureId(), structure.getName(),
+                structure.getHealth());
     }
 
     public UUID getInstanceId() {

@@ -1,13 +1,13 @@
 {
-  "id": "earthquake",
+  "id": "EARTHQUAKE",
   "name": "Earthquake",
   "cost": 3,
   "color": "RED",
   "behaviours": [
     [
-      "damage-group",
+      "damageGroup",
       {
-        "targets": ["own-structures", "other-structures"],
+        "targets": ["OWN_STRUCTURES", "OTHER_STRUCTURES"],
         "amount": 4
       }
     ],

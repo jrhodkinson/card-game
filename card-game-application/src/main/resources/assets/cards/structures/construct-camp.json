@@ -1,12 +1,12 @@
 {
-  "id": "construct:camp",
+  "id": "construct:CAMP",
   "name": "Encamp",
   "cost": 1,
   "color": "CYAN",
   "behaviours": [
     [
       "construct",
-      "camp"
+      "CAMP"
     ],
     [ "vanish" ]
   ]

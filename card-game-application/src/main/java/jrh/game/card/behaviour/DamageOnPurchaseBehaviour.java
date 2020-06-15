@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonKey("damage-on-purchase")
+@JsonKey("damageOnPurchase")
 public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
