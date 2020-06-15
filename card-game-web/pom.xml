@@ -32,7 +32,6 @@
                                 <argument>install</argument>
                                 <argument>--frozen-lockfile</argument>
                             </arguments>
-                            <workingDirectory>${basedir}/src/main/app</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -47,7 +46,6 @@
                                 <argument>run</argument>
                                 <argument>test:ci</argument>
                             </arguments>
-                            <workingDirectory>${basedir}/src/main/app</workingDirectory>
                         </configuration>
                     </execution>
                 </executions>
