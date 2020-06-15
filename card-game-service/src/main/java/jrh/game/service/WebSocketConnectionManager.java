@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class WebSocketConnectionManager {
 
@@ -20,6 +22,7 @@ public class WebSocketConnectionManager {
     private final Javalin javalin;
     private final String route;
     private final List<WsContext> webSocketClients = new ArrayList<>();
+    private final List<Supplier<Optional<WebSocketMessage<?>>>> welcomeMessageSuppliers = new ArrayList<>();
     private final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
     public WebSocketConnectionManager(Javalin javalin, String route) {
@@ -40,14 +43,21 @@ public class WebSocketConnectionManager {
             logger.debug("Broadcasting to {} clients: message={}", webSocketClients.size(), messageJson);
             webSocketClients.forEach(ctx -> ctx.send(messageJson));
         } catch (JsonProcessingException e) {
-            logger.error("Failed to broadcast websocket message: could not convertmessage={} to json", webSocketMessage,
+            logger.error("Failed to broadcast websocket message: could not convert message={} to json", webSocketMessage,
                     e);
         }
+    }
+
+    public void addWelcomeMessage(Supplier<Optional<WebSocketMessage<?>>> welcomeMessageSupplier) {
+        logger.info("Added welcome message supplier {}", welcomeMessageSupplier);
+        this.welcomeMessageSuppliers.add(welcomeMessageSupplier);
     }
 
     private void handleConnect(WsConnectContext wsConnectContext) {
         logger.info("Websocket connected: session={}", wsConnectContext.getSessionId());
         webSocketClients.add(wsConnectContext);
+        logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());
+        welcomeMessageSuppliers.forEach(supplier -> supplier.get().ifPresent(wsConnectContext::send));
     }
 
     private void handleClose(WsCloseContext wsCloseContext) {
