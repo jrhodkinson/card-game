@@ -1,8 +1,8 @@
 import React from "react";
-import MatchWebSocket from "./MatchWebSocket";
+import Match from "./Match";
 
 function App() {
-  return <MatchWebSocket />;
+  return <Match />;
 }
 
 export default App;
