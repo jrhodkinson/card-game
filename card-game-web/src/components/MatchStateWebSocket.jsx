@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from "react";
 import { connectToMatchStateWebSocket, MESSAGE_TYPES } from "../gateway/ws";
 
 const MatchStateWebSocket = () => {
@@ -18,11 +18,7 @@ const MatchStateWebSocket = () => {
     return ws.close;
   }, [handleWebSocketMessage]);
 
-  return (
-    <pre>
-      {JSON.stringify(latestMessage, null, 4)}
-    </pre>
-  );
+  return <pre>{JSON.stringify(latestMessage, null, 4)}</pre>;
 };
 
 export default MatchStateWebSocket;

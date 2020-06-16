@@ -35,6 +35,20 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>run-lint</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>yarn</executable>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>lint:ci</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>run-tests</id>
                         <phase>test</phase>
                         <goals>
