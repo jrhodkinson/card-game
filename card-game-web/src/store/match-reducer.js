@@ -1,6 +1,8 @@
 import Immutable from "seamless-immutable";
 import { RECEIVED_MATCH_STATE } from "./match-actions";
 
+export const MATCH_STATE = "match";
+
 export const defaultState = Immutable({
   activePlayer: {
     username: "",
