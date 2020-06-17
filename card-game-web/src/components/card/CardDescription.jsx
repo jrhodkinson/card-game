@@ -10,8 +10,6 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 
-const CardDescription = ({ description }) => {
-  return <Wrapper>{description}</Wrapper>;
-};
+const CardDescription = ({ description }) => <Wrapper>{description}</Wrapper>;
 
 export default CardDescription;

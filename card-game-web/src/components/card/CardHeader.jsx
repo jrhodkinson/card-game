@@ -27,13 +27,11 @@ const Name = styled(HeaderElement)`
   padding: 0 10px;
 `;
 
-const CardHeader = ({ name, cost }) => {
-  return (
-    <Wrapper>
-      <Cost>{cost}</Cost>
-      <Name>{name}</Name>
-    </Wrapper>
-  );
-};
+const CardHeader = ({ name, cost }) => (
+  <Wrapper>
+    <Cost>{cost}</Cost>
+    <Name>{name}</Name>
+  </Wrapper>
+);
 
 export default CardHeader;
