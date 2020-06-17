@@ -5,7 +5,7 @@ import jrh.game.api.Controller;
 import jrh.game.asset.AssetLibrary;
 import jrh.game.card.CardBehaviourRegistrar;
 import jrh.game.card.CardImplFactory;
-import jrh.game.deck.Store;
+import jrh.game.deck.MutableStore;
 import jrh.game.api.event.EventBus;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
@@ -36,7 +36,7 @@ public class MutableMatch implements Match {
     private final ModificationComputer modificationComputer;
     private final CardImplFactory cardImplFactory;
     private final StructureFactory structureFactory;
-    private final Store store;
+    private final MutableStore mutableStore;
     private final MutablePlayer firstPlayer;
     private final MutablePlayer secondPlayer;
     private boolean firstPlayerIsActive;
@@ -50,7 +50,7 @@ public class MutableMatch implements Match {
         this.modificationComputer = new ModificationComputer(this);
         this.cardImplFactory = new CardImplFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);
-        this.store = new Store(cardImplFactory, Constants.STORE_SIZE, Collections.emptyList());
+        this.mutableStore = new MutableStore(cardImplFactory, Constants.STORE_SIZE, Collections.emptyList());
         this.firstPlayer = new MutablePlayer(firstUser, cardImplFactory.startingDeck());
         this.secondPlayer = new MutablePlayer(secondUser, cardImplFactory.startingDeck());
         this.currentTurn = new MutableTurn();
@@ -71,8 +71,9 @@ public class MutableMatch implements Match {
         return (T) controllers.get(controllerClass);
     }
 
-    public Store getStore() {
-        return store;
+    @Override
+    public MutableStore getStore() {
+        return mutableStore;
     }
 
     @Override

@@ -24,6 +24,9 @@ export const defaultState = Immutable({
     money: 0,
     playedCards: [],
   },
+  storefront: {
+    row: [],
+  },
 });
 
 export default (state = defaultState, action) => {

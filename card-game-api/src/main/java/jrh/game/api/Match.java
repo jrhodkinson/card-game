@@ -17,4 +17,6 @@ public interface Match {
     Turn getCurrentTurn();
 
     Collection<Structure> getAllStructures();
+
+    Store getStore();
 }

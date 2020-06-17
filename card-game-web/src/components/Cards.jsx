@@ -4,6 +4,7 @@ import Card from "./card/Card";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const Cards = ({ cards }) => {

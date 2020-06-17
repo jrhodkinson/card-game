@@ -12,7 +12,6 @@ import jrh.game.common.Color;
 import jrh.game.common.User;
 import jrh.game.deck.Hand;
 import jrh.game.deck.Pile;
-import jrh.game.deck.Row;
 import jrh.game.match.MutableMatch;
 import jrh.game.match.MutableTurn;
 import jrh.game.service.Service;
@@ -57,7 +56,7 @@ public class Application {
             for (int i = 0; i < hand.size(); i++) {
                 System.out.printf(OPTION_FORMAT, i + 1, hand.get(i));
             }
-            Row row = match.getStore().getRow();
+            List<Card> row = match.getStore().getRow();
             for (int i = 0; i < row.size(); i++) {
                 if (i % 7 == 0) {
                     System.out.println();
