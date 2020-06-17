@@ -38,12 +38,12 @@ public class BehaviourDescription {
         }
 
         public Builder keyword(String keyword) {
-            pieces.add(String.format("%s%s%s", Color.RED, keyword, Color.RESET));
+            pieces.add(keyword);
             return this;
         }
 
         public Builder number(int number) {
-            pieces.add(String.format("%s%d%s", Color.BLUE, number, Color.RESET));
+            pieces.add(String.valueOf(number));
             return this;
         }
 
