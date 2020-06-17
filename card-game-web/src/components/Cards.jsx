@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Card from "./card/Card";
 
 const Wrapper = styled.div`
+  align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
 `;

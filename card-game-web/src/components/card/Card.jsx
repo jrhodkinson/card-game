@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CardDescription from "./CardDescription";
 import CardHeader from "./CardHeader";
