@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   display: grid;
   height: 36px;
   grid-template-columns: 36px 1fr;
@@ -18,7 +18,7 @@ const HeaderElement = styled.div`
 
 const Cost = styled(HeaderElement)`
   background-color: #444;
-  border-right: 2px solid black;
+  border-right: 1px solid black;
   color: white;
   font-weight: bold;
 `;
