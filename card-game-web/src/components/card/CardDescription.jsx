@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `;
 
 const CardDescription = ({ description }) => {
-  return <Wrapper>{description}sdfgsdfg</Wrapper>;
+  return <Wrapper>{description}</Wrapper>;
 };
 
 export default CardDescription;

@@ -11,16 +11,24 @@ public class CardDto {
     private final CardId cardId;
     private final String name;
     private final int cost;
+    private final CardDescriptionDto description;
 
-    private CardDto(UUID instanceId, CardId cardId, String name, int cost) {
+    private CardDto(UUID instanceId, CardId cardId, String name, int cost, CardDescriptionDto description) {
         this.instanceId = instanceId;
         this.cardId = cardId;
         this.name = name;
         this.cost = cost;
+        this.description = description;
     }
 
     public static CardDto fromCard(Card card) {
-        return new CardDto(card.getInstanceId(), card.getCardId(), card.getName(), card.getCost());
+        return new CardDto(
+            card.getInstanceId(),
+            card.getCardId(),
+            card.getName(),
+            card.getCost(),
+            CardDescriptionDto.fromCardDescription(card.getDescription())
+        );
     }
 
     public UUID getInstanceId() {
@@ -37,5 +45,9 @@ public class CardDto {
 
     public int getCost() {
         return cost;
+    }
+
+    public CardDescriptionDto getDescription() {
+        return description;
     }
 }
