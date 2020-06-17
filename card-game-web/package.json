@@ -22,7 +22,9 @@
     "reconnecting-websocket": "^4.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "seamless-immutable": "^7.1.4"
+    "seamless-immutable": "^7.1.4",
+    "styled-components": "^5.1.1",
+    "typeface-merriweather": "^0.0.72"
   },
   "devDependencies": {
     "husky": "^4.2.5",
