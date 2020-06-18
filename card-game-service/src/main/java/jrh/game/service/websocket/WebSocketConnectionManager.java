@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import static jrh.game.service.websocket.WebSocketMessageTypes.PING;
+
 public class WebSocketConnectionManager {
 
     private static final Logger logger = LogManager.getLogger(WebSocketConnectionManager.class);
@@ -40,7 +42,9 @@ public class WebSocketConnectionManager {
     public void broadcast(WebSocketMessage<?> webSocketMessage) {
         try {
             String messageJson = objectMapper.writeValueAsString(webSocketMessage);
-            logger.debug("Broadcasting to {} clients: message={}", webSocketClients.size(), messageJson);
+            if (!webSocketMessage.getType().equals(PING)) {
+                logger.debug("Broadcasting to {} clients: message={}", webSocketClients.size(), messageJson);
+            }
             webSocketClients.forEach(ctx -> ctx.send(messageJson));
         } catch (JsonProcessingException e) {
             logger.error("Failed to broadcast websocket message: could not convert message={} to json",
