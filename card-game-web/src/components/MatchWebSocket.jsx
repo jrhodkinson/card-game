@@ -1,21 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { connectToMatchStateWebSocket, toAction } from "../gateway/ws";
+import { connectToMatchWebSocket } from "../gateway/ws";
 
 const MatchWebSocket = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const ws = connectToMatchStateWebSocket();
-    ws.onmessage = (messageEvent) => {
-      const action = toAction(messageEvent);
-      if (action) {
-        dispatch(action);
-      }
-    };
-    return ws.close;
-  }, [dispatch]);
-
+  useEffect(() => connectToMatchWebSocket(dispatch), [dispatch]);
   return null;
 };
 

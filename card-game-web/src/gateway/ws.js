@@ -7,11 +7,7 @@ const MESSAGE_ACTION_CREATORS = {
   matchState: (payload) => receivedMatchState(payload),
 };
 
-export const connectToMatchStateWebSocket = () =>
-  new ReconnectingWebSocket("ws://localhost:7000/match");
-
-export const toAction = (webSocketMessageEvent) => {
-  const message = JSON.parse(webSocketMessageEvent.data);
+const toAction = (message) => {
   if (
     !Object.prototype.hasOwnProperty.call(MESSAGE_ACTION_CREATORS, message.type)
   ) {
@@ -21,4 +17,16 @@ export const toAction = (webSocketMessageEvent) => {
     return undefined;
   }
   return MESSAGE_ACTION_CREATORS[message.type](message.payload);
+};
+
+export const connectToMatchWebSocket = (dispatch) => {
+  const ws = new ReconnectingWebSocket("ws://localhost:7000/match");
+  ws.onmessage = (event) => {
+    const message = JSON.parse(event.data);
+    const action = toAction(message);
+    if (action) {
+      dispatch(action);
+    }
+  };
+  return ws.close;
 };
