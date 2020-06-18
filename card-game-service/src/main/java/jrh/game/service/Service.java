@@ -2,6 +2,10 @@ package jrh.game.service;
 
 import io.javalin.Javalin;
 import jrh.game.api.event.EventBus;
+import jrh.game.service.websocket.WebSocketConnectionManager;
+import jrh.game.service.websocket.WebSocketPinger;
+
+import java.util.concurrent.Executors;
 
 public class Service {
 
@@ -21,5 +25,6 @@ public class Service {
         webSocketConnectionManager.start();
 
         eventBus.register(new MatchStateBroadcaster(webSocketConnectionManager));
+        new WebSocketPinger(webSocketConnectionManager, Executors.newSingleThreadScheduledExecutor());
     }
 }

@@ -1,4 +1,4 @@
-package jrh.game.service;
+package jrh.game.service.websocket;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.apache.commons.lang3.builder.EqualsBuilder;

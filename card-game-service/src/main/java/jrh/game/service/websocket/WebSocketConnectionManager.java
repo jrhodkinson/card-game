@@ -1,4 +1,4 @@
-package jrh.game.service;
+package jrh.game.service.websocket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@ public class WebSocketConnectionManager {
     private final Javalin javalin;
     private final String route;
     private final List<WsContext> webSocketClients = new ArrayList<>();
-    private final List<Supplier<Optional<WebSocketMessage<?>>>> welcomeMessageSuppliers = new ArrayList<>();
+    private final List<Supplier<Optional<? extends WebSocketMessage<?>>>> welcomeMessageSuppliers = new ArrayList<>();
     private final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
     public WebSocketConnectionManager(Javalin javalin, String route) {
@@ -48,7 +48,7 @@ public class WebSocketConnectionManager {
         }
     }
 
-    public void addWelcomeMessage(Supplier<Optional<WebSocketMessage<?>>> welcomeMessageSupplier) {
+    public void addWelcomeMessage(Supplier<Optional<? extends WebSocketMessage<?>>> welcomeMessageSupplier) {
         logger.info("Added welcome message supplier {}", welcomeMessageSupplier);
         this.welcomeMessageSuppliers.add(welcomeMessageSupplier);
     }

@@ -1,11 +1,11 @@
-package jrh.game.service;
+package jrh.game.service.websocket;
 
 public class WebSocketMessage<T> {
 
     private final WebSocketMessageType<T> type;
     private final T payload;
 
-    public WebSocketMessage(WebSocketMessageType<T> type, T payload) {
+    WebSocketMessage(WebSocketMessageType<T> type, T payload) {
         this.type = type;
         this.payload = payload;
     }

@@ -8,10 +8,11 @@ import jrh.game.api.event.impl.MatchStarted;
 import jrh.game.api.event.impl.TurnEnded;
 import jrh.game.common.EventHandler;
 import jrh.game.service.dto.MatchDto;
+import jrh.game.service.websocket.WebSocketConnectionManager;
+import jrh.game.service.websocket.WebSocketMessage;
+import jrh.game.service.websocket.WebSocketMessages;
 
 import java.util.Optional;
-
-import static jrh.game.service.WebSocketMessageTypes.MATCH_STATE;
 
 public class MatchStateBroadcaster implements EventHandler {
 
@@ -48,10 +49,7 @@ public class MatchStateBroadcaster implements EventHandler {
         matchStateMessage().ifPresent(webSocketConnectionManager::broadcast);
     }
 
-    private Optional<WebSocketMessage<?>> matchStateMessage() {
-        if (latestMatchState == null) {
-            return Optional.empty();
-        }
-        return Optional.of(new WebSocketMessage<>(MATCH_STATE, latestMatchState));
+    private Optional<WebSocketMessage<MatchDto>> matchStateMessage() {
+        return Optional.ofNullable(latestMatchState).map(WebSocketMessages::matchState);
     }
 }
