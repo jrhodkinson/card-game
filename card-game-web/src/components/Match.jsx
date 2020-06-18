@@ -10,13 +10,13 @@ const Match = () => {
   const activePlayer = useSelector(getActivePlayer);
   const inactivePlayer = useSelector(getInactivePlayer);
   return (
-    <div className="match">
+    <>
       <MatchWebSocket />
       <Player player={inactivePlayer} />
       <Storefront />
       <CurrentTurn />
       <Player player={activePlayer} />
-    </div>
+    </>
   );
 };
 

@@ -6,10 +6,10 @@ import Cards from "./card/Cards";
 const CurrentTurn = () => {
   const currentTurn = useSelector(getCurrentTurn);
   return (
-    <div className="current-turn">
-      <div className="money-count">{currentTurn.money} Money</div>
+    <>
+      {currentTurn.money} Money
       <Cards cards={currentTurn.playedCards} />
-    </div>
+    </>
   );
 };
 
