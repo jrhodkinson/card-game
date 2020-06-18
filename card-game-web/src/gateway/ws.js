@@ -1,8 +1,10 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { receivedMatchState } from "../store/match-actions";
+import { receivedPing } from "../store/socket-actions";
 
-const MESSAGE_TYPES = {
-  MATCH_STATE: "matchState",
+const MESSAGE_ACTION_CREATORS = {
+  ping: (payload) => receivedPing(payload),
+  matchState: (payload) => receivedMatchState(payload),
 };
 
 export const connectToMatchStateWebSocket = () =>
@@ -10,13 +12,13 @@ export const connectToMatchStateWebSocket = () =>
 
 export const toAction = (webSocketMessageEvent) => {
   const message = JSON.parse(webSocketMessageEvent.data);
-  switch (message.type) {
-    case MESSAGE_TYPES.MATCH_STATE:
-      return receivedMatchState(message.payload);
-    default:
-      console.error(
-        "Unknown message type for message event: " + webSocketMessageEvent
-      );
-      return undefined;
+  if (
+    !Object.prototype.hasOwnProperty.call(MESSAGE_ACTION_CREATORS, message.type)
+  ) {
+    console.error(
+      `Unknown message type for message: ${JSON.stringify(message)}`
+    );
+    return undefined;
   }
+  return MESSAGE_ACTION_CREATORS[message.type](message.payload);
 };
