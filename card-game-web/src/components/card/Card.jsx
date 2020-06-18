@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import CardDescription from "./CardDescription";
 import CardHeader from "./CardHeader";
 import CardImage from "./CardImage";
 
 const colors = {
-  RED: "#FCC",
+  RED: "#FBB",
   YELLOW: "#FFC",
   BLUE: "#CCF",
   WHITE: "#FFF",
   GREEN: "#CFC",
+  CYAN: "#CFF",
 };
 
 const Wrapper = styled.div`
@@ -24,7 +25,6 @@ const Wrapper = styled.div`
 `;
 
 const Card = ({ card }) => {
-  // console.log(card.color);
   return (
     <Wrapper background={card.color}>
       <CardHeader name={card.name} cost={card.cost} />

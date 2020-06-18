@@ -3,7 +3,10 @@ package jrh.game.service.dto;
 import jrh.game.api.Card;
 import jrh.game.common.CardId;
 
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 public class CardDto {
 
@@ -32,6 +35,10 @@ public class CardDto {
             CardDescriptionDto.fromCardDescription(card.getDescription()),
             ColorDto.fromColor(card.getColor())
         );
+    }
+
+    public static List<CardDto> fromCards(List<Card> cards) {
+        return cards.stream().map(CardDto::fromCard).collect(toList());
     }
 
     public UUID getInstanceId() {

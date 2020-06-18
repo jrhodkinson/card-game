@@ -2,6 +2,7 @@ package jrh.game.service;
 
 import jrh.game.api.Match;
 import jrh.game.api.event.Subscribe;
+import jrh.game.api.event.impl.CardPurchased;
 import jrh.game.api.event.impl.CardResolved;
 import jrh.game.api.event.impl.MatchStarted;
 import jrh.game.api.event.impl.TurnEnded;
@@ -24,6 +25,11 @@ public class MatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match) {
+        broadcastMatchState(match);
+    }
+
+    @Subscribe
+    private void cardPurchased(CardPurchased cardPurchased, Match match) {
         broadcastMatchState(match);
     }
 

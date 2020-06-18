@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getActivePlayer, getInactivePlayer } from "../store/match-selector";
 import CurrentTurn from "./CurrentTurn";
 import MatchWebSocket from "./MatchWebSocket";
-import Player from "./Player";
+import Player from "./player/Player";
 import Storefront from "./Storefront";
 
 const Match = () => {

@@ -10,7 +10,7 @@ export const defaultState = Immutable({
     structures: [],
     hand: [],
     deckSize: 0,
-    discardPileSize: 0,
+    discardPile: [],
   },
   inactivePlayer: {
     username: "",
@@ -18,7 +18,7 @@ export const defaultState = Immutable({
     structures: [],
     hand: [],
     deckSize: 0,
-    discardPileSize: 0,
+    discardPile: [],
   },
   currentTurn: {
     money: 0,
