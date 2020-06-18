@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0,
     rgba(0, 0, 0, 0.12) 0 1px 2px 0;
   margin: 10px;
+  min-width: 180px;
   width: 180px;
 
   background-color: ${(props) => colors[props.background] || "#F7F"};

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { getStorefront } from "../store/match-selector";
-import Cards from "./Cards";
+import Cards from "./card/Cards";
 
 const Wrapper = styled.div`
   background-color: #c8c8c8;

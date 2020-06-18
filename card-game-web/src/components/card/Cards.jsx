@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Card from "./card/Card";
+import Card from "./Card";
 
 const Wrapper = styled.div`
   align-items: flex-start;
   display: flex;
-  flex-wrap: wrap;
+  overflow: auto;
+  max-width: 100%;
 `;
 
 const Cards = ({ cards }) => {

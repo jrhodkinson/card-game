@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { getCurrentTurn } from "../store/match-selector";
-import Cards from "./Cards";
+import Cards from "./card/Cards";
 
 const CurrentTurn = () => {
   const currentTurn = useSelector(getCurrentTurn);
