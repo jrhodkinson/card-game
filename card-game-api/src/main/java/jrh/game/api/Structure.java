@@ -1,13 +1,13 @@
 package jrh.game.api;
 
+import jrh.game.common.InstanceId;
 import jrh.game.common.StructureId;
 
 import java.util.Collection;
-import java.util.UUID;
 
 public interface Structure extends Damageable {
 
-    UUID getInstanceId();
+    InstanceId getInstanceId();
 
     StructureId getStructureId();
 

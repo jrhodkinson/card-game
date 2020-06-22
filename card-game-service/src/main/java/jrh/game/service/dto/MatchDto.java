@@ -17,12 +17,9 @@ public class MatchDto {
     }
 
     public static MatchDto fromMatch(Match match) {
-        return new MatchDto(
-            PlayerDto.fromPlayer(match.getActivePlayer()),
-            PlayerDto.fromPlayer(match.getInactivePlayer()),
-            TurnDto.fromTurn(match.getCurrentTurn()),
-            StoreDto.fromStore(match.getStore())
-        );
+        return new MatchDto(PlayerDto.fromPlayer(match.getActivePlayer()),
+                PlayerDto.fromPlayer(match.getInactivePlayer()), TurnDto.fromTurn(match.getCurrentTurn()),
+                StoreDto.fromStore(match.getStore()));
     }
 
     public PlayerDto getActivePlayer() {

@@ -27,22 +27,20 @@ public final class InstanceId {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         InstanceId that = (InstanceId) o;
 
-        return new EqualsBuilder()
-            .append(instanceId, that.instanceId)
-            .isEquals();
+        return new EqualsBuilder().append(instanceId, that.instanceId).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-            .append(instanceId)
-            .toHashCode();
+        return new HashCodeBuilder(17, 37).append(instanceId).toHashCode();
     }
 
     @Override

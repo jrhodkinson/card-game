@@ -1,18 +1,17 @@
 package jrh.game.service.dto;
 
 import jrh.game.api.Structure;
+import jrh.game.common.InstanceId;
 import jrh.game.common.StructureId;
-
-import java.util.UUID;
 
 public class StructureDto {
 
-    private final UUID instanceId;
+    private final InstanceId instanceId;
     private final StructureId structureId;
     private final String name;
     private final int health;
 
-    private StructureDto(UUID instanceId, StructureId structureId, String name, int health) {
+    private StructureDto(InstanceId instanceId, StructureId structureId, String name, int health) {
         this.instanceId = instanceId;
         this.structureId = structureId;
         this.name = name;
@@ -24,7 +23,7 @@ public class StructureDto {
                 structure.getHealth());
     }
 
-    public UUID getInstanceId() {
+    public InstanceId getInstanceId() {
         return instanceId;
     }
 

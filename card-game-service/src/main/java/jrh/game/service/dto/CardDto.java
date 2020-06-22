@@ -2,22 +2,23 @@ package jrh.game.service.dto;
 
 import jrh.game.api.Card;
 import jrh.game.common.CardId;
+import jrh.game.common.InstanceId;
 
 import java.util.List;
-import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
 public class CardDto {
 
-    private final UUID instanceId;
+    private final InstanceId instanceId;
     private final CardId cardId;
     private final String name;
     private final int cost;
     private final CardDescriptionDto description;
     private final ColorDto color;
 
-    private CardDto(UUID instanceId, CardId cardId, String name, int cost, CardDescriptionDto description, ColorDto color) {
+    private CardDto(InstanceId instanceId, CardId cardId, String name, int cost, CardDescriptionDto description,
+            ColorDto color) {
         this.instanceId = instanceId;
         this.cardId = cardId;
         this.name = name;
@@ -27,21 +28,15 @@ public class CardDto {
     }
 
     public static CardDto fromCard(Card card) {
-        return new CardDto(
-            card.getInstanceId(),
-            card.getCardId(),
-            card.getName(),
-            card.getCost(),
-            CardDescriptionDto.fromCardDescription(card.getDescription()),
-            ColorDto.fromColor(card.getColor())
-        );
+        return new CardDto(card.getInstanceId(), card.getCardId(), card.getName(), card.getCost(),
+                CardDescriptionDto.fromCardDescription(card.getDescription()), ColorDto.fromColor(card.getColor()));
     }
 
     public static List<CardDto> fromCards(List<Card> cards) {
         return cards.stream().map(CardDto::fromCard).collect(toList());
     }
 
-    public UUID getInstanceId() {
+    public InstanceId getInstanceId() {
         return instanceId;
     }
 

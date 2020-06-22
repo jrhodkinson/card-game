@@ -17,6 +17,7 @@ public class CardDescription {
 
     @Override
     public String toString() {
-        return behaviourDescriptions.stream().map(BehaviourDescription::toString).collect(Collectors.joining(". ")) + ".";
+        return behaviourDescriptions.stream().map(BehaviourDescription::toString).collect(Collectors.joining(". "))
+                + ".";
     }
 }

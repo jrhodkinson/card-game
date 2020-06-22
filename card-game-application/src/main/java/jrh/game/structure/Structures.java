@@ -1,12 +1,12 @@
 package jrh.game.structure;
 
 import jrh.game.api.Structure;
+import jrh.game.common.InstanceId;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 public class Structures {
@@ -17,11 +17,11 @@ public class Structures {
         this.structures.add(structure);
     }
 
-    public boolean contains(UUID instanceId) {
+    public boolean contains(InstanceId instanceId) {
         return structures.stream().anyMatch(mutableStructure -> mutableStructure.getInstanceId().equals(instanceId));
     }
 
-    public void remove(UUID instanceId) {
+    public void remove(InstanceId instanceId) {
         structures.removeIf(mutableStructure -> mutableStructure.getInstanceId().equals(instanceId));
     }
 

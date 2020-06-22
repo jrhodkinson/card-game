@@ -10,19 +10,19 @@ import jrh.game.card.behaviour.AbstractBehaviour;
 import jrh.game.common.CardDescription;
 import jrh.game.common.CardId;
 import jrh.game.common.Color;
+import jrh.game.common.InstanceId;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @JsonDeserialize(using = CardImplDeserializer.class)
 @JsonSerialize(using = CardImplSerializer.class)
 public class CardImpl implements Card {
 
-    private final UUID instanceId = UUID.randomUUID();
+    private final InstanceId instanceId = InstanceId.randomInstanceId();
     private final CardId cardId;
     private final String name;
     private final int cost;
@@ -43,7 +43,7 @@ public class CardImpl implements Card {
     }
 
     @Override
-    public UUID getInstanceId() {
+    public InstanceId getInstanceId() {
         return instanceId;
     }
 

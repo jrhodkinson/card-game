@@ -13,7 +13,8 @@ public class WebSocketPinger {
 
     private final long PING_DELAY_S = 10;
 
-    public WebSocketPinger(WebSocketConnectionManager webSocketConnectionManager, ScheduledExecutorService scheduledExecutorService) {
+    public WebSocketPinger(WebSocketConnectionManager webSocketConnectionManager,
+            ScheduledExecutorService scheduledExecutorService) {
         scheduledExecutorService.scheduleWithFixedDelay(() -> {
             try {
                 webSocketConnectionManager.broadcast(WebSocketMessages.ping());
