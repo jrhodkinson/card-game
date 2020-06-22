@@ -2,6 +2,12 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import { receivedMatchState } from "../store/match-actions";
 import { receivedPing } from "../store/socket-actions";
 
+let ws;
+
+const send = (type, payload) => {
+  ws.send(JSON.stringify({ type, payload }));
+};
+
 const PING = "ping";
 const PONG = "pong";
 
@@ -25,7 +31,7 @@ const toAction = (message) => {
 const handleMessage = (dispatch, ws) => (event) => {
   const message = JSON.parse(event.data);
   if (message.type === PING) {
-    ws.send(JSON.stringify({ type: PONG, payload: message.payload }));
+    send(PONG, message.payload);
   }
   const action = toAction(message);
   if (action) {
@@ -34,7 +40,11 @@ const handleMessage = (dispatch, ws) => (event) => {
 };
 
 export const connectToMatchWebSocket = (dispatch) => {
-  const ws = new ReconnectingWebSocket("ws://localhost:7000/match");
+  ws = new ReconnectingWebSocket("ws://localhost:7000/match");
   ws.onmessage = handleMessage(dispatch, ws);
   return ws.close;
+};
+
+export const playCard = (cardInstanceId) => {
+  send("card/play", cardInstanceId);
 };

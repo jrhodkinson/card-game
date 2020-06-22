@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { playCard } from "../../gateway/ws";
 import Cards from "../card/Cards";
 
 const Hand = ({ hand }) => {
@@ -7,9 +8,10 @@ const Hand = ({ hand }) => {
   );
   const handleCardClick = (card) => {
     const { instanceId } = card;
-    setSelectedCardInstanceId((selectedCardInstanceId) =>
-      selectedCardInstanceId === instanceId ? undefined : instanceId
-    );
+    // setSelectedCardInstanceId((selectedCardInstanceId) =>
+    //   selectedCardInstanceId === instanceId ? undefined : instanceId
+    // );
+    playCard(instanceId);
   };
   return (
     <Cards
