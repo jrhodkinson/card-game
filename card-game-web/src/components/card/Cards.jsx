@@ -17,15 +17,18 @@ const Cards = ({
 }) => {
   return (
     <Wrapper>
-      {cards.map((card) => (
-        <Card
-          key={card.instanceId}
-          card={card}
-          selectable={selectable}
-          selected={selectable && selectedCardInstanceId === card.instanceId}
-          onCardClick={onCardClick}
-        />
-      ))}
+      {cards.map((card) => {
+        const { instanceId } = card;
+        return (
+          <Card
+            key={instanceId}
+            card={card}
+            selectable={selectable}
+            selected={selectable && selectedCardInstanceId === instanceId}
+            onCardClick={onCardClick}
+          />
+        );
+      })}
     </Wrapper>
   );
 };

@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Cards from "../card/Cards";
 
 const Hand = ({ hand }) => {
-  const [selectedCardInstanceId, setSelectedCardInstanceId] = useState();
+  const [selectedCardInstanceId, setSelectedCardInstanceId] = useState(
+    undefined
+  );
   const handleCardClick = (card) => {
+    const { instanceId } = card;
     setSelectedCardInstanceId((selectedCardInstanceId) =>
-      selectedCardInstanceId === card.instanceId ? undefined : card.instanceId
+      selectedCardInstanceId === instanceId ? undefined : instanceId
     );
   };
   return (
