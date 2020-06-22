@@ -20,6 +20,10 @@ public class WebSocketMessageType<T> {
         return payloadType;
     }
 
+    public static WebSocketMessageType<?> fromString(String messageType) {
+        return WebSocketMessageTypes.get(messageType);
+    }
+
     @Override
     public String toString() {
         return type;

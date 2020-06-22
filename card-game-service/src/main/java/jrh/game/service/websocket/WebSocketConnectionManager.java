@@ -6,6 +6,7 @@ import io.javalin.Javalin;
 import io.javalin.websocket.WsCloseContext;
 import io.javalin.websocket.WsConnectContext;
 import io.javalin.websocket.WsContext;
+import io.javalin.websocket.WsMessageContext;
 import jrh.game.common.ObjectMapperFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import static jrh.game.service.websocket.WebSocketMessageTypes.PING;
+import static jrh.game.service.websocket.WebSocketMessageTypes.PONG;
 
 public class WebSocketConnectionManager {
 
@@ -35,6 +37,7 @@ public class WebSocketConnectionManager {
     public void start() {
         javalin.ws(route, ws -> {
             ws.onConnect(this::handleConnect);
+            ws.onMessage(this::handleMessage);
             ws.onClose(this::handleClose);
         });
     }
@@ -62,6 +65,17 @@ public class WebSocketConnectionManager {
         webSocketClients.add(wsConnectContext);
         logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());
         welcomeMessageSuppliers.forEach(supplier -> supplier.get().ifPresent(wsConnectContext::send));
+    }
+
+    private void handleMessage(WsMessageContext wsMessageContext) {
+        try {
+            WebSocketMessage<?> webSocketMessage = objectMapper.readValue(wsMessageContext.message(), WebSocketMessage.class);
+            if (!webSocketMessage.getType().equals(PONG)) {
+                logger.debug("RX message={} for session={}", webSocketMessage, wsMessageContext.getSessionId());
+            }
+        } catch (JsonProcessingException e) {
+            logger.error("Failed to parse message={} for session={}", wsMessageContext.message(), wsMessageContext.session, e);
+        }
     }
 
     private void handleClose(WsCloseContext wsCloseContext) {
