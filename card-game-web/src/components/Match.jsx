@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import { getActivePlayer, getInactivePlayer } from "../store/match-selector";
 import CurrentTurn from "./CurrentTurn";
 import MatchWebSocket from "./MatchWebSocket";
-import Player from "./player/Player";
+import PrimaryPlayer from "./player/PrimaryPlayer";
+import SecondaryPlayer from "./player/SecondaryPlayer";
 import Storefront from "./Storefront";
 
 const Match = () => {
@@ -12,10 +13,10 @@ const Match = () => {
   return (
     <>
       <MatchWebSocket />
-      <Player player={inactivePlayer} />
+      <SecondaryPlayer player={inactivePlayer} />
       <Storefront />
       <CurrentTurn />
-      <Player player={activePlayer} />
+      <PrimaryPlayer player={activePlayer} />
     </>
   );
 };

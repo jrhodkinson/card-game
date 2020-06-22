@@ -9,11 +9,22 @@ const Wrapper = styled.div`
   max-width: 100%;
 `;
 
-const Cards = ({ cards }) => {
+const Cards = ({
+  cards,
+  selectedCardInstanceId,
+  selectable = false,
+  onCardClick = () => {},
+}) => {
   return (
     <Wrapper>
       {cards.map((card) => (
-        <Card card={card} />
+        <Card
+          key={card.instanceId}
+          card={card}
+          selectable={selectable}
+          selected={selectable && selectedCardInstanceId === card.instanceId}
+          onCardClick={onCardClick}
+        />
       ))}
     </Wrapper>
   );
