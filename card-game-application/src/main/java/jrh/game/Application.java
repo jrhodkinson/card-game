@@ -40,7 +40,7 @@ public class Application {
     void start() {
         match = new MutableMatch(assetLibrary, new User("Hero"), new User("Villain"));
         Service service = new Service(7000);
-        service.start(match.getEventBus());
+        service.start(match, match.getEventBus());
         match.start();
         simulateGame();
     }

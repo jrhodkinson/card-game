@@ -7,7 +7,9 @@ import io.javalin.websocket.WsCloseContext;
 import io.javalin.websocket.WsConnectContext;
 import io.javalin.websocket.WsContext;
 import io.javalin.websocket.WsMessageContext;
+import jrh.game.api.Match;
 import jrh.game.common.ObjectMapperFactory;
+import jrh.game.common.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,31 +18,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static java.util.Collections.emptyList;
 import static jrh.game.service.websocket.WebSocketMessageTypes.PING;
 import static jrh.game.service.websocket.WebSocketMessageTypes.PONG;
 
 public class WebSocketConnectionManager {
 
     private static final Logger logger = LogManager.getLogger(WebSocketConnectionManager.class);
+    private static final String ROUTE = "match";
 
     private final Javalin javalin;
-    private final String route;
-    private final List<WsContext> webSocketClients = new ArrayList<>();
+    private final Match match;
+    private final WebSocketMessageHandler webSocketMessageHandler;
+    private final Map<String, WsContext> webSocketClientsBySessionId = new HashMap<>();
+    private final Map<String, WebSocketSession> webSocketSessionsBySessionId = new HashMap<>();
     private final List<Supplier<Optional<? extends WebSocketMessage<?>>>> welcomeMessageSuppliers = new ArrayList<>();
-    private final Map<WebSocketMessageType<?>, List<Consumer<WebSocketMessage>>> websocketMessageSubscribers = new HashMap<>();
     private final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public WebSocketConnectionManager(Javalin javalin, String route) {
+    public WebSocketConnectionManager(Javalin javalin, Match match, WebSocketMessageHandler webSocketMessageHandler) {
         this.javalin = javalin;
-        this.route = route;
+        this.match = match;
+        this.webSocketMessageHandler = webSocketMessageHandler;
     }
 
     public void start() {
-        javalin.ws(route, ws -> {
+        javalin.ws("match/:username", ws -> {
             ws.onConnect(this::handleConnect);
             ws.onMessage(this::handleMessage);
             ws.onClose(this::handleClose);
@@ -51,9 +54,9 @@ public class WebSocketConnectionManager {
         try {
             String messageJson = objectMapper.writeValueAsString(webSocketMessage);
             if (!webSocketMessage.getType().equals(PING)) {
-                logger.debug("Broadcasting to {} clients: message={}", webSocketClients.size(), messageJson);
+                logger.debug("Broadcasting to {} clients: message={}", webSocketClientsBySessionId.size(), messageJson);
             }
-            webSocketClients.forEach(ctx -> ctx.send(messageJson));
+            webSocketClientsBySessionId.values().forEach(ctx -> ctx.send(messageJson));
         } catch (JsonProcessingException e) {
             logger.error("Failed to broadcast websocket message: could not convert message={} to json",
                     webSocketMessage, e);
@@ -65,15 +68,12 @@ public class WebSocketConnectionManager {
         this.welcomeMessageSuppliers.add(welcomeMessageSupplier);
     }
 
-    public <T> void subscribe(WebSocketMessageType<T> messageType, Consumer<WebSocketMessage<T>> consumer) {
-        List<Consumer<WebSocketMessage>> consumers = websocketMessageSubscribers.getOrDefault(messageType, new ArrayList<>());
-        consumers.add(consumer::accept);
-        websocketMessageSubscribers.put(messageType, consumers);
-    }
-
     private void handleConnect(WsConnectContext wsConnectContext) {
         logger.info("Websocket connected: session={}", wsConnectContext.getSessionId());
-        webSocketClients.add(wsConnectContext);
+        String sessionId = wsConnectContext.getSessionId();
+        WebSocketSession webSocketSession = new WebSocketSession(sessionId, match, new User(wsConnectContext.pathParam("username")));
+        webSocketClientsBySessionId.put(sessionId, wsConnectContext);
+        webSocketSessionsBySessionId.put(sessionId, webSocketSession);
         logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());
         welcomeMessageSuppliers.forEach(supplier -> supplier.get().ifPresent(wsConnectContext::send));
     }
@@ -83,9 +83,9 @@ public class WebSocketConnectionManager {
             WebSocketMessage<?> webSocketMessage = objectMapper.readValue(wsMessageContext.message(), WebSocketMessage.class);
             if (!webSocketMessage.getType().equals(PONG)) {
                 logger.debug("RX message={} for session={}", webSocketMessage, wsMessageContext.getSessionId());
+                WebSocketSession webSocketSession = webSocketSessionsBySessionId.get(wsMessageContext.getSessionId());
+                webSocketMessageHandler.handleMessage(webSocketSession, webSocketMessage);
             }
-            websocketMessageSubscribers.getOrDefault(webSocketMessage.getType(), emptyList())
-                .forEach(consumer -> consumer.accept(webSocketMessage));
         } catch (JsonProcessingException e) {
             logger.error("Failed to parse message={} for session={}", wsMessageContext.message(), wsMessageContext.session, e);
         }
@@ -93,6 +93,8 @@ public class WebSocketConnectionManager {
 
     private void handleClose(WsCloseContext wsCloseContext) {
         logger.info("Websocket closed: session={}", wsCloseContext.getSessionId());
-        webSocketClients.remove(wsCloseContext);
+        String sessionId = wsCloseContext.getSessionId();
+        webSocketClientsBySessionId.remove(sessionId);
+        webSocketSessionsBySessionId.remove(sessionId);
     }
 }
