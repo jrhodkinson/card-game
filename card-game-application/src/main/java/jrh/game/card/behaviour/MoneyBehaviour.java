@@ -2,9 +2,9 @@ package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
-import jrh.game.api.event.impl.CardPlayed;
+import jrh.game.api.event.CardPlayed;
 import jrh.game.common.BehaviourDescription;
-import jrh.game.api.event.Subscribe;
+import jrh.game.api.Subscribe;
 import jrh.game.match.TurnController;
 import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;

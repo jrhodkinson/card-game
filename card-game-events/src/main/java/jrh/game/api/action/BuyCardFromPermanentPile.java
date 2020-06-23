@@ -1,9 +1,7 @@
 package jrh.game.api.action;
 
 import jrh.game.api.Card;
-import jrh.game.api.ControllableMatch;
 import jrh.game.api.Player;
-import jrh.game.match.CardFlowController;
 
 public class BuyCardFromPermanentPile implements Action {
 
@@ -15,8 +13,11 @@ public class BuyCardFromPermanentPile implements Action {
         this.card = card;
     }
 
-    @Override
-    public void perform(ControllableMatch match) {
-        match.getController(CardFlowController.class).buyCardFromPermanentPile(player, card);
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Card getCard() {
+        return card;
     }
 }

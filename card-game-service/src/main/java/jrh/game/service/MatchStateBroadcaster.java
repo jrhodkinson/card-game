@@ -1,11 +1,11 @@
 package jrh.game.service;
 
 import jrh.game.api.Match;
-import jrh.game.api.event.Subscribe;
-import jrh.game.api.event.impl.CardPurchased;
-import jrh.game.api.event.impl.CardResolved;
-import jrh.game.api.event.impl.MatchStarted;
-import jrh.game.api.event.impl.TurnEnded;
+import jrh.game.api.Subscribe;
+import jrh.game.api.event.CardPurchased;
+import jrh.game.api.event.CardResolved;
+import jrh.game.api.event.MatchStarted;
+import jrh.game.api.event.TurnEnded;
 import jrh.game.common.EventHandler;
 import jrh.game.service.dto.MatchDto;
 import jrh.game.service.websocket.WebSocketConnectionManager;

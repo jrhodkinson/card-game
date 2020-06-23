@@ -2,14 +2,14 @@ package jrh.game.structure;
 
 import jrh.game.common.StructureId;
 import jrh.game.common.EventHandler;
-import jrh.game.api.event.Subscribe;
+import jrh.game.api.Subscribe;
 import jrh.game.api.Controller;
 import jrh.game.match.MutableMatch;
 import jrh.game.api.Player;
 import jrh.game.api.Structure;
-import jrh.game.api.event.impl.StructureConstructed;
-import jrh.game.api.event.impl.StructureDestroyed;
-import jrh.game.api.event.impl.StructureTookDamage;
+import jrh.game.api.event.StructureConstructed;
+import jrh.game.api.event.StructureDestroyed;
+import jrh.game.api.event.StructureTookDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

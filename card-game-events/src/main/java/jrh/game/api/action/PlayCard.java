@@ -1,17 +1,19 @@
-package jrh.game.api.event.impl;
+package jrh.game.api.action;
 
 import jrh.game.api.Card;
+import jrh.game.api.Damageable;
 import jrh.game.api.Player;
-import jrh.game.api.event.Event;
 
-public class CardResolved implements Event {
+public class PlayCard implements Action {
 
     private final Player player;
     private final Card card;
+    private final Damageable target;
 
-    public CardResolved(Player player, Card card) {
+    public PlayCard(Player player, Card card, Damageable target) {
         this.player = player;
         this.card = card;
+        this.target = target;
     }
 
     public Player getPlayer() {
@@ -22,8 +24,7 @@ public class CardResolved implements Event {
         return card;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s %s", getClass().getSimpleName(), card);
+    public Damageable getTarget() {
+        return target;
     }
 }

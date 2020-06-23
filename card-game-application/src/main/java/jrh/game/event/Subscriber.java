@@ -1,7 +1,7 @@
 package jrh.game.event;
 
 import jrh.game.api.Match;
-import jrh.game.api.event.Callback;
+import jrh.game.api.Callback;
 import jrh.game.api.event.Event;
 import jrh.game.common.EventHandler;
 import org.apache.commons.lang3.builder.ToStringBuilder;

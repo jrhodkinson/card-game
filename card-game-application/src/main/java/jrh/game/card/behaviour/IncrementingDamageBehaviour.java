@@ -2,11 +2,11 @@ package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jrh.game.asset.JsonKey;
-import jrh.game.api.event.impl.CardPlayed;
-import jrh.game.api.event.impl.CardResolved;
+import jrh.game.api.event.CardPlayed;
+import jrh.game.api.event.CardResolved;
 import jrh.game.common.BehaviourDescription;
-import jrh.game.api.event.Callback;
-import jrh.game.api.event.Subscribe;
+import jrh.game.api.Callback;
+import jrh.game.api.Subscribe;
 import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;

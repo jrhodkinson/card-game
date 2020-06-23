@@ -1,4 +1,4 @@
-package jrh.game.api.event;
+package jrh.game.api;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

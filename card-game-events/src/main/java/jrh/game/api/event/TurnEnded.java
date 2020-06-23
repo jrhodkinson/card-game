@@ -1,4 +1,4 @@
-package jrh.game.api.event.impl;
+package jrh.game.api.event;
 
 import jrh.game.api.event.Event;
 import jrh.game.api.Player;

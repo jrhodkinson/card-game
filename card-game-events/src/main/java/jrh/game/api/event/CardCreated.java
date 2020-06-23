@@ -1,21 +1,14 @@
-package jrh.game.api.event.impl;
+package jrh.game.api.event;
 
 import jrh.game.api.Card;
-import jrh.game.api.Player;
 import jrh.game.api.event.Event;
 
-public class DrewCard implements Event {
+public class CardCreated implements Event {
 
-    private final Player player;
     private final Card card;
 
-    public DrewCard(Player player, Card card) {
-        this.player = player;
+    public CardCreated(Card card) {
         this.card = card;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public Card getCard() {

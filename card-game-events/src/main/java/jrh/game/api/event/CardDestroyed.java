@@ -1,13 +1,13 @@
-package jrh.game.api.event.impl;
+package jrh.game.api.event;
 
 import jrh.game.api.Card;
 import jrh.game.api.event.Event;
 
-public class CardCreated implements Event {
+public class CardDestroyed implements Event {
 
     private final Card card;
 
-    public CardCreated(Card card) {
+    public CardDestroyed(Card card) {
         this.card = card;
     }
 

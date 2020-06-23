@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.BehaviourDescription;
-import jrh.game.api.event.Subscribe;
+import jrh.game.api.Subscribe;
 import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
 import jrh.game.common.Target;
-import jrh.game.api.event.impl.CardPurchased;
+import jrh.game.api.event.CardPurchased;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

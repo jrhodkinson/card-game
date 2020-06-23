@@ -2,7 +2,7 @@ package jrh.game.service;
 
 import io.javalin.Javalin;
 import jrh.game.api.Match;
-import jrh.game.api.event.EventBus;
+import jrh.game.api.EventBus;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessageHandler;
 import jrh.game.service.websocket.WebSocketPinger;
