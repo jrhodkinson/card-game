@@ -4,14 +4,16 @@ import jrh.game.api.Card;
 import jrh.game.api.Controller;
 import jrh.game.api.Damageable;
 import jrh.game.api.Player;
-import jrh.game.card.behaviour.UnplayableBehaviour;
 import jrh.game.api.event.CardDestroyed;
 import jrh.game.api.event.CardPlayed;
-import jrh.game.api.event.CardResolved;
-import jrh.game.deck.DiscardPile;
 import jrh.game.api.event.CardPurchased;
+import jrh.game.api.event.CardResolved;
 import jrh.game.api.event.DiscardedCard;
 import jrh.game.api.event.DrewCard;
+import jrh.game.card.behaviour.UnplayableBehaviour;
+import jrh.game.common.InstanceId;
+import jrh.game.common.User;
+import jrh.game.deck.DiscardPile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,19 +40,23 @@ public class CardFlowController implements Controller {
         return Optional.empty();
     }
 
-    public void playCard(Player player, Card card, Damageable target) {
-        if (!match.getActivePlayer().equals(player)) {
-            logger.warn("Not playing card={}, player={} wasn't the active player", card, player);
+    public void playCard(User user, InstanceId cardInstanceId, Damageable target) {
+        if (!match.getActivePlayer().getUser().equals(user)) {
+            logger.warn("Not playing cardInstanceId={}, user={} wasn't the active player", cardInstanceId, user);
             return;
         }
+        MutablePlayer player = match.getPlayer(user);
+        Optional<Card> optionalCard = player.getHand().getCard(cardInstanceId);
+        if (optionalCard.isEmpty()) {
+            logger.warn("Not playing cardInstanceId={}, user={} hand did not contain card", cardInstanceId, user);
+            return;
+        }
+        Card card = optionalCard.get();
         if (card.hasBehaviour(UnplayableBehaviour.class)) {
             logger.info("Not playing card={}, it has UnplayableBehaviour", card);
             return;
         }
-        if (!match.getActivePlayer().getHand().remove(card)) {
-            logger.warn("Not playing card={}, player={} hand did not contain card", card, player);
-            return;
-        }
+        player.getHand().remove(card);
         match.getEventBus().dispatch(new CardPlayed(player, target, card));
         match.getCurrentTurn().addPlayedCard(card);
         match.getEventBus().dispatch(new CardResolved(player, card));

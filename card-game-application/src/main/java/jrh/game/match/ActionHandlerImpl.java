@@ -33,7 +33,7 @@ public class ActionHandlerImpl implements ActionHandler, EventHandler {
 
     @Subscribe
     private void playCard(PlayCard playCard) {
-        match.getController(CardFlowController.class).playCard(playCard.getPlayer(), playCard.getCard(), playCard.getTarget());
+        match.getController(CardFlowController.class).playCard(playCard.getUser(), playCard.getCardInstanceId(), playCard.getTarget());
     }
 
     @Subscribe

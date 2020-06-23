@@ -90,6 +90,17 @@ public class MutableMatch implements Match {
     }
 
     @Override
+    public MutablePlayer getPlayer(User user) {
+        if (firstPlayer.getUser().equals(user)) {
+            return firstPlayer;
+        }
+        if (secondPlayer.getUser().equals(user)) {
+            return secondPlayer;
+        }
+        throw new IllegalArgumentException(String.format("User %s is not playing this match", user));
+    }
+
+    @Override
     public MutablePlayer getActivePlayer() {
         return firstPlayerIsActive ? firstPlayer : secondPlayer;
     }
@@ -100,11 +111,14 @@ public class MutableMatch implements Match {
     }
 
     @Override
-    public MutablePlayer getOtherPlayer(Player player) {
-        if (player.getUser().equals(firstPlayer.getUser())) {
+    public MutablePlayer getOtherPlayer(User user) {
+        if (firstPlayer.getUser().equals(user)) {
             return secondPlayer;
         }
-        return firstPlayer;
+        if (secondPlayer.getUser().equals(user)) {
+            return firstPlayer;
+        }
+        throw new IllegalArgumentException(String.format("User %s is not playing this match", user));
     }
 
     public MutablePlayer getPlayerAsMutable(Player player) {

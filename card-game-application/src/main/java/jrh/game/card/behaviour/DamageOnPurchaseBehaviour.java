@@ -57,13 +57,13 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
             realTargets.add(player);
         }
         if (targets.contains(Target.OTHER)) {
-            realTargets.add(match.getOtherPlayer(player));
+            realTargets.add(match.getOtherPlayer(player.getUser()));
         }
         if (targets.contains(Target.OWN_STRUCTURES)) {
             realTargets.addAll(player.getStructures());
         }
         if (targets.contains(Target.OTHER_STRUCTURES)) {
-            realTargets.addAll(match.getOtherPlayer(player).getStructures());
+            realTargets.addAll(match.getOtherPlayer(player.getUser()).getStructures());
         }
         return realTargets;
     }

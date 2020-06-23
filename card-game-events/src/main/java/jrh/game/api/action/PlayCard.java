@@ -1,30 +1,30 @@
 package jrh.game.api.action;
 
 import jrh.game.api.Action;
-import jrh.game.api.Card;
 import jrh.game.api.Damageable;
-import jrh.game.api.Player;
+import jrh.game.common.InstanceId;
+import jrh.game.common.User;
 
 public class PlayCard implements Action {
 
-    private final Player player;
-    private final Card card;
+    private final User user;
+    private final InstanceId cardInstanceId;
     private final Damageable target;
 
-    public PlayCard(Player player, Card card, Damageable target) {
-        this.player = player;
-        this.card = card;
+    public PlayCard(User user, InstanceId cardInstanceId, Damageable target) {
+        this.user = user;
+        this.cardInstanceId = cardInstanceId;
         this.target = target;
     }
 
-    public Player getPlayer() {
-        return player;
+    public User getUser() {
+        return user;
     }
 
-    public Card getCard() {
-        return card;
+    public InstanceId getCardInstanceId() {
+        return cardInstanceId;
     }
-
+    
     public Damageable getTarget() {
         return target;
     }

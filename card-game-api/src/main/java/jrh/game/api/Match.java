@@ -1,5 +1,7 @@
 package jrh.game.api;
 
+import jrh.game.common.User;
+
 import java.util.Collection;
 
 public interface Match {
@@ -10,11 +12,13 @@ public interface Match {
 
     <T extends Controller> T getController(Class<T> controllerClass);
 
+    Player getPlayer(User user);
+
     Player getActivePlayer();
 
     Player getInactivePlayer();
 
-    Player getOtherPlayer(Player player);
+    Player getOtherPlayer(User user);
 
     Turn getCurrentTurn();
 

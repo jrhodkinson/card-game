@@ -1,5 +1,6 @@
 package jrh.game.service.websocket;
 
+import jrh.game.api.action.PlayCard;
 import jrh.game.common.InstanceId;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,8 @@ public class WebSocketMessageHandler {
     void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) {
         if (PLAY_CARD.equals(webSocketMessage.getType())) {
             WebSocketMessage<InstanceId> message = cast(webSocketMessage, PLAY_CARD.getPayloadType());
-            System.out.println("Playing " + message.getPayload());
+            PlayCard playCard = new PlayCard(webSocketSession.getUser(), message.getPayload(), null);
+            webSocketSession.getMatch().getActionHandler().accept(playCard);
         }
     }
 

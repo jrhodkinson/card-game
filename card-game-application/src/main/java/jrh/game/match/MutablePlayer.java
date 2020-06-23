@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,12 +43,12 @@ public class MutablePlayer implements Player {
 
     @Override
     public List<Card> getDeck() {
-        return deckAndDiscardPile.getDeck();
+        return Collections.unmodifiableList(deckAndDiscardPile.getDeck());
     }
 
     @Override
     public List<Card> getDiscardPile() {
-        return deckAndDiscardPile.getDiscardPile();
+        return Collections.unmodifiableList(deckAndDiscardPile.getDiscardPile());
     }
 
     DeckAndDiscardPile getDeckAndDiscardPile() {
