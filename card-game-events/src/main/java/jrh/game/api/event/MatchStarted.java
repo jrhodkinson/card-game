@@ -1,6 +1,6 @@
 package jrh.game.api.event;
 
-import jrh.game.api.event.Event;
+import jrh.game.api.Event;
 
 public class MatchStarted implements Event {
     @Override

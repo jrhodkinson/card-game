@@ -1,6 +1,7 @@
 package jrh.game.match;
 
 import jrh.game.Constants;
+import jrh.game.api.ActionHandler;
 import jrh.game.api.Controller;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
@@ -32,6 +33,7 @@ import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 public class MutableMatch implements Match {
 
     private final EventBus eventBus;
+    private final ActionHandlerImpl actionHandler;
     private final Map<Class<? extends Controller>, Controller> controllers = new HashMap<>();
     private final ModificationComputer modificationComputer;
     private final CardImplFactory cardImplFactory;
@@ -47,6 +49,7 @@ public class MutableMatch implements Match {
     public MutableMatch(AssetLibrary assetLibrary, User firstUser, User secondUser) {
         this.eventBus = new SingleMatchEventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
+        this.actionHandler = new ActionHandlerImpl(this);
         this.modificationComputer = new ModificationComputer(this);
         this.cardImplFactory = new CardImplFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);
@@ -58,6 +61,11 @@ public class MutableMatch implements Match {
 
     public EventBus getEventBus() {
         return eventBus;
+    }
+
+    @Override
+    public ActionHandler getActionHandler() {
+        return this.actionHandler;
     }
 
     @Override
@@ -154,7 +162,7 @@ public class MutableMatch implements Match {
     private void setUpControllers() {
         List.of(new CardFlowController(this), new MatchStateController(this), new HealthController(this),
                 new StructureHealthController(this), new StructureStateController(this, structureFactory),
-                new TurnController(this), new ActionController(this)).forEach(this::putController);
+                new TurnController(this)).forEach(this::putController);
         controllers.values().forEach(Controller::initialise);
     }
 

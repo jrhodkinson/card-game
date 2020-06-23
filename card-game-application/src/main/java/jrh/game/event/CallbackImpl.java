@@ -1,7 +1,7 @@
 package jrh.game.event;
 
 import jrh.game.api.Callback;
-import jrh.game.api.event.Event;
+import jrh.game.api.Event;
 import jrh.game.api.EventBus;
 import jrh.game.common.EventHandler;
 import org.apache.logging.log4j.LogManager;

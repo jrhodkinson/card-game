@@ -1,19 +1,19 @@
 package jrh.game.match;
 
-import jrh.game.api.Controller;
+import jrh.game.api.Action;
+import jrh.game.api.ActionHandler;
 import jrh.game.api.Subscribe;
-import jrh.game.api.action.Action;
 import jrh.game.api.action.BuyCardFromPermanentPile;
 import jrh.game.api.action.BuyCardFromRow;
 import jrh.game.api.action.EndTurn;
 import jrh.game.api.action.PlayCard;
 import jrh.game.common.EventHandler;
 
-public class ActionController implements Controller, EventHandler {
+public class ActionHandlerImpl implements ActionHandler, EventHandler {
 
     private final MutableMatch match;
 
-    ActionController(MutableMatch match) {
+    ActionHandlerImpl(MutableMatch match) {
         this.match = match;
     }
 

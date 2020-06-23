@@ -1,5 +1,6 @@
 package jrh.game.api.action;
 
+import jrh.game.api.Action;
 import jrh.game.api.Card;
 import jrh.game.api.Player;
 

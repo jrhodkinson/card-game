@@ -1,4 +1,4 @@
-package jrh.game.api.event;
+package jrh.game.api;
 
 public interface Event {
 }

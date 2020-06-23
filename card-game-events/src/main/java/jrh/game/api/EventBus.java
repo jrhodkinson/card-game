@@ -1,6 +1,5 @@
 package jrh.game.api;
 
-import jrh.game.api.event.Event;
 import jrh.game.common.EventHandler;
 
 public interface EventBus {

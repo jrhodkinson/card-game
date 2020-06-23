@@ -2,7 +2,7 @@ package jrh.game.api.event;
 
 import jrh.game.api.Card;
 import jrh.game.api.Player;
-import jrh.game.api.event.Event;
+import jrh.game.api.Event;
 
 public class CardResolved implements Event {
 
