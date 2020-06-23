@@ -50,6 +50,7 @@ public class MutableMatch implements Match {
         this.eventBus = new SingleMatchEventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
         this.actionHandler = new ActionHandlerImpl(this);
+        eventBus.register(actionHandler);
         this.modificationComputer = new ModificationComputer(this);
         this.cardImplFactory = new CardImplFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);

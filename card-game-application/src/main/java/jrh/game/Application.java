@@ -81,13 +81,13 @@ public class Application {
                 playCard(hand.get(option - 1));
             } else if (option >= hand.size() + 1 && option < hand.size() + row.size() + 1) {
                 Card card = row.get(option - 1 - hand.size());
-                (new BuyCardFromRow(match.getActivePlayer(), card)).perform(match);
+                match.getActionHandler().accept(new BuyCardFromRow(match.getActivePlayer(), card));
             } else if (option >= hand.size() + row.size() + 1
                     && option < hand.size() + row.size() + permanentPiles.size() + 1) {
                 Card card = permanentPiles.get(option - 1 - hand.size() - row.size()).getCard();
-                (new BuyCardFromPermanentPile(match.getActivePlayer(), card)).perform(match);
+                match.getActionHandler().accept(new BuyCardFromPermanentPile(match.getActivePlayer(), card));
             } else if (option == hand.size() + row.size() + permanentPiles.size() + 1) {
-                (new EndTurn(match.getActivePlayer().getUser())).perform(match);
+                match.getActionHandler().accept(new EndTurn(match.getActivePlayer().getUser()));
             } else {
                 isRunning = false;
             }
@@ -100,9 +100,9 @@ public class Application {
 
     private void playCard(Card card) {
         if (card.requiresTarget()) {
-            (new PlayCard(match, match.getActivePlayer(), card, getTarget())).perform();
+            match.getActionHandler().accept(new PlayCard(match.getActivePlayer().getUser(), card.getInstanceId(), getTarget()));
         } else {
-            (new PlayCard(match, match.getActivePlayer(), card, null)).perform();
+            match.getActionHandler().accept(new PlayCard(match.getActivePlayer().getUser(), card.getInstanceId(), null));
         }
     }
 

@@ -7,7 +7,7 @@ import Hero from "./Hero";
 
 const PrimaryPlayer = ({ player }) => (
   <>
-    <Hero name={player.username} health={player.health} />
+    <Hero name={player.user} health={player.health} />
     <Hand hand={player.hand} />
     <Deck size={player.deckSize} />
     <Pile cards={player.discardPile} />

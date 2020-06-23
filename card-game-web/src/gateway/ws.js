@@ -40,7 +40,7 @@ const handleMessage = (dispatch, ws) => (event) => {
 };
 
 export const connectToMatchWebSocket = (dispatch) => {
-  ws = new ReconnectingWebSocket("ws://localhost:7000/match");
+  ws = new ReconnectingWebSocket("ws://localhost:7000/match/Villain");
   ws.onmessage = handleMessage(dispatch, ws);
   return ws.close;
 };
