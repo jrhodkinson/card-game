@@ -35,7 +35,7 @@ public class SingleMatchEventBus implements EventBus {
     }
 
     @Override
-    public void dispatch(Event initialEvent) {
+    public synchronized void dispatch(Event initialEvent) {
         Queue<Event> events = new LinkedList<>();
         events.add(initialEvent);
         while (events.size() > 0) {

@@ -1,22 +1,23 @@
 package jrh.game.match;
 
-import jrh.game.common.User;
+import jrh.game.Constants;
+import jrh.game.api.ControllableMatch;
 import jrh.game.api.Controller;
+import jrh.game.api.MatchActionHandler;
+import jrh.game.api.Player;
+import jrh.game.api.Structure;
+import jrh.game.api.event.EventBus;
 import jrh.game.asset.AssetLibrary;
 import jrh.game.card.CardBehaviourRegistrar;
 import jrh.game.card.CardImplFactory;
+import jrh.game.common.User;
 import jrh.game.deck.MutableStore;
-import jrh.game.api.event.EventBus;
-import jrh.game.api.Match;
-import jrh.game.api.Player;
 import jrh.game.event.SingleMatchEventBus;
 import jrh.game.structure.MutableStructure;
 import jrh.game.structure.StructureFactory;
 import jrh.game.structure.StructureHealthController;
 import jrh.game.structure.StructureStateController;
 import jrh.game.structure.Structures;
-import jrh.game.api.Structure;
-import jrh.game.Constants;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -29,9 +30,10 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toUnmodifiableList;
 import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
-public class MutableMatch implements Match {
+public class MutableMatch implements ControllableMatch {
 
     private final EventBus eventBus;
+    private final MatchActionHandler actionHandler;
     private final Map<Class<? extends Controller>, Controller> controllers = new HashMap<>();
     private final ModificationComputer modificationComputer;
     private final CardImplFactory cardImplFactory;
@@ -47,6 +49,7 @@ public class MutableMatch implements Match {
     public MutableMatch(AssetLibrary assetLibrary, User firstUser, User secondUser) {
         this.eventBus = new SingleMatchEventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
+        this.actionHandler = new MatchActionHandlerImpl(this);
         this.modificationComputer = new ModificationComputer(this);
         this.cardImplFactory = new CardImplFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);
@@ -58,6 +61,11 @@ public class MutableMatch implements Match {
 
     public EventBus getEventBus() {
         return eventBus;
+    }
+
+    @Override
+    public MatchActionHandler getActionHandler() {
+        return actionHandler;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package jrh.game.match;
 
 import jrh.game.api.Card;
-import jrh.game.api.Controller;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
@@ -13,7 +12,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class ModificationComputer implements Controller {
+public class ModificationComputer {
 
     private static final Logger logger = LogManager.getLogger(ModificationComputer.class);
 
