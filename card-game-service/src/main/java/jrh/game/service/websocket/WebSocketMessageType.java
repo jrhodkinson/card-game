@@ -11,17 +11,25 @@ public class WebSocketMessageType<T> {
 
     private final Class<T> payloadType;
 
-    WebSocketMessageType(String type, Class<T> payloadType) {
-        this.type = type;
-        this.payloadType = payloadType;
+    public static <S> WebSocketMessageType<S> of(String type, Class<S> payloadType) {
+        return new WebSocketMessageType<>(type, payloadType);
+    }
+
+    public static WebSocketMessageType<NoPayload> emptyPayload(String type) {
+        return new WebSocketMessageType<>(type, NoPayload.class);
+    }
+
+    public static WebSocketMessageType<?> fromString(String messageType) {
+        return WebSocketMessageTypes.get(messageType);
     }
 
     public Class<T> getPayloadType() {
         return payloadType;
     }
 
-    public static WebSocketMessageType<?> fromString(String messageType) {
-        return WebSocketMessageTypes.get(messageType);
+    private WebSocketMessageType(String type, Class<T> payloadType) {
+        this.type = type;
+        this.payloadType = payloadType;
     }
 
     @Override
@@ -46,4 +54,5 @@ public class WebSocketMessageType<T> {
     public int hashCode() {
         return new HashCodeBuilder(17, 37).append(type).append(payloadType).toHashCode();
     }
+
 }

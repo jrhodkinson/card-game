@@ -19,6 +19,9 @@ public class WebSocketMessageDeserializer extends StdDeserializer<WebSocketMessa
         JsonNode tree = jsonParser.readValueAsTree();
         String type = tree.get("type").asText();
         WebSocketMessageType<?> messageType = WebSocketMessageType.fromString(type);
+        if (NoPayload.class.isAssignableFrom(messageType.getPayloadType())) {
+            return new WebSocketMessage(messageType, NoPayload.INSTANCE);
+        }
         Object payload = tree.get("payload").traverse(jsonParser.getCodec()).readValueAs(messageType.getPayloadType());
         return new WebSocketMessage(messageType, payload);
     }

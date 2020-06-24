@@ -1,4 +1,5 @@
 import React from "react";
+import { endTurn } from "../../gateway/ws";
 import Deck from "../card/Deck";
 import Pile from "../card/Pile";
 import Structures from "../structure/Structures";
@@ -12,6 +13,7 @@ const PrimaryPlayer = ({ player }) => (
     <Deck size={player.deckSize} />
     <Pile cards={player.discardPile} />
     <Structures structures={player.structures} />
+    <button onClick={endTurn}>End turn</button>
   </>
 );
 

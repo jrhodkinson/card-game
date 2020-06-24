@@ -9,7 +9,6 @@ import io.javalin.websocket.WsContext;
 import io.javalin.websocket.WsMessageContext;
 import jrh.game.api.Match;
 import jrh.game.common.ObjectMapperFactory;
-import jrh.game.common.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,7 +42,7 @@ public class WebSocketConnectionManager {
     }
 
     public void start() {
-        javalin.ws("match/:username", ws -> {
+        javalin.ws("match", ws -> {
             ws.onConnect(this::handleConnect);
             ws.onMessage(this::handleMessage);
             ws.onClose(this::handleClose);
@@ -71,7 +70,7 @@ public class WebSocketConnectionManager {
     private void handleConnect(WsConnectContext wsConnectContext) {
         logger.info("Websocket connected: session={}", wsConnectContext.getSessionId());
         String sessionId = wsConnectContext.getSessionId();
-        WebSocketSession webSocketSession = new WebSocketSession(sessionId, match, new User(wsConnectContext.pathParam("username")));
+        WebSocketSession webSocketSession = new WebSocketSession(sessionId, match);
         webSocketClientsBySessionId.put(sessionId, wsConnectContext);
         webSocketSessionsBySessionId.put(sessionId, webSocketSession);
         logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());

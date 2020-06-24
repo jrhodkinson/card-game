@@ -5,7 +5,11 @@ import { receivedPing } from "../store/socket-actions";
 let ws;
 
 const send = (type, payload) => {
-  ws.send(JSON.stringify({ type, payload }));
+  if (payload === undefined) {
+    ws.send(JSON.stringify({ type }));
+  } else {
+    ws.send(JSON.stringify({ type, payload }));
+  }
 };
 
 const PING = "ping";
@@ -40,11 +44,19 @@ const handleMessage = (dispatch, ws) => (event) => {
 };
 
 export const connectToMatchWebSocket = (dispatch) => {
-  ws = new ReconnectingWebSocket("ws://localhost:7000/match/Villain");
+  ws = new ReconnectingWebSocket("ws://localhost:7000/match");
   ws.onmessage = handleMessage(dispatch, ws);
   return ws.close;
 };
 
+export const login = (user) => {
+  send("login", user);
+};
+
 export const playCard = (cardInstanceId) => {
   send("card/play", cardInstanceId);
+};
+
+export const endTurn = () => {
+  send("turn/end");
 };
