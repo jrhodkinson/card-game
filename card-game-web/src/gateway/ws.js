@@ -2,18 +2,23 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import { receivedMatchState } from "../store/match-actions";
 import { receivedPing } from "../store/socket-actions";
 
+const PING = "ping";
+const PONG = "pong";
+
 let ws;
 
 const send = (type, payload) => {
+  let message;
   if (payload === undefined) {
-    ws.send(JSON.stringify({ type }));
+    message = JSON.stringify({ type });
   } else {
-    ws.send(JSON.stringify({ type, payload }));
+    message = JSON.stringify({ type, payload });
   }
+  if (type !== PONG) {
+    console.log(`[ws] TX: ${message}`);
+  }
+  ws.send(message);
 };
-
-const PING = "ping";
-const PONG = "pong";
 
 const MESSAGE_ACTION_CREATORS = {
   ping: (payload) => receivedPing(payload),
@@ -32,11 +37,12 @@ const toAction = (message) => {
   return MESSAGE_ACTION_CREATORS[message.type](message.payload);
 };
 
-const handleMessage = (dispatch, ws) => (event) => {
+const handleMessage = (dispatch) => (event) => {
   const message = JSON.parse(event.data);
   if (message.type === PING) {
     send(PONG, message.payload);
   }
+  console.log(`[ws] RX: ${message}`);
   const action = toAction(message);
   if (action) {
     dispatch(action);
@@ -45,7 +51,7 @@ const handleMessage = (dispatch, ws) => (event) => {
 
 export const connectToMatchWebSocket = (dispatch) => {
   ws = new ReconnectingWebSocket("ws://localhost:7000/match");
-  ws.onmessage = handleMessage(dispatch, ws);
+  ws.onmessage = handleMessage(dispatch);
   return ws.close;
 };
 
