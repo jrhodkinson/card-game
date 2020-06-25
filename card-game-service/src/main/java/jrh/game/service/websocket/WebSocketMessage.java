@@ -10,7 +10,7 @@ public class WebSocketMessage<T> {
     private final WebSocketMessageType<T> type;
     private final T payload;
 
-    WebSocketMessage(WebSocketMessageType<T> type, T payload) {
+    public WebSocketMessage(WebSocketMessageType<T> type, T payload) {
         this.type = type;
         this.payload = payload;
     }
@@ -26,13 +26,9 @@ public class WebSocketMessage<T> {
     @Override
     public String toString() {
         if (payload.equals(NoPayload.INSTANCE)) {
-            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("type", type)
-                .toString();
+            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("type", type).toString();
         }
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("type", type)
-            .append("payload", payload)
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("type", type)
+                .append("payload", payload).toString();
     }
 }

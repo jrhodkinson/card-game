@@ -1,5 +1,6 @@
 package jrh.game.service.websocket;
 
+import jrh.game.service.websocket.server.ServerWebSocketMessages;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +18,7 @@ public class WebSocketPinger {
             ScheduledExecutorService scheduledExecutorService) {
         scheduledExecutorService.scheduleWithFixedDelay(() -> {
             try {
-                webSocketConnectionManager.broadcast(WebSocketMessages.ping());
+                webSocketConnectionManager.broadcast(ServerWebSocketMessages.ping());
             } catch (Exception e) {
                 logger.error("Exception while pinging clients", e);
             } catch (Throwable t) {

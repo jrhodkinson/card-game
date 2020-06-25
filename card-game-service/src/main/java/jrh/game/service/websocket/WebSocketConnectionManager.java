@@ -19,8 +19,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static jrh.game.service.websocket.WebSocketMessageTypes.PING;
-import static jrh.game.service.websocket.WebSocketMessageTypes.PONG;
+import static jrh.game.service.websocket.ServerWebSocketMessageTypes.PING;
+import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.PONG;
 
 public class WebSocketConnectionManager {
 
@@ -79,14 +79,16 @@ public class WebSocketConnectionManager {
 
     private void handleMessage(WsMessageContext wsMessageContext) {
         try {
-            WebSocketMessage<?> webSocketMessage = objectMapper.readValue(wsMessageContext.message(), WebSocketMessage.class);
+            WebSocketMessage<?> webSocketMessage = objectMapper.readValue(wsMessageContext.message(),
+                    WebSocketMessage.class);
             if (!webSocketMessage.getType().equals(PONG)) {
                 logger.debug("RX message={} for session={}", webSocketMessage, wsMessageContext.getSessionId());
                 WebSocketSession webSocketSession = webSocketSessionsBySessionId.get(wsMessageContext.getSessionId());
                 webSocketMessageHandler.handleMessage(webSocketSession, webSocketMessage);
             }
         } catch (JsonProcessingException e) {
-            logger.error("Failed to parse message={} for session={}", wsMessageContext.message(), wsMessageContext.session, e);
+            logger.error("Failed to parse message={} for session={}", wsMessageContext.message(),
+                    wsMessageContext.session, e);
         }
     }
 

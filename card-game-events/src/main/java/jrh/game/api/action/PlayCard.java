@@ -24,7 +24,7 @@ public class PlayCard implements Action {
     public InstanceId getCardInstanceId() {
         return cardInstanceId;
     }
-    
+
     public Damageable getTarget() {
         return target;
     }

@@ -24,7 +24,8 @@ public class Service {
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
-        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, match, webSocketMessageHandler);
+        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, match,
+                webSocketMessageHandler);
         webSocketConnectionManager.start();
 
         eventBus.register(new MatchStateBroadcaster(webSocketConnectionManager));

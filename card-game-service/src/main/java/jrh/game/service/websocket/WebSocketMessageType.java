@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class WebSocketMessageType<T> {
+public final class WebSocketMessageType<T> {
 
     @JsonValue
     private final String type;

@@ -15,7 +15,8 @@ public class WebSocketMessageDeserializer extends StdDeserializer<WebSocketMessa
     }
 
     @Override
-    public WebSocketMessage<?> deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException, JsonProcessingException {
+    public WebSocketMessage<?> deserialize(JsonParser jsonParser, DeserializationContext context)
+            throws IOException, JsonProcessingException {
         JsonNode tree = jsonParser.readValueAsTree();
         String type = tree.get("type").asText();
         WebSocketMessageType<?> messageType = WebSocketMessageType.fromString(type);

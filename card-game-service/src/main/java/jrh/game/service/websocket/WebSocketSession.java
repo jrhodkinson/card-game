@@ -34,9 +34,7 @@ public class WebSocketSession {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("sessionId", sessionId)
-            .append("user", user)
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("sessionId", sessionId)
+                .append("user", user).toString();
     }
 }
