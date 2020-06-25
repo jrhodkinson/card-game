@@ -16,20 +16,23 @@ public class CardDto {
     private final int cost;
     private final CardDescriptionDto description;
     private final ColorDto color;
+    private final boolean requiresTarget;
 
     private CardDto(InstanceId instanceId, CardId cardId, String name, int cost, CardDescriptionDto description,
-            ColorDto color) {
+            ColorDto color, boolean requiresTarget) {
         this.instanceId = instanceId;
         this.cardId = cardId;
         this.name = name;
         this.cost = cost;
         this.description = description;
         this.color = color;
+        this.requiresTarget = requiresTarget;
     }
 
     public static CardDto fromCard(Card card) {
         return new CardDto(card.getInstanceId(), card.getCardId(), card.getName(), card.getCost(),
-                CardDescriptionDto.fromCardDescription(card.getDescription()), ColorDto.fromColor(card.getColor()));
+                CardDescriptionDto.fromCardDescription(card.getDescription()), ColorDto.fromColor(card.getColor()),
+                card.requiresTarget());
     }
 
     public static List<CardDto> fromCards(List<Card> cards) {
@@ -58,5 +61,9 @@ public class CardDto {
 
     public ColorDto getColor() {
         return color;
+    }
+
+    public boolean requiresTarget() {
+        return requiresTarget;
     }
 }
