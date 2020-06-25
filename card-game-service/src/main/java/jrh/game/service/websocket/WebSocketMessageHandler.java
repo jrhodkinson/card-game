@@ -1,5 +1,6 @@
 package jrh.game.service.websocket;
 
+import jrh.game.api.action.BuyCard;
 import jrh.game.api.action.EndTurn;
 import jrh.game.api.action.PlayCard;
 import jrh.game.common.InstanceId;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import static jrh.game.service.websocket.WebSocketMessageTypes.BUY_CARD;
 import static jrh.game.service.websocket.WebSocketMessageTypes.END_TURN;
 import static jrh.game.service.websocket.WebSocketMessageTypes.LOGIN;
 import static jrh.game.service.websocket.WebSocketMessageTypes.PLAY_CARD;
@@ -23,6 +25,7 @@ public class WebSocketMessageHandler {
             .forType(LOGIN).perform(this::login)
             .forType(END_TURN).perform(this::endTurn)
             .forType(PLAY_CARD).perform(this::playCard)
+            .forType(BUY_CARD).perform(this::buyCard)
             .end();
     }
 
@@ -43,6 +46,12 @@ public class WebSocketMessageHandler {
         PlayCard playCard = new PlayCard(webSocketSession.getUser(), instanceId, null);
         logger.info("TX playCard={}", playCard);
         webSocketSession.getMatch().getActionHandler().accept(playCard);
+    }
+
+    private void buyCard(WebSocketSession webSocketSession, InstanceId instanceId) {
+        BuyCard buyCard = new BuyCard(webSocketSession.getUser(), instanceId);
+        logger.info("TX buyCard={}", buyCard);
+        webSocketSession.getMatch().getActionHandler().accept(buyCard);
     }
 
     private static MessageContext handle(WebSocketMessage<?> webSocketMessage, WebSocketSession webSocketSession) {

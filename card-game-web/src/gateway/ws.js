@@ -53,10 +53,14 @@ export const login = (user) => {
   send("login", user);
 };
 
+export const endTurn = () => {
+  send("turn/end");
+};
+
 export const playCard = (cardInstanceId) => {
   send("card/play", cardInstanceId);
 };
 
-export const endTurn = () => {
-  send("turn/end");
+export const buyCard = (cardInstanceId) => {
+  send("card/buy", cardInstanceId);
 };

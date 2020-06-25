@@ -3,10 +3,10 @@ package jrh.game.match;
 import jrh.game.Constants;
 import jrh.game.api.ActionHandler;
 import jrh.game.api.Controller;
+import jrh.game.api.EventBus;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
 import jrh.game.api.Structure;
-import jrh.game.api.EventBus;
 import jrh.game.asset.AssetLibrary;
 import jrh.game.card.CardBehaviourRegistrar;
 import jrh.game.card.CardImplFactory;
@@ -20,7 +20,6 @@ import jrh.game.structure.StructureStateController;
 import jrh.game.structure.Structures;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +53,7 @@ public class MutableMatch implements Match {
         this.modificationComputer = new ModificationComputer(this);
         this.cardImplFactory = new CardImplFactory(eventBus, assetLibrary, new Random());
         this.structureFactory = new StructureFactory(eventBus, assetLibrary);
-        this.mutableStore = new MutableStore(cardImplFactory, Constants.STORE_SIZE, Collections.emptyList());
+        this.mutableStore = new MutableStore(cardImplFactory, Constants.STORE_SIZE);
         this.firstPlayer = new MutablePlayer(firstUser, cardImplFactory.startingDeck());
         this.secondPlayer = new MutablePlayer(secondUser, cardImplFactory.startingDeck());
         this.currentTurn = new MutableTurn();

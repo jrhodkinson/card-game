@@ -73,11 +73,18 @@ public class CardFlowController implements Controller {
         }
     }
 
-    public void buyCardFromRow(Player player, Card card) {
-        if (!match.getActivePlayer().equals(player)) {
-            logger.error("Player wasn't the active player");
+    public void buyCard(User user, InstanceId cardInstanceId) {
+        if (!match.getActivePlayer().getUser().equals(user)) {
+            logger.warn("Not buying card, user={} wasn't the active player", user);
             return;
         }
+        Optional<Card> optionalCard = match.getStore().getCard(cardInstanceId);
+        if (optionalCard.isEmpty()) {
+            logger.warn("Not buying card, cardInstanceId={} wasn't in the store", cardInstanceId);
+            return;
+        }
+        Card card = optionalCard.get();
+        Player player = match.getPlayer(user);
         int money = match.getCurrentTurn().getMoney();
         int cost = match.getModificationComputer().computeModifiedCost(player, card);
         if (money < cost) {
@@ -86,26 +93,6 @@ public class CardFlowController implements Controller {
         }
         if (!match.getStore().removeFromRow(card)) {
             logger.error("Card={} is not in the store row", card);
-            return;
-        }
-        match.getCurrentTurn().setMoney(money - cost);
-        match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
-        match.getEventBus().dispatch(new CardPurchased(match.getActivePlayer(), card));
-    }
-
-    public void buyCardFromPermanentPile(Player player, Card card) {
-        if (!match.getActivePlayer().equals(player)) {
-            logger.error("Player wasn't the active player");
-            return;
-        }
-        int money = match.getCurrentTurn().getMoney();
-        int cost = match.getModificationComputer().computeModifiedCost(player, card);
-        if (money < cost) {
-            logger.error("Not enough money to buy card (money={}, cost={})", money, cost);
-            return;
-        }
-        if (!match.getStore().removeFromPile(card)) {
-            logger.error("Card={} is not in a pile", card);
             return;
         }
         match.getCurrentTurn().setMoney(money - cost);
