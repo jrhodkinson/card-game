@@ -7,7 +7,7 @@ import jrh.game.api.event.CardResolved;
 import jrh.game.api.event.MatchStarted;
 import jrh.game.api.event.TurnEnded;
 import jrh.game.common.EventHandler;
-import jrh.game.service.dto.MatchDto;
+import jrh.game.service.websocket.server.dto.MatchDto;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessage;
 import jrh.game.service.websocket.server.ServerWebSocketMessages;

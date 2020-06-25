@@ -4,6 +4,7 @@ import jrh.game.Constants;
 import jrh.game.api.Card;
 import jrh.game.api.Player;
 import jrh.game.api.Structure;
+import jrh.game.common.InstanceId;
 import jrh.game.common.User;
 import jrh.game.deck.Deck;
 import jrh.game.deck.DeckAndDiscardPile;
@@ -21,6 +22,7 @@ public class MutablePlayer implements Player {
 
     private static final Logger logger = LogManager.getLogger(MutablePlayer.class);
 
+    private final InstanceId instanceId = InstanceId.randomInstanceId();
     private final User user;
     private final Hand hand = new Hand();
     private final DeckAndDiscardPile deckAndDiscardPile;
@@ -32,6 +34,12 @@ public class MutablePlayer implements Player {
         this.deckAndDiscardPile = new DeckAndDiscardPile(deck);
     }
 
+    @Override
+    public InstanceId getInstanceId() {
+        return instanceId;
+    }
+
+    @Override
     public User getUser() {
         return user;
     }

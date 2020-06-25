@@ -1,7 +1,6 @@
 package jrh.game.api.action;
 
 import jrh.game.api.Action;
-import jrh.game.api.Damageable;
 import jrh.game.common.InstanceId;
 import jrh.game.common.User;
 
@@ -9,9 +8,9 @@ public class PlayCard implements Action {
 
     private final User user;
     private final InstanceId cardInstanceId;
-    private final Damageable target;
+    private final InstanceId target;
 
-    public PlayCard(User user, InstanceId cardInstanceId, Damageable target) {
+    public PlayCard(User user, InstanceId cardInstanceId, InstanceId target) {
         this.user = user;
         this.cardInstanceId = cardInstanceId;
         this.target = target;
@@ -25,7 +24,7 @@ public class PlayCard implements Action {
         return cardInstanceId;
     }
 
-    public Damageable getTarget() {
+    public InstanceId getTarget() {
         return target;
     }
 }

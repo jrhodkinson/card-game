@@ -1,4 +1,4 @@
-package jrh.game.service.dto;
+package jrh.game.service.websocket.server.dto;
 
 import jrh.game.api.Card;
 import jrh.game.common.CardId;

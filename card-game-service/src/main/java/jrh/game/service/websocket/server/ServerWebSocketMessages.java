@@ -1,6 +1,6 @@
 package jrh.game.service.websocket.server;
 
-import jrh.game.service.dto.MatchDto;
+import jrh.game.service.websocket.server.dto.MatchDto;
 import jrh.game.service.websocket.WebSocketMessage;
 import org.joda.time.DateTimeUtils;
 

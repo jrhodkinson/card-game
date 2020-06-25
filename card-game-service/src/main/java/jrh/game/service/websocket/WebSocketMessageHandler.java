@@ -5,6 +5,7 @@ import jrh.game.api.action.EndTurn;
 import jrh.game.api.action.PlayCard;
 import jrh.game.common.InstanceId;
 import jrh.game.common.User;
+import jrh.game.service.websocket.client.dto.PlayCardDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,8 +40,8 @@ public class WebSocketMessageHandler {
         }
     }
 
-    private void playCard(WebSocketSession webSocketSession, InstanceId instanceId) {
-        PlayCard playCard = new PlayCard(webSocketSession.getUser(), instanceId, null);
+    private void playCard(WebSocketSession webSocketSession, PlayCardDto playCardDto) {
+        PlayCard playCard = new PlayCard(webSocketSession.getUser(), playCardDto.getCard(), playCardDto.getTarget());
         logger.info("TX playCard={}", playCard);
         webSocketSession.getMatch().getActionHandler().accept(playCard);
     }

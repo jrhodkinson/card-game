@@ -4,6 +4,7 @@ import jrh.game.api.Card;
 import jrh.game.api.Controller;
 import jrh.game.api.Damageable;
 import jrh.game.api.Player;
+import jrh.game.api.Structure;
 import jrh.game.api.event.CardDestroyed;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.api.event.CardPurchased;
@@ -40,7 +41,7 @@ public class CardFlowController implements Controller {
         return Optional.empty();
     }
 
-    public void playCard(User user, InstanceId cardInstanceId, Damageable target) {
+    public void playCard(User user, InstanceId cardInstanceId, InstanceId target) {
         if (!match.getActivePlayer().getUser().equals(user)) {
             logger.warn("Not playing cardInstanceId={}, user={} wasn't the active player", cardInstanceId, user);
             return;
@@ -56,8 +57,16 @@ public class CardFlowController implements Controller {
             logger.info("Not playing card={}, it has UnplayableBehaviour", card);
             return;
         }
+        Damageable damageable = null;
+        if (target != null) {
+            damageable = getDamageableTarget(target);
+            if (damageable == null) {
+                logger.warn("Not playing card={}, target={} was not damageable", card, target);
+                return;
+            }
+        }
         player.getHand().remove(card);
-        match.getEventBus().dispatch(new CardPlayed(player, target, card));
+        match.getEventBus().dispatch(new CardPlayed(player, damageable, card));
         match.getCurrentTurn().addPlayedCard(card);
         match.getEventBus().dispatch(new CardResolved(player, card));
     }
@@ -120,5 +129,21 @@ public class CardFlowController implements Controller {
     public void destroyPlayedCard(Card card) {
         match.getCurrentTurn().removePlayedCard(card);
         match.getEventBus().dispatch(new CardDestroyed(card));
+    }
+
+    private Damageable getDamageableTarget(InstanceId target) {
+        Optional<Structure> optionalStructure = match.getAllStructures().stream()
+            .filter(structure -> structure.getInstanceId().equals(target))
+            .findFirst();
+        if (optionalStructure.isPresent()) {
+            return optionalStructure.get();
+        }
+        if (match.getActivePlayer().getInstanceId().equals(target)) {
+            return match.getActivePlayer();
+        }
+        if (match.getInactivePlayer().getInstanceId().equals(target)) {
+            return match.getInactivePlayer();
+        }
+        return null;
     }
 }

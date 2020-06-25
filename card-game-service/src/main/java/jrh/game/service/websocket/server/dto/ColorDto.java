@@ -1,4 +1,4 @@
-package jrh.game.service.dto;
+package jrh.game.service.websocket.server.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.common.Color;

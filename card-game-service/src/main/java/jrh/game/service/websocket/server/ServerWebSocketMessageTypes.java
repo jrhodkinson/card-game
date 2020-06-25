@@ -1,6 +1,6 @@
 package jrh.game.service.websocket;
 
-import jrh.game.service.dto.MatchDto;
+import jrh.game.service.websocket.server.dto.MatchDto;
 
 public class ServerWebSocketMessageTypes extends WebSocketMessageTypes {
     public static final WebSocketMessageType<Long> PING = WebSocketMessageType.of("ping", Long.class);
