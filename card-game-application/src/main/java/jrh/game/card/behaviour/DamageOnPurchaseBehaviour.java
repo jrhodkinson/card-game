@@ -37,7 +37,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().plainString("On purchase,").keyword("damage").plainString("self")
+        return BehaviourDescription.builder().plainString("On purchase,").keyword("damage").plainString(targets.toString())
                 .number(amount).build();
     }
 
