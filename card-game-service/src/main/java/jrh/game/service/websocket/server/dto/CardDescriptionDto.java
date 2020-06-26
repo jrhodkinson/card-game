@@ -5,7 +5,8 @@ import jrh.game.common.CardDescription;
 
 public class CardDescriptionDto {
 
-    private final String description;
+    @JsonValue
+    public final String description;
 
     private CardDescriptionDto(String description) {
         this.description = description;
@@ -13,10 +14,5 @@ public class CardDescriptionDto {
 
     public static CardDescriptionDto fromCardDescription(CardDescription cardDescription) {
         return new CardDescriptionDto(cardDescription.toString());
-    }
-
-    @JsonValue
-    public String getDescription() {
-        return description;
     }
 }

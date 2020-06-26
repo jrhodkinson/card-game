@@ -8,8 +8,8 @@ import static java.util.stream.Collectors.toList;
 
 public class TurnDto {
 
-    private final int money;
-    private final List<CardDto> playedCards;
+    public final int money;
+    public final List<CardDto> playedCards;
 
     private TurnDto(int money, List<CardDto> playedCards) {
         this.money = money;
@@ -18,13 +18,5 @@ public class TurnDto {
 
     public static TurnDto fromTurn(Turn turn) {
         return new TurnDto(turn.getMoney(), turn.getPlayedCards().stream().map(CardDto::fromCard).collect(toList()));
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public List<CardDto> getPlayedCards() {
-        return playedCards;
     }
 }

@@ -10,13 +10,13 @@ import static java.util.stream.Collectors.toList;
 
 public class CardDto {
 
-    private final InstanceId instanceId;
-    private final CardId cardId;
-    private final String name;
-    private final int cost;
-    private final CardDescriptionDto description;
-    private final ColorDto color;
-    private final boolean requiresTarget;
+    public final InstanceId instanceId;
+    public final CardId cardId;
+    public final String name;
+    public final int cost;
+    public final CardDescriptionDto description;
+    public final ColorDto color;
+    public final boolean requiresTarget;
 
     private CardDto(InstanceId instanceId, CardId cardId, String name, int cost, CardDescriptionDto description,
             ColorDto color, boolean requiresTarget) {
@@ -37,33 +37,5 @@ public class CardDto {
 
     public static List<CardDto> fromCards(List<Card> cards) {
         return cards.stream().map(CardDto::fromCard).collect(toList());
-    }
-
-    public InstanceId getInstanceId() {
-        return instanceId;
-    }
-
-    public CardId getCardId() {
-        return cardId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public CardDescriptionDto getDescription() {
-        return description;
-    }
-
-    public ColorDto getColor() {
-        return color;
-    }
-
-    public boolean requiresTarget() {
-        return requiresTarget;
     }
 }
