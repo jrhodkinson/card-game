@@ -63,8 +63,8 @@ export const endTurn = () => {
   send("turn/end");
 };
 
-export const playCard = (cardInstanceId) => {
-  send("card/play", cardInstanceId);
+export const playCard = (cardInstanceId, targetInstanceId) => {
+  send("card/play", { card: cardInstanceId, target: targetInstanceId });
 };
 
 export const buyCard = (cardInstanceId) => {
