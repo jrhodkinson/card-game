@@ -1,13 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectedTarget } from "../../store/play-actions";
+import { pendingCardRequiresTarget } from "../../store/play-selector";
 
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
   background-color: #ccc;
   padding: 20px;
+
+  ${({ interactable }) => interactable && "cursor: pointer"};
 `;
 
 const Name = styled.div`
@@ -29,9 +32,10 @@ const Health = styled.div`
 
 const Hero = ({ instanceId, name, health }) => {
   const dispatch = useDispatch();
+  const heroIsInteractable = useSelector(pendingCardRequiresTarget);
   const handleClick = () => dispatch(selectedTarget(instanceId));
   return (
-    <Wrapper onClick={handleClick}>
+    <Wrapper interactable={heroIsInteractable} onClick={handleClick}>
       <Name>{name}</Name>
       <Health>{health}</Health>
     </Wrapper>

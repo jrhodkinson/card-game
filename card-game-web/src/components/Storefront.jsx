@@ -16,7 +16,11 @@ const Storefront = () => {
   const handleCardClick = (card) => dispatch(selectedCardInStorefront(card));
   return (
     <Wrapper>
-      <Cards cards={storefront.row} selectable onCardClick={handleCardClick} />
+      <Cards
+        cards={storefront.row}
+        interactable
+        onCardClick={handleCardClick}
+      />
     </Wrapper>
   );
 };

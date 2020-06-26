@@ -11,8 +11,8 @@ const Wrapper = styled.div`
 
 const Cards = ({
   cards,
-  selectedCardInstanceId,
-  selectable = false,
+  selectedCardInstanceId = undefined,
+  interactable = false,
   onCardClick = () => {},
 }) => {
   return (
@@ -23,8 +23,8 @@ const Cards = ({
           <Card
             key={instanceId}
             card={card}
-            selectable={selectable}
-            selected={selectable && selectedCardInstanceId === instanceId}
+            interactable={interactable}
+            selected={selectedCardInstanceId === instanceId}
             onCardClick={onCardClick}
           />
         );

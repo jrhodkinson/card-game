@@ -1,4 +1,5 @@
 import React from "react";
+import { darken } from "polished";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -13,6 +14,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${({ interactable }) => {
+    if (interactable) {
+      return `&:hover { box-shadow: ${darken(
+        0.4,
+        "#cff"
+      )} 0 0 8px 0; cursor: pointer; }`;
+    }
+  }};
 `;
 
 const Name = styled.div`
@@ -32,9 +42,16 @@ const Health = styled.div`
   border-radius: ${healthDiameter / 2}px;
 `;
 
-const Structure = ({ structure, onStructureClick = () => {} }) => {
+const Structure = ({
+  structure,
+  interactable = false,
+  onStructureClick = () => {},
+}) => {
   return (
-    <Wrapper onClick={() => onStructureClick(structure)}>
+    <Wrapper
+      interactable={interactable}
+      onClick={() => onStructureClick(structure)}
+    >
       <Name>{structure.name}</Name>
       <Health>{structure.health}</Health>
     </Wrapper>

@@ -24,24 +24,31 @@ const Wrapper = styled.div`
   min-width: 180px;
   width: 180px;
 
-  ${({ selected, background }) =>
-    selected && `box-shadow: ${darken(0.4, color(background))} 0 0 8px 0;`};
-
-  ${({ selectable }) => selectable && "cursor: pointer"};
-
   background-color: ${({ background }) => color(background)};
+
+  ${({ interactable, background }) => {
+    if (interactable) {
+      return `&:hover { box-shadow: ${darken(
+        0.4,
+        color(background)
+      )} 0 0 8px 0; cursor: pointer; }`;
+    }
+  }};
+
+  ${({ selected, background }) =>
+    selected && `box-shadow: ${darken(0.4, color(background))} 0 0 8px 0`};
 `;
 
 const Card = ({
   card,
-  selectable = false,
+  interactable = false,
   selected = false,
   onCardClick = () => {},
 }) => {
   return (
     <Wrapper
       background={card.color}
-      selectable={selectable}
+      interactable={interactable}
       selected={selected}
       onClick={() => onCardClick(card)}
     >
