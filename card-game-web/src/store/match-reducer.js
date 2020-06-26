@@ -5,6 +5,7 @@ export const MATCH_STATE = "match";
 
 export const defaultState = Immutable({
   activePlayer: {
+    instanceId: "",
     username: "",
     health: 0,
     structures: [],
@@ -13,6 +14,7 @@ export const defaultState = Immutable({
     discardPile: [],
   },
   inactivePlayer: {
+    instanceId: "",
     username: "",
     health: 0,
     structures: [],

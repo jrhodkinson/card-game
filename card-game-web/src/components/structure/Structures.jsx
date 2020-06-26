@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { selectedTarget } from "../../store/play-actions";
 import Structure from "./Structure";
 
 const Wrapper = styled.div`
@@ -10,10 +12,17 @@ const Wrapper = styled.div`
 `;
 
 const Structures = ({ structures }) => {
+  const dispatch = useDispatch();
+  const handleStructureClick = (structure) =>
+    dispatch(selectedTarget(structure.instanceId));
   return (
     <Wrapper>
       {structures.map((structure) => (
-        <Structure structure={structure} />
+        <Structure
+          key={structure.instanceId}
+          structure={structure}
+          onStructureClick={handleStructureClick}
+        />
       ))}
     </Wrapper>
   );

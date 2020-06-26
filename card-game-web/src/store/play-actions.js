@@ -28,7 +28,8 @@ export const selectedTarget = (targetInstanceId) => (dispatch, getState) => {
   }
 };
 
-export const selectedCardInShop = (cardInstanceId) => (dispatch) => {
-  buyCard(cardInstanceId);
+export const selectedCardInStorefront = (card) => (dispatch) => {
+  const { instanceId } = card;
+  buyCard(instanceId);
   dispatch({ type: PURCHASED_CARD });
 };

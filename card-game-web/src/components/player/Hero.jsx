@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { selectedTarget } from "../../store/play-actions";
 
 const Wrapper = styled.div`
   align-items: center;
@@ -25,9 +27,11 @@ const Health = styled.div`
   border-radius: ${healthDiameter / 2}px;
 `;
 
-const Hero = ({ name, health }) => {
+const Hero = ({ instanceId, name, health }) => {
+  const dispatch = useDispatch();
+  const handleClick = () => dispatch(selectedTarget(instanceId));
   return (
-    <Wrapper>
+    <Wrapper onClick={handleClick}>
       <Name>{name}</Name>
       <Health>{health}</Health>
     </Wrapper>

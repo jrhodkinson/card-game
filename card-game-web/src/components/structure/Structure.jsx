@@ -32,9 +32,9 @@ const Health = styled.div`
   border-radius: ${healthDiameter / 2}px;
 `;
 
-const Structure = ({ structure }) => {
+const Structure = ({ structure, onStructureClick = () => {} }) => {
   return (
-    <Wrapper>
+    <Wrapper onClick={() => onStructureClick(structure)}>
       <Name>{structure.name}</Name>
       <Health>{structure.health}</Health>
     </Wrapper>

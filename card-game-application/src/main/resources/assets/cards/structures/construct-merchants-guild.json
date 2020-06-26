@@ -6,7 +6,7 @@
   "behaviours": [
     [
       "construct",
-      "merchants-guild"
+      "MERCHANTS_GUILD"
     ],
     [ "vanish" ]
   ]
