@@ -6,9 +6,10 @@ import { pendingCardRequiresTarget } from "../../store/play-selector";
 
 const Wrapper = styled.div`
   align-items: center;
+  justify-content: center;
   display: flex;
   background-color: #ccc;
-  padding: 20px;
+  padding: 5px;
 
   ${({ interactable }) => interactable && "cursor: pointer"};
 `;
