@@ -6,6 +6,7 @@ import jrh.game.api.EventBus;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessageHandler;
 import jrh.game.service.websocket.WebSocketPinger;
+import jrh.game.service.websocket.server.MatchStateBroadcaster;
 
 import java.util.concurrent.Executors;
 

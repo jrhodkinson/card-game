@@ -1,16 +1,16 @@
-package jrh.game.service;
+package jrh.game.service.websocket.server;
 
 import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
+import jrh.game.api.event.CardDestroyed;
 import jrh.game.api.event.CardPurchased;
 import jrh.game.api.event.CardResolved;
 import jrh.game.api.event.MatchStarted;
 import jrh.game.api.event.TurnEnded;
 import jrh.game.common.EventHandler;
-import jrh.game.service.websocket.server.dto.MatchDto;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessage;
-import jrh.game.service.websocket.server.ServerWebSocketMessages;
+import jrh.game.service.websocket.server.dto.MatchDto;
 
 import java.util.Optional;
 
@@ -26,6 +26,11 @@ public class MatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match) {
+        broadcastMatchState(match);
+    }
+
+    @Subscribe
+    private void cardDestroyed(CardDestroyed cardDestroyed, Match match) {
         broadcastMatchState(match);
     }
 
