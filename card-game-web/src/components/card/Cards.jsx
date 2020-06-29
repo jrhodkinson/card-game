@@ -5,7 +5,8 @@ import Card from "./Card";
 const Wrapper = styled.div`
   align-items: flex-start;
   display: flex;
-  overflow: auto;
+  //overflow-x: visible;
+  //overflow-y: auto;
   max-width: 100%;
 `;
 
