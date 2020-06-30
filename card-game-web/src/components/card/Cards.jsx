@@ -6,7 +6,6 @@ const Wrapper = styled.div`
   align-items: flex-start;
   display: flex;
   overflow-y: auto;
-  max-width: 100%;
 
   // overflow hack
   margin: -10px 0 0 -10px;
@@ -15,6 +14,7 @@ const Wrapper = styled.div`
 
 const Cards = ({
   cards,
+  hideDescriptions = false,
   selectedCardInstanceId = undefined,
   interactable = false,
   onCardClick = () => {},
@@ -27,6 +27,7 @@ const Cards = ({
           <Card
             key={instanceId}
             card={card}
+            hideDescription={hideDescriptions}
             interactable={interactable}
             selected={selectedCardInstanceId === instanceId}
             onCardClick={onCardClick}

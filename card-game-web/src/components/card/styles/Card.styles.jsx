@@ -4,7 +4,10 @@ import { cardColor, lightCardColor, darkCardColor } from "./color";
 import { card, cost, image, header, description } from "./dimensions";
 
 export const Card = styled.div`
-  height: ${card.HEIGHT}px;
+  height: ${({ hideDescription }) =>
+    hideDescription
+      ? card.FULL_HEIGHT - description.HEIGHT - card.PADDING
+      : card.FULL_HEIGHT}px;
   width: ${card.WIDTH}px;
   margin: ${card.MARGIN}px;
   padding: ${card.PADDING}px;

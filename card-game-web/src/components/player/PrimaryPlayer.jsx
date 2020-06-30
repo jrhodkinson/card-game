@@ -12,6 +12,8 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: ${card.WIDTH * 1.5}px 1fr ${card.WIDTH * 1.5}px;
   grid-gap: 5px;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const StructuresWrapper = styled(S.Centered)`
@@ -36,9 +38,7 @@ const PrimaryPlayer = ({ player }) => (
     <DeckWrapper>
       <Deck size={player.deckSize} />
     </DeckWrapper>
-    <S.Centered>
-      <Hand hand={player.hand} />
-    </S.Centered>
+    <Hand hand={player.hand} />
     <DiscardPileWrapper>
       <Pile cards={player.discardPile} />
     </DiscardPileWrapper>

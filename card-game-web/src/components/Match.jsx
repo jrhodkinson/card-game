@@ -12,7 +12,6 @@ import Storefront from "./Storefront";
 const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
-  height: 100vh;
 `;
 
 const Match = () => {

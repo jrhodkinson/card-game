@@ -18,6 +18,7 @@ const Storefront = () => {
     <Wrapper>
       <Cards
         cards={storefront.row}
+        hideDescriptions
         interactable
         onCardClick={handleCardClick}
       />

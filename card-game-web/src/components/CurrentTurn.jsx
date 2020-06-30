@@ -24,9 +24,7 @@ const CurrentTurn = () => {
   return (
     <Wrapper>
       <Money>{currentTurn.money} Money</Money>
-      <S.Centered>
-        <Cards cards={currentTurn.playedCards} />
-      </S.Centered>
+      <Cards cards={currentTurn.playedCards} hideDescriptions />
       <EndTurnButton onClick={endTurn}>End turn</EndTurnButton>
     </Wrapper>
   );
