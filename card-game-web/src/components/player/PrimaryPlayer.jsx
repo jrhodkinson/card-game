@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import * as S from "../../styles";
 import { card } from "../card/styles/dimensions";
 import Deck from "../card/Deck";
 import Pile from "../card/Pile";
@@ -13,22 +14,16 @@ const Wrapper = styled.div`
   grid-gap: 5px;
 `;
 
-const CenteredWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StructuresWrapper = styled(CenteredWrapper)`
+const StructuresWrapper = styled(S.Centered)`
   grid-column: span 3;
 `;
 
-const DeckWrapper = styled(CenteredWrapper)`
+const DeckWrapper = styled(S.Centered)`
   grid-column: 1;
   grid-row: 2 / 4;
 `;
 
-const DiscardPileWrapper = styled(CenteredWrapper)`
+const DiscardPileWrapper = styled(S.Centered)`
   grid-column: 3;
   grid-row: 2 / 4;
 `;
@@ -41,7 +36,9 @@ const PrimaryPlayer = ({ player }) => (
     <DeckWrapper>
       <Deck size={player.deckSize} />
     </DeckWrapper>
-    <Hand hand={player.hand} />
+    <S.Centered>
+      <Hand hand={player.hand} />
+    </S.Centered>
     <DiscardPileWrapper>
       <Pile cards={player.discardPile} />
     </DiscardPileWrapper>
