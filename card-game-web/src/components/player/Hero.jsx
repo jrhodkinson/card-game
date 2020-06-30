@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   display: flex;
   background-color: #ccc;
   padding: 5px;
+  width: 100%;
 
   ${({ interactable }) => interactable && "cursor: pointer"};
 `;

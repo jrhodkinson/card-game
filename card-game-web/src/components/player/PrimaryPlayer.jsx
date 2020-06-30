@@ -16,37 +16,25 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const StructuresWrapper = styled(S.Centered)`
+const SpanAll = styled(S.Centered)`
   grid-column: span 3;
-`;
-
-const DeckWrapper = styled(S.Centered)`
-  grid-column: 1;
-  grid-row: 2 / 4;
-`;
-
-const DiscardPileWrapper = styled(S.Centered)`
-  grid-column: 3;
-  grid-row: 2 / 4;
 `;
 
 const PrimaryPlayer = ({ player }) => (
   <Wrapper>
-    <StructuresWrapper>
+    <SpanAll>
       <Structures structures={player.structures} />
-    </StructuresWrapper>
-    <DeckWrapper>
-      <Deck size={player.deckSize} />
-    </DeckWrapper>
+    </SpanAll>
+    <SpanAll>
+      <Hero
+        instanceId={player.instanceId}
+        name={player.user}
+        health={player.health}
+      />
+    </SpanAll>
+    <Deck size={player.deckSize} />
     <Hand hand={player.hand} />
-    <DiscardPileWrapper>
-      <Pile cards={player.discardPile} />
-    </DiscardPileWrapper>
-    <Hero
-      instanceId={player.instanceId}
-      name={player.user}
-      health={player.health}
-    />
+    <Pile cards={player.discardPile} />
   </Wrapper>
 );
 
