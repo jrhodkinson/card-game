@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { card } from "../card/styles/dimensions";
 import Deck from "../card/Deck";
 import Pile from "../card/Pile";
 import Structures from "../structure/Structures";
@@ -8,7 +9,7 @@ import SecondaryPlayerHand from "./SecondaryPlayerHand";
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: ${card.WIDTH * 1.5}px 1fr ${card.WIDTH * 1.5}px;
   grid-gap: 5px;
 `;
 

@@ -5,9 +5,12 @@ import Card from "./Card";
 const Wrapper = styled.div`
   align-items: flex-start;
   display: flex;
-  //overflow-x: visible;
-  //overflow-y: auto;
+  overflow-y: auto;
   max-width: 100%;
+
+  // overflow hack
+  margin: -10px 0 0 -10px;
+  padding: 10px 0 0 10px;
 `;
 
 const Cards = ({

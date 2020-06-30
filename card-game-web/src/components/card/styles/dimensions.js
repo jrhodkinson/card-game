@@ -1,6 +1,6 @@
 export const card = {
-  WIDTH: 160,
-  HEIGHT: 224,
+  WIDTH: 150,
+  HEIGHT: 212,
   BORDER_WIDTH: 3,
   BORDER_RADIUS: 3,
   MARGIN: 8,
