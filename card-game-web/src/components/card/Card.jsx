@@ -14,12 +14,12 @@ const Card = ({
       selected={selected}
       onClick={() => onCardClick(card)}
     >
+      <S.CardCost background={card.color}>{card.cost}</S.CardCost>
       <S.CardName background={card.color}>{card.name}</S.CardName>
       <S.CardImage background={card.color} />
       <S.CardDescription background={card.color}>
         {card.description}
       </S.CardDescription>
-      <S.CardCost background={card.color}>{card.cost}</S.CardCost>
     </S.Card>
   );
 };

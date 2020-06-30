@@ -1,10 +1,10 @@
 export const card = {
   WIDTH: 160,
   HEIGHT: 224,
-  BORDER_WIDTH: 4,
-  BORDER_RADIUS: 4,
-  MARGIN: 6,
-  PADDING: 6,
+  BORDER_WIDTH: 3,
+  BORDER_RADIUS: 3,
+  MARGIN: 8,
+  PADDING: 5,
 };
 
 const INNER_CARD_WIDTH = card.WIDTH - 2 * (card.PADDING + card.BORDER_WIDTH);
@@ -18,7 +18,7 @@ export const header = {
 };
 
 export const cost = {
-  RADIUS: 13,
+  RADIUS: 14,
 };
 
 export const image = {

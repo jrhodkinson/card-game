@@ -37,7 +37,7 @@ export const CardName = styled.div`
   width: ${header.WIDTH}px;
   margin-bottom: ${header.MARGIN_BOTTOM}px;
   line-height: ${header.LINE_HEIGHT}px;
-
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,8 +63,6 @@ export const CardDescription = styled.div`
 
 export const CardCost = styled.div`
   background-color: ${({ background }) => darkCardColor(background)};
-  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0,
-    rgba(0, 0, 0, 0.12) 0 1px 2px 0;
   color: black;
   font-weight: bold;
   position: absolute;
@@ -76,4 +74,17 @@ export const CardCost = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &::after {
+    position: absolute;
+    content: "";
+    border: ${card.BORDER_WIDTH}px solid #555;
+    border-radius: ${cost.RADIUS}px;
+    border-bottom-color: transparent;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    width: ${2 * cost.RADIUS}px;
+    height: ${2 * cost.RADIUS}px;
+  }
 `;
