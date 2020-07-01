@@ -8,7 +8,6 @@ import Structure from "./Structure";
 const Wrapper = styled.div`
   align-items: flex-start;
   display: flex;
-  overflow: auto;
   max-width: 100%;
 `;
 

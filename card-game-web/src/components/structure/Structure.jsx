@@ -17,9 +17,15 @@ const Wrapper = styled.div`
 
   ${({ interactable }) => {
     if (interactable) {
-      return `&:hover { box-shadow: ${darkCardColor(
-        "CYAN"
-      )} 0 0 8px 0; cursor: pointer; }`;
+      return `
+          cursor: pointer;
+          transition: transform 0.15s;
+          
+          &:hover {
+            transform: scale(1.05) translate(0, -2.5%);
+            box-shadow: ${cardColor("CYAN")} 0 0 8px 0;
+          }
+        `;
     }
   }};
 `;
