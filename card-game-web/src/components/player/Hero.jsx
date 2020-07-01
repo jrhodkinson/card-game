@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectedTarget } from "../../store/play-actions";
 import { pendingCardRequiresTarget } from "../../store/play-selector";
+import { darkCardColor } from "../card/styles/color";
 
 const Wrapper = styled.div`
   align-items: center;
@@ -22,7 +23,7 @@ const Name = styled.div`
 const healthDiameter = 36;
 
 const Health = styled.div`
-  background-color: #f33;
+  background-color: ${darkCardColor("RED")};
   color: white;
   margin-left: 10px;
   text-align: center;

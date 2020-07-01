@@ -65,7 +65,7 @@ export const CardDescription = styled.div`
 `;
 
 export const CardCost = styled.div`
-  background-color: ${({ background }) => darkCardColor(background)};
+  background-color: ${({ background }) => cardColor(background)};
   color: black;
   font-weight: bold;
   position: absolute;

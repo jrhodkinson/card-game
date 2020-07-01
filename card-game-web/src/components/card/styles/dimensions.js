@@ -15,7 +15,7 @@ export const header = {
   HEIGHT: 32,
   WIDTH: INNER_CARD_WIDTH,
   MARGIN_BOTTOM: card.PADDING,
-  LINE_HEIGHT: 12,
+  LINE_HEIGHT: 16,
 };
 
 export const cost = {
