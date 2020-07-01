@@ -1,7 +1,6 @@
 import React from "react";
 import { cardColor, darkCardColor, lightCardColor } from "../card/styles/color";
 import { card } from "../card/styles/dimensions";
-import { darken } from "polished";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -9,7 +8,7 @@ const Wrapper = styled.div`
   border-radius: ${card.BORDER_RADIUS}px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0,
     rgba(0, 0, 0, 0.12) 0 1px 2px 0;
-  margin: ${card.MARGIN}px;
+  margin: ${card.MARGIN_TOP_BOTTOM}px ${card.MARGIN_LEFT_RIGHT}px;
   padding: 6px;
   width: 180px;
   background-color: ${cardColor("CYAN")};

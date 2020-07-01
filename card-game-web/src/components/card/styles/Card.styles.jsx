@@ -9,7 +9,7 @@ export const Card = styled.div`
       ? card.FULL_HEIGHT - description.HEIGHT - card.PADDING
       : card.FULL_HEIGHT}px;
   width: ${card.WIDTH}px;
-  margin: ${card.MARGIN}px;
+  margin: ${card.MARGIN_TOP_BOTTOM}px ${card.MARGIN_LEFT_RIGHT}px;
   padding: ${card.PADDING}px;
   border: ${card.BORDER_WIDTH}px solid #555;
   border-radius: ${card.BORDER_RADIUS}px;
@@ -24,9 +24,15 @@ export const Card = styled.div`
 
   ${({ interactable, background }) => {
     if (interactable) {
-      return `&:hover { box-shadow: ${cardColor(
-        background
-      )} 0 0 8px 0; cursor: pointer; }`;
+      return `
+        cursor: pointer;
+        transition: transform 0.15s;
+        
+        &:hover {
+          transform: scale(1.05) translate(0, -2.5%);
+          box-shadow: ${cardColor(background)} 0 0 8px 0;
+        }
+      `;
     }
   }};
 
@@ -64,6 +70,23 @@ export const CardDescription = styled.div`
   text-align: center;
 `;
 
+export const CardDescriptionOverlay = styled.div`
+  background-color: ${({ background }) => lightCardColor(background)};
+
+  position: absolute;
+  top: ${header.HEIGHT + 2 * card.PADDING}px;
+  bottom: ${card.PADDING}px;
+  left: ${card.PADDING}px;
+  right: ${card.PADDING}px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  pointer-events: none;
+`;
+
 export const CardCost = styled.div`
   background-color: ${({ background }) => cardColor(background)};
   color: black;
@@ -77,6 +100,7 @@ export const CardCost = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 
   &::after {
     position: absolute;

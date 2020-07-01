@@ -3,7 +3,8 @@ export const card = {
   FULL_HEIGHT: 212,
   BORDER_WIDTH: 3,
   BORDER_RADIUS: 3,
-  MARGIN: 8,
+  MARGIN_TOP_BOTTOM: 12,
+  MARGIN_LEFT_RIGHT: 8,
   PADDING: 5,
 };
 
