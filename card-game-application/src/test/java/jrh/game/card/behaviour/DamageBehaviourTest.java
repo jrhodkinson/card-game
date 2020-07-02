@@ -39,7 +39,8 @@ public class DamageBehaviourTest {
 
         int initialHealth = match.getInactivePlayer().getHealth();
 
-        PlayCard playCard = new PlayCard(activePlayer.getUser(), damageCard.getEntityId(), match.getInactivePlayer().getEntityId());
+        PlayCard playCard = new PlayCard(activePlayer.getUser(), damageCard.getEntityId(),
+                match.getInactivePlayer().getEntityId());
         match.getActionHandler().accept(playCard);
 
         assertThat(match.getInactivePlayer().getHealth(), equalTo(initialHealth - 1));

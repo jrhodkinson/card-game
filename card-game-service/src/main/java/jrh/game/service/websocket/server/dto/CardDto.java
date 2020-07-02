@@ -19,7 +19,7 @@ public class CardDto {
     public final boolean requiresTarget;
 
     private CardDto(EntityId entityId, CardId cardId, String name, int cost, CardDescriptionDto description,
-                    ColorDto color, boolean requiresTarget) {
+            ColorDto color, boolean requiresTarget) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;

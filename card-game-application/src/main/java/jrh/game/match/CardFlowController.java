@@ -133,8 +133,7 @@ public class CardFlowController implements Controller {
 
     private Damageable getDamageableTarget(EntityId target) {
         Optional<Structure> optionalStructure = match.getAllStructures().stream()
-            .filter(structure -> structure.getEntityId().equals(target))
-            .findFirst();
+                .filter(structure -> structure.getEntityId().equals(target)).findFirst();
         if (optionalStructure.isPresent()) {
             return optionalStructure.get();
         }

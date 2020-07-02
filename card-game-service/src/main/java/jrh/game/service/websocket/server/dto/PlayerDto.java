@@ -19,7 +19,7 @@ public class PlayerDto {
     public final int deckSize;
 
     private PlayerDto(EntityId entityId, User user, int health, List<StructureDto> structures, List<CardDto> hand,
-                      List<CardDto> discardPile, int deckSize) {
+            List<CardDto> discardPile, int deckSize) {
         this.entityId = entityId;
         this.user = user;
         this.health = health;

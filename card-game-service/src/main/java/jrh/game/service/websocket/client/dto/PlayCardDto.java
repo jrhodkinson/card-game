@@ -27,9 +27,7 @@ public class PlayCardDto {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("card", card)
-            .append("target", target)
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("card", card).append("target", target)
+                .toString();
     }
 }

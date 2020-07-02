@@ -131,8 +131,8 @@ public class MutableMatch implements Match {
     public MutableStructure getStructureAsMutable(Structure structure) {
         return Stream.of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
                 .flatMap(Structures::stream)
-                .filter(mutableStructure -> structure.getEntityId().equals(mutableStructure.getEntityId()))
-                .findFirst().orElseThrow();
+                .filter(mutableStructure -> structure.getEntityId().equals(mutableStructure.getEntityId())).findFirst()
+                .orElseThrow();
     }
 
     @Override
