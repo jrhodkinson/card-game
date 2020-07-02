@@ -24,7 +24,7 @@ public class TestBehaviour {
             Class<? extends AbstractBehaviour> behaviourClass = behaviour.getClass();
             Card card = CardImpl.card(new CardId("test")).withName("Test").withCost(1).withColor(Color.BLACK)
                     .withBehaviour(behaviour).build();
-            Card parsed = objectMapper.readValue(objectMapper.writeValueAsString(card), Card.class);
+            Card parsed = objectMapper.readValue(objectMapper.writeValueAsString(card), CardImpl.class);
             Behaviour parsedBehaviour = parsed.getBehaviour(behaviourClass);
             for (Field field : behaviourClass.getDeclaredFields()) {
                 if (field.getType().equals(Logger.class)) {

@@ -1,9 +1,19 @@
 package jrh.game.card.behaviour;
 
+import jrh.game.api.Card;
+import jrh.game.api.Player;
+import jrh.game.api.action.PlayCard;
+import jrh.game.asset.AssetLibrary;
+import jrh.game.asset.TestAssetLibrary;
 import jrh.game.card.TestCard;
+import jrh.game.common.User;
+import jrh.game.match.MutableMatch;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MoneyBehaviourTest {
 
@@ -15,6 +25,19 @@ public class MoneyBehaviourTest {
     @Test
     public void addsMoneyToCurrentTurn() {
         MoneyBehaviour moneyBehaviour = new MoneyBehaviour(3);
-        TestCard.forBehaviour(moneyBehaviour);
+
+        AssetLibrary assetLibrary = TestAssetLibrary.of(TestCard.forBehaviour(moneyBehaviour));
+        User firstUser = new User("a");
+        User secondUser = new User("b");
+        MutableMatch match = new MutableMatch(assetLibrary, firstUser, secondUser);
+        match.start();
+
+        Player activePlayer = match.getActivePlayer();
+        Card moneyCard = activePlayer.getHand().get(0);
+        assertTrue(moneyCard.hasBehaviour(MoneyBehaviour.class));
+        assertThat(match.getCurrentTurn().getMoney(), equalTo(0));
+        PlayCard playCard = new PlayCard(activePlayer.getUser(), moneyCard.getEntityId(), null);
+        match.getActionHandler().accept(playCard);
+        assertThat(match.getCurrentTurn().getMoney(), equalTo(3));
     }
 }

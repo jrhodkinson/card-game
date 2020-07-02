@@ -1,5 +1,6 @@
 package jrh.game.card;
 
+import jrh.game.Constants;
 import jrh.game.asset.CardImplLibrary;
 import jrh.game.api.event.CardCreated;
 import jrh.game.common.CardId;
@@ -24,11 +25,18 @@ public class CardImplFactory {
 
     public Deck startingDeck() {
         Deck deck = new Deck();
-        deck.add(cardImplLibrary.getCard(CardId.Debug.MONEY).duplicate());
-        deck.add(cardImplLibrary.getCard(CardId.Debug.DAMAGE).duplicate());
-        deck.add(cardImplLibrary.getCard(CardId.Debug.DRAW).duplicate());
-        Collections.shuffle(deck);
+        List<CardId> startingDeck = List.of(CardId.Debug.MONEY, CardId.Debug.DAMAGE, CardId.Debug.DRAW);
+        for (CardId cardId : startingDeck) {
+            CardImpl cardImpl = cardImplLibrary.getCard(cardId);
+            if (cardImpl != null) {
+                deck.add(cardImpl.duplicate());
+            }
+        }
         deck.forEach(card -> eventBus.dispatch(new CardCreated(card)));
+        while (deck.size() < Constants.INITIAL_HAND_SIZE) {
+            deck.add(randomCard());
+        }
+        Collections.shuffle(deck);
         return deck;
     }
 
