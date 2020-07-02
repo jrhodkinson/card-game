@@ -2,26 +2,26 @@ package jrh.game.service.websocket.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class PlayCardDto {
 
-    private final InstanceId card;
-    private final InstanceId target;
+    private final EntityId card;
+    private final EntityId target;
 
     @JsonCreator
-    public PlayCardDto(@JsonProperty("card") InstanceId card, @JsonProperty("target") InstanceId target) {
+    public PlayCardDto(@JsonProperty("card") EntityId card, @JsonProperty("target") EntityId target) {
         this.card = card;
         this.target = target;
     }
 
-    public InstanceId getCard() {
+    public EntityId getCard() {
         return card;
     }
 
-    public InstanceId getTarget() {
+    public EntityId getTarget() {
         return target;
     }
 

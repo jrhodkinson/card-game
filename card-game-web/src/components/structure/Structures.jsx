@@ -15,12 +15,12 @@ const Structures = ({ structures }) => {
   const dispatch = useDispatch();
   const structuresAreInteractable = useSelector(pendingCardRequiresTarget);
   const handleStructureClick = (structure) =>
-    dispatch(selectedTarget(structure.instanceId));
+    dispatch(selectedTarget(structure.entityId));
   return (
     <Wrapper>
       {structures.map((structure) => (
         <Structure
-          key={structure.instanceId}
+          key={structure.entityId}
           structure={structure}
           interactable={structuresAreInteractable}
           onStructureClick={handleStructureClick}

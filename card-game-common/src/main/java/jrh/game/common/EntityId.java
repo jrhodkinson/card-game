@@ -7,22 +7,22 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.UUID;
 
-public final class InstanceId {
+public final class EntityId {
 
     @JsonValue
-    private final UUID instanceId;
+    private final UUID entityId;
 
     @JsonCreator
-    private InstanceId(UUID instanceId) {
-        this.instanceId = instanceId;
+    private EntityId(UUID entityId) {
+        this.entityId = entityId;
     }
 
-    public static InstanceId randomInstanceId() {
-        return new InstanceId(UUID.randomUUID());
+    public static EntityId randomEntityId() {
+        return new EntityId(UUID.randomUUID());
     }
 
     public UUID toUUID() {
-        return instanceId;
+        return entityId;
     }
 
     @Override
@@ -33,18 +33,18 @@ public final class InstanceId {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        InstanceId that = (InstanceId) o;
+        EntityId that = (EntityId) o;
 
-        return new EqualsBuilder().append(instanceId, that.instanceId).isEquals();
+        return new EqualsBuilder().append(entityId, that.entityId).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(instanceId).toHashCode();
+        return new HashCodeBuilder(17, 37).append(entityId).toHashCode();
     }
 
     @Override
     public String toString() {
-        return String.valueOf(instanceId);
+        return String.valueOf(entityId);
     }
 }

@@ -1,7 +1,7 @@
 package jrh.game.service.websocket.server.dto;
 
 import jrh.game.api.Player;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 import jrh.game.common.User;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toList;
 
 public class PlayerDto {
 
-    public final InstanceId instanceId;
+    public final EntityId entityId;
     public final User user;
     public final int health;
     public final List<StructureDto> structures;
@@ -18,9 +18,9 @@ public class PlayerDto {
     public final List<CardDto> discardPile;
     public final int deckSize;
 
-    private PlayerDto(InstanceId instanceId, User user, int health, List<StructureDto> structures, List<CardDto> hand,
-            List<CardDto> discardPile, int deckSize) {
-        this.instanceId = instanceId;
+    private PlayerDto(EntityId entityId, User user, int health, List<StructureDto> structures, List<CardDto> hand,
+                      List<CardDto> discardPile, int deckSize) {
+        this.entityId = entityId;
         this.user = user;
         this.health = health;
         this.structures = structures;
@@ -30,7 +30,7 @@ public class PlayerDto {
     }
 
     public static PlayerDto fromPlayer(Player player) {
-        return new PlayerDto(player.getInstanceId(), player.getUser(), player.getHealth(),
+        return new PlayerDto(player.getEntityId(), player.getUser(), player.getHealth(),
                 player.getStructures().stream().map(StructureDto::fromStructure).collect(toList()),
                 CardDto.fromCards(player.getHand()), CardDto.fromCards(player.getDiscardPile()),
                 player.getDeck().size());

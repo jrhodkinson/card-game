@@ -46,7 +46,7 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
         if (cardResolved.getCard().equals(this.getCard())) {
-            logger.info("Increasing money of {} from {} by {}", this.getCard().getInstanceId(), amount,
+            logger.info("Increasing money of {} from {} by {}", this.getCard().getEntityId(), amount,
                     amount + increment);
             this.amount += increment;
         }

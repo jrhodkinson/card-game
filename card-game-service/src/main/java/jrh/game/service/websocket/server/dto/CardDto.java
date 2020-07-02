@@ -2,7 +2,7 @@ package jrh.game.service.websocket.server.dto;
 
 import jrh.game.api.Card;
 import jrh.game.common.CardId;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toList;
 
 public class CardDto {
 
-    public final InstanceId instanceId;
+    public final EntityId entityId;
     public final CardId cardId;
     public final String name;
     public final int cost;
@@ -18,9 +18,9 @@ public class CardDto {
     public final ColorDto color;
     public final boolean requiresTarget;
 
-    private CardDto(InstanceId instanceId, CardId cardId, String name, int cost, CardDescriptionDto description,
-            ColorDto color, boolean requiresTarget) {
-        this.instanceId = instanceId;
+    private CardDto(EntityId entityId, CardId cardId, String name, int cost, CardDescriptionDto description,
+                    ColorDto color, boolean requiresTarget) {
+        this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;
         this.cost = cost;
@@ -30,7 +30,7 @@ public class CardDto {
     }
 
     public static CardDto fromCard(Card card) {
-        return new CardDto(card.getInstanceId(), card.getCardId(), card.getName(), card.getCost(),
+        return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getCost(),
                 CardDescriptionDto.fromCardDescription(card.getDescription()), ColorDto.fromColor(card.getColor()),
                 card.requiresTarget());
     }

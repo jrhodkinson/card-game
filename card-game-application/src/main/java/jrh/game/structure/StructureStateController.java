@@ -31,7 +31,7 @@ public class StructureStateController implements Controller, EventHandler {
     }
 
     public Player getOwner(Structure structure) {
-        if (match.getActivePlayer().getStructuresAsMutable().contains(structure.getInstanceId())) {
+        if (match.getActivePlayer().getStructuresAsMutable().contains(structure.getEntityId())) {
             return match.getActivePlayer();
         } else {
             return match.getInactivePlayer();
@@ -53,7 +53,7 @@ public class StructureStateController implements Controller, EventHandler {
             logger.info("Structure={} has health <= 0, destroying structure", structure);
             match.getStructureAsMutable(structureTookDamage.getStructure()).getPowers()
                     .forEach(power -> match.getEventBus().unregister(power));
-            match.getPlayerAsMutable(getOwner(structure)).getStructuresAsMutable().remove(structure.getInstanceId());
+            match.getPlayerAsMutable(getOwner(structure)).getStructuresAsMutable().remove(structure.getEntityId());
             match.getEventBus().dispatch(new StructureDestroyed(structure));
         }
     }

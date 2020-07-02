@@ -2,7 +2,7 @@ package jrh.game.deck;
 
 import com.google.common.collect.ForwardingList;
 import jrh.game.api.Card;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Hand extends ForwardingList<Card> implements RandomAccess {
         return cards.toString();
     }
 
-    public Optional<Card> getCard(InstanceId instanceId) {
-        return cards.stream().filter(card -> card.getInstanceId().equals(instanceId)).findFirst();
+    public Optional<Card> getCard(EntityId entityId) {
+        return cards.stream().filter(card -> card.getEntityId().equals(entityId)).findFirst();
     }
 }

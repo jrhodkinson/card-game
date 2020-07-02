@@ -2,7 +2,7 @@ package jrh.game.service.websocket.client.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 import jrh.game.common.ObjectMapperFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +23,8 @@ public class PlayCardDtoTest {
 
     @Test
     public void parsesJson() throws JsonProcessingException {
-        InstanceId card = InstanceId.randomInstanceId();
-        InstanceId target = InstanceId.randomInstanceId();
+        EntityId card = EntityId.randomEntityId();
+        EntityId target = EntityId.randomEntityId();
         String json = String.format("{\"card\":\"%s\", \"target\": \"%s\"}", card, target);
         PlayCardDto playCardDto = objectMapper.readValue(json, PlayCardDto.class);
         assertThat(playCardDto.getCard(), equalTo(card));
@@ -33,7 +33,7 @@ public class PlayCardDtoTest {
 
     @Test
     public void parsesJsonWithNoTarget() throws JsonProcessingException {
-        InstanceId card = InstanceId.randomInstanceId();
+        EntityId card = EntityId.randomEntityId();
         String json = String.format("{\"card\":\"%s\" }", card);
         PlayCardDto playCardDto = objectMapper.readValue(json, PlayCardDto.class);
         assertThat(playCardDto.getCard(), equalTo(card));

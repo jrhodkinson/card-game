@@ -1,18 +1,18 @@
 package jrh.game.api.action;
 
 import jrh.game.api.Action;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 import jrh.game.common.User;
 
 public class PlayCard implements Action {
 
     private final User user;
-    private final InstanceId cardInstanceId;
-    private final InstanceId target;
+    private final EntityId cardEntityId;
+    private final EntityId target;
 
-    public PlayCard(User user, InstanceId cardInstanceId, InstanceId target) {
+    public PlayCard(User user, EntityId cardEntityId, EntityId target) {
         this.user = user;
-        this.cardInstanceId = cardInstanceId;
+        this.cardEntityId = cardEntityId;
         this.target = target;
     }
 
@@ -20,11 +20,11 @@ public class PlayCard implements Action {
         return user;
     }
 
-    public InstanceId getCardInstanceId() {
-        return cardInstanceId;
+    public EntityId getCardEntityId() {
+        return cardEntityId;
     }
 
-    public InstanceId getTarget() {
+    public EntityId getTarget() {
         return target;
     }
 }

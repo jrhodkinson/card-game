@@ -15,21 +15,21 @@ const Wrapper = styled.div`
 const Cards = ({
   cards,
   hideDescriptions = false,
-  selectedCardInstanceId = undefined,
+  selectedCardEntityId = undefined,
   interactable = false,
   onCardClick = () => {},
 }) => {
   return (
     <Wrapper>
       {cards.map((card) => {
-        const { instanceId } = card;
+        const { entityId } = card;
         return (
           <Card
-            key={instanceId}
+            key={entityId}
             card={card}
             hideDescription={hideDescriptions}
             interactable={interactable}
-            selected={selectedCardInstanceId === instanceId}
+            selected={selectedCardEntityId === entityId}
             onCardClick={onCardClick}
           />
         );

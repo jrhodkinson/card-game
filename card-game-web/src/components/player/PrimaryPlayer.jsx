@@ -27,7 +27,7 @@ const PrimaryPlayer = ({ player }) => (
     </SpanAll>
     <SpanAll>
       <Hero
-        instanceId={player.instanceId}
+        entityId={player.entityId}
         name={player.user}
         health={player.health}
       />

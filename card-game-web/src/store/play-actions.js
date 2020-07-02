@@ -1,5 +1,5 @@
 import { buyCard, playCard } from "../gateway/ws";
-import { getPendingCardInstanceId } from "./play-selector";
+import { getPendingCardEntityId } from "./play-selector";
 
 export const NAMESPACE = "match";
 
@@ -8,28 +8,28 @@ export const PLAYED_CARD = `${NAMESPACE}/PLAYED_CARD`;
 export const PURCHASED_CARD = `${NAMESPACE}/PURCHASED_CARD`;
 
 export const selectedCardInHand = (card) => (dispatch) => {
-  const { requiresTarget, instanceId } = card;
+  const { requiresTarget, entityId } = card;
   if (requiresTarget) {
     dispatch({
       type: SELECTED_CARD_REQUIRING_TARGET,
-      cardInstanceId: instanceId,
+      cardEntityId: entityId,
     });
   } else {
-    playCard(instanceId);
+    playCard(entityId);
     dispatch({ type: PLAYED_CARD });
   }
 };
 
-export const selectedTarget = (targetInstanceId) => (dispatch, getState) => {
-  const pendingCardInstanceId = getPendingCardInstanceId(getState());
-  if (pendingCardInstanceId) {
-    playCard(pendingCardInstanceId, targetInstanceId);
+export const selectedTarget = (targetEntityId) => (dispatch, getState) => {
+  const pendingCardEntityId = getPendingCardEntityId(getState());
+  if (pendingCardEntityId) {
+    playCard(pendingCardEntityId, targetEntityId);
     dispatch({ type: PLAYED_CARD });
   }
 };
 
 export const selectedCardInStorefront = (card) => (dispatch) => {
-  const { instanceId } = card;
-  buyCard(instanceId);
+  const { entityId } = card;
+  buyCard(entityId);
   dispatch({ type: PURCHASED_CARD });
 };

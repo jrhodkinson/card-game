@@ -27,7 +27,7 @@ const SecondaryPlayer = ({ player }) => (
     <Deck size={player.deckSize} />
     <SpanAll>
       <Hero
-        instanceId={player.instanceId}
+        entityId={player.entityId}
         name={player.user}
         health={player.health}
       />

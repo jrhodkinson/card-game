@@ -33,10 +33,10 @@ const Health = styled.div`
   border-radius: ${healthDiameter / 2}px;
 `;
 
-const Hero = ({ instanceId, name, health }) => {
+const Hero = ({ entityId, name, health }) => {
   const dispatch = useDispatch();
   const heroIsInteractable = useSelector(pendingCardRequiresTarget);
-  const handleClick = () => dispatch(selectedTarget(instanceId));
+  const handleClick = () => dispatch(selectedTarget(entityId));
   return (
     <Wrapper interactable={heroIsInteractable} onClick={handleClick}>
       <Name>{name}</Name>

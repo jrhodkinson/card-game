@@ -10,7 +10,7 @@ import jrh.game.card.behaviour.AbstractBehaviour;
 import jrh.game.common.CardDescription;
 import jrh.game.common.CardId;
 import jrh.game.common.Color;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @JsonSerialize(using = CardImplSerializer.class)
 public class CardImpl implements Card {
 
-    private final InstanceId instanceId = InstanceId.randomInstanceId();
+    private final EntityId entityId = EntityId.randomEntityId();
     private final CardId cardId;
     private final String name;
     private final int cost;
@@ -43,8 +43,8 @@ public class CardImpl implements Card {
     }
 
     @Override
-    public InstanceId getInstanceId() {
-        return instanceId;
+    public EntityId getEntityId() {
+        return entityId;
     }
 
     @Override
@@ -110,12 +110,12 @@ public class CardImpl implements Card {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        return this.instanceId.equals(((CardImpl) o).instanceId);
+        return this.entityId.equals(((CardImpl) o).entityId);
     }
 
     @Override
     public int hashCode() {
-        return instanceId.hashCode();
+        return entityId.hashCode();
     }
 
     public interface NameSetter {

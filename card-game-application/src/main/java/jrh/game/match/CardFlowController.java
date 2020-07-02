@@ -12,7 +12,7 @@ import jrh.game.api.event.CardResolved;
 import jrh.game.api.event.DiscardedCard;
 import jrh.game.api.event.DrewCard;
 import jrh.game.card.behaviour.UnplayableBehaviour;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 import jrh.game.common.User;
 import jrh.game.deck.DiscardPile;
 import org.apache.logging.log4j.LogManager;
@@ -41,15 +41,15 @@ public class CardFlowController implements Controller {
         return Optional.empty();
     }
 
-    public void playCard(User user, InstanceId cardInstanceId, InstanceId target) {
+    public void playCard(User user, EntityId cardEntityId, EntityId target) {
         if (!match.getActivePlayer().getUser().equals(user)) {
-            logger.warn("Not playing cardInstanceId={}, user={} wasn't the active player", cardInstanceId, user);
+            logger.warn("Not playing cardInstanceId={}, user={} wasn't the active player", cardEntityId, user);
             return;
         }
         MutablePlayer player = match.getPlayer(user);
-        Optional<Card> optionalCard = player.getHand().getCard(cardInstanceId);
+        Optional<Card> optionalCard = player.getHand().getCard(cardEntityId);
         if (optionalCard.isEmpty()) {
-            logger.warn("Not playing cardInstanceId={}, user={} hand did not contain card", cardInstanceId, user);
+            logger.warn("Not playing cardInstanceId={}, user={} hand did not contain card", cardEntityId, user);
             return;
         }
         Card card = optionalCard.get();
@@ -82,14 +82,14 @@ public class CardFlowController implements Controller {
         }
     }
 
-    public void buyCard(User user, InstanceId cardInstanceId) {
+    public void buyCard(User user, EntityId cardEntityId) {
         if (!match.getActivePlayer().getUser().equals(user)) {
             logger.warn("Not buying card, user={} wasn't the active player", user);
             return;
         }
-        Optional<Card> optionalCard = match.getStore().getCard(cardInstanceId);
+        Optional<Card> optionalCard = match.getStore().getCard(cardEntityId);
         if (optionalCard.isEmpty()) {
-            logger.warn("Not buying card, cardInstanceId={} wasn't in the store", cardInstanceId);
+            logger.warn("Not buying card, cardInstanceId={} wasn't in the store", cardEntityId);
             return;
         }
         Card card = optionalCard.get();
@@ -131,17 +131,17 @@ public class CardFlowController implements Controller {
         match.getEventBus().dispatch(new CardDestroyed(card));
     }
 
-    private Damageable getDamageableTarget(InstanceId target) {
+    private Damageable getDamageableTarget(EntityId target) {
         Optional<Structure> optionalStructure = match.getAllStructures().stream()
-            .filter(structure -> structure.getInstanceId().equals(target))
+            .filter(structure -> structure.getEntityId().equals(target))
             .findFirst();
         if (optionalStructure.isPresent()) {
             return optionalStructure.get();
         }
-        if (match.getActivePlayer().getInstanceId().equals(target)) {
+        if (match.getActivePlayer().getEntityId().equals(target)) {
             return match.getActivePlayer();
         }
-        if (match.getInactivePlayer().getInstanceId().equals(target)) {
+        if (match.getInactivePlayer().getEntityId().equals(target)) {
             return match.getInactivePlayer();
         }
         return null;

@@ -3,13 +3,13 @@ package jrh.game.api;
 import jrh.game.common.CardDescription;
 import jrh.game.common.CardId;
 import jrh.game.common.Color;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 
 import java.util.Collection;
 
 public interface Card {
 
-    InstanceId getInstanceId();
+    EntityId getEntityId();
 
     CardId getCardId();
 

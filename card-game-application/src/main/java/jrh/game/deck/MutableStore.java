@@ -3,7 +3,7 @@ package jrh.game.deck;
 import jrh.game.api.Card;
 import jrh.game.api.Store;
 import jrh.game.card.CardImplFactory;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +41,7 @@ public class MutableStore implements Store {
         return Collections.unmodifiableList(row);
     }
 
-    public Optional<Card> getCard(InstanceId instanceId) {
-        return row.stream().filter(card -> card.getInstanceId().equals(instanceId)).findFirst();
+    public Optional<Card> getCard(EntityId entityId) {
+        return row.stream().filter(card -> card.getEntityId().equals(entityId)).findFirst();
     }
 }

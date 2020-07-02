@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class InstanceIdTest {
+public class EntityIdTest {
 
     private ObjectMapper objectMapper;
 
@@ -20,14 +20,14 @@ public class InstanceIdTest {
 
     @Test
     public void equalsContract() {
-        EqualsVerifier.forClass(InstanceId.class).verify();
+        EqualsVerifier.forClass(EntityId.class).verify();
     }
 
     @Test
     public void roundTripsViaJson() throws JsonProcessingException {
-        InstanceId original = InstanceId.randomInstanceId();
+        EntityId original = EntityId.randomEntityId();
         String json = objectMapper.writeValueAsString(original);
-        InstanceId parsed = objectMapper.readValue(json, InstanceId.class);
+        EntityId parsed = objectMapper.readValue(json, EntityId.class);
         assertThat(parsed, equalTo(original));
     }
 }

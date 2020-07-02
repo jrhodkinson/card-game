@@ -8,7 +8,7 @@ import jrh.game.api.Power;
 import jrh.game.api.Structure;
 import jrh.game.asset.MutableStructureDeserializer;
 import jrh.game.asset.MutableStructureSerializer;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 import jrh.game.common.StructureId;
 import jrh.game.structure.power.AbstractPower;
 
@@ -21,7 +21,7 @@ import java.util.Map;
 @JsonSerialize(using = MutableStructureSerializer.class)
 public class MutableStructure implements Structure {
 
-    private final InstanceId instanceId = InstanceId.randomInstanceId();
+    private final EntityId entityId = EntityId.randomEntityId();
     private final StructureId structureId;
     private final String name;
     private final Map<Class<? extends AbstractPower>, AbstractPower> powers = new HashMap<>();
@@ -36,8 +36,8 @@ public class MutableStructure implements Structure {
     }
 
     @Override
-    public InstanceId getInstanceId() {
-        return instanceId;
+    public EntityId getEntityId() {
+        return entityId;
     }
 
     @Override
@@ -98,11 +98,11 @@ public class MutableStructure implements Structure {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        return this.instanceId.equals(((MutableStructure) o).instanceId);
+        return this.entityId.equals(((MutableStructure) o).entityId);
     }
 
     @Override
     public int hashCode() {
-        return instanceId.hashCode();
+        return entityId.hashCode();
     }
 }

@@ -3,7 +3,7 @@ package jrh.game.service.websocket;
 import jrh.game.api.action.BuyCard;
 import jrh.game.api.action.EndTurn;
 import jrh.game.api.action.PlayCard;
-import jrh.game.common.InstanceId;
+import jrh.game.common.EntityId;
 import jrh.game.common.User;
 import jrh.game.service.websocket.client.dto.PlayCardDto;
 import org.apache.logging.log4j.LogManager;
@@ -46,8 +46,8 @@ public class WebSocketMessageHandler {
         webSocketSession.getMatch().getActionHandler().accept(playCard);
     }
 
-    private void buyCard(WebSocketSession webSocketSession, InstanceId instanceId) {
-        BuyCard buyCard = new BuyCard(webSocketSession.getUser(), instanceId);
+    private void buyCard(WebSocketSession webSocketSession, EntityId entityId) {
+        BuyCard buyCard = new BuyCard(webSocketSession.getUser(), entityId);
         logger.info("TX buyCard={}", buyCard);
         webSocketSession.getMatch().getActionHandler().accept(buyCard);
     }
