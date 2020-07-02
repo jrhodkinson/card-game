@@ -37,7 +37,7 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
 
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
-        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
+        if (cardPlayed.getCard().equals(this.getCard())) {
             logger.info("Adding {} money to current turn", amount);
             match.getController(TurnController.class).changeMoney(amount);
         }
