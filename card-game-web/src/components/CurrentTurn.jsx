@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import * as S from "../styles";
 import { useSelector } from "react-redux";
 import { endTurn } from "../gateway/ws";
 import { getCurrentTurn } from "../store/match-selector";
