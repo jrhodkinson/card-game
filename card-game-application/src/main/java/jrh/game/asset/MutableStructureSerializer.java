@@ -23,6 +23,9 @@ public class MutableStructureSerializer extends StdSerializer<MutableStructure> 
         gen.writeObjectField("id", structure.getStructureId());
         gen.writeObjectField("name", structure.getName());
         gen.writeObjectField("health", structure.getHealth());
+        if (structure.getFlavorText().isPresent()) {
+            gen.writeObjectField("flavor", structure.getFlavorText().get());
+        }
         gen.writeArrayFieldStart("powers");
         for (Power power : structure.getPowers()) {
             gen.writeStartArray();
