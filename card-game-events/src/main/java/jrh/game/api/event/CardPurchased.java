@@ -6,16 +6,16 @@ import jrh.game.api.Event;
 
 public class CardPurchased implements Event {
 
-    private final Player player;
+    private final Player purchaser;
     private final Card card;
 
-    public CardPurchased(Player player, Card card) {
-        this.player = player;
+    public CardPurchased(Player purchaser, Card card) {
+        this.purchaser = purchaser;
         this.card = card;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Player getPurchaser() {
+        return purchaser;
     }
 
     public Card getCard() {

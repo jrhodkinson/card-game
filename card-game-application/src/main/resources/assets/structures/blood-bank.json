@@ -1,0 +1,21 @@
+{
+  "id": "BLOOD_BANK",
+  "name": "Blood Bank",
+  "health": 1,
+  "powers": [
+    [
+      "modifyCost",
+      {
+        "purchasers": [ "OTHER" ],
+        "amount": -1
+      }
+    ],
+    [
+      "damageOnPurchase",
+      {
+        "purchasers": [ "OTHER" ],
+        "amount": 2
+      }
+    ]
+  ]
+}

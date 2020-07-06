@@ -44,10 +44,10 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
     @Subscribe
     private void cardPurchased(CardPurchased cardPurchased, Match match) {
         if (cardPurchased.getCard().equals(this.getCard())) {
-            List<Damageable> realTargets = computeRealTargets(match, cardPurchased.getPlayer());
+            List<Damageable> realTargets = computeRealTargets(match, cardPurchased.getPurchaser());
             logger.info("Damaging targets={} by amount={}", realTargets, amount);
             realTargets.forEach((target) -> match.getController(HealthController.class)
-                    .damage(cardPurchased.getPlayer(), target, this.amount));
+                    .damage(cardPurchased.getPurchaser(), target, this.amount));
         }
     }
 

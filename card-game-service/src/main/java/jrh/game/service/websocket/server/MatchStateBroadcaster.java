@@ -7,6 +7,7 @@ import jrh.game.api.event.CardPurchased;
 import jrh.game.api.event.CardResolved;
 import jrh.game.api.event.MatchEnded;
 import jrh.game.api.event.MatchStarted;
+import jrh.game.api.event.PlayerTookDamage;
 import jrh.game.api.event.TurnEnded;
 import jrh.game.common.EventHandler;
 import jrh.game.common.User;
@@ -39,6 +40,11 @@ public class MatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void cardPurchased(CardPurchased cardPurchased, Match match) {
+        broadcastFullMatchState(match);
+    }
+
+    @Subscribe
+    private void playerTookDamage(PlayerTookDamage playerTookDamage, Match match) {
         broadcastFullMatchState(match);
     }
 
