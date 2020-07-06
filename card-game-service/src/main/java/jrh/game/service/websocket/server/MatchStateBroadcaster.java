@@ -5,6 +5,7 @@ import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardDestroyed;
 import jrh.game.api.event.CardPurchased;
 import jrh.game.api.event.CardResolved;
+import jrh.game.api.event.MatchEnded;
 import jrh.game.api.event.MatchStarted;
 import jrh.game.api.event.TurnEnded;
 import jrh.game.common.EventHandler;
@@ -26,30 +27,35 @@ public class MatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match) {
-        broadcastMatchState(match);
+        broadcaseFullMatchState(match);
     }
 
     @Subscribe
     private void cardDestroyed(CardDestroyed cardDestroyed, Match match) {
-        broadcastMatchState(match);
+        broadcaseFullMatchState(match);
     }
 
     @Subscribe
     private void cardPurchased(CardPurchased cardPurchased, Match match) {
-        broadcastMatchState(match);
+        broadcaseFullMatchState(match);
     }
 
     @Subscribe
     private void matchStarted(MatchStarted matchStarted, Match match) {
-        broadcastMatchState(match);
+        broadcaseFullMatchState(match);
     }
 
     @Subscribe
     private void turnEnded(TurnEnded turnEnded, Match match) {
-        broadcastMatchState(match);
+        broadcaseFullMatchState(match);
     }
 
-    private void broadcastMatchState(Match match) {
+    @Subscribe
+    private void matchEnded(MatchEnded matchEnded) {
+        webSocketConnectionManager.broadcast(ServerWebSocketMessages.matchEnded(matchEnded.getWinner()));
+    }
+
+    private void broadcaseFullMatchState(Match match) {
         latestMatchState = MatchDto.fromMatch(match);
         matchStateMessage().ifPresent(webSocketConnectionManager::broadcast);
     }
