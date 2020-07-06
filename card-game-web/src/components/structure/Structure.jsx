@@ -60,7 +60,7 @@ const Structure = ({
       interactable={interactable}
       onClick={() => onStructureClick(structure)}
     >
-      <Name>{structure.name}</Name>
+      <Name title={structure.flavor}>{structure.name}</Name>
       <Health>{structure.health}</Health>
     </Wrapper>
   );

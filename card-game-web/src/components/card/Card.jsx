@@ -20,7 +20,9 @@ const Card = ({
       onMouseOut={() => setMouseOver(false)}
     >
       <S.CardCost background={card.color}>{card.cost}</S.CardCost>
-      <S.CardName background={card.color}>{card.name}</S.CardName>
+      <S.CardName background={card.color} title={card.flavor}>
+        {card.name}
+      </S.CardName>
       <S.CardImage background={card.color} />
       {hideDescription ? (
         mouseOver && (

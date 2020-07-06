@@ -1,6 +1,7 @@
 {
   "id": "BLOOD_BANK",
   "name": "Blood Bank",
+  "flavor": "See, look, that's yours",
   "health": 1,
   "powers": [
     [

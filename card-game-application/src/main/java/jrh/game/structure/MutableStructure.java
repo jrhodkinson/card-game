@@ -88,7 +88,7 @@ public class MutableStructure implements Structure {
     }
 
     MutableStructure duplicate() {
-        MutableStructure duplicate = new MutableStructure(structureId, name, health);
+        MutableStructure duplicate = new MutableStructure(structureId, name, health, flavorText);
         for (AbstractPower power : powers.values()) {
             duplicate.addPower(power.duplicate());
         }
