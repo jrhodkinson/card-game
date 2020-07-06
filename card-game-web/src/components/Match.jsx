@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { login } from "../gateway/ws";
-import { getActivePlayer, getInactivePlayer } from "../store/match-selector";
+import {
+  getActivePlayer,
+  getInactivePlayer,
+  getWinner,
+} from "../store/match-selector";
 import CurrentTurn from "./CurrentTurn";
 import MatchWebSocket from "./MatchWebSocket";
 import PrimaryPlayer from "./player/PrimaryPlayer";
@@ -15,6 +19,7 @@ const Wrapper = styled.main`
 `;
 
 const Match = () => {
+  const winner = useSelector(getWinner);
   const activePlayer = useSelector(getActivePlayer);
   const inactivePlayer = useSelector(getInactivePlayer);
 
@@ -27,10 +32,16 @@ const Match = () => {
   return (
     <Wrapper>
       <MatchWebSocket />
-      <SecondaryPlayer player={inactivePlayer} />
-      <Storefront />
-      <CurrentTurn />
-      <PrimaryPlayer player={activePlayer} />
+      {winner ? (
+        "Match is over, winner: " + winner
+      ) : (
+        <>
+          <SecondaryPlayer player={inactivePlayer} />
+          <Storefront />
+          <CurrentTurn />
+          <PrimaryPlayer player={activePlayer} />
+        </>
+      )}
     </Wrapper>
   );
 };

@@ -9,6 +9,7 @@ import jrh.game.api.event.MatchEnded;
 import jrh.game.api.event.MatchStarted;
 import jrh.game.api.event.TurnEnded;
 import jrh.game.common.EventHandler;
+import jrh.game.common.User;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessage;
 import jrh.game.service.websocket.server.dto.MatchDto;
@@ -19,7 +20,7 @@ public class MatchStateBroadcaster implements EventHandler {
 
     private final WebSocketConnectionManager webSocketConnectionManager;
     private MatchDto latestMatchState;
-    private boolean matchIsOver = false;
+    private User winner;
 
     public MatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager) {
         this.webSocketConnectionManager = webSocketConnectionManager;
@@ -53,8 +54,8 @@ public class MatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void matchEnded(MatchEnded matchEnded) {
+        winner = matchEnded.getWinner();
         webSocketConnectionManager.broadcast(ServerWebSocketMessages.matchEnded(matchEnded.getWinner()));
-        matchIsOver = true;
     }
 
     private void broadcastFullMatchState(Match match) {
@@ -62,9 +63,9 @@ public class MatchStateBroadcaster implements EventHandler {
         matchStateMessage().ifPresent(webSocketConnectionManager::broadcast);
     }
 
-    private Optional<WebSocketMessage<MatchDto>> matchStateMessage() {
-        if (matchIsOver) {
-            return Optional.empty();
+    private Optional<WebSocketMessage<?>> matchStateMessage() {
+        if (winner != null) {
+            return Optional.of(ServerWebSocketMessages.matchEnded(winner));
         }
         return Optional.ofNullable(latestMatchState).map(ServerWebSocketMessages::matchState);
     }
