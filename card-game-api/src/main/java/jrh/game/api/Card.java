@@ -6,6 +6,7 @@ import jrh.game.common.Color;
 import jrh.game.common.EntityId;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface Card {
 
@@ -14,6 +15,8 @@ public interface Card {
     CardId getCardId();
 
     String getName();
+
+    Optional<String> getFlavorText();
 
     int getCost();
 

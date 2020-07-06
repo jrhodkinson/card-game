@@ -27,7 +27,14 @@ public class MutableStructureDeserializer extends StdDeserializer<MutableStructu
         StructureId id = tree.get("id").traverse(jp.getCodec()).readValueAs(StructureId.class);
         String name = tree.get("name").traverse(jp.getCodec()).readValueAs(String.class);
         Integer health = tree.get("health").traverse(jp.getCodec()).readValueAs(Integer.class);
-        MutableStructure structure = new MutableStructure(id, name, health);
+        JsonNode flavorNode = tree.get("flavor");
+        MutableStructure structure;
+        if (flavorNode == null) {
+            structure = new MutableStructure(id, name, health);
+        } else {
+            String flavorText = flavorNode.traverse(jp.getCodec()).readValueAs(String.class);
+            structure = new MutableStructure(id, name, health, flavorText);
+        }
         JsonNode powers = tree.get("powers");
         for (int i = 0; i < powers.size(); i++) {
             JsonNode powerJson = powers.get(i);

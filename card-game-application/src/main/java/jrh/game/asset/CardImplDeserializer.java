@@ -31,6 +31,10 @@ public class CardImplDeserializer extends StdDeserializer<CardImpl> {
         Integer cost = tree.get("cost").traverse(jp.getCodec()).readValueAs(Integer.class);
         Color color = tree.get("color").traverse(jp.getCodec()).readValueAs(Color.class);
         CardImpl.Builder cardBuilder = CardImpl.card(id).withName(name).withCost(cost).withColor(color);
+        JsonNode flavorNode = tree.get("flavor");
+        if (flavorNode != null) {
+            cardBuilder = cardBuilder.withFlavorText(flavorNode.traverse(jp.getCodec()).readValueAs(String.class));
+        }
         JsonNode behaviours = tree.get("behaviours");
         for (int i = 0; i < behaviours.size(); i++) {
             JsonNode behaviourJson = behaviours.get(i);

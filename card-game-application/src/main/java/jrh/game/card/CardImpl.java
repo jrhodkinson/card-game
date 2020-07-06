@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @JsonDeserialize(using = CardImplDeserializer.class)
@@ -27,6 +28,7 @@ public class CardImpl implements Card {
     private final String name;
     private final int cost;
     private final Color color;
+    private final String flavorText;
     private final Map<Class<? extends AbstractBehaviour>, AbstractBehaviour> behaviours;
 
     private CardImpl(Builder builder) {
@@ -35,6 +37,7 @@ public class CardImpl implements Card {
         this.cost = builder.cost;
         this.color = builder.color;
         this.behaviours = builder.behaviours;
+        this.flavorText = builder.flavorText;
         this.behaviours.values().forEach(behaviour -> behaviour.forCard(this));
     }
 
@@ -55,6 +58,11 @@ public class CardImpl implements Card {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Optional<String> getFlavorText() {
+        return Optional.ofNullable(flavorText);
     }
 
     @Override
@@ -136,6 +144,7 @@ public class CardImpl implements Card {
         private String name;
         private int cost;
         private Color color;
+        private String flavorText;
         private final LinkedHashMap<Class<? extends AbstractBehaviour>, AbstractBehaviour> behaviours = new LinkedHashMap<>();
 
         private Builder(CardId cardId) {
@@ -154,6 +163,11 @@ public class CardImpl implements Card {
 
         public Builder withColor(Color color) {
             this.color = color;
+            return this;
+        }
+
+        public Builder withFlavorText(String flavorText) {
+            this.flavorText = flavorText;
             return this;
         }
 

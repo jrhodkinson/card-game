@@ -1,7 +1,5 @@
 package jrh.game.structure;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jrh.game.api.Power;
@@ -16,6 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @JsonDeserialize(using = MutableStructureDeserializer.class)
 @JsonSerialize(using = MutableStructureSerializer.class)
@@ -24,15 +23,19 @@ public class MutableStructure implements Structure {
     private final EntityId entityId = EntityId.randomEntityId();
     private final StructureId structureId;
     private final String name;
+    private final String flavorText;
     private final Map<Class<? extends AbstractPower>, AbstractPower> powers = new HashMap<>();
     private int health;
 
-    @JsonCreator
-    public MutableStructure(@JsonProperty("id") StructureId structureId, @JsonProperty("name") String name,
-            @JsonProperty("health") int health) {
+    public MutableStructure(StructureId structureId,String name, int health) {
+        this(structureId, name, health, null);
+    }
+
+    public MutableStructure(StructureId structureId,String name, int health, String flavorText) {
         this.structureId = structureId;
         this.name = name;
         this.health = health;
+        this.flavorText = flavorText;
     }
 
     @Override
@@ -48,6 +51,11 @@ public class MutableStructure implements Structure {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Optional<String> getFlavorText() {
+        return Optional.ofNullable(flavorText);
     }
 
     @Override
