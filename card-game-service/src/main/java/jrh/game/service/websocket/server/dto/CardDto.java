@@ -13,16 +13,18 @@ public class CardDto {
     public final EntityId entityId;
     public final CardId cardId;
     public final String name;
+    public final String flavor;
     public final int cost;
     public final CardDescriptionDto description;
     public final ColorDto color;
     public final boolean requiresTarget;
 
-    private CardDto(EntityId entityId, CardId cardId, String name, int cost, CardDescriptionDto description,
+    private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost, CardDescriptionDto description,
             ColorDto color, boolean requiresTarget) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;
+        this.flavor = flavor;
         this.cost = cost;
         this.description = description;
         this.color = color;
@@ -30,7 +32,7 @@ public class CardDto {
     }
 
     public static CardDto fromCard(Card card) {
-        return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getCost(),
+        return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null), card.getCost(),
                 CardDescriptionDto.fromCardDescription(card.getDescription()), ColorDto.fromColor(card.getColor()),
                 card.requiresTarget());
     }
