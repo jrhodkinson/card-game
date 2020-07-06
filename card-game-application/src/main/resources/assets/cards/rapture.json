@@ -1,0 +1,17 @@
+{
+  "id": "RAPTURE",
+  "name": "Rapture",
+  "cost": 3,
+  "color": "RED",
+  "behaviours": [
+    [
+      "damageGroup",
+      {
+        "targets": ["OWN_STRUCTURES"],
+        "amount": 77
+      }
+    ],
+    [ "money", 7 ],
+    [ "vanish" ]
+  ]
+}
