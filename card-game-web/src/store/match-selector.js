@@ -7,3 +7,5 @@ export const getInactivePlayer = (store) => getMatchState(store).inactivePlayer;
 
 export const getCurrentTurn = (store) => getMatchState(store).currentTurn;
 export const getStorefront = (store) => getMatchState(store).storefront;
+
+export const getWinner = (store) => getMatchState(store).winner;

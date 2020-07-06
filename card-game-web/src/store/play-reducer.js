@@ -1,4 +1,5 @@
 import Immutable from "seamless-immutable";
+import { MATCH_ENDED } from "./match-actions";
 import {
   PLAYED_CARD,
   PURCHASED_CARD,
@@ -17,6 +18,7 @@ export default (state = defaultState, action) => {
       return state.set("pendingCardEntityId", action.cardEntityId);
     case PLAYED_CARD:
     case PURCHASED_CARD:
+    case MATCH_ENDED:
       return defaultState;
     default:
       return state;

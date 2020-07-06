@@ -1,11 +1,17 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import { receivedMatchState } from "../store/match-actions";
+import { matchEnded, receivedMatchState } from "../store/match-actions";
 import { receivedPing } from "../store/socket-actions";
 
 const PING = "ping";
 const PONG = "pong";
 
 let ws;
+
+const MESSAGE_ACTION_CREATORS = {
+  ping: (payload) => receivedPing(payload),
+  matchState: (payload) => receivedMatchState(payload),
+  matchEnded: (payload) => matchEnded(payload),
+};
 
 const send = (type, payload) => {
   let message;
@@ -18,11 +24,6 @@ const send = (type, payload) => {
     console.log(`[ws] TX: ${message}`);
   }
   ws.send(message);
-};
-
-const MESSAGE_ACTION_CREATORS = {
-  ping: (payload) => receivedPing(payload),
-  matchState: (payload) => receivedMatchState(payload),
 };
 
 const toAction = (message) => {

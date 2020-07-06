@@ -19,6 +19,7 @@ public class MatchStateBroadcaster implements EventHandler {
 
     private final WebSocketConnectionManager webSocketConnectionManager;
     private MatchDto latestMatchState;
+    private boolean matchIsOver = false;
 
     public MatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager) {
         this.webSocketConnectionManager = webSocketConnectionManager;
@@ -27,40 +28,44 @@ public class MatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match) {
-        broadcaseFullMatchState(match);
+        broadcastFullMatchState(match);
     }
 
     @Subscribe
     private void cardDestroyed(CardDestroyed cardDestroyed, Match match) {
-        broadcaseFullMatchState(match);
+        broadcastFullMatchState(match);
     }
 
     @Subscribe
     private void cardPurchased(CardPurchased cardPurchased, Match match) {
-        broadcaseFullMatchState(match);
+        broadcastFullMatchState(match);
     }
 
     @Subscribe
     private void matchStarted(MatchStarted matchStarted, Match match) {
-        broadcaseFullMatchState(match);
+        broadcastFullMatchState(match);
     }
 
     @Subscribe
     private void turnEnded(TurnEnded turnEnded, Match match) {
-        broadcaseFullMatchState(match);
+        broadcastFullMatchState(match);
     }
 
     @Subscribe
     private void matchEnded(MatchEnded matchEnded) {
         webSocketConnectionManager.broadcast(ServerWebSocketMessages.matchEnded(matchEnded.getWinner()));
+        matchIsOver = true;
     }
 
-    private void broadcaseFullMatchState(Match match) {
+    private void broadcastFullMatchState(Match match) {
         latestMatchState = MatchDto.fromMatch(match);
         matchStateMessage().ifPresent(webSocketConnectionManager::broadcast);
     }
 
     private Optional<WebSocketMessage<MatchDto>> matchStateMessage() {
+        if (matchIsOver) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(latestMatchState).map(ServerWebSocketMessages::matchState);
     }
 }
