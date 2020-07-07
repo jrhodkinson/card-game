@@ -1,0 +1,16 @@
+{
+  "id": "IDOL",
+  "name": "Idol",
+  "cost": 4,
+  "color": "YELLOW",
+  "behaviours": [
+    [
+      "gainOnPurchase",
+      "REPENT"
+    ],
+    [
+      "money",
+      8
+    ]
+  ]
+}
