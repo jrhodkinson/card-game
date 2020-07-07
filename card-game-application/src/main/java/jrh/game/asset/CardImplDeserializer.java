@@ -40,6 +40,11 @@ public class CardImplDeserializer extends StdDeserializer<CardImpl> {
             JsonNode behaviourJson = behaviours.get(i);
             String behaviourKey = behaviourJson.get(0).asText();
             Class<? extends AbstractBehaviour> behaviourClass = SerializationKeys.getBehaviourClass(behaviourKey);
+            if (behaviourClass == null) {
+                logger.error("Invalid behaviour={} for cardId={}, could not find behaviour class", behaviourJson,
+                        tree.get("id"));
+                continue;
+            }
             if (behaviourJson.size() == 1) {
                 try {
                     cardBuilder.withBehaviour(behaviourClass.getConstructor().newInstance());

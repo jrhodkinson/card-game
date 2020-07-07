@@ -5,7 +5,7 @@
   "color": "YELLOW",
   "behaviours": [
     [
-      "gainOnPurchase",
+      "gainCardOnPurchase",
       "REPENT"
     ],
     [
