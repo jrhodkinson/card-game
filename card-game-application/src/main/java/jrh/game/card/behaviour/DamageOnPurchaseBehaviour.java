@@ -28,7 +28,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
     private final int amount;
 
     public DamageOnPurchaseBehaviour(@JsonProperty("targets") List<Target> targets,
-                                     @JsonProperty("amount") int amount) {
+            @JsonProperty("amount") int amount) {
         super(false);
         this.targets = targets;
         this.amount = amount;
@@ -37,7 +37,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
     @Override
     public BehaviourDescription getDescription() {
         return BehaviourDescription.builder().plainString("On purchase,").keyword("damage")
-            .plainString(targets.toString()).number(amount).build();
+                .plainString(targets.toString()).number(amount).build();
     }
 
     @Subscribe
@@ -46,7 +46,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
             List<Damageable> realTargets = computeRealTargets(match, cardPurchased.getPurchaser());
             logger.info("Damaging targets={} by amount={}", realTargets, amount);
             realTargets.forEach((target) -> match.getController(HealthController.class)
-                .damage(cardPurchased.getPurchaser(), target, this.amount));
+                    .damage(cardPurchased.getPurchaser(), target, this.amount));
         }
     }
 
