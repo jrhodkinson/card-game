@@ -1,16 +1,15 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.asset.JsonKey;
-import jrh.game.api.event.CardPlayed;
-import jrh.game.common.BehaviourDescription;
-import jrh.game.api.Subscribe;
-import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
+import jrh.game.api.Subscribe;
+import jrh.game.api.event.CardPlayed;
+import jrh.game.asset.JsonKey;
+import jrh.game.common.BehaviourDescription;
 import jrh.game.common.Target;
+import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,10 +21,10 @@ public class DamageGroupBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(DamageGroupBehaviour.class);
 
-    @JsonValue
+    @JsonProperty
     private final List<Target> targets;
 
-    @JsonValue
+    @JsonProperty
     private final int amount;
 
     public DamageGroupBehaviour(@JsonProperty("targets") List<Target> targets, @JsonProperty("amount") int amount) {

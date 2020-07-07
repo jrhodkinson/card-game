@@ -1,5 +1,6 @@
 package jrh.game.card.behaviour;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jrh.game.api.Behaviour;
 import jrh.game.api.Card;
 import jrh.game.common.BehaviourDescription;
@@ -27,6 +28,7 @@ public abstract class AbstractBehaviour implements Behaviour {
     }
 
     @Override
+    @JsonIgnore
     abstract public BehaviourDescription getDescription();
 
     abstract public AbstractBehaviour duplicate();

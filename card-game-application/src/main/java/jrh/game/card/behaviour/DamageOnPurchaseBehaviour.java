@@ -1,16 +1,15 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.asset.JsonKey;
-import jrh.game.common.BehaviourDescription;
-import jrh.game.api.Subscribe;
-import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
-import jrh.game.common.Target;
+import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardPurchased;
+import jrh.game.asset.JsonKey;
+import jrh.game.common.BehaviourDescription;
+import jrh.game.common.Target;
+import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,14 +21,14 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
     private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
 
-    @JsonValue
+    @JsonProperty
     private final List<Target> targets;
 
-    @JsonValue
+    @JsonProperty
     private final int amount;
 
     public DamageOnPurchaseBehaviour(@JsonProperty("targets") List<Target> targets,
-            @JsonProperty("amount") int amount) {
+                                     @JsonProperty("amount") int amount) {
         super(false);
         this.targets = targets;
         this.amount = amount;
@@ -38,7 +37,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
     @Override
     public BehaviourDescription getDescription() {
         return BehaviourDescription.builder().plainString("On purchase,").keyword("damage")
-                .plainString(targets.toString()).number(amount).build();
+            .plainString(targets.toString()).number(amount).build();
     }
 
     @Subscribe
@@ -47,7 +46,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
             List<Damageable> realTargets = computeRealTargets(match, cardPurchased.getPurchaser());
             logger.info("Damaging targets={} by amount={}", realTargets, amount);
             realTargets.forEach((target) -> match.getController(HealthController.class)
-                    .damage(cardPurchased.getPurchaser(), target, this.amount));
+                .damage(cardPurchased.getPurchaser(), target, this.amount));
         }
     }
 

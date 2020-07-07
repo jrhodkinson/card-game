@@ -28,7 +28,8 @@ public class GainCardOnPurchaseBehaviour extends AbstractBehaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().plainString("On purchase,").keyword("Gain").plainString(cardId.toString()).build();
+        return BehaviourDescription.builder().plainString("On purchase,").keyword("Gain").plainString(cardId.toString())
+                .build();
     }
 
     @Subscribe
