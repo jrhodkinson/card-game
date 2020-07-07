@@ -88,7 +88,7 @@ public class CardFlowController implements Controller {
         }
     }
 
-    public void buyCard(User user, EntityId cardEntityId) {
+    public void buyCard(EntityId cardEntityId, User user) {
         if (!match.getActivePlayer().getUser().equals(user)) {
             logger.warn("Not buying card, user={} wasn't the active player", user);
             return;
@@ -116,7 +116,7 @@ public class CardFlowController implements Controller {
         match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
     }
 
-    public void gainCardDirectly(User user, CardId cardId) {
+    public void gainDirectly(CardId cardId, User user) {
         Optional<CardImpl> optionalCard = cardImplFactory.create(cardId);
         if (optionalCard.isEmpty()) {
             logger.error("Could not gain card with cardId={} for user={}. The factory didn't create one", cardId, user);

@@ -22,7 +22,7 @@ public class ActionHandlerImpl implements ActionHandler, EventHandler {
 
     @Subscribe
     private void buyCard(BuyCard buyCard) {
-        match.getController(CardFlowController.class).buyCard(buyCard.getUser(), buyCard.getCardEntityId());
+        match.getController(CardFlowController.class).buyCard(buyCard.getCardEntityId(), buyCard.getUser());
     }
 
     @Subscribe
