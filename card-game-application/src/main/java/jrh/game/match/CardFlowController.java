@@ -6,12 +6,16 @@ import jrh.game.api.Damageable;
 import jrh.game.api.Player;
 import jrh.game.api.Structure;
 import jrh.game.api.event.CardDestroyed;
+import jrh.game.api.event.CardGained;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.api.event.CardPurchased;
 import jrh.game.api.event.CardResolved;
 import jrh.game.api.event.DiscardedCard;
 import jrh.game.api.event.DrewCard;
+import jrh.game.card.CardImpl;
+import jrh.game.card.CardImplFactory;
 import jrh.game.card.behaviour.UnplayableBehaviour;
+import jrh.game.common.CardId;
 import jrh.game.common.EntityId;
 import jrh.game.common.User;
 import jrh.game.deck.DiscardPile;
@@ -24,9 +28,11 @@ public class CardFlowController implements Controller {
 
     private static final Logger logger = LogManager.getLogger(CardFlowController.class);
     private final MutableMatch match;
+    private final CardImplFactory cardImplFactory;
 
-    public CardFlowController(MutableMatch match) {
+    public CardFlowController(MutableMatch match, CardImplFactory cardImplFactory) {
         this.match = match;
+        this.cardImplFactory = cardImplFactory;
     }
 
     public Optional<Player> getOwner(Card card) {
@@ -107,6 +113,18 @@ public class CardFlowController implements Controller {
         match.getCurrentTurn().setMoney(money - cost);
         match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
         match.getEventBus().dispatch(new CardPurchased(match.getActivePlayer(), card));
+        match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
+    }
+
+    public void gainCardDirectly(User user, CardId cardId) {
+        Optional<CardImpl> optionalCard = cardImplFactory.create(cardId);
+        if (optionalCard.isEmpty()) {
+            logger.error("Could not gain card with cardId={} for user={}. The factory didn't create one", cardId, user);
+            return;
+        }
+        CardImpl card = optionalCard.get();
+        match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
+        match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
     }
 
     public void discardCard(Player player, Card card) {

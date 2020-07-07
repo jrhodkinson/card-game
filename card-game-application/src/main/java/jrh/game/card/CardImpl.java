@@ -102,7 +102,8 @@ public class CardImpl implements Card {
     }
 
     CardImpl duplicate() {
-        CardImpl.Builder duplicateBuilder = CardImpl.card(cardId).withName(name).withCost(cost).withColor(color).withFlavorText(flavorText);
+        CardImpl.Builder duplicateBuilder = CardImpl.card(cardId).withName(name).withCost(cost).withColor(color)
+                .withFlavorText(flavorText);
         behaviours.values().forEach(behaviour -> duplicateBuilder.withBehaviour(behaviour.duplicate()));
         return duplicateBuilder.build();
     }

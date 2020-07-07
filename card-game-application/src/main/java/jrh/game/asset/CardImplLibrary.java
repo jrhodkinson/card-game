@@ -4,10 +4,11 @@ import jrh.game.card.CardImpl;
 import jrh.game.common.CardId;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CardImplLibrary {
 
-    CardImpl getCard(CardId cardId);
+    Optional<CardImpl> getCard(CardId cardId);
 
-    List<CardImpl> getAllCards();
+    List<CardId> getAllCardIds();
 }

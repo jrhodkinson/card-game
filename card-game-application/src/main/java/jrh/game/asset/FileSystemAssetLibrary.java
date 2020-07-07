@@ -3,9 +3,9 @@ package jrh.game.asset;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jrh.game.card.CardImpl;
 import jrh.game.common.CardId;
-import jrh.game.structure.MutableStructure;
-import jrh.game.common.StructureId;
 import jrh.game.common.ObjectMapperFactory;
+import jrh.game.common.StructureId;
+import jrh.game.structure.MutableStructure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class FileSystemAssetLibrary implements AssetLibrary {
 
@@ -29,23 +30,23 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     }
 
     @Override
-    public CardImpl getCard(CardId cardId) {
-        return cards.get(cardId);
+    public Optional<CardImpl> getCard(CardId cardId) {
+        return Optional.ofNullable(cards.get(cardId));
     }
 
     @Override
-    public List<CardImpl> getAllCards() {
-        return List.copyOf(cards.values());
+    public List<CardId> getAllCardIds() {
+        return List.copyOf(cards.keySet());
     }
 
     @Override
-    public MutableStructure getStructure(StructureId structureId) {
-        return structures.get(structureId);
+    public Optional<MutableStructure> getStructure(StructureId structureId) {
+        return Optional.ofNullable(structures.get(structureId));
     }
 
     @Override
-    public List<MutableStructure> getAllStructures() {
-        return List.copyOf(structures.values());
+    public List<StructureId> getAllStructureIds() {
+        return List.copyOf(structures.keySet());
     }
 
     private void loadAssets(Path assetsDirectory) {

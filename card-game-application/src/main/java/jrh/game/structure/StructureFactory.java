@@ -1,9 +1,11 @@
 package jrh.game.structure;
 
-import jrh.game.common.StructureId;
-import jrh.game.asset.MutableStructureLibrary;
 import jrh.game.api.EventBus;
 import jrh.game.api.event.StructureCreated;
+import jrh.game.asset.MutableStructureLibrary;
+import jrh.game.common.StructureId;
+
+import java.util.Optional;
 
 public class StructureFactory {
 
@@ -15,9 +17,9 @@ public class StructureFactory {
         this.mutableStructureLibrary = mutableStructureLibrary;
     }
 
-    public MutableStructure create(StructureId structureId) {
-        MutableStructure structure = mutableStructureLibrary.getStructure(structureId).duplicate();
-        eventBus.dispatch(new StructureCreated(structure));
-        return structure;
+    public Optional<MutableStructure> create(StructureId structureId) {
+        Optional<MutableStructure> optionalStructure = mutableStructureLibrary.getStructure(structureId);
+        optionalStructure.ifPresent(structure -> eventBus.dispatch(new StructureCreated(structure)));
+        return optionalStructure;
     }
 }

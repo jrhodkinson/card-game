@@ -7,6 +7,5 @@ public class ServerWebSocketMessageTypes extends WebSocketMessageTypes {
     public static final WebSocketMessageType<Long> PING = WebSocketMessageType.of("ping", Long.class);
     public static final WebSocketMessageType<MatchDto> MATCH_STATE = WebSocketMessageType.of("matchState",
             MatchDto.class);
-    public static final WebSocketMessageType<User> MATCH_ENDED = WebSocketMessageType.of("matchEnded",
-        User.class);
+    public static final WebSocketMessageType<User> MATCH_ENDED = WebSocketMessageType.of("matchEnded", User.class);
 }

@@ -27,11 +27,11 @@ public class MutableStructure implements Structure {
     private final Map<Class<? extends AbstractPower>, AbstractPower> powers = new HashMap<>();
     private int health;
 
-    public MutableStructure(StructureId structureId,String name, int health) {
+    public MutableStructure(StructureId structureId, String name, int health) {
         this(structureId, name, health, null);
     }
 
-    public MutableStructure(StructureId structureId,String name, int health, String flavorText) {
+    public MutableStructure(StructureId structureId, String name, int health, String flavorText) {
         this.structureId = structureId;
         this.name = name;
         this.health = health;

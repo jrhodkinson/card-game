@@ -1,17 +1,19 @@
 package jrh.game.structure;
 
-import jrh.game.common.StructureId;
-import jrh.game.common.EventHandler;
-import jrh.game.api.Subscribe;
 import jrh.game.api.Controller;
-import jrh.game.match.MutableMatch;
 import jrh.game.api.Player;
 import jrh.game.api.Structure;
+import jrh.game.api.Subscribe;
 import jrh.game.api.event.StructureConstructed;
 import jrh.game.api.event.StructureDestroyed;
 import jrh.game.api.event.StructureTookDamage;
+import jrh.game.common.EventHandler;
+import jrh.game.common.StructureId;
+import jrh.game.match.MutableMatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
 
 public class StructureStateController implements Controller, EventHandler {
 
@@ -39,7 +41,14 @@ public class StructureStateController implements Controller, EventHandler {
     }
 
     public void construct(StructureId structureId, Player player) {
-        MutableStructure structure = factory.create(structureId);
+        Optional<MutableStructure> optionalStructure = factory.create(structureId);
+        if (optionalStructure.isEmpty()) {
+            logger.error(
+                    "Could not construct structure with structureId={} for player={}. It wasn't in the structure factory",
+                    structureId, player);
+            return;
+        }
+        MutableStructure structure = optionalStructure.get();
         structure.getPowers().forEach(power -> match.getEventBus().register(power));
         logger.info("Assigning structure={} to player={}", structure, player);
         match.getPlayerAsMutable(player).getStructuresAsMutable().add(structure);

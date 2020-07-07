@@ -1,13 +1,14 @@
 package jrh.game.asset;
 
-import jrh.game.structure.MutableStructure;
 import jrh.game.common.StructureId;
+import jrh.game.structure.MutableStructure;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MutableStructureLibrary {
 
-    MutableStructure getStructure(StructureId structureId);
+    Optional<MutableStructure> getStructure(StructureId structureId);
 
-    List<MutableStructure> getAllStructures();
+    List<StructureId> getAllStructureIds();
 }

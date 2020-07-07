@@ -30,7 +30,7 @@ public class DamageOnPurchasePower extends AbstractPower {
     private final int amount;
 
     public DamageOnPurchasePower(@JsonProperty("purchasers") List<Target> purchasers,
-                                 @JsonProperty("amount") int amount) {
+            @JsonProperty("amount") int amount) {
         this.purchasers = purchasers;
         this.amount = amount;
     }
@@ -48,7 +48,7 @@ public class DamageOnPurchasePower extends AbstractPower {
     private boolean shouldDamage(Match match, Player purchaser) {
         Player owner = match.getController(StructureStateController.class).getOwner(getStructure());
         return (owner.equals(purchaser) && purchasers.contains(SELF))
-            || (!owner.equals(purchaser) && purchasers.contains(OTHER));
+                || (!owner.equals(purchaser) && purchasers.contains(OTHER));
     }
 
     private Player owner(Match match) {
