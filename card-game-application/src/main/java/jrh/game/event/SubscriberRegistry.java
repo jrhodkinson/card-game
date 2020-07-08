@@ -33,17 +33,20 @@ public class SubscriberRegistry {
         Method[] allMethods = eventHandler.getClass().getDeclaredMethods();
         for (Method method : allMethods) {
             if (method.isAnnotationPresent(Subscribe.class) && method.isAnnotationPresent(SubscribeAll.class)) {
-                throw new EventBusException("Method must only be annotated with one of @Subscribe or @SubscribeAll, not both");
+                throw new EventBusException(
+                    "Method must only be annotated with one of @Subscribe or @SubscribeAll, not both");
             }
             if (method.isAnnotationPresent(Subscribe.class)) {
-                verifyTypeSignature(method);
-                Subscriber subscriber = new Subscriber(eventHandler, method, singletonList((Class<? extends Event>) method.getParameterTypes()[0]));
+                verifyTypeSignature(method, Subscribe.class);
+                Subscriber subscriber = new Subscriber(eventHandler, method,
+                    singletonList((Class<? extends Event>) method.getParameterTypes()[0]));
                 logger.info("Registering subscriber={}", subscriber);
                 subscribers.add(subscriber);
             }
             if (method.isAnnotationPresent(SubscribeAll.class)) {
-                verifyTypeSignature(method);
-                List<Class<? extends Event>> eventTypes = Arrays.asList(method.getAnnotation(SubscribeAll.class).value());
+                verifyTypeSignature(method, SubscribeAll.class);
+                List<Class<? extends Event>> eventTypes = Arrays
+                    .asList(method.getAnnotation(SubscribeAll.class).value());
                 Subscriber subscriber = new Subscriber(eventHandler, method, eventTypes);
                 logger.info("Registering subscriber={}", subscriber);
                 subscribers.add(subscriber);
@@ -63,17 +66,18 @@ public class SubscriberRegistry {
     }
 
     List<Subscriber> getSubscribers(Class<? extends Event> eventType) {
-        return subscribers.stream().filter(subscriber -> subscriber.listensTo(eventType))
-                .collect(Collectors.toList());
+        return subscribers.stream().filter(subscriber -> subscriber.listensTo(eventType)).collect(Collectors.toList());
     }
 
-    private void verifyTypeSignature(Method method) {
+    private void verifyTypeSignature(Method method, Class<?> annotationClass) {
         if (method.getParameterCount() == 0 || method.getParameterCount() > 3) {
             throw new EventBusException("Subscriber must have either between one and three (inclusive) parameters");
         }
         Class<?>[] parameterTypes = method.getParameterTypes();
-        if (!Event.class.isAssignableFrom(parameterTypes[0])) {
-            throw new EventBusException("Event must be assignable from Subscriber's first parameter");
+        if (Subscribe.class.equals(annotationClass) && !Event.class.isAssignableFrom(parameterTypes[0])) {
+            throw new EventBusException("Event must be assignable from the type of Subscriber's first parameter");
+        } else if (SubscribeAll.class.equals(annotationClass) && !Event.class.equals(parameterTypes[0])) {
+            throw new EventBusException("Event must be the type of Subscriber's first parameter");
         }
         if (parameterTypes.length > 1 && !Match.class.isAssignableFrom(parameterTypes[1])) {
             throw new EventBusException("Second parameter of Subscriber, if present, must be of type Match");

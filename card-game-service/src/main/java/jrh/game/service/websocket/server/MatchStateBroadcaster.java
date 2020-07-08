@@ -1,8 +1,11 @@
 package jrh.game.service.websocket.server;
 
+import jrh.game.api.Event;
 import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
+import jrh.game.api.SubscribeAll;
 import jrh.game.api.event.CardDestroyed;
+import jrh.game.api.event.CardGained;
 import jrh.game.api.event.CardPurchased;
 import jrh.game.api.event.CardResolved;
 import jrh.game.api.event.MatchEnded;
@@ -28,33 +31,9 @@ public class MatchStateBroadcaster implements EventHandler {
         webSocketConnectionManager.addWelcomeMessage(this::matchStateMessage);
     }
 
-    @Subscribe
-    private void cardResolved(CardResolved cardResolved, Match match) {
-        broadcastFullMatchState(match);
-    }
-
-    @Subscribe
-    private void cardDestroyed(CardDestroyed cardDestroyed, Match match) {
-        broadcastFullMatchState(match);
-    }
-
-    @Subscribe
-    private void cardPurchased(CardPurchased cardPurchased, Match match) {
-        broadcastFullMatchState(match);
-    }
-
-    @Subscribe
-    private void playerTookDamage(PlayerTookDamage playerTookDamage, Match match) {
-        broadcastFullMatchState(match);
-    }
-
-    @Subscribe
-    private void matchStarted(MatchStarted matchStarted, Match match) {
-        broadcastFullMatchState(match);
-    }
-
-    @Subscribe
-    private void turnEnded(TurnEnded turnEnded, Match match) {
+    @SubscribeAll({ CardResolved.class, CardDestroyed.class, CardPurchased.class, CardGained.class,
+            PlayerTookDamage.class, MatchStarted.class, TurnEnded.class })
+    private void matchStateChanged(Event event, Match match) {
         broadcastFullMatchState(match);
     }
 
