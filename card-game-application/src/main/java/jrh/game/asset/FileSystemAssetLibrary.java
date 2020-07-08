@@ -25,7 +25,7 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     private final Map<CardId, CardImpl> cards = new HashMap<>();
     private final Map<StructureId, MutableStructure> structures = new HashMap<>();
 
-    public FileSystemAssetLibrary(Path assetsDirectory) {
+    public FileSystemAssetLibrary(Path assetsDirectory) throws IOException {
         loadAssets(assetsDirectory);
     }
 
@@ -49,13 +49,13 @@ public class FileSystemAssetLibrary implements AssetLibrary {
         return List.copyOf(structures.keySet());
     }
 
-    private void loadAssets(Path assetsDirectory) {
+    private void loadAssets(Path assetsDirectory) throws IOException {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
         addCardsFromDirectory(assetsDirectory.resolve("cards").toFile(), objectMapper);
         addStructuresFromDirectory(assetsDirectory.resolve("structures").toFile(), objectMapper);
     }
 
-    private void addCardsFromDirectory(File directory, ObjectMapper objectMapper) {
+    private void addCardsFromDirectory(File directory, ObjectMapper objectMapper) throws IOException {
         for (File file : Objects.requireNonNull(directory.listFiles())) {
             if (file.isHidden()) {
                 continue;
@@ -63,18 +63,14 @@ public class FileSystemAssetLibrary implements AssetLibrary {
             if (file.isDirectory()) {
                 addCardsFromDirectory(file, objectMapper);
             } else {
-                try {
-                    CardImpl card = objectMapper.readValue(file, CardImpl.class);
-                    cards.put(card.getCardId(), card);
-                    logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription());
-                } catch (IOException e) {
-                    logger.error("Error reading card from file={}", file, e);
-                }
+                CardImpl card = objectMapper.readValue(file, CardImpl.class);
+                cards.put(card.getCardId(), card);
+                logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription());
             }
         }
     }
 
-    private void addStructuresFromDirectory(File directory, ObjectMapper objectMapper) {
+    private void addStructuresFromDirectory(File directory, ObjectMapper objectMapper) throws IOException {
         for (File file : Objects.requireNonNull(directory.listFiles())) {
             if (file.isHidden()) {
                 continue;
@@ -82,12 +78,9 @@ public class FileSystemAssetLibrary implements AssetLibrary {
             if (file.isDirectory()) {
                 addStructuresFromDirectory(file, objectMapper);
             } else {
-                try {
-                    MutableStructure structure = objectMapper.readValue(file, MutableStructure.class);
-                    structures.put(structure.getStructureId(), structure);
-                } catch (IOException e) {
-                    logger.error("Error reading structure from file={}", file, e);
-                }
+                MutableStructure structure = objectMapper.readValue(file, MutableStructure.class);
+                structures.put(structure.getStructureId(), structure);
+                logger.debug("Loaded structure: {}, {}, {}", structure.getStructureId(), structure.getName());
             }
         }
     }

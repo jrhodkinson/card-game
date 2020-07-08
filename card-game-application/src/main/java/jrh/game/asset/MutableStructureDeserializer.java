@@ -39,22 +39,25 @@ public class MutableStructureDeserializer extends StdDeserializer<MutableStructu
         for (int i = 0; i < powers.size(); i++) {
             JsonNode powerJson = powers.get(i);
             String powerKey = powerJson.get(0).asText();
-            Class<? extends AbstractPower> powerClass = SerializationKeys.getPowerClass(powerKey)
-                    .asSubclass(AbstractPower.class);
+            Class<? extends AbstractPower> powerClass = SerializationKeys.getPowerClass(powerKey);
+            if (powerClass == null) {
+                throw new AssetDeserializationException(String.format("Invalid power=%s for structureId=%s, could not find Power class", powerKey,
+                    tree.get("id")));
+            }
             if (powerJson.size() == 1) {
                 try {
                     structure.addPower(powerClass.getConstructor().newInstance());
                 } catch (InstantiationException | NoSuchMethodException | IllegalAccessException
                         | InvocationTargetException e) {
-                    logger.error("Error instantiating power={} for structureId={} with no-args constructor", powerJson,
-                            tree.get("id"), e);
+                    throw new AssetDeserializationException(String.format("Exception instantiating power=%s for structureId=%s with no-args constructor", powerKey,
+                        tree.get("id")), e);
                 }
             } else if (powerJson.size() == 2) {
                 AbstractPower power = powerJson.get(1).traverse(jp.getCodec()).readValueAs(powerClass);
                 structure.addPower(power);
             } else {
-                logger.error("Invalid power={} for structureId={}, too many elements in array", powerJson,
-                        tree.get("id"));
+                throw new AssetDeserializationException(String.format("Invalid power=%s for structureId=%s, too many elements in array: %s", powerKey,
+                    tree.get("id"), powerJson));
             }
         }
         return structure;
