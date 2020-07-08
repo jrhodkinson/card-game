@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -20,13 +21,15 @@ import java.util.Optional;
 
 public class FileSystemAssetLibrary implements AssetLibrary {
 
+    static final String ASSETS_DIRECTORY = "assets";
+
     private static final Logger logger = LogManager.getLogger(FileSystemAssetLibrary.class);
 
     private final Map<CardId, CardImpl> cards = new HashMap<>();
     private final Map<StructureId, MutableStructure> structures = new HashMap<>();
 
-    public FileSystemAssetLibrary(Path assetsDirectory) throws IOException {
-        loadAssets(assetsDirectory);
+    public FileSystemAssetLibrary() throws IOException {
+        loadAssets();
     }
 
     @Override
@@ -49,10 +52,15 @@ public class FileSystemAssetLibrary implements AssetLibrary {
         return List.copyOf(structures.keySet());
     }
 
-    private void loadAssets(Path assetsDirectory) throws IOException {
-        ObjectMapper objectMapper = ObjectMapperFactory.create();
-        addCardsFromDirectory(assetsDirectory.resolve("cards").toFile(), objectMapper);
-        addStructuresFromDirectory(assetsDirectory.resolve("structures").toFile(), objectMapper);
+    private void loadAssets() throws IOException {
+        try {
+            Path assetsDirectory = Path.of(getClass().getClassLoader().getResource(ASSETS_DIRECTORY).toURI());
+            ObjectMapper objectMapper = ObjectMapperFactory.create();
+            addCardsFromDirectory(assetsDirectory.resolve("cards").toFile(), objectMapper);
+            addStructuresFromDirectory(assetsDirectory.resolve("structures").toFile(), objectMapper);
+        } catch (URISyntaxException e) {
+            throw new IOException(e);
+        }
     }
 
     private void addCardsFromDirectory(File directory, ObjectMapper objectMapper) throws IOException {

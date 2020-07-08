@@ -41,23 +41,26 @@ public class CardImplDeserializer extends StdDeserializer<CardImpl> {
             String behaviourKey = behaviourJson.get(0).asText();
             Class<? extends AbstractBehaviour> behaviourClass = SerializationKeys.getBehaviourClass(behaviourKey);
             if (behaviourClass == null) {
-                throw new AssetDeserializationException(String.format("Invalid behaviour=%s for cardId=%s, could not find Behaviour class", behaviourKey,
-                    tree.get("id")));
+                throw new AssetDeserializationException(
+                        String.format("Invalid behaviour=%s for cardId=%s, could not find Behaviour class",
+                                behaviourKey, tree.get("id")));
             }
             if (behaviourJson.size() == 1) {
                 try {
                     cardBuilder.withBehaviour(behaviourClass.getConstructor().newInstance());
                 } catch (InstantiationException | NoSuchMethodException | IllegalAccessException
                         | InvocationTargetException e) {
-                    throw new AssetDeserializationException(String.format("Exception instantiating behaviour=%s for cardId=%s with zero-args constructor", behaviourKey,
-                        tree.get("id")), e);
+                    throw new AssetDeserializationException(String.format(
+                            "Exception instantiating behaviour=%s for cardId=%s with zero-args constructor",
+                            behaviourKey, tree.get("id")), e);
                 }
             } else if (behaviourJson.size() == 2) {
                 AbstractBehaviour behaviour = behaviourJson.get(1).traverse(jp.getCodec()).readValueAs(behaviourClass);
                 cardBuilder.withBehaviour(behaviour);
             } else {
-                throw new AssetDeserializationException(String.format("Invalid behaviour=%s for cardId=%s, too many elements in array: %s", behaviourKey,
-                    tree.get("id"), behaviourJson));
+                throw new AssetDeserializationException(
+                        String.format("Invalid behaviour=%s for cardId=%s, too many elements in array: %s",
+                                behaviourKey, tree.get("id"), behaviourJson));
             }
         }
         return cardBuilder.build();

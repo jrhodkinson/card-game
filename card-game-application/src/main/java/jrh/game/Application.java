@@ -18,7 +18,7 @@ public class Application {
     void start() {
         AssetLibrary assetLibrary = null;
         try {
-            assetLibrary = new FileSystemAssetLibrary(Constants.ASSETS_DIRECTORY);
+            assetLibrary = new FileSystemAssetLibrary();
         } catch (IOException e) {
             logger.error("Failed to load asset library, exiting.", e);
             System.exit(1);
