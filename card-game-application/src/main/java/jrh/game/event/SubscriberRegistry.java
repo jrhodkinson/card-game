@@ -1,17 +1,21 @@
 package jrh.game.event;
 
-import jrh.game.api.Match;
 import jrh.game.api.Callback;
 import jrh.game.api.Event;
-import jrh.game.common.EventHandler;
+import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
+import jrh.game.api.SubscribeAll;
+import jrh.game.common.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.singletonList;
 
 public class SubscriberRegistry {
 
@@ -23,13 +27,24 @@ public class SubscriberRegistry {
 
     }
 
+    @SuppressWarnings("unchecked")
     void register(EventHandler eventHandler) {
         logger.info("Registering event handler of type={}", eventHandler.getClass().getSimpleName());
         Method[] allMethods = eventHandler.getClass().getDeclaredMethods();
         for (Method method : allMethods) {
+            if (method.isAnnotationPresent(Subscribe.class) && method.isAnnotationPresent(SubscribeAll.class)) {
+                throw new EventBusException("Method must only be annotated with one of @Subscribe or @SubscribeAll, not both");
+            }
             if (method.isAnnotationPresent(Subscribe.class)) {
                 verifyTypeSignature(method);
-                Subscriber subscriber = new Subscriber(eventHandler, method);
+                Subscriber subscriber = new Subscriber(eventHandler, method, singletonList((Class<? extends Event>) method.getParameterTypes()[0]));
+                logger.info("Registering subscriber={}", subscriber);
+                subscribers.add(subscriber);
+            }
+            if (method.isAnnotationPresent(SubscribeAll.class)) {
+                verifyTypeSignature(method);
+                List<Class<? extends Event>> eventTypes = Arrays.asList(method.getAnnotation(SubscribeAll.class).value());
+                Subscriber subscriber = new Subscriber(eventHandler, method, eventTypes);
                 logger.info("Registering subscriber={}", subscriber);
                 subscribers.add(subscriber);
             }
@@ -48,7 +63,7 @@ public class SubscriberRegistry {
     }
 
     List<Subscriber> getSubscribers(Class<? extends Event> eventType) {
-        return subscribers.stream().filter(subscriber -> subscriber.getEventType().isAssignableFrom(eventType))
+        return subscribers.stream().filter(subscriber -> subscriber.listensTo(eventType))
                 .collect(Collectors.toList());
     }
 

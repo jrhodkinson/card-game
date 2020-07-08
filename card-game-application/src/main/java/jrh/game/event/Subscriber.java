@@ -1,8 +1,8 @@
 package jrh.game.event;
 
-import jrh.game.api.Match;
 import jrh.game.api.Callback;
 import jrh.game.api.Event;
+import jrh.game.api.Match;
 import jrh.game.common.EventHandler;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class Subscriber {
 
@@ -18,24 +19,23 @@ public class Subscriber {
 
     private final EventHandler handler;
     private final Method method;
-    private final Class<? extends Event> eventType;
+    private final List<Class<? extends Event>> eventTypes;
     private final int parameterCount;
 
-    @SuppressWarnings("unchecked")
-    Subscriber(EventHandler handler, Method method) {
+    Subscriber(EventHandler handler, Method method, List<Class<? extends Event>> eventTypes) {
         this.handler = handler;
         this.method = method;
-        this.eventType = (Class<? extends Event>) method.getParameterTypes()[0];
+        this.eventTypes = eventTypes;
         this.parameterCount = method.getParameterCount();
         method.setAccessible(true);
     }
 
-    EventHandler getHandler() {
-        return handler;
+    boolean listensTo(Class<? extends Event> eventType) {
+        return eventTypes.stream().anyMatch(t -> t.isAssignableFrom(eventType));
     }
 
-    Class<? extends Event> getEventType() {
-        return eventType;
+    EventHandler getHandler() {
+        return handler;
     }
 
     void dispatch(Event event, Match match, Callback callback) {
@@ -58,6 +58,6 @@ public class Subscriber {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("method", method)
-                .append("eventType", eventType).append("parameterCount", parameterCount).toString();
+                .append("eventTypes", eventTypes).append("parameterCount", parameterCount).toString();
     }
 }

@@ -53,7 +53,7 @@ public class SingleMatchEventBusTest {
 
     @Test
     public void callbackResolvesAdditionalEvent() {
-        SecondTestEvent event = new SecondTestEvent();
+        SecondTestEvent event = new SecondTestEvent(true);
         eventBus.dispatch(event);
         assertThat(handler.methodCalls.get(SECOND_HANDLER), hasSize(1));
         assertThat(handler.methodCalls.get(FIRST_HANDLER), hasSize(1));
@@ -66,7 +66,7 @@ public class SingleMatchEventBusTest {
         assertThat(handler.methodCalls.get(ALL_HANDLER), hasSize(1));
         assertThat(handler.methodCalls.get(ALL_HANDLER).get(0).event, equalTo(firstEvent));
 
-        SecondTestEvent secondTestEvent = new SecondTestEvent();
+        SecondTestEvent secondTestEvent = new SecondTestEvent(false);
         eventBus.dispatch(secondTestEvent);
         assertThat(handler.methodCalls.get(ALL_HANDLER), hasSize(2));
         assertThat(handler.methodCalls.get(ALL_HANDLER).get(1).event, equalTo(secondTestEvent));
@@ -74,7 +74,7 @@ public class SingleMatchEventBusTest {
 
     private static class TestHandler implements EventHandler {
 
-        private Map<String, List<MethodCall>> methodCalls = new HashMap<>();
+        private final Map<String, List<MethodCall>> methodCalls = new HashMap<>();
 
         @Subscribe
         private void firstTestEvent(FirstTestEvent firstTestEvent, Match match) {
@@ -84,7 +84,9 @@ public class SingleMatchEventBusTest {
         @Subscribe
         private void secondTestEvent(SecondTestEvent secondTestEvent, Match match, Callback callback) {
             addMethodCall(SECOND_HANDLER, secondTestEvent, match);
-            callback.enqueue(new FirstTestEvent());
+            if (secondTestEvent.enqueue) {
+                callback.enqueue(new FirstTestEvent());
+            }
         }
 
         @SubscribeAll({ FirstTestEvent.class, SecondTestEvent.class })
@@ -114,6 +116,10 @@ public class SingleMatchEventBusTest {
     }
 
     private static class SecondTestEvent implements Event {
+        private final boolean enqueue;
 
+        public SecondTestEvent(boolean enqueue) {
+            this.enqueue = enqueue;
+        }
     }
 }
