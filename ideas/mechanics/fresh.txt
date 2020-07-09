@@ -6,3 +6,5 @@ Strength
 Status effect that allows person to buy things cheaper
 Card which gives choices
 "Either" card, you get a choice: e.g. either 'build structure' or 'damage 10'
+Damage multiple times: Do X damage N times
+Incrementing health power for structures
