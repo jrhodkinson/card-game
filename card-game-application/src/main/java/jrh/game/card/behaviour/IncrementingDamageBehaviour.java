@@ -48,7 +48,7 @@ public class IncrementingDamageBehaviour extends AbstractBehaviour {
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
         if (cardResolved.getCard().equals(this.getCard())) {
-            logger.info("Increasing damage of {} from {} by {}", this.getCard().getEntityId(), damage,
+            logger.info("Increasing damage of {} from {} to {}", this.getCard().getEntityId(), damage,
                     damage + increment);
             this.damage += increment;
         }

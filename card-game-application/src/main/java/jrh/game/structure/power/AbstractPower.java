@@ -6,6 +6,7 @@ import jrh.game.api.Player;
 import jrh.game.api.Power;
 import jrh.game.api.Structure;
 import jrh.game.common.CardId;
+import jrh.game.structure.StructureStateController;
 
 public abstract class AbstractPower implements Power {
 
@@ -17,6 +18,10 @@ public abstract class AbstractPower implements Power {
 
     protected final Structure getStructure() {
         return structure;
+    }
+
+    protected final Player getOwner(Match match) {
+        return match.getController(StructureStateController.class).getOwner(structure);
     }
 
     @Override
