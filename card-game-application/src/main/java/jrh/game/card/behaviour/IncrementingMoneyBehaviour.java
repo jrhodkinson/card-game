@@ -31,7 +31,7 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().keyword("Gain").number(amount).plainString("then increase future gain by")
+        return BehaviourDescription.builder().keyword("+ $").number(amount).plainString("then increase future $ by")
                 .number(increment).build();
     }
 

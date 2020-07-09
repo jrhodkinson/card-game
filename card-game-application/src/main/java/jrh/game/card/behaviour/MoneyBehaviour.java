@@ -25,7 +25,7 @@ public class MoneyBehaviour extends AbstractBehaviour {
 
     @Override
     public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().keyword("Gain").number(amount).build();
+        return BehaviourDescription.builder().keyword("+ $").number(amount).build();
     }
 
     @Subscribe
