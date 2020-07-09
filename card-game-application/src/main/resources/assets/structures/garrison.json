@@ -1,0 +1,14 @@
+{
+  "id": "GARRISON",
+  "name": "Garrison",
+  "health": 12,
+  "powers": [
+    [
+      "incrementingDamage",
+      {
+        "amount": 1,
+        "increment": 1
+      }
+    ]
+  ]
+}
