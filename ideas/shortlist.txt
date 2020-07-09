@@ -2,4 +2,4 @@ Inflation: All cards now cost 1 more
 Temperance: Gain 5, you may not attack this turn
 Regulate: All cards cost 3
 Cartel: Worth a traingular / square number depending how many you have
-Duplicate a card
+Duplicate a card -> need to target a card -> behaviour needs to be able to say what type of entity it targets
