@@ -8,6 +8,7 @@ Ill-gotten gains: Cost 4, 2 money, on purchasing, deal 3 damage to your opponent
 Earthquake: Deal 4 damage to all structures
 Life Steal: Deal 2 damage to opponent, heal 2
 Rapture: Deal 77 damage to all own structures, gain 7 money, vanish
+Fortify: All structures gain 2 health
 
 Structures
 ----------

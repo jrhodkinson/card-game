@@ -1,0 +1,15 @@
+{
+  "id": "FORTIFY",
+  "name": "Fortify",
+  "cost": 1,
+  "color": "GREEN",
+  "behaviours": [
+    [
+      "healGroup",
+      {
+        "amount": 2,
+        "targets": ["OWN_STRUCTURES"]
+      }
+    ]
+  ]
+}

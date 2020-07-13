@@ -5,7 +5,6 @@ Cartel: Worth a traingular / square number depending how many you have
 Duplicate a card -> need to target a card -> behaviour needs to be able to say what type of entity it targets
 Greed: gain 3 gold
 Black market: private shop, just for you
-Fortify: all structures gain 2 health
 Brewery: combat down 1, but every turn add a beer to your hand:
     - different types: ale, mead, etc
     - varying effects, all vanish
