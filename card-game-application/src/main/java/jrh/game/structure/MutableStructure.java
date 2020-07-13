@@ -2,6 +2,8 @@ package jrh.game.structure;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
 import jrh.game.api.Power;
 import jrh.game.api.Structure;
 import jrh.game.asset.MutableStructureDeserializer;
@@ -12,9 +14,10 @@ import jrh.game.structure.power.AbstractPower;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @JsonDeserialize(using = MutableStructureDeserializer.class)
 @JsonSerialize(using = MutableStructureSerializer.class)
@@ -24,7 +27,7 @@ public class MutableStructure implements Structure {
     private final StructureId structureId;
     private final String name;
     private final String flavorText;
-    private final Map<Class<? extends AbstractPower>, AbstractPower> powers = new HashMap<>();
+    private final ListMultimap<Class<? extends Power>, AbstractPower> powers = LinkedListMultimap.create();
     private int health;
 
     public MutableStructure(StructureId structureId, String name, int health) {
@@ -78,13 +81,13 @@ public class MutableStructure implements Structure {
     }
 
     @Override
-    public Collection<Power> getPowers() {
+    public Collection<Power> getAllPowers() {
         return Collections.unmodifiableCollection(powers.values());
     }
 
     @Override
-    public Power getPower(Class<? extends Power> powerClass) {
-        return powers.get(powerClass);
+    public List<Power> getPowers(Class<? extends Power> powerClass) {
+        return powers.get(powerClass).stream().map(ap -> (Power) ap).collect(toList());
     }
 
     MutableStructure duplicate() {

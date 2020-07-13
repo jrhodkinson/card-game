@@ -4,6 +4,7 @@ import jrh.game.common.EntityId;
 import jrh.game.common.StructureId;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface Structure extends Damageable {
@@ -20,7 +21,7 @@ public interface Structure extends Damageable {
 
     boolean hasPower(Class<? extends Power> powerClass);
 
-    Collection<Power> getPowers();
+    Collection<Power> getAllPowers();
 
-    Power getPower(Class<? extends Power> powerClass);
+    List<Power> getPowers(Class<? extends Power> powerClass);
 }
