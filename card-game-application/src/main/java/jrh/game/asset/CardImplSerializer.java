@@ -27,7 +27,7 @@ public class CardImplSerializer extends StdSerializer<CardImpl> {
             gen.writeObjectField("flavor", card.getFlavorText().get());
         }
         gen.writeArrayFieldStart("behaviours");
-        for (Behaviour behaviour : card.getBehaviours()) {
+        for (Behaviour behaviour : card.getAllBehaviours()) {
             gen.writeStartArray();
             gen.writeString(SerializationKeys.getBehaviourKey(behaviour.getClass()));
             if (Arrays.stream(behaviour.getClass().getDeclaredFields()).anyMatch(

@@ -2,6 +2,8 @@ package jrh.game.card;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
 import jrh.game.api.Behaviour;
 import jrh.game.api.Card;
 import jrh.game.asset.CardImplDeserializer;
@@ -14,10 +16,10 @@ import jrh.game.common.EntityId;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @JsonDeserialize(using = CardImplDeserializer.class)
 @JsonSerialize(using = CardImplSerializer.class)
@@ -29,7 +31,7 @@ public class CardImpl implements Card {
     private final int cost;
     private final Color color;
     private final String flavorText;
-    private final Map<Class<? extends AbstractBehaviour>, AbstractBehaviour> behaviours;
+    private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours;
 
     private CardImpl(Builder builder) {
         this.cardId = builder.cardId;
@@ -78,7 +80,7 @@ public class CardImpl implements Card {
     @Override
     public CardDescription getDescription() {
         return CardDescription.fromBehaviourDescriptions(
-                getBehaviours().stream().map(Behaviour::getDescription).collect(Collectors.toList()));
+                getAllBehaviours().stream().map(Behaviour::getDescription).collect(toList()));
     }
 
     @Override
@@ -87,13 +89,13 @@ public class CardImpl implements Card {
     }
 
     @Override
-    public Collection<Behaviour> getBehaviours() {
+    public Collection<Behaviour> getAllBehaviours() {
         return Collections.unmodifiableCollection(behaviours.values());
     }
 
     @Override
-    public Behaviour getBehaviour(Class<? extends Behaviour> behaviourClass) {
-        return behaviours.get(behaviourClass);
+    public List<Behaviour> getBehaviours(Class<? extends Behaviour> behaviourClass) {
+        return behaviours.get(behaviourClass).stream().map(ab -> (Behaviour) ab).collect(toList());
     }
 
     @Override
@@ -146,7 +148,7 @@ public class CardImpl implements Card {
         private int cost;
         private Color color;
         private String flavorText;
-        private final LinkedHashMap<Class<? extends AbstractBehaviour>, AbstractBehaviour> behaviours = new LinkedHashMap<>();
+        private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours = LinkedListMultimap.create();
 
         private Builder(CardId cardId) {
             this.cardId = cardId;

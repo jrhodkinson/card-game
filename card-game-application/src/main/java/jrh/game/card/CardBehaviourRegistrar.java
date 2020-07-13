@@ -11,11 +11,11 @@ public class CardBehaviourRegistrar implements EventHandler {
 
     @Subscribe
     private void cardCreated(CardCreated cardCreated, Match match, Callback callback) {
-        cardCreated.getCard().getBehaviours().forEach(callback::register);
+        cardCreated.getCard().getAllBehaviours().forEach(callback::register);
     }
 
     @Subscribe
     private void cardDestroyed(CardDestroyed cardDestroyed, Match match, Callback callback) {
-        cardDestroyed.getCard().getBehaviours().forEach(callback::unregister);
+        cardDestroyed.getCard().getAllBehaviours().forEach(callback::unregister);
     }
 }

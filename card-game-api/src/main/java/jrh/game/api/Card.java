@@ -6,6 +6,7 @@ import jrh.game.common.Color;
 import jrh.game.common.EntityId;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface Card {
@@ -26,9 +27,9 @@ public interface Card {
 
     boolean hasBehaviour(Class<? extends Behaviour> behaviourClass);
 
-    Collection<Behaviour> getBehaviours();
+    Collection<Behaviour> getAllBehaviours();
 
-    Behaviour getBehaviour(Class<? extends Behaviour> behaviourClass);
+    List<Behaviour> getBehaviours(Class<? extends Behaviour> behaviourClass);
 
     boolean requiresTarget();
 }
