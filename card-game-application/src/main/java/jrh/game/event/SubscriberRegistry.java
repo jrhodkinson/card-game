@@ -34,19 +34,19 @@ public class SubscriberRegistry {
         for (Method method : allMethods) {
             if (method.isAnnotationPresent(Subscribe.class) && method.isAnnotationPresent(SubscribeAll.class)) {
                 throw new EventBusException(
-                    "Method must only be annotated with one of @Subscribe or @SubscribeAll, not both");
+                        "Method must only be annotated with one of @Subscribe or @SubscribeAll, not both");
             }
             if (method.isAnnotationPresent(Subscribe.class)) {
                 verifyTypeSignature(method, Subscribe.class);
                 Subscriber subscriber = new Subscriber(eventHandler, method,
-                    singletonList((Class<? extends Event>) method.getParameterTypes()[0]));
+                        singletonList((Class<? extends Event>) method.getParameterTypes()[0]));
                 logger.info("Registering subscriber={}", subscriber);
                 subscribers.add(subscriber);
             }
             if (method.isAnnotationPresent(SubscribeAll.class)) {
                 verifyTypeSignature(method, SubscribeAll.class);
                 List<Class<? extends Event>> eventTypes = Arrays
-                    .asList(method.getAnnotation(SubscribeAll.class).value());
+                        .asList(method.getAnnotation(SubscribeAll.class).value());
                 Subscriber subscriber = new Subscriber(eventHandler, method, eventTypes);
                 logger.info("Registering subscriber={}", subscriber);
                 subscribers.add(subscriber);

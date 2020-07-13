@@ -33,7 +33,8 @@ public class IncrementingDamagePower extends AbstractPower {
             Damageable target = match.getOtherPlayer(getOwner(match).getUser());
             logger.info("Damaging target={} by amount={}", target, amount);
             match.getController(HealthController.class).damage(getOwner(match), target, amount);
-            logger.info("Increasing damage of {} from {} to {}", this.getStructure().getEntityId(), amount, amount + increment);
+            logger.info("Increasing damage of {} from {} to {}", this.getStructure().getEntityId(), amount,
+                    amount + increment);
             this.amount += increment;
         }
     }
