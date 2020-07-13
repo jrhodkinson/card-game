@@ -9,6 +9,7 @@ Earthquake: Deal 4 damage to all structures
 Life Steal: Deal 2 damage to opponent, heal 2
 Rapture: Deal 77 damage to all own structures, gain 7 money, vanish
 Fortify: All structures gain 2 health
+Greed: Gain 1 copper, 1 silver, and 1 gold
 
 Structures
 ----------
