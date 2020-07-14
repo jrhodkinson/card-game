@@ -186,11 +186,9 @@ public class CardFlowController implements Controller {
         if (target instanceof Structure && structureStateController.getOwner((Structure) target).equals(source)) {
             return false;
         }
-        List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt()
-            .stream()
-            .filter(s -> structureStateController.getOwner(s).equals(otherPlayer))
-            .map(Structure::getEntityId)
-            .collect(toList());
+        List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt().stream()
+                .filter(s -> structureStateController.getOwner(s).equals(otherPlayer)).map(Structure::getEntityId)
+                .collect(toList());
         if (otherPlayersStructuresWithTaunt.isEmpty()) {
             return false;
         }
@@ -198,9 +196,6 @@ public class CardFlowController implements Controller {
     }
 
     private List<Structure> structuresWithTaunt() {
-        return match.getAllStructures()
-            .stream()
-            .filter(s -> s.hasPower(TauntPower.class))
-            .collect(toList());
+        return match.getAllStructures().stream().filter(s -> s.hasPower(TauntPower.class)).collect(toList());
     }
 }

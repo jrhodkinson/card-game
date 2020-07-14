@@ -33,7 +33,7 @@ public class MatchStateBroadcaster implements EventHandler {
     }
 
     @SubscribeAll({ CardResolved.class, CardDestroyed.class, CardPurchased.class, CardGained.class,
-            PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class})
+            PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class })
     private void matchStateChanged(Event event, Match match) {
         broadcastFullMatchState(match);
     }
