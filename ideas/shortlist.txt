@@ -9,4 +9,3 @@ Brewery: combat down 1, but every turn add a beer to your hand:
     - varying effects, all vanish
     - maybe must play?
 Harbour: must attach, increases gold for turn by X
-Wall: must attack, large health

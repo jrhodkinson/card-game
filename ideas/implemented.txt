@@ -16,3 +16,4 @@ Structures
 
 Blood Bank: Opponent can buy cards for 1 cheaper, but whenever they buy a card, they lose 2 health
 Garrison: Damages 1 at the end of enemy's turn, then increases future damage by 1
+Wall: must attack, large health

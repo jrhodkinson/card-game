@@ -1,0 +1,10 @@
+{
+  "id": "WALL",
+  "name": "Wall",
+  "health": 25,
+  "powers": [
+    [
+      "taunt"
+    ]
+  ]
+}
