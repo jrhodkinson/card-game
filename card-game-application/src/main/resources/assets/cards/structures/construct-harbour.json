@@ -1,0 +1,13 @@
+{
+  "id": "construct:HARBOUR",
+  "name": "Construct Harbour",
+  "cost": 4,
+  "color": "CYAN",
+  "behaviours": [
+    [
+      "construct",
+      "HARBOUR"
+    ],
+    [ "vanish" ]
+  ]
+}

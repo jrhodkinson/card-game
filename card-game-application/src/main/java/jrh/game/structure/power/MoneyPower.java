@@ -5,6 +5,7 @@ import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
 import jrh.game.api.event.TurnStarted;
 import jrh.game.asset.JsonKey;
+import jrh.game.match.TurnController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,10 @@ public class MoneyPower extends AbstractPower {
 
     @Subscribe
     private void turnStarted(TurnStarted turnStarted, Match match) {
-        // not implemented yet
+        if (turnStarted.getNewPlayer().equals(getOwner(match))) {
+            logger.info("Increasing turn's money by {}", amount);
+            match.getController(TurnController.class).changeMoney(amount);
+        }
     }
 
     @Override

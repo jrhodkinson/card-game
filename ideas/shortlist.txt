@@ -8,4 +8,3 @@ Brewery: combat down 1, but every turn add a beer to your hand:
     - different types: ale, mead, etc
     - varying effects, all vanish
     - maybe must play?
-Harbour: must attack, increases gold for turn by X
