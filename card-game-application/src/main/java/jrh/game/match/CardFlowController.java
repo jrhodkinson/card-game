@@ -178,8 +178,14 @@ public class CardFlowController implements Controller {
     }
 
     private boolean anotherEnemyStructureHasTaunt(Player source, Damageable target) {
+        if (target.equals(source)) {
+            return false;
+        }
         Player otherPlayer = match.getOtherPlayer(source.getUser());
         StructureStateController structureStateController = match.getController(StructureStateController.class);
+        if (target instanceof Structure && structureStateController.getOwner((Structure) target).equals(source)) {
+            return false;
+        }
         List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt()
             .stream()
             .filter(s -> structureStateController.getOwner(s).equals(otherPlayer))

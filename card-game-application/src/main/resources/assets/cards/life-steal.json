@@ -5,11 +5,8 @@
   "color": "RED",
   "behaviours": [
     [
-      "damageGroup",
-      {
-        "amount": 2,
-        "targets": ["OTHER"]
-      }
+      "damage",
+      2
     ],
     [
       "healGroup",
