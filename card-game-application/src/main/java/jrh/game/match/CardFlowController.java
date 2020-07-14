@@ -19,10 +19,15 @@ import jrh.game.common.CardId;
 import jrh.game.common.EntityId;
 import jrh.game.common.User;
 import jrh.game.deck.DiscardPile;
+import jrh.game.structure.StructureStateController;
+import jrh.game.structure.power.TauntPower;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 public class CardFlowController implements Controller {
 
@@ -70,6 +75,14 @@ public class CardFlowController implements Controller {
                 logger.warn("Not playing card={}, target={} was not damageable", card, target);
                 return;
             }
+        }
+        if (card.requiresTarget() && damageable == null) {
+            logger.warn("Not playing card={}, it requires a target", card);
+            return;
+        }
+        if (card.requiresTarget() && anotherEnemyStructureHasTaunt(player, damageable)) {
+            logger.warn("Not playing card={}, at least one other enemy structure has taunt", card);
+            return;
         }
         player.getHand().remove(card);
         match.getEventBus().dispatch(new CardPlayed(player, damageable, card));
@@ -162,5 +175,26 @@ public class CardFlowController implements Controller {
             return match.getInactivePlayer();
         }
         return null;
+    }
+
+    private boolean anotherEnemyStructureHasTaunt(Player source, Damageable target) {
+        Player otherPlayer = match.getOtherPlayer(source.getUser());
+        StructureStateController structureStateController = match.getController(StructureStateController.class);
+        List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt()
+            .stream()
+            .filter(s -> structureStateController.getOwner(s).equals(otherPlayer))
+            .map(Structure::getEntityId)
+            .collect(toList());
+        if (otherPlayersStructuresWithTaunt.isEmpty()) {
+            return false;
+        }
+        return !otherPlayersStructuresWithTaunt.contains(target.getEntityId());
+    }
+
+    private List<Structure> structuresWithTaunt() {
+        return match.getAllStructures()
+            .stream()
+            .filter(s -> s.hasPower(TauntPower.class))
+            .collect(toList());
     }
 }
