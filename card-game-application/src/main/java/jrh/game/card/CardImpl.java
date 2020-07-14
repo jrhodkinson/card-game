@@ -148,7 +148,8 @@ public class CardImpl implements Card {
         private int cost;
         private Color color;
         private String flavorText;
-        private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours = LinkedListMultimap.create();
+        private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours = LinkedListMultimap
+                .create();
 
         private Builder(CardId cardId) {
             this.cardId = cardId;

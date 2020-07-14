@@ -1,7 +1,6 @@
 package jrh.game.structure.power;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
 import jrh.game.api.Subscribe;
@@ -23,10 +22,10 @@ public class DamageOnPurchasePower extends AbstractPower {
 
     private static final Logger logger = LogManager.getLogger(DamageOnPurchasePower.class);
 
-    @JsonValue
+    @JsonProperty
     private final List<Target> purchasers;
 
-    @JsonValue
+    @JsonProperty
     private final int amount;
 
     public DamageOnPurchasePower(@JsonProperty("purchasers") List<Target> purchasers,
@@ -42,17 +41,13 @@ public class DamageOnPurchasePower extends AbstractPower {
             return;
         }
         logger.info("Damaging purchaser={} by amount={}", purchaser, amount);
-        match.getController(HealthController.class).damage(owner(match), purchaser, amount);
+        match.getController(HealthController.class).damage(getOwner(match), purchaser, amount);
     }
 
     private boolean shouldDamage(Match match, Player purchaser) {
         Player owner = match.getController(StructureStateController.class).getOwner(getStructure());
         return (owner.equals(purchaser) && purchasers.contains(SELF))
                 || (!owner.equals(purchaser) && purchasers.contains(OTHER));
-    }
-
-    private Player owner(Match match) {
-        return match.getController(StructureStateController.class).getOwner(getStructure());
     }
 
     @Override

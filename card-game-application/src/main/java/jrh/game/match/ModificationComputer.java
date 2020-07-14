@@ -42,6 +42,7 @@ public class ModificationComputer {
     }
 
     private List<Power> powers() {
-        return match.getAllStructures().stream().flatMap(structure -> structure.getPowers().stream()).collect(toList());
+        return match.getAllStructures().stream().flatMap(structure -> structure.getAllPowers().stream())
+                .collect(toList());
     }
 }
