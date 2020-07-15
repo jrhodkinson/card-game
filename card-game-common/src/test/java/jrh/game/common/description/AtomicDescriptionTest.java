@@ -25,10 +25,10 @@ public class AtomicDescriptionTest {
         AtomicDescription description = AtomicDescription.builder()
             .plainString("On purchase,")
             .keyword("damage")
-            .plainString(List.of(OTHER, OTHER_STRUCTURES).toString())
+            .targets(List.of(OTHER, OTHER_STRUCTURES))
             .plainString("by")
             .number(4)
             .build();
-        assertThat(description.toString(), equalTo("On purchase, damage [OTHER, OTHER_STRUCTURES] by 4"));
+        assertThat(description.toString(), equalTo("On purchase, damage your opponent and your opponent's structures by 4"));
     }
 }

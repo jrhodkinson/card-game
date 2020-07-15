@@ -24,11 +24,14 @@ public class TargetDescriptionPiece implements DescriptionPiece {
         if (targets.size() == 1) {
             return targetString(targets.get(0));
         }
+        if (targets.size() == 2) {
+            return targetString(targets.get(0)) + " and " + targetString(targets.get(1));
+        }
         StringBuilder description = new StringBuilder();
         for (int i = 0; i < targets.size() - 1; i++) {
-            description.append(targets.get(i)).append(", ");
+            description.append(targetString(targets.get(i))).append(", ");
         }
-        description.append("and ").append(targets.get(targets.size() - 1));
+        description.append("and ").append(targetString(targets.get(targets.size() - 1)));
         return description.toString();
     }
 
