@@ -62,6 +62,7 @@ const Structure = ({
     >
       <Name title={structure.flavor}>{structure.name}</Name>
       <Health>{structure.health}</Health>
+      {structure.description}
     </Wrapper>
   );
 };

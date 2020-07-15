@@ -34,9 +34,13 @@ public class ModifyCostPower extends AbstractPower {
 
     @Override
     public AtomicDescription getDescription() {
+        String introduction = "Increase cost of cards purchased by ";
+        if (amount < 0) {
+            introduction = "Decrease cost of cards purchased by ";
+        }
         return AtomicDescription.builder()
-            .plainString("Decrease cost of cards purchased by ").plainString(purchasers.toString())
-            .plainString("by $").number(amount).build();
+            .plainString(introduction).plainString(purchasers.toString())
+            .plainString("by $").number(Math.abs(amount)).build();
     }
 
     @Override

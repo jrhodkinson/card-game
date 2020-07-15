@@ -32,7 +32,7 @@ public class IncrementingDamagePower extends AbstractPower {
     public AtomicDescription getDescription() {
         return AtomicDescription.builder()
             .plainString("At the end of your opponent's turn,")
-            .keyword("Damage").plainString("them by").number(amount)
+            .keyword("damage").plainString("them by").number(amount)
             .plainString("then increase future damage by").number(increment).build();
     }
 
