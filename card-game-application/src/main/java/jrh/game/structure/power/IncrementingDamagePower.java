@@ -7,6 +7,7 @@ import jrh.game.api.Player;
 import jrh.game.api.Subscribe;
 import jrh.game.api.event.TurnEnded;
 import jrh.game.asset.JsonKey;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,14 @@ public class IncrementingDamagePower extends AbstractPower {
     public IncrementingDamagePower(@JsonProperty("damage") int amount, @JsonProperty("increment") int increment) {
         this.amount = amount;
         this.increment = increment;
+    }
+
+    @Override
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder()
+            .plainString("At the end of your opponent's turn,")
+            .keyword("Damage").plainString("them by").number(amount)
+            .plainString("then increase future damage by").number(increment).build();
     }
 
     @Subscribe

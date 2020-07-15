@@ -2,6 +2,7 @@ package jrh.game.api;
 
 import jrh.game.common.EntityId;
 import jrh.game.common.StructureId;
+import jrh.game.common.description.Description;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +19,8 @@ public interface Structure extends Damageable {
     Optional<String> getFlavorText();
 
     int getHealth();
+
+    Description getDescription();
 
     boolean hasPower(Class<? extends Power> powerClass);
 

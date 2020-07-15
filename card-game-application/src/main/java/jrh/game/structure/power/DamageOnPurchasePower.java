@@ -7,6 +7,7 @@ import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardPurchased;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.Target;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.match.HealthController;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
@@ -32,6 +33,12 @@ public class DamageOnPurchasePower extends AbstractPower {
             @JsonProperty("amount") int amount) {
         this.purchasers = purchasers;
         this.amount = amount;
+    }
+
+    @Override
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder().plainString("When").keyword(purchasers.toString()).plainString("purchases a card,")
+            .keyword("damage").keyword(purchasers.toString()).number(amount).build();
     }
 
     @Subscribe

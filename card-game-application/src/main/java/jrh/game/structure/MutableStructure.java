@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
+import jrh.game.api.Behaviour;
 import jrh.game.api.Power;
 import jrh.game.api.Structure;
 import jrh.game.asset.MutableStructureDeserializer;
 import jrh.game.asset.MutableStructureSerializer;
 import jrh.game.common.EntityId;
 import jrh.game.common.StructureId;
+import jrh.game.common.description.Description;
 import jrh.game.structure.power.AbstractPower;
 
 import java.util.Collection;
@@ -64,6 +66,12 @@ public class MutableStructure implements Structure {
     @Override
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public Description getDescription() {
+        return Description.of(
+            getAllPowers().stream().map(Power::getDescription).collect(toList()));
     }
 
     void changeHealth(int amount) {

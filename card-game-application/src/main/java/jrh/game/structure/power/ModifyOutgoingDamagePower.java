@@ -5,6 +5,7 @@ import jrh.game.asset.JsonKey;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +20,12 @@ public class ModifyOutgoingDamagePower extends AbstractPower {
 
     public ModifyOutgoingDamagePower(int amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder()
+            .plainString("Increase outgoing damage by ").number(amount).build();
     }
 
     @Override

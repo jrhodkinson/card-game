@@ -6,6 +6,7 @@ import jrh.game.common.CardId;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
 import jrh.game.common.Target;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +30,13 @@ public class ModifyCostPower extends AbstractPower {
     public ModifyCostPower(@JsonProperty("purchasers") List<Target> purchasers, @JsonProperty("amount") int amount) {
         this.purchasers = purchasers;
         this.amount = amount;
+    }
+
+    @Override
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder()
+            .plainString("Decrease cost of cards purchased by ").plainString(purchasers.toString())
+            .plainString("by $").number(amount).build();
     }
 
     @Override
