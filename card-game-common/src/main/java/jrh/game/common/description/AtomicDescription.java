@@ -3,12 +3,16 @@ package jrh.game.common.description;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.joining;
+
 public class AtomicDescription {
 
     private final String description;
 
     private AtomicDescription(Builder builder) {
-        this.description = String.join(" ", builder.pieces);
+        this.description = builder.pieces.stream()
+            .map(DescriptionPiece::get)
+            .collect(joining(" "));
     }
 
     public static AtomicDescription keyword(String keyword) {
@@ -26,24 +30,24 @@ public class AtomicDescription {
 
     public static class Builder {
 
-        private final List<String> pieces = new ArrayList<>();
+        private final List<DescriptionPiece> pieces = new ArrayList<>();
 
         private Builder() {
 
         }
 
         public Builder plainString(String plainString) {
-            pieces.add(plainString);
+            pieces.add(new PlainStringDescriptionPiece(plainString));
             return this;
         }
 
         public Builder keyword(String keyword) {
-            pieces.add(keyword);
+            pieces.add(new PlainStringDescriptionPiece(keyword));
             return this;
         }
 
         public Builder number(int number) {
-            pieces.add(String.valueOf(number));
+            pieces.add(new PlainStringDescriptionPiece(String.valueOf(number)));
             return this;
         }
 
