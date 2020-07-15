@@ -38,7 +38,7 @@ public class TargetDescriptionPiece implements DescriptionPiece {
     private String targetString(Target target) {
         switch (target) {
             case SELF:
-                return "you";
+                return "yourself";
             case OTHER:
                 return "your opponent";
             case OWN_STRUCTURES:

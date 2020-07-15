@@ -37,8 +37,8 @@ public class DamageOnPurchasePower extends AbstractPower {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("When").keyword(purchasers.toString()).plainString("purchases a card,")
-            .keyword("damage").keyword(purchasers.toString()).number(amount).build();
+        return AtomicDescription.builder().plainString("When").targets(purchasers).plainString("purchases a card,")
+            .keyword("damage").targets(purchasers).number(amount).build();
     }
 
     @Subscribe

@@ -37,7 +37,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
     @Override
     public AtomicDescription getDescription() {
         return AtomicDescription.builder().plainString("On purchase,").keyword("damage")
-                .plainString(targets.toString()).number(amount).build();
+                .targets(targets).number(amount).build();
     }
 
     @Subscribe

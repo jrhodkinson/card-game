@@ -35,7 +35,7 @@ public class DamageGroupBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Damage").plainString(targets.toString()).number(amount).build();
+        return AtomicDescription.builder().keyword("Damage").targets(targets).number(amount).build();
     }
 
     @Subscribe

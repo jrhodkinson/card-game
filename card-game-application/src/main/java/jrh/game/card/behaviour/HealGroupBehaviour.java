@@ -35,7 +35,7 @@ public class HealGroupBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Heal").plainString(targets.toString()).number(amount).build();
+        return AtomicDescription.builder().keyword("Heal").targets(targets).number(amount).build();
     }
 
     @Subscribe

@@ -39,7 +39,7 @@ public class ModifyCostPower extends AbstractPower {
             introduction = "Decrease cost of cards purchased by ";
         }
         return AtomicDescription.builder()
-            .plainString(introduction).plainString(purchasers.toString())
+            .plainString(introduction).targets(purchasers)
             .plainString("by $").number(Math.abs(amount)).build();
     }
 

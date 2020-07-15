@@ -1,15 +1,19 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.asset.JsonKey;
-import jrh.game.api.event.CardPlayed;
-import jrh.game.common.description.AtomicDescription;
-import jrh.game.api.Subscribe;
-import jrh.game.match.HealthController;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
+import jrh.game.api.Subscribe;
+import jrh.game.api.event.CardPlayed;
+import jrh.game.asset.JsonKey;
+import jrh.game.common.description.AtomicDescription;
+import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
+
+import static jrh.game.common.Target.SELF;
 
 @JsonKey("sacrifice")
 public class SacrificeBehaviour extends AbstractBehaviour {
@@ -26,7 +30,7 @@ public class SacrificeBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Damage").plainString("self").number(damage).build();
+        return AtomicDescription.builder().keyword("Damage").targets(List.of(SELF)).number(damage).build();
     }
 
     @Subscribe
