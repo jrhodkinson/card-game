@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jrh.game.asset.JsonKey;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.api.event.CardResolved;
-import jrh.game.common.BehaviourDescription;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.api.Callback;
 import jrh.game.api.Subscribe;
 import jrh.game.match.TurnController;
@@ -30,8 +30,8 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
     }
 
     @Override
-    public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().keyword("+ $").number(amount).plainString("then increase future $ by")
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder().keyword("+ $").number(amount).plainString("then increase future $ by")
                 .number(increment).build();
     }
 

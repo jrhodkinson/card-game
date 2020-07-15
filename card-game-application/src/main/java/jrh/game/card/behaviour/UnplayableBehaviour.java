@@ -1,7 +1,7 @@
 package jrh.game.card.behaviour;
 
 import jrh.game.asset.JsonKey;
-import jrh.game.common.BehaviourDescription;
+import jrh.game.common.description.AtomicDescription;
 
 @JsonKey("unplayable")
 public class UnplayableBehaviour extends AbstractBehaviour {
@@ -11,8 +11,8 @@ public class UnplayableBehaviour extends AbstractBehaviour {
     }
 
     @Override
-    public BehaviourDescription getDescription() {
-        return BehaviourDescription.keyword("Unplayable");
+    public AtomicDescription getDescription() {
+        return AtomicDescription.keyword("Unplayable");
     }
 
     @Override

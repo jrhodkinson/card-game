@@ -6,7 +6,7 @@ import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardPurchased;
 import jrh.game.asset.JsonKey;
-import jrh.game.common.BehaviourDescription;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.common.CardId;
 import jrh.game.match.CardFlowController;
 import org.apache.logging.log4j.LogManager;
@@ -27,8 +27,8 @@ public class GainCardOnPurchaseBehaviour extends AbstractBehaviour {
     }
 
     @Override
-    public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().plainString("On purchase,").keyword("Gain").plainString(cardId.toString())
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder().plainString("On purchase,").keyword("Gain").plainString(cardId.toString())
                 .build();
     }
 

@@ -9,7 +9,7 @@ import jrh.game.api.Card;
 import jrh.game.asset.CardImplDeserializer;
 import jrh.game.asset.CardImplSerializer;
 import jrh.game.card.behaviour.AbstractBehaviour;
-import jrh.game.common.CardDescription;
+import jrh.game.common.description.Description;
 import jrh.game.common.CardId;
 import jrh.game.common.Color;
 import jrh.game.common.EntityId;
@@ -78,8 +78,8 @@ public class CardImpl implements Card {
     }
 
     @Override
-    public CardDescription getDescription() {
-        return CardDescription.fromBehaviourDescriptions(
+    public Description getDescription() {
+        return Description.of(
                 getAllBehaviours().stream().map(Behaviour::getDescription).collect(toList()));
     }
 

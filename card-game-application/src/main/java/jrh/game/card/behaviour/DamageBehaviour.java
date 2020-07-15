@@ -3,7 +3,7 @@ package jrh.game.card.behaviour;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.api.event.CardPlayed;
-import jrh.game.common.BehaviourDescription;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.api.Subscribe;
 import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
@@ -25,8 +25,8 @@ public class DamageBehaviour extends AbstractBehaviour {
     }
 
     @Override
-    public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().keyword("Damage").number(damage).build();
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder().keyword("Damage").number(damage).build();
     }
 
     @Subscribe

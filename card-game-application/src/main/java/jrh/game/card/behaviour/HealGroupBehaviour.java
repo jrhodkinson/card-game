@@ -7,7 +7,7 @@ import jrh.game.api.Player;
 import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.asset.JsonKey;
-import jrh.game.common.BehaviourDescription;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.common.Target;
 import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
@@ -34,8 +34,8 @@ public class HealGroupBehaviour extends AbstractBehaviour {
     }
 
     @Override
-    public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().keyword("Heal").plainString(targets.toString()).number(amount).build();
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder().keyword("Heal").plainString(targets.toString()).number(amount).build();
     }
 
     @Subscribe

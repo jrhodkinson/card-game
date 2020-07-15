@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.asset.JsonKey;
 import jrh.game.api.event.CardPlayed;
-import jrh.game.common.BehaviourDescription;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.api.Subscribe;
 import jrh.game.api.Match;
 import jrh.game.common.StructureId;
@@ -27,8 +27,8 @@ public class ConstructBehaviour extends AbstractBehaviour {
     }
 
     @Override
-    public BehaviourDescription getDescription() {
-        return BehaviourDescription.builder().keyword("Construct").plainString(structureId.toString()).build();
+    public AtomicDescription getDescription() {
+        return AtomicDescription.builder().keyword("Construct").plainString(structureId.toString()).build();
     }
 
     @Subscribe

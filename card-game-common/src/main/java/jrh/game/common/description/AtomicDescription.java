@@ -1,21 +1,21 @@
-package jrh.game.common;
+package jrh.game.common.description;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BehaviourDescription {
+public class AtomicDescription {
 
     private final String description;
 
-    private BehaviourDescription(Builder builder) {
+    private AtomicDescription(Builder builder) {
         this.description = String.join(" ", builder.pieces);
     }
 
-    public static BehaviourDescription keyword(String keyword) {
+    public static AtomicDescription keyword(String keyword) {
         return builder().keyword(keyword).build();
     }
 
-    public static BehaviourDescription.Builder builder() {
+    public static AtomicDescription.Builder builder() {
         return new Builder();
     }
 
@@ -47,8 +47,8 @@ public class BehaviourDescription {
             return this;
         }
 
-        public BehaviourDescription build() {
-            return new BehaviourDescription(this);
+        public AtomicDescription build() {
+            return new AtomicDescription(this);
         }
     }
 }

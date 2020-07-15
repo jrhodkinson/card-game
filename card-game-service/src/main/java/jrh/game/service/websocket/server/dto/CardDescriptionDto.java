@@ -1,7 +1,7 @@
 package jrh.game.service.websocket.server.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.common.CardDescription;
+import jrh.game.common.description.Description;
 
 public class CardDescriptionDto {
 
@@ -12,7 +12,7 @@ public class CardDescriptionDto {
         this.description = description;
     }
 
-    public static CardDescriptionDto fromCardDescription(CardDescription cardDescription) {
-        return new CardDescriptionDto(cardDescription.toString());
+    public static CardDescriptionDto fromCardDescription(Description description) {
+        return new CardDescriptionDto(description.toString());
     }
 }

@@ -3,7 +3,7 @@ package jrh.game.card.behaviour;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jrh.game.api.Behaviour;
 import jrh.game.api.Card;
-import jrh.game.common.BehaviourDescription;
+import jrh.game.common.description.AtomicDescription;
 
 public abstract class AbstractBehaviour implements Behaviour {
 
@@ -29,7 +29,7 @@ public abstract class AbstractBehaviour implements Behaviour {
 
     @Override
     @JsonIgnore
-    abstract public BehaviourDescription getDescription();
+    abstract public AtomicDescription getDescription();
 
     abstract public AbstractBehaviour duplicate();
 }
