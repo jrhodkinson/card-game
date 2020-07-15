@@ -9,7 +9,7 @@ public class KeywordDescriptionPiece implements DescriptionPiece {
     }
 
     @Override
-    public String get() {
-        return value;
+    public String lowercase() {
+        return value.toLowerCase();
     }
 }

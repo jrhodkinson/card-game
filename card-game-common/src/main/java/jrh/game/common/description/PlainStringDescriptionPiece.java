@@ -9,7 +9,7 @@ public class PlainStringDescriptionPiece implements DescriptionPiece {
     }
 
     @Override
-    public String get() {
-        return value;
+    public String lowercase() {
+        return value.toLowerCase();
     }
 }

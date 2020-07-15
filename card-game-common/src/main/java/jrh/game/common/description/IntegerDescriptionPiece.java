@@ -9,7 +9,7 @@ public class IntegerDescriptionPiece implements DescriptionPiece {
     }
 
     @Override
-    public String get() {
+    public String lowercase() {
         return String.valueOf(value);
     }
 }
