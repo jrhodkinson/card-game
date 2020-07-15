@@ -42,12 +42,12 @@ public class AtomicDescription {
         }
 
         public Builder keyword(String keyword) {
-            pieces.add(new PlainStringDescriptionPiece(keyword));
+            pieces.add(new KeywordDescriptionPiece(keyword));
             return this;
         }
 
         public Builder number(int number) {
-            pieces.add(new PlainStringDescriptionPiece(String.valueOf(number)));
+            pieces.add(new IntegerDescriptionPiece(number));
             return this;
         }
 
