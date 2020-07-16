@@ -1,9 +1,9 @@
 package jrh.game.api;
 
-import jrh.game.common.description.Description;
 import jrh.game.common.CardId;
 import jrh.game.common.Color;
 import jrh.game.common.EntityId;
+import jrh.game.common.description.Description;
 
 import java.util.Collection;
 import java.util.List;

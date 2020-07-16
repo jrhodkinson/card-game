@@ -28,7 +28,7 @@ public class ConstructBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Construct").plainString(structureId.toString()).build();
+        return AtomicDescription.builder().keyword("Construct").structure(structureId).build();
     }
 
     @Subscribe

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
-import jrh.game.api.Behaviour;
 import jrh.game.api.Power;
 import jrh.game.api.Structure;
 import jrh.game.asset.MutableStructureDeserializer;

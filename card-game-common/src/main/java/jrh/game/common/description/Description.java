@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Description {
 
+    private final DescriptionContext descriptionContext = DescriptionContext.defaultContext();
     private final List<AtomicDescription> atomicDescriptions;
 
     private Description(List<AtomicDescription> atomicDescriptions) {
@@ -17,7 +18,7 @@ public class Description {
 
     @Override
     public String toString() {
-        return atomicDescriptions.stream().map(AtomicDescription::toString).collect(Collectors.joining(". "))
+        return atomicDescriptions.stream().map(ad -> ad.get(descriptionContext)).collect(Collectors.joining(". "))
                 + ".";
     }
 }

@@ -9,10 +9,10 @@ import jrh.game.api.Card;
 import jrh.game.asset.CardImplDeserializer;
 import jrh.game.asset.CardImplSerializer;
 import jrh.game.card.behaviour.AbstractBehaviour;
-import jrh.game.common.description.Description;
 import jrh.game.common.CardId;
 import jrh.game.common.Color;
 import jrh.game.common.EntityId;
+import jrh.game.common.description.Description;
 
 import java.util.Collection;
 import java.util.Collections;

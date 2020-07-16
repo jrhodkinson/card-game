@@ -1,5 +1,6 @@
 package jrh.game.common.description;
 
+import jrh.game.common.StructureId;
 import jrh.game.common.Target;
 
 import java.util.ArrayList;
@@ -9,10 +10,10 @@ import static java.util.stream.Collectors.joining;
 
 public class AtomicDescription {
 
-    private final String description;
+    private final Builder builder;
 
     private AtomicDescription(Builder builder) {
-        this.description = builder.toString();
+        this.builder = builder;
     }
 
     public static AtomicDescription keyword(String keyword) {
@@ -23,9 +24,8 @@ public class AtomicDescription {
         return new Builder();
     }
 
-    @Override
-    public String toString() {
-        return description;
+    public String get(DescriptionContext descriptionContext) {
+        return builder.get(descriptionContext);
     }
 
     public static class Builder {
@@ -51,6 +51,11 @@ public class AtomicDescription {
             return this;
         }
 
+        public Builder structure(StructureId structureId) {
+            pieces.add(new StructureDescriptionPiece(structureId));
+            return this;
+        }
+
         public Builder plainString(String plainString) {
             pieces.add(new PlainStringDescriptionPiece(plainString));
             return this;
@@ -60,10 +65,9 @@ public class AtomicDescription {
             return new AtomicDescription(this);
         }
 
-        @Override
-        public String toString() {
+        private String get(DescriptionContext descriptionContext) {
             String description = pieces.stream()
-                .map(DescriptionPiece::lowercase)
+                .map(descriptionPiece -> descriptionPiece.get(descriptionContext))
                 .collect(joining(" "));
             if (description.length() > 0) {
                 description = description.substring(0, 1).toUpperCase() + description.substring(1);

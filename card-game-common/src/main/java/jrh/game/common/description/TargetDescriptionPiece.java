@@ -17,7 +17,7 @@ public class TargetDescriptionPiece implements DescriptionPiece {
     }
 
     @Override
-    public String lowercase() {
+    public String get(DescriptionContext descriptionContext) {
         if (targets.isEmpty()) {
             return "";
         }

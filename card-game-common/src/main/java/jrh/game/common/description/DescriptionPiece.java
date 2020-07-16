@@ -1,5 +1,5 @@
 package jrh.game.common.description;
 
 public interface DescriptionPiece {
-    String lowercase();
+    String get(DescriptionContext descriptionContext);
 }
