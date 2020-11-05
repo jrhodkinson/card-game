@@ -10,12 +10,12 @@ import jrh.game.service.websocket.server.MatchStateBroadcaster;
 
 import java.util.concurrent.Executors;
 
-public class Service {
+public class Server {
 
     private final Javalin javalin;
     private final int port;
 
-    public Service(int port) {
+    public Server(int port) {
         this.port = port;
         this.javalin = Javalin.create();
     }
