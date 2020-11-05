@@ -5,9 +5,9 @@ import jrh.game.service.websocket.WebSocketMessage;
 import jrh.game.service.websocket.server.dto.MatchDto;
 import org.joda.time.DateTimeUtils;
 
-import static jrh.game.service.websocket.ServerWebSocketMessageTypes.MATCH_ENDED;
-import static jrh.game.service.websocket.ServerWebSocketMessageTypes.MATCH_STATE;
-import static jrh.game.service.websocket.ServerWebSocketMessageTypes.PING;
+import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.MATCH_ENDED;
+import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.MATCH_STATE;
+import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.PING;
 
 public class ServerWebSocketMessages {
 

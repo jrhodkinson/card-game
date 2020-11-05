@@ -24,8 +24,7 @@ public class ModifyOutgoingDamagePower extends AbstractPower {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder()
-            .plainString("Increase outgoing damage by ").number(amount).build();
+        return AtomicDescription.builder().plainString("Increase outgoing damage by ").number(amount).build();
     }
 
     @Override

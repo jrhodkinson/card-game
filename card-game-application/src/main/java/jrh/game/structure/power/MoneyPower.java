@@ -24,8 +24,8 @@ public class MoneyPower extends AbstractPower {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("At the start of your turn,")
-            .keyword("+ $").number(amount).build();
+        return AtomicDescription.builder().plainString("At the start of your turn,").keyword("+ $").number(amount)
+                .build();
     }
 
     @Subscribe

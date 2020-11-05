@@ -69,8 +69,7 @@ public class MutableStructure implements Structure {
 
     @Override
     public Description getDescription() {
-        return Description.of(
-            getAllPowers().stream().map(Power::getDescription).collect(toList()));
+        return Description.of(getAllPowers().stream().map(Power::getDescription).collect(toList()));
     }
 
     void changeHealth(int amount) {

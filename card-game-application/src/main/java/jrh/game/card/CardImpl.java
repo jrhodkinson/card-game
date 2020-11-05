@@ -79,8 +79,7 @@ public class CardImpl implements Card {
 
     @Override
     public Description getDescription() {
-        return Description.of(
-                getAllBehaviours().stream().map(Behaviour::getDescription).collect(toList()));
+        return Description.of(getAllBehaviours().stream().map(Behaviour::getDescription).collect(toList()));
     }
 
     @Override

@@ -37,17 +37,17 @@ public class TargetDescriptionPiece implements DescriptionPiece {
 
     private String targetString(Target target) {
         switch (target) {
-            case SELF:
-                return "yourself";
-            case OTHER:
-                return "your opponent";
-            case OWN_STRUCTURES:
-                return "your structures";
-            case OTHER_STRUCTURES:
-                return "your opponent's structures";
-            default:
-                logger.error("Unsupported target={}", target);
-                return "~" + target.toString() + "~";
+        case SELF:
+            return "yourself";
+        case OTHER:
+            return "your opponent";
+        case OWN_STRUCTURES:
+            return "your structures";
+        case OTHER_STRUCTURES:
+            return "your opponent's structures";
+        default:
+            logger.error("Unsupported target={}", target);
+            return "~" + target.toString() + "~";
         }
     }
 }

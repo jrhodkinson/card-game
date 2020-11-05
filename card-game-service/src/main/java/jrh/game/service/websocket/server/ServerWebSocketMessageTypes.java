@@ -1,6 +1,8 @@
-package jrh.game.service.websocket;
+package jrh.game.service.websocket.server;
 
 import jrh.game.common.User;
+import jrh.game.service.websocket.WebSocketMessageType;
+import jrh.game.service.websocket.WebSocketMessageTypes;
 import jrh.game.service.websocket.server.dto.MatchDto;
 
 public class ServerWebSocketMessageTypes extends WebSocketMessageTypes {

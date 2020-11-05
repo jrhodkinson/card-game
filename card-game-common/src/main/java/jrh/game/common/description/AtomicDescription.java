@@ -1,5 +1,7 @@
 package jrh.game.common.description;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import jrh.game.common.StructureId;
 import jrh.game.common.Target;
 
@@ -10,8 +12,10 @@ import static java.util.stream.Collectors.joining;
 
 public class AtomicDescription {
 
+    @JsonValue
     private final Builder builder;
 
+    @JsonCreator
     private AtomicDescription(Builder builder) {
         this.builder = builder;
     }
@@ -30,6 +34,7 @@ public class AtomicDescription {
 
     public static class Builder {
 
+        @JsonValue
         private final List<DescriptionPiece> pieces = new ArrayList<>();
 
         private Builder() {
@@ -66,9 +71,8 @@ public class AtomicDescription {
         }
 
         private String get(DescriptionContext descriptionContext) {
-            String description = pieces.stream()
-                .map(descriptionPiece -> descriptionPiece.get(descriptionContext))
-                .collect(joining(" "));
+            String description = pieces.stream().map(descriptionPiece -> descriptionPiece.get(descriptionContext))
+                    .collect(joining(" "));
             if (description.length() > 0) {
                 description = description.substring(0, 1).toUpperCase() + description.substring(1);
             }

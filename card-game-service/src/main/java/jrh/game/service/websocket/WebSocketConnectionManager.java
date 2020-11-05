@@ -19,8 +19,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static jrh.game.service.websocket.ServerWebSocketMessageTypes.PING;
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.PONG;
+import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.PING;
 
 public class WebSocketConnectionManager {
 
