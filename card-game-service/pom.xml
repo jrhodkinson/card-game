@@ -25,6 +25,10 @@
         </dependency>
         <dependency>
             <groupId>jrh</groupId>
+            <artifactId>card-game-implementation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jrh</groupId>
             <artifactId>card-game-events</artifactId>
         </dependency>
         <dependency>
