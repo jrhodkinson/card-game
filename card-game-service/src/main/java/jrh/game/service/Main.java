@@ -2,8 +2,7 @@ package jrh.game.service;
 
 import jrh.game.asset.AssetLibrary;
 import jrh.game.asset.FileSystemAssetLibrary;
-import jrh.game.common.User;
-import jrh.game.match.MutableMatch;
+import jrh.game.service.lobby.MatchManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,11 +18,9 @@ public class Main {
     }
 
     private void start() {
-        AssetLibrary assetLibrary = assetLibrary();
-        MutableMatch match = new MutableMatch(assetLibrary, new User("Hero"), new User("Villain"));
-        Server server = new Server(7000);
-        server.start(match, match.getEventBus());
-        match.start();
+        MatchManager matchManager = new MatchManager(assetLibrary());
+        Server server = new Server(matchManager);
+        server.start();
     }
 
     private AssetLibrary assetLibrary() {
