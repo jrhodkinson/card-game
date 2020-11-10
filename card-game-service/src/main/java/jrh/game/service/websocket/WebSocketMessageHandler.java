@@ -22,9 +22,12 @@ public class WebSocketMessageHandler {
     private static final Logger logger = LogManager.getLogger(WebSocketMessageHandler.class);
 
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) {
-        handle(webSocketMessage, webSocketSession).forType(LOGIN).perform(this::login).forType(END_TURN)
-                .perform(this::endTurn).forType(PLAY_CARD).perform(this::playCard).forType(BUY_CARD)
-                .perform(this::buyCard).end();
+        with(webSocketMessage, webSocketSession)
+            .handle(LOGIN, this::login)
+            .handle(END_TURN, this::endTurn)
+            .handle(PLAY_CARD, this::playCard)
+            .handle(BUY_CARD, this::buyCard)
+            .end();
     }
 
     private void login(WebSocketSession webSocketSession, User user) {
@@ -52,17 +55,8 @@ public class WebSocketMessageHandler {
         webSocketSession.getMatch().getActionHandler().accept(buyCard);
     }
 
-    private static MessageContext handle(WebSocketMessage<?> webSocketMessage, WebSocketSession webSocketSession) {
+    private static MessageContext with(WebSocketMessage<?> webSocketMessage, WebSocketSession webSocketSession) {
         return new MessageContext(webSocketMessage, webSocketSession);
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T> WebSocketMessage<T> cast(WebSocketMessage<?> webSocketMessage, Class<T> clazz) {
-        if (!webSocketMessage.getType().getPayloadType().equals(clazz)) {
-            throw new IllegalArgumentException(
-                    String.format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
-        }
-        return (WebSocketMessage<T>) webSocketMessage;
     }
 
     private static class MessageContext {
@@ -76,14 +70,21 @@ public class WebSocketMessageHandler {
             this.webSocketSession = webSocketSession;
         }
 
-        private <T> SpecificTypeHandler<T> forType(WebSocketMessageType<T> webSocketMessageType) {
+        private <T> MessageContext handle(WebSocketMessageType<T> webSocketMessageType, Consumer<WebSocketSession> consumer) {
+            if (webSocketMessageType.equals(webSocketMessage.getType())) {
+                wasHandled = true;
+                consumer.accept(webSocketSession);
+            }
+            return this;
+        }
+
+        private <T> MessageContext handle(WebSocketMessageType<T> webSocketMessageType, BiConsumer<WebSocketSession, T> consumer) {
             if (webSocketMessageType.equals(webSocketMessage.getType())) {
                 WebSocketMessage<T> message = cast(webSocketMessage, webSocketMessageType.getPayloadType());
                 wasHandled = true;
-                return new SpecificTypeHandler<>(this, message.getPayload());
-            } else {
-                return new SpecificTypeHandler<>(this);
+                consumer.accept(webSocketSession, message.getPayload());
             }
+            return this;
         }
 
         private void end() {
@@ -91,36 +92,14 @@ public class WebSocketMessageHandler {
                 logger.warn("Unhandled WebSocketMessage={} for session={}", webSocketMessage, webSocketSession);
             }
         }
-    }
 
-    private static class SpecificTypeHandler<T> {
-
-        private final MessageContext messageContext;
-        private T payload;
-        private boolean isPresent = false;
-
-        private SpecificTypeHandler(MessageContext messageContext) {
-            this.messageContext = messageContext;
-        }
-
-        private SpecificTypeHandler(MessageContext messageContext, T payload) {
-            this.messageContext = messageContext;
-            this.payload = payload;
-            this.isPresent = true;
-        }
-
-        private MessageContext perform(Consumer<WebSocketSession> consumer) {
-            if (isPresent) {
-                consumer.accept(messageContext.webSocketSession);
+        @SuppressWarnings("unchecked")
+        private static <T> WebSocketMessage<T> cast(WebSocketMessage<?> webSocketMessage, Class<T> clazz) {
+            if (!webSocketMessage.getType().getPayloadType().equals(clazz)) {
+                throw new IllegalArgumentException(
+                    String.format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
             }
-            return messageContext;
-        }
-
-        private MessageContext perform(BiConsumer<WebSocketSession, T> consumer) {
-            if (isPresent) {
-                consumer.accept(messageContext.webSocketSession, payload);
-            }
-            return messageContext;
+            return (WebSocketMessage<T>) webSocketMessage;
         }
     }
 }
