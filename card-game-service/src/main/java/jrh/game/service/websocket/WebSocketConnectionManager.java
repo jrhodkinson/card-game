@@ -22,6 +22,9 @@ import java.util.function.Supplier;
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.PONG;
 import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.PING;
 
+// TODO separate out login from other stuff - login via HTTP
+// Then match websocket is _only_ for match state, and we know the user is already authenticated
+// after the first message
 public class WebSocketConnectionManager {
 
     private static final Logger logger = LogManager.getLogger(WebSocketConnectionManager.class);
