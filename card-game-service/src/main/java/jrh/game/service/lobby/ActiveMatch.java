@@ -4,18 +4,26 @@ import jrh.game.api.EventBus;
 import jrh.game.api.Match;
 import jrh.game.match.MutableMatch;
 
-public class MatchAndEventBus {
+import java.util.UUID;
 
+public class ActiveMatch {
+
+    private final UUID id;
     private final Match match;
     private final EventBus eventBus;
 
-    private MatchAndEventBus(Match match, EventBus eventBus) {
+    private ActiveMatch(Match match, EventBus eventBus) {
+        this.id = UUID.randomUUID();
         this.match = match;
         this.eventBus = eventBus;
     }
 
-    public static MatchAndEventBus from(MutableMatch mutableMatch) {
-        return new MatchAndEventBus(mutableMatch, mutableMatch.getEventBus());
+    public static ActiveMatch from(MutableMatch mutableMatch) {
+        return new ActiveMatch(mutableMatch, mutableMatch.getEventBus());
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public Match getMatch() {

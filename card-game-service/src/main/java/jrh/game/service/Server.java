@@ -1,7 +1,7 @@
 package jrh.game.service;
 
 import io.javalin.Javalin;
-import jrh.game.service.lobby.MatchAndEventBus;
+import jrh.game.service.lobby.ActiveMatch;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessageHandler;
@@ -26,14 +26,14 @@ public class Server {
         javalin.start(PORT);
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
-        MatchAndEventBus matchAndEventBus = matchManager.newMatch();
+        ActiveMatch activeMatch = matchManager.newMatch();
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
-        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, matchAndEventBus.getMatch(),
+        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, matchManager,
                 webSocketMessageHandler);
         webSocketConnectionManager.start();
 
-        matchAndEventBus.getEventBus().register(new MatchStateBroadcaster(webSocketConnectionManager));
+        activeMatch.getEventBus().register(new MatchStateBroadcaster(webSocketConnectionManager));
         new WebSocketPinger(webSocketConnectionManager, Executors.newSingleThreadScheduledExecutor());
     }
 }

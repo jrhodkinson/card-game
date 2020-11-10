@@ -7,8 +7,8 @@ import io.javalin.websocket.WsCloseContext;
 import io.javalin.websocket.WsConnectContext;
 import io.javalin.websocket.WsContext;
 import io.javalin.websocket.WsMessageContext;
-import jrh.game.api.Match;
 import jrh.game.common.ObjectMapperFactory;
+import jrh.game.service.lobby.MatchManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,16 +28,16 @@ public class WebSocketConnectionManager {
     private static final String ROUTE = "match";
 
     private final Javalin javalin;
-    private final Match match;
+    private final MatchManager matchManager;
     private final WebSocketMessageHandler webSocketMessageHandler;
     private final Map<String, WsContext> webSocketClientsBySessionId = new HashMap<>();
     private final Map<String, WebSocketSession> webSocketSessionsBySessionId = new HashMap<>();
     private final List<Supplier<Optional<? extends WebSocketMessage<?>>>> welcomeMessageSuppliers = new ArrayList<>();
     private final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public WebSocketConnectionManager(Javalin javalin, Match match, WebSocketMessageHandler webSocketMessageHandler) {
+    public WebSocketConnectionManager(Javalin javalin, MatchManager matchManager, WebSocketMessageHandler webSocketMessageHandler) {
         this.javalin = javalin;
-        this.match = match;
+        this.matchManager = matchManager;
         this.webSocketMessageHandler = webSocketMessageHandler;
     }
 
@@ -70,7 +70,7 @@ public class WebSocketConnectionManager {
     private void handleConnect(WsConnectContext wsConnectContext) {
         logger.info("Websocket connected: session={}", wsConnectContext.getSessionId());
         String sessionId = wsConnectContext.getSessionId();
-        WebSocketSession webSocketSession = new WebSocketSession(sessionId, match);
+        WebSocketSession webSocketSession = new WebSocketSession(sessionId);
         webSocketClientsBySessionId.put(sessionId, wsConnectContext);
         webSocketSessionsBySessionId.put(sessionId, webSocketSession);
         logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());

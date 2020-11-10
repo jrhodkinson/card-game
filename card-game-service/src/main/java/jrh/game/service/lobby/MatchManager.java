@@ -12,8 +12,8 @@ public class MatchManager {
         this.assetLibrary = assetLibrary;
     }
 
-    public MatchAndEventBus newMatch() {
+    public ActiveMatch newMatch() {
         MutableMatch mutableMatch = new MutableMatch(assetLibrary, new User("Hero"), new User("Villain"));
-        return MatchAndEventBus.from(mutableMatch);
+        return ActiveMatch.from(mutableMatch);
     }
 }

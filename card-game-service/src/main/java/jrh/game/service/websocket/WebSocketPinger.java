@@ -12,7 +12,7 @@ public class WebSocketPinger {
 
     private static final Logger logger = LogManager.getLogger(WebSocketPinger.class);
 
-    private final long PING_DELAY_S = 10;
+    private final long PING_DELAY_SECONDS = 10;
 
     public WebSocketPinger(WebSocketConnectionManager webSocketConnectionManager,
             ScheduledExecutorService scheduledExecutorService) {
@@ -25,7 +25,7 @@ public class WebSocketPinger {
                 logger.error("Throwable while pinging clients", t);
                 System.exit(1);
             }
-        }, 0, PING_DELAY_S, SECONDS);
+        }, 0, PING_DELAY_SECONDS, SECONDS);
     }
 
     private void createPingMessage() {

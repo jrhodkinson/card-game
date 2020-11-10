@@ -8,12 +8,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class WebSocketSession {
 
     private final String sessionId;
-    private final Match match;
+    private Match match;
     private User user;
 
-    public WebSocketSession(String sessionId, Match match) {
+    public WebSocketSession(String sessionId) {
         this.sessionId = sessionId;
-        this.match = match;
     }
 
     public String getSessionId() {
@@ -34,7 +33,8 @@ public class WebSocketSession {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("sessionId", sessionId)
-                .append("user", user).toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("sessionId", sessionId)
+            .append("user", user).toString();
     }
 }
