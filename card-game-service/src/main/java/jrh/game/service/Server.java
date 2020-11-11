@@ -1,12 +1,12 @@
 package jrh.game.service;
 
 import io.javalin.Javalin;
-import jrh.game.service.lobby.ActiveMatch;
+import jrh.game.service.lobby.LobbyEndpoint;
 import jrh.game.service.lobby.MatchManager;
+import jrh.game.service.lobby.Matchmaker;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessageHandler;
 import jrh.game.service.websocket.WebSocketPinger;
-import jrh.game.service.websocket.server.MatchStateBroadcaster;
 
 import java.util.concurrent.Executors;
 
@@ -16,24 +16,26 @@ public class Server {
 
     private final Javalin javalin;
     private final MatchManager matchManager;
+    private final Matchmaker matchmaker;
 
-    public Server(MatchManager matchManager) {
+    public Server(MatchManager matchManager, Matchmaker matchmaker) {
         this.javalin = Javalin.create();
         this.matchManager = matchManager;
+        this.matchmaker = matchmaker;
     }
 
     public void start() {
         javalin.start(PORT);
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
-        ActiveMatch activeMatch = matchManager.newMatch();
+        new LobbyEndpoint(javalin, matchManager, matchmaker);
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
         WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, matchManager,
-                webSocketMessageHandler);
+            webSocketMessageHandler);
         webSocketConnectionManager.start();
 
-        activeMatch.getEventBus().register(new MatchStateBroadcaster(webSocketConnectionManager));
+//        activeMatch.getEventBus().register(new MatchStateBroadcaster(webSocketConnectionManager));
         new WebSocketPinger(webSocketConnectionManager, Executors.newSingleThreadScheduledExecutor());
     }
 }

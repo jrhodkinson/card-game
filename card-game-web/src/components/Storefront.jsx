@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { getStorefront } from "../store/match-selector";
-import { selectedCardInStorefront } from "../store/play-actions";
+import { selectStorefront } from "../store/match/match-selector";
+import { selectedCardInStorefront } from "../store/play/play-actions";
 import Cards from "./card/Cards";
 
 const Wrapper = styled.div`
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Storefront = () => {
-  const storefront = useSelector(getStorefront);
+  const storefront = useSelector(selectStorefront);
   const dispatch = useDispatch();
   const handleCardClick = (card) => dispatch(selectedCardInStorefront(card));
   return (

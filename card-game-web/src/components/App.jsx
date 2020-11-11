@@ -1,12 +1,12 @@
 import React from "react";
 import { GlobalStyle } from "./GlobalStyle";
-import Match from "./Match";
+import Lobby from "./Lobby";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Match />
+      <Lobby />
     </>
   );
 };

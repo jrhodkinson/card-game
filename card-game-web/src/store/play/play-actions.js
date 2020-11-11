@@ -1,5 +1,5 @@
-import { buyCard, playCard } from "../gateway/ws";
-import { getPendingCardEntityId } from "./play-selector";
+import { buyCard, playCard } from "../../gateway/ws";
+import { selectPendingCardEntityId } from "./play-selector";
 
 export const NAMESPACE = "match";
 
@@ -21,7 +21,7 @@ export const selectedCardInHand = (card) => (dispatch) => {
 };
 
 export const selectedTarget = (targetEntityId) => (dispatch, getState) => {
-  const pendingCardEntityId = getPendingCardEntityId(getState());
+  const pendingCardEntityId = selectPendingCardEntityId(getState());
   if (pendingCardEntityId) {
     playCard(pendingCardEntityId, targetEntityId);
     dispatch({ type: PLAYED_CARD });

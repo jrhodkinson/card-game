@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { login } from "../gateway/ws";
 import {
-  getActivePlayer,
-  getInactivePlayer,
-  getWinner,
-} from "../store/match-selector";
+  selectActivePlayer,
+  selectInactivePlayer,
+  selectWinner,
+} from "../store/match/match-selector";
 import CurrentTurn from "./CurrentTurn";
 import MatchWebSocket from "./MatchWebSocket";
 import PrimaryPlayer from "./player/PrimaryPlayer";
@@ -19,9 +19,9 @@ const Wrapper = styled.main`
 `;
 
 const Match = () => {
-  const winner = useSelector(getWinner);
-  const activePlayer = useSelector(getActivePlayer);
-  const inactivePlayer = useSelector(getInactivePlayer);
+  const winner = useSelector(selectWinner);
+  const activePlayer = useSelector(selectActivePlayer);
+  const inactivePlayer = useSelector(selectInactivePlayer);
 
   useEffect(() => {
     if (activePlayer.user) {

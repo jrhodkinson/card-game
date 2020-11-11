@@ -3,6 +3,7 @@ package jrh.game.service;
 import jrh.game.asset.AssetLibrary;
 import jrh.game.asset.FileSystemAssetLibrary;
 import jrh.game.service.lobby.MatchManager;
+import jrh.game.service.lobby.Matchmaker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +20,8 @@ public class Main {
 
     private void start() {
         MatchManager matchManager = new MatchManager(assetLibrary());
-        Server server = new Server(matchManager);
+        Matchmaker matchmaker = new Matchmaker(matchManager);
+        Server server = new Server(matchManager, matchmaker);
         server.start();
     }
 

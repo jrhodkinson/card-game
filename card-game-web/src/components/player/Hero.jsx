@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectedTarget } from "../../store/play-actions";
-import { pendingCardRequiresTarget } from "../../store/play-selector";
+import { selectedTarget } from "../../store/play/play-actions";
+import { selectDoesPendingCardRequireTarget } from "../../store/play/play-selector";
 import { darkCardColor } from "../card/styles/color";
 
 const Wrapper = styled.div`
@@ -35,7 +35,7 @@ const Health = styled.div`
 
 const Hero = ({ entityId, name, health }) => {
   const dispatch = useDispatch();
-  const heroIsInteractable = useSelector(pendingCardRequiresTarget);
+  const heroIsInteractable = useSelector(selectDoesPendingCardRequireTarget);
   const handleClick = () => dispatch(selectedTarget(entityId));
   return (
     <Wrapper interactable={heroIsInteractable} onClick={handleClick}>

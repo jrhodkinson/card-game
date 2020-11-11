@@ -1,5 +1,5 @@
 import Immutable from "seamless-immutable";
-import { MATCH_ENDED } from "./match-actions";
+import { MATCH_ENDED } from "../match/match-actions";
 import {
   PLAYED_CARD,
   PURCHASED_CARD,

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { endTurn } from "../gateway/ws";
-import { getCurrentTurn } from "../store/match-selector";
+import { selectCurrentTurn } from "../store/match/match-selector";
 import Cards from "./card/Cards";
 
 const Wrapper = styled.div`
@@ -19,7 +19,7 @@ const EndTurnButton = styled.button`
 `;
 
 const CurrentTurn = () => {
-  const currentTurn = useSelector(getCurrentTurn);
+  const currentTurn = useSelector(selectCurrentTurn);
   return (
     <Wrapper>
       <Money>{currentTurn.money} Money</Money>

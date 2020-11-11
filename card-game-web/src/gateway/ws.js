@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import { matchEnded, receivedMatchState } from "../store/match-actions";
-import { receivedPing } from "../store/socket-actions";
+import { matchEnded, receivedMatchState } from "../store/match/match-actions";
+import { receivedPing } from "../store/socket/socket-actions";
 
 const PING = "ping";
 const PONG = "pong";

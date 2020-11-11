@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectedTarget } from "../../store/play-actions";
-import { pendingCardRequiresTarget } from "../../store/play-selector";
+import { selectedTarget } from "../../store/play/play-actions";
+import { selectDoesPendingCardRequireTarget } from "../../store/play/play-selector";
 import Structure from "./Structure";
 
 const Wrapper = styled.div`
@@ -13,7 +13,9 @@ const Wrapper = styled.div`
 
 const Structures = ({ structures }) => {
   const dispatch = useDispatch();
-  const structuresAreInteractable = useSelector(pendingCardRequiresTarget);
+  const structuresAreInteractable = useSelector(
+    selectDoesPendingCardRequireTarget
+  );
   const handleStructureClick = (structure) =>
     dispatch(selectedTarget(structure.entityId));
   return (
