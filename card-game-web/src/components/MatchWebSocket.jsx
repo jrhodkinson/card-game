@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { connectToMatchWebSocket } from "../gateway/ws";
 
-const MatchWebSocket = () => {
+const MatchWebSocket = ({ matchId }) => {
   const dispatch = useDispatch();
-  useEffect(() => connectToMatchWebSocket(dispatch), [dispatch]);
+  useEffect(() => connectToMatchWebSocket(dispatch, matchId), [
+    dispatch,
+    matchId,
+  ]);
   return null;
 };
 

@@ -1,5 +1,6 @@
 package jrh.game.service.lobby;
 
+import jrh.game.api.ActionHandler;
 import jrh.game.api.EventBus;
 import jrh.game.api.Match;
 import jrh.game.match.MutableMatch;
@@ -26,8 +27,8 @@ public class ActiveMatch {
         return id;
     }
 
-    public Match getMatch() {
-        return match;
+    public ActionHandler getActionHandler() {
+        return match.getActionHandler();
     }
 
     public EventBus getEventBus() {

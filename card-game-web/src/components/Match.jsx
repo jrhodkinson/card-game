@@ -18,7 +18,7 @@ const Wrapper = styled.main`
   flex-direction: column;
 `;
 
-const Match = () => {
+const Match = ({ matchId }) => {
   const winner = useSelector(selectWinner);
   const activePlayer = useSelector(selectActivePlayer);
   const inactivePlayer = useSelector(selectInactivePlayer);
@@ -31,7 +31,7 @@ const Match = () => {
 
   return (
     <Wrapper>
-      <MatchWebSocket />
+      <MatchWebSocket matchId={matchId} />
       {winner ? (
         "Match is over, winner: " + winner
       ) : (

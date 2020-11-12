@@ -18,7 +18,7 @@ public class WebSocketPinger {
             ScheduledExecutorService scheduledExecutorService) {
         scheduledExecutorService.scheduleWithFixedDelay(() -> {
             try {
-                webSocketConnectionManager.broadcast(ServerWebSocketMessages.ping());
+                webSocketConnectionManager.broadcastAll(ServerWebSocketMessages.ping());
             } catch (Exception e) {
                 logger.error("Exception while pinging clients", e);
             } catch (Throwable t) {

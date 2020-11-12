@@ -1,25 +1,24 @@
 package jrh.game.service.websocket;
 
-import jrh.game.api.Match;
 import jrh.game.common.User;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import jrh.game.service.lobby.ActiveMatch;
 
 public class WebSocketSession {
 
     private final String sessionId;
-    private Match match;
+    private final ActiveMatch match;
     private User user;
 
-    public WebSocketSession(String sessionId) {
+    public WebSocketSession(String sessionId, ActiveMatch match) {
         this.sessionId = sessionId;
+        this.match = match;
     }
 
     public String getSessionId() {
         return sessionId;
     }
 
-    public Match getMatch() {
+    public ActiveMatch getMatch() {
         return match;
     }
 
@@ -33,8 +32,6 @@ public class WebSocketSession {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("sessionId", sessionId)
-            .append("user", user).toString();
+        return sessionId;
     }
 }

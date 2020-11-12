@@ -31,10 +31,15 @@ public class MatchManager {
         matches.put(matchId, match);
         matchIdByUser.put(firstPlayer, matchId);
         matchIdByUser.put(secondPlayer, matchId);
+        mutableMatch.start();
         return match;
     }
 
     public Optional<ActiveMatch> getMatchByUser(User user) {
         return Optional.ofNullable(matchIdByUser.get(user)).map(matches::get);
+    }
+
+    public ActiveMatch getMatchById(UUID id) {
+        return matches.get(id);
     }
 }

@@ -31,6 +31,7 @@ public class WebSocketMessageHandler {
     }
 
     private void login(WebSocketSession webSocketSession, User user) {
+        logger.info("RX login with user={} for session={}", user, webSocketSession);
         logger.info("Setting user={} for session={}", user, webSocketSession);
         webSocketSession.setUser(user);
     }
@@ -102,4 +103,6 @@ public class WebSocketMessageHandler {
             return (WebSocketMessage<T>) webSocketMessage;
         }
     }
+
+
 }

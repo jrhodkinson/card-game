@@ -14,7 +14,15 @@ const Lobby = () => {
     dispatch(fetchCurrentMatch());
   }, [dispatch]);
 
-  return <>{matchId ? <Match /> : <button onClick={queue}>Queue</button>}</>;
+  return (
+    <>
+      {matchId ? (
+        <Match matchId={matchId} />
+      ) : (
+        <button onClick={queue}>Queue</button>
+      )}
+    </>
+  );
 };
 
 export default Lobby;

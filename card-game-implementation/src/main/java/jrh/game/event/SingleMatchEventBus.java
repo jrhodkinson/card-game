@@ -3,6 +3,7 @@ package jrh.game.event;
 import jrh.game.api.Match;
 import jrh.game.api.Event;
 import jrh.game.api.EventBus;
+import jrh.game.api.event.EventHandlerRegistered;
 import jrh.game.common.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,7 @@ public class SingleMatchEventBus implements EventBus {
     @Override
     public void register(EventHandler eventHandler) {
         subscriberRegistry.register(eventHandler);
+        dispatch(new EventHandlerRegistered(eventHandler.getClass()));
     }
 
     @Override

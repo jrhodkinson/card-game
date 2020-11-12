@@ -8,6 +8,7 @@ import jrh.game.api.event.CardDestroyed;
 import jrh.game.api.event.CardGained;
 import jrh.game.api.event.CardPurchased;
 import jrh.game.api.event.CardResolved;
+import jrh.game.api.event.EventHandlerRegistered;
 import jrh.game.api.event.MatchEnded;
 import jrh.game.api.event.MatchStarted;
 import jrh.game.api.event.MoneyChanged;
@@ -20,20 +21,23 @@ import jrh.game.service.websocket.WebSocketMessage;
 import jrh.game.service.websocket.server.dto.MatchDto;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public class MatchStateBroadcaster implements EventHandler {
+public class SingleMatchStateBroadcaster implements EventHandler {
 
     private final WebSocketConnectionManager webSocketConnectionManager;
+    private final UUID matchId;
     private MatchDto latestMatchState;
     private User winner;
 
-    public MatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager) {
+    public SingleMatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager, UUID matchId) {
         this.webSocketConnectionManager = webSocketConnectionManager;
-        webSocketConnectionManager.addWelcomeMessage(this::matchStateMessage);
+        this.matchId = matchId;
+        webSocketConnectionManager.addWelcomeMessage(matchId, this::matchStateMessage);
     }
 
-    @SubscribeAll({ CardResolved.class, CardDestroyed.class, CardPurchased.class, CardGained.class,
-            PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class })
+    @SubscribeAll({EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class, CardGained.class,
+        PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class})
     private void matchStateChanged(Event event, Match match) {
         broadcastFullMatchState(match);
     }
@@ -41,12 +45,12 @@ public class MatchStateBroadcaster implements EventHandler {
     @Subscribe
     private void matchEnded(MatchEnded matchEnded) {
         winner = matchEnded.getWinner();
-        webSocketConnectionManager.broadcast(ServerWebSocketMessages.matchEnded(matchEnded.getWinner()));
+        webSocketConnectionManager.broadcast(matchId, ServerWebSocketMessages.matchEnded(matchEnded.getWinner()));
     }
 
     private void broadcastFullMatchState(Match match) {
         latestMatchState = MatchDto.fromMatch(match);
-        matchStateMessage().ifPresent(webSocketConnectionManager::broadcast);
+        matchStateMessage().ifPresent(m -> webSocketConnectionManager.broadcast(matchId, m));
     }
 
     private Optional<WebSocketMessage<?>> matchStateMessage() {

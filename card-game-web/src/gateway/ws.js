@@ -21,7 +21,7 @@ const send = (type, payload) => {
     message = JSON.stringify({ type, payload });
   }
   if (type !== PONG) {
-    console.log(`[ws] TX: ${message}`);
+    console.log(`[ws] TX: ${JSON.stringify(message)}`);
   }
   ws.send(message);
 };
@@ -42,16 +42,17 @@ const handleMessage = (dispatch) => (event) => {
   const message = JSON.parse(event.data);
   if (message.type === PING) {
     send(PONG, message.payload);
+  } else {
+    console.log(`[ws] RX: ${JSON.stringify(message)}`);
   }
-  console.log(`[ws] RX: ${message}`);
   const action = toAction(message);
   if (action) {
     dispatch(action);
   }
 };
 
-export const connectToMatchWebSocket = (dispatch) => {
-  ws = new ReconnectingWebSocket("ws://localhost:7000/match");
+export const connectToMatchWebSocket = (dispatch, matchId) => {
+  ws = new ReconnectingWebSocket(`ws://localhost:7000/match/${matchId}`);
   ws.onmessage = handleMessage(dispatch);
   return ws.close;
 };
