@@ -23,9 +23,9 @@ public class LobbyEndpoint {
     private final MatchManager matchManager;
 
     public LobbyEndpoint(Javalin javalin, MatchManager matchManager, Matchmaker matchmaker) {
-        registerRoutes(javalin);
         this.matchmaker = matchmaker;
         this.matchManager = matchManager;
+        registerRoutes(javalin);
     }
 
     private void registerRoutes(Javalin javalin) {

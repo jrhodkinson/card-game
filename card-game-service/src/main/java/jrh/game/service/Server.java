@@ -2,6 +2,8 @@ package jrh.game.service;
 
 import io.javalin.Javalin;
 import io.javalin.core.validation.JavalinValidation;
+import io.javalin.plugin.json.JavalinJackson;
+import jrh.game.common.ObjectMapperFactory;
 import jrh.game.service.lobby.LobbyEndpoint;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.lobby.Matchmaker;
@@ -17,6 +19,7 @@ public class Server {
     private static final int PORT = 7000;
 
     static {
+        JavalinJackson.configure(ObjectMapperFactory.create());
         JavalinValidation.register(UUID.class, UUID::fromString);
     }
 
