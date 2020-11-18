@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { login } from "../gateway/account";
 import { queue } from "../gateway/lobby";
 import {
   fetchCurrentMatch,
@@ -14,12 +15,25 @@ const Lobby = () => {
     dispatch(fetchCurrentMatch());
   }, [dispatch]);
 
+  const handleUsernameKeyUp = (e) => {
+    if (e.key === "Enter") {
+      login(e.currentTarget.value);
+    }
+  };
+
   return (
     <>
       {matchId ? (
         <Match matchId={matchId} />
       ) : (
-        <button onClick={queue}>Queue</button>
+        <>
+          <input
+            type="text"
+            placeholder="Username"
+            onKeyUp={handleUsernameKeyUp}
+          />
+          <button onClick={queue}>Queue</button>
+        </>
       )}
     </>
   );

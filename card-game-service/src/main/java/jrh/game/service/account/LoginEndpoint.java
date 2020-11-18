@@ -35,8 +35,8 @@ public class LoginEndpoint {
     }
 
     private void login(Context context) {
-        logger.debug("RX login request");
         LoginRequest request = context.bodyAsClass(LoginRequest.class);
+        logger.debug("RX loginRequest={}", request);
         Optional<AccountId> optionalAccountId = accounts.getAccountId(request.getName());
         if (optionalAccountId.isEmpty()) {
             context.status(FORBIDDEN);

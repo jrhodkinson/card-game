@@ -3,6 +3,8 @@ package jrh.game.service.account;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public final class LoginRequest {
 
@@ -34,5 +36,12 @@ public final class LoginRequest {
         return new HashCodeBuilder(17, 37)
             .append(name)
             .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("name", name)
+            .toString();
     }
 }
