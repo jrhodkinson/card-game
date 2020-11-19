@@ -9,7 +9,7 @@ import java.util.Base64.Encoder;
 
 public final class Token {
 
-    private static final int TOKEN_LENGTH = 32;
+    private static final int TOKEN_SIZE_IN_BYTES = 64;
 
     private final String token;
 
@@ -19,7 +19,7 @@ public final class Token {
 
     public static Token randomToken() {
         SecureRandom random = new SecureRandom();
-        byte[] bytes = new byte[3 * TOKEN_LENGTH / 4];
+        byte[] bytes = new byte[TOKEN_SIZE_IN_BYTES];
         random.nextBytes(bytes);
         Encoder encoder = Base64.getUrlEncoder().withoutPadding();
         return new Token(encoder.encodeToString(bytes));

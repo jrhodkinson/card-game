@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class TokenTest {
 
@@ -15,8 +16,7 @@ public class TokenTest {
 
     @Test
     public void tokenHasAppropriateLength() {
-        System.out.println(Token.randomToken().toString());
-        assertThat(Token.randomToken().toString().length(), equalTo(32));
+        assertThat(Token.randomToken().toString().length(), greaterThan(80));
     }
 
     @Test
