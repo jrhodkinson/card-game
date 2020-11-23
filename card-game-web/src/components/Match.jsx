@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { login } from "../gateway/ws";
 import {
-  selectActivePlayer,
-  selectInactivePlayer,
+  isPrimaryPlayerActive,
+  selectPrimaryPlayer,
+  selectSecondaryPlayer,
   selectWinner,
 } from "../store/match/match-selector";
 import CurrentTurn from "./CurrentTurn";
@@ -20,14 +20,9 @@ const Wrapper = styled.main`
 
 const Match = ({ matchId }) => {
   const winner = useSelector(selectWinner);
-  const activePlayer = useSelector(selectActivePlayer);
-  const inactivePlayer = useSelector(selectInactivePlayer);
-
-  useEffect(() => {
-    if (activePlayer.user) {
-      login(activePlayer.user);
-    }
-  }, [activePlayer.user]);
+  const primaryPlayer = useSelector(selectPrimaryPlayer);
+  const secondaryPlayer = useSelector(selectSecondaryPlayer);
+  const primaryPlayerActive = useSelector(isPrimaryPlayerActive);
 
   return (
     <Wrapper>
@@ -36,10 +31,13 @@ const Match = ({ matchId }) => {
         "Match is over, winner: " + winner
       ) : (
         <>
-          <SecondaryPlayer player={inactivePlayer} />
+          <SecondaryPlayer
+            player={secondaryPlayer}
+            active={!primaryPlayerActive}
+          />
           <Storefront />
           <CurrentTurn />
-          <PrimaryPlayer player={activePlayer} />
+          <PrimaryPlayer player={primaryPlayer} active={primaryPlayerActive} />
         </>
       )}
     </Wrapper>

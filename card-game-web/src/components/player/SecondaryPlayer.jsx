@@ -20,7 +20,7 @@ const SpanAll = styled(S.Centered)`
   grid-column: span 3;
 `;
 
-const SecondaryPlayer = ({ player }) => (
+const SecondaryPlayer = ({ player, active }) => (
   <Wrapper>
     <Pile cards={player.discardPile} />
     <SecondaryPlayerHand size={player.hand.length} />
@@ -30,6 +30,7 @@ const SecondaryPlayer = ({ player }) => (
         entityId={player.entityId}
         name={player.user}
         health={player.health}
+        active={active}
       />
     </SpanAll>
     <SpanAll>

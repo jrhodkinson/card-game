@@ -11,7 +11,8 @@ public class EndTurn implements Action {
         this.user = user;
     }
 
-    public User getUser() {
+    @Override
+    public User getActor() {
         return user;
     }
 }

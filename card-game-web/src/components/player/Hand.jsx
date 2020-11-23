@@ -4,14 +4,18 @@ import { selectedCardInHand } from "../../store/play/play-actions";
 import { selectPendingCardEntityId } from "../../store/play/play-selector";
 import Cards from "../card/Cards";
 
-const Hand = ({ hand }) => {
+const Hand = ({ hand, interactable }) => {
   const dispatch = useDispatch();
   const pendingCardEntityId = useSelector(selectPendingCardEntityId);
-  const handleCardClick = (card) => dispatch(selectedCardInHand(card));
+  const handleCardClick = (card) => {
+    if (interactable) {
+      dispatch(selectedCardInHand(card));
+    }
+  };
   return (
     <Cards
       cards={hand}
-      interactable
+      interactable={interactable}
       onCardClick={handleCardClick}
       selectedCardEntityId={pendingCardEntityId}
     />

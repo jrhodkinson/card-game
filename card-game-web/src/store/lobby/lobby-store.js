@@ -1,5 +1,5 @@
 import Immutable from "seamless-immutable";
-import { currentMatch } from "../../gateway/lobby";
+import { getCurrentMatch } from "../../gateway/lobby";
 
 export const LOBBY_STATE = "lobby";
 export const NAMESPACE = "lobby";
@@ -21,7 +21,7 @@ export default (state = defaultState, action) => {
 
 export const fetchCurrentMatch = () => (dispatch) => {
   const matchPoller = setInterval(() => {
-    currentMatch().then((response) => {
+    getCurrentMatch().then((response) => {
       dispatch({ type: RECEIVED_MATCH_ID, matchId: response.data });
       clearInterval(matchPoller);
     });

@@ -57,10 +57,6 @@ export const connectToMatchWebSocket = (dispatch, matchId) => {
   return ws.close;
 };
 
-export const login = (user) => {
-  send("login", user);
-};
-
 export const endTurn = () => {
   send("turn/end");
 };

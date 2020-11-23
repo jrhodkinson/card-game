@@ -16,7 +16,8 @@ public class PlayCard implements Action {
         this.target = target;
     }
 
-    public User getUser() {
+    @Override
+    public User getActor() {
         return user;
     }
 

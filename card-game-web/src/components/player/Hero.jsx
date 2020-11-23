@@ -16,8 +16,13 @@ const Wrapper = styled.div`
   ${({ interactable }) => interactable && "cursor: pointer"};
 `;
 
-const Name = styled.div`
+const ActiveName = styled.div`
   font-weight: bold;
+  color: red;
+`;
+
+const Name = styled.div`
+  color: #333;
 `;
 
 const healthDiameter = 36;
@@ -33,13 +38,13 @@ const Health = styled.div`
   border-radius: ${healthDiameter / 2}px;
 `;
 
-const Hero = ({ entityId, name, health }) => {
+const Hero = ({ entityId, name, health, active }) => {
   const dispatch = useDispatch();
   const heroIsInteractable = useSelector(selectDoesPendingCardRequireTarget);
   const handleClick = () => dispatch(selectedTarget(entityId));
   return (
     <Wrapper interactable={heroIsInteractable} onClick={handleClick}>
-      <Name>{name}</Name>
+      {active ? <ActiveName>{name}</ActiveName> : <Name>{name}</Name>}
       <Health>{health}</Health>
     </Wrapper>
   );

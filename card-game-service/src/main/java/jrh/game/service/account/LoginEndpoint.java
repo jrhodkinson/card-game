@@ -48,5 +48,24 @@ public class LoginEndpoint {
         Token token = sessions.getToken(accountId);
         context.cookie(cookies.accountId(accountId));
         context.cookie(cookies.token(token));
+        context.json(new LoggedInResponse(accountId.toString(), accounts.getAccount(accountId).getName()));
+    }
+
+    public static class LoggedInResponse {
+        private final String accountId;
+        private final String name;
+
+        public LoggedInResponse(String accountId, String name) {
+            this.accountId = accountId;
+            this.name = name;
+        }
+
+        public String getAccountId() {
+            return accountId;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

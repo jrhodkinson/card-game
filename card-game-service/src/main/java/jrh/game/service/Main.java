@@ -19,9 +19,6 @@ public class Main {
         main.start();
     }
 
-    // TODO remove LOGIN message
-    // TODO stop switching active user
-
     private void start() {
         Accounts accounts = new Accounts();
         MatchManager matchManager = new MatchManager(assetLibrary(), accounts);

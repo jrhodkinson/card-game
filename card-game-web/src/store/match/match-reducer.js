@@ -3,25 +3,19 @@ import { MATCH_ENDED, RECEIVED_MATCH_STATE } from "./match-actions";
 
 export const MATCH_STATE = "match";
 
+export const defaultPlayer = Immutable({
+  entityId: "",
+  username: "",
+  health: 0,
+  structures: [],
+  hand: [],
+  deckSize: 0,
+  discardPile: [],
+});
+
 export const defaultState = Immutable({
-  activePlayer: {
-    entityId: "",
-    username: "",
-    health: 0,
-    structures: [],
-    hand: [],
-    deckSize: 0,
-    discardPile: [],
-  },
-  inactivePlayer: {
-    entityId: "",
-    username: "",
-    health: 0,
-    structures: [],
-    hand: [],
-    deckSize: 0,
-    discardPile: [],
-  },
+  activeUser: "",
+  players: {},
   currentTurn: {
     money: 0,
     playedCards: [],

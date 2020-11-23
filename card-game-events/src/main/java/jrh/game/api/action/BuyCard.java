@@ -14,7 +14,8 @@ public class BuyCard implements Action {
         this.cardEntityId = cardEntityId;
     }
 
-    public User getUser() {
+    @Override
+    public User getActor() {
         return user;
     }
 
