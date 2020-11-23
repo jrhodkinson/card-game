@@ -1,5 +1,6 @@
 package jrh.game.service.account;
 
+import jrh.game.common.User;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -19,6 +20,10 @@ public class Account {
 
     public String getName() {
         return name;
+    }
+
+    public User toUser() {
+        return new User(name);
     }
 
     @Override

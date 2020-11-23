@@ -4,8 +4,10 @@ import io.javalin.Javalin;
 import io.javalin.core.validation.JavalinValidation;
 import io.javalin.plugin.json.JavalinJackson;
 import jrh.game.common.ObjectMapperFactory;
+import jrh.game.service.Cookies.Environment;
 import jrh.game.service.account.Accounts;
 import jrh.game.service.account.LoginEndpoint;
+import jrh.game.service.account.SessionAccessManager;
 import jrh.game.service.account.Sessions;
 import jrh.game.service.lobby.LobbyEndpoint;
 import jrh.game.service.lobby.MatchManager;
@@ -26,25 +28,31 @@ public class Server {
         JavalinValidation.register(UUID.class, UUID::fromString);
     }
 
-    private final Javalin javalin;
     private final MatchManager matchManager;
     private final Matchmaker matchmaker;
+    private final Accounts accounts;
 
-    public Server(MatchManager matchManager, Matchmaker matchmaker) {
-        this.javalin = Javalin.create();
+    public Server(MatchManager matchManager, Matchmaker matchmaker, Accounts accounts) {
         this.matchManager = matchManager;
         this.matchmaker = matchmaker;
+        this.accounts = accounts;
     }
 
     public void start() {
+        Cookies cookies = new Cookies(Environment.DEVELOPMENT);
+        Sessions sessions = new Sessions();
+
+        SessionAccessManager accessManager = new SessionAccessManager(cookies, sessions);
+
+        Javalin javalin = Javalin.create(config -> config.accessManager(accessManager));
         javalin.start(PORT);
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
-        new LoginEndpoint(javalin, new Accounts(), new Sessions());
-        new LobbyEndpoint(javalin, matchManager, matchmaker);
+        new LoginEndpoint(javalin, cookies, accounts, sessions);
+        new LobbyEndpoint(javalin, accounts,  matchManager, matchmaker);
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
-        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, matchManager,
+        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, accounts, matchManager,
             webSocketMessageHandler);
         webSocketConnectionManager.start();
 

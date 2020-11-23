@@ -7,11 +7,12 @@ public class WebSocketSession {
 
     private final String sessionId;
     private final ActiveMatch match;
-    private User user;
+    private final User user;
 
-    public WebSocketSession(String sessionId, ActiveMatch match) {
+    public WebSocketSession(String sessionId, ActiveMatch match, User user) {
         this.sessionId = sessionId;
         this.match = match;
+        this.user = user;
     }
 
     public String getSessionId() {
@@ -24,10 +25,6 @@ public class WebSocketSession {
 
     public User getUser() {
         return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Override

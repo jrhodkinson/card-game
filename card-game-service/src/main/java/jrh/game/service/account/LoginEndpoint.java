@@ -2,6 +2,7 @@ package jrh.game.service.account;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import io.javalin.http.ForbiddenResponse;
 import jrh.game.service.Cookies;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,8 +11,8 @@ import java.util.Optional;
 
 import static io.javalin.apibuilder.ApiBuilder.path;
 import static io.javalin.apibuilder.ApiBuilder.post;
-import static jrh.game.service.Status.FORBIDDEN;
-import static jrh.game.service.Status.OK;
+import static java.util.Collections.singleton;
+import static jrh.game.service.account.AccountRole.ANYONE;
 
 public class LoginEndpoint {
 
@@ -19,8 +20,10 @@ public class LoginEndpoint {
 
     private final Accounts accounts;
     private final Sessions sessions;
+    private final Cookies cookies;
 
-    public LoginEndpoint(Javalin javalin, Accounts accounts, Sessions sessions) {
+    public LoginEndpoint(Javalin javalin, Cookies cookies, Accounts accounts, Sessions sessions) {
+        this.cookies = cookies;
         this.accounts = accounts;
         this.sessions = sessions;
         registerRoutes(javalin);
@@ -29,7 +32,7 @@ public class LoginEndpoint {
     private void registerRoutes(Javalin javalin) {
         javalin.routes(() -> {
             path("user", () -> {
-                post("login", this::login);
+                post("login", this::login, singleton(ANYONE));
             });
         });
     }
@@ -39,13 +42,11 @@ public class LoginEndpoint {
         logger.debug("RX loginRequest={}", request);
         Optional<AccountId> optionalAccountId = accounts.getAccountId(request.getName());
         if (optionalAccountId.isEmpty()) {
-            context.status(FORBIDDEN);
-            return;
+            throw new ForbiddenResponse();
         }
         AccountId accountId = optionalAccountId.get();
         Token token = sessions.getToken(accountId);
-        context.cookie(Cookies.ACCOUNT_ID, accountId.toString());
-        context.cookie(Cookies.TOKEN, token.toString());
-        context.status(OK);
+        context.cookie(cookies.accountId(accountId));
+        context.cookie(cookies.token(token));
     }
 }

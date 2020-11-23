@@ -2,6 +2,7 @@ package jrh.game.service;
 
 import jrh.game.asset.AssetLibrary;
 import jrh.game.asset.FileSystemAssetLibrary;
+import jrh.game.service.account.Accounts;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.lobby.Matchmaker;
 import org.apache.logging.log4j.LogManager;
@@ -18,10 +19,14 @@ public class Main {
         main.start();
     }
 
+    // TODO remove LOGIN message
+    // TODO stop switching active user
+
     private void start() {
-        MatchManager matchManager = new MatchManager(assetLibrary());
+        Accounts accounts = new Accounts();
+        MatchManager matchManager = new MatchManager(assetLibrary(), accounts);
         Matchmaker matchmaker = new Matchmaker(matchManager);
-        Server server = new Server(matchManager, matchmaker);
+        Server server = new Server(matchManager, matchmaker, accounts);
         server.start();
     }
 

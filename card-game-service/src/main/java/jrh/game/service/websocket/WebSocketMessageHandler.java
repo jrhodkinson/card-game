@@ -4,7 +4,6 @@ import jrh.game.api.action.BuyCard;
 import jrh.game.api.action.EndTurn;
 import jrh.game.api.action.PlayCard;
 import jrh.game.common.EntityId;
-import jrh.game.common.User;
 import jrh.game.service.websocket.client.dto.PlayCardDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,8 +12,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.BUY_CARD;
-import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN;
-import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.LOGIN;
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.PLAY_CARD;
 
 public class WebSocketMessageHandler {
@@ -23,17 +20,10 @@ public class WebSocketMessageHandler {
 
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) {
         with(webSocketMessage, webSocketSession)
-            .handle(LOGIN, this::login)
-            .handle(END_TURN, this::endTurn)
+            .handle(this::endTurn)
             .handle(PLAY_CARD, this::playCard)
             .handle(BUY_CARD, this::buyCard)
             .end();
-    }
-
-    private void login(WebSocketSession webSocketSession, User user) {
-        logger.info("RX login with user={} for session={}", user, webSocketSession);
-        logger.info("Setting user={} for session={}", user, webSocketSession);
-        webSocketSession.setUser(user);
     }
 
     private void endTurn(WebSocketSession webSocketSession) {
@@ -71,8 +61,8 @@ public class WebSocketMessageHandler {
             this.webSocketSession = webSocketSession;
         }
 
-        private <T> MessageContext handle(WebSocketMessageType<T> webSocketMessageType, Consumer<WebSocketSession> consumer) {
-            if (webSocketMessageType.equals(webSocketMessage.getType())) {
+        private <T> MessageContext handle(Consumer<WebSocketSession> consumer) {
+            if (jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN.equals(webSocketMessage.getType())) {
                 wasHandled = true;
                 consumer.accept(webSocketSession);
             }
@@ -103,6 +93,5 @@ public class WebSocketMessageHandler {
             return (WebSocketMessage<T>) webSocketMessage;
         }
     }
-
 
 }

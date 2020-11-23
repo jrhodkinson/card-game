@@ -24,5 +24,4 @@ public class TokenTest {
         Token token = Token.randomToken();
         assertThat(Token.fromString(token.toString()), equalTo(token));
     }
-
 }

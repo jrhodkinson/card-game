@@ -10,4 +10,12 @@ public class Sessions {
     public Token getToken(AccountId accountId) {
         return tokens.computeIfAbsent(accountId, (id) -> Token.randomToken());
     }
+
+    public boolean isValid(AccountId accountId, Token token) {
+        Token expectedToken = tokens.get(accountId);
+        if (token == null) {
+            return false;
+        }
+        return token.equals(expectedToken);
+    }
 }

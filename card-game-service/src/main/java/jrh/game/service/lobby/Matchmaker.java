@@ -1,21 +1,21 @@
 package jrh.game.service.lobby;
 
-import jrh.game.common.User;
+import jrh.game.service.account.AccountId;
 
 public class Matchmaker {
 
     private final MatchManager matchManager;
-    private User queue = new User("Jack");
+    private AccountId queue = AccountId.fromString("043107f6-2c82-4306-8416-5ba9d882c323");
 
     public Matchmaker(MatchManager matchManager) {
         this.matchManager = matchManager;
     }
 
-    public synchronized void queue(User user) {
+    public synchronized void queue(AccountId accountId) {
         if (queue == null) {
-            queue = user;
+            queue = accountId;
         } else {
-            matchManager.newMatch(queue, user);
+            matchManager.newMatch(queue, accountId);
             queue = null;
         }
     }
