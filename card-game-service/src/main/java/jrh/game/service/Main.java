@@ -2,6 +2,7 @@ package jrh.game.service;
 
 import jrh.game.asset.AssetLibrary;
 import jrh.game.asset.FileSystemAssetLibrary;
+import jrh.game.card.store.Database;
 import jrh.game.service.account.Accounts;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.lobby.Matchmaker;
@@ -20,7 +21,8 @@ public class Main {
     }
 
     private void start() {
-        Accounts accounts = new Accounts();
+        Database database = Database.instance();
+        Accounts accounts = new Accounts(database.accountStore());
         MatchManager matchManager = new MatchManager(assetLibrary(), accounts);
         Matchmaker matchmaker = new Matchmaker(matchManager);
         Server server = new Server(matchManager, matchmaker, accounts);

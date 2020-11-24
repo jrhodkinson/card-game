@@ -32,6 +32,10 @@
             <artifactId>card-game-events</artifactId>
         </dependency>
         <dependency>
+            <groupId>jrh</groupId>
+            <artifactId>card-game-store</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>
         </dependency>

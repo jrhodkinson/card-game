@@ -5,7 +5,7 @@ import jrh.game.common.account.AccountId;
 public class Matchmaker {
 
     private final MatchManager matchManager;
-    private AccountId queue = AccountId.fromString("043107f6-2c82-4306-8416-5ba9d882c323");
+    private AccountId queue = null;
 
     public Matchmaker(MatchManager matchManager) {
         this.matchManager = matchManager;
@@ -14,7 +14,7 @@ public class Matchmaker {
     public synchronized void queue(AccountId accountId) {
         if (queue == null) {
             queue = accountId;
-        } else {
+        } else if (!accountId.equals(queue)) {
             matchManager.newMatch(queue, accountId);
             queue = null;
         }

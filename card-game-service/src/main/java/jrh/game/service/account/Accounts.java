@@ -1,22 +1,25 @@
 package jrh.game.service.account;
 
+import jrh.game.card.store.AccountStore;
 import jrh.game.common.account.Account;
 import jrh.game.common.account.AccountId;
 
-import java.util.List;
 import java.util.Optional;
 
 public class Accounts {
 
-    private static final List<Account> accounts = List.of(new Account(AccountId.randomAccountId(), "jack"),
-            new Account(AccountId.fromString("043107f6-2c82-4306-8416-5ba9d882c323"), "terry"));
+    private final AccountStore store;
+
+    public Accounts(AccountStore store) {
+        this.store = store;
+    }
 
     public Optional<AccountId> getAccountId(String name) {
-        return accounts.stream().filter(account -> account.getName().equals(name)).findAny().map(Account::getId);
+        return store.getAccountId(name);
     }
 
     public Account getAccount(AccountId accountId) {
-        return accounts.stream().filter(account -> account.getId().equals(accountId)).findAny().orElseThrow();
+        return store.getAccount(accountId).orElseThrow();
     }
 
 }

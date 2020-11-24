@@ -25,6 +25,10 @@ public final class AccountId {
         return new AccountId(UUID.fromString(id));
     }
 
+    public UUID toUUID() {
+        return accountId;
+    }
+
     @Override
     public String toString() {
         return accountId.toString();
