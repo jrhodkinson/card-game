@@ -32,21 +32,19 @@ public final class AccountId {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         AccountId accountId1 = (AccountId) o;
 
-        return new EqualsBuilder()
-            .append(accountId, accountId1.accountId)
-            .isEquals();
+        return new EqualsBuilder().append(accountId, accountId1.accountId).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-            .append(accountId)
-            .toHashCode();
+        return new HashCodeBuilder(17, 37).append(accountId).toHashCode();
     }
 }

@@ -3,7 +3,8 @@ package jrh.game.service.websocket.server;
 import jrh.game.common.User;
 import jrh.game.service.websocket.WebSocketMessage;
 import jrh.game.service.websocket.server.dto.MatchDto;
-import org.joda.time.DateTimeUtils;
+
+import java.time.Clock;
 
 import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.MATCH_ENDED;
 import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.MATCH_STATE;
@@ -12,7 +13,7 @@ import static jrh.game.service.websocket.server.ServerWebSocketMessageTypes.PING
 public class ServerWebSocketMessages {
 
     public static WebSocketMessage<Long> ping() {
-        return new WebSocketMessage<>(PING, DateTimeUtils.currentTimeMillis());
+        return new WebSocketMessage<>(PING, Clock.systemUTC().millis());
     }
 
     public static WebSocketMessage<MatchDto> matchState(MatchDto matchDto) {

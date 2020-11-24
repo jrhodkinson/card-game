@@ -19,11 +19,8 @@ public class WebSocketMessageHandler {
     private static final Logger logger = LogManager.getLogger(WebSocketMessageHandler.class);
 
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) {
-        with(webSocketMessage, webSocketSession)
-            .handle(this::endTurn)
-            .handle(PLAY_CARD, this::playCard)
-            .handle(BUY_CARD, this::buyCard)
-            .end();
+        with(webSocketMessage, webSocketSession).handle(this::endTurn).handle(PLAY_CARD, this::playCard)
+                .handle(BUY_CARD, this::buyCard).end();
     }
 
     private void endTurn(WebSocketSession webSocketSession) {
@@ -62,14 +59,16 @@ public class WebSocketMessageHandler {
         }
 
         private <T> MessageContext handle(Consumer<WebSocketSession> consumer) {
-            if (jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN.equals(webSocketMessage.getType())) {
+            if (jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN
+                    .equals(webSocketMessage.getType())) {
                 wasHandled = true;
                 consumer.accept(webSocketSession);
             }
             return this;
         }
 
-        private <T> MessageContext handle(WebSocketMessageType<T> webSocketMessageType, BiConsumer<WebSocketSession, T> consumer) {
+        private <T> MessageContext handle(WebSocketMessageType<T> webSocketMessageType,
+                BiConsumer<WebSocketSession, T> consumer) {
             if (webSocketMessageType.equals(webSocketMessage.getType())) {
                 WebSocketMessage<T> message = cast(webSocketMessage, webSocketMessageType.getPayloadType());
                 wasHandled = true;
@@ -87,8 +86,8 @@ public class WebSocketMessageHandler {
         @SuppressWarnings("unchecked")
         private static <T> WebSocketMessage<T> cast(WebSocketMessage<?> webSocketMessage, Class<T> clazz) {
             if (!webSocketMessage.getType().getPayloadType().equals(clazz)) {
-                throw new IllegalArgumentException(
-                    String.format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
+                throw new IllegalArgumentException(String
+                        .format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
             }
             return (WebSocketMessage<T>) webSocketMessage;
         }

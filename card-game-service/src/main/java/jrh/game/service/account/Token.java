@@ -36,21 +36,19 @@ public final class Token {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Token token1 = (Token) o;
 
-        return new EqualsBuilder()
-            .append(token, token1.token)
-            .isEquals();
+        return new EqualsBuilder().append(token, token1.token).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-            .append(token)
-            .toHashCode();
+        return new HashCodeBuilder(17, 37).append(token).toHashCode();
     }
 }

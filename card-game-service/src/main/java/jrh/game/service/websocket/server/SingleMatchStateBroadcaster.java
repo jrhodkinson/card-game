@@ -36,8 +36,8 @@ public class SingleMatchStateBroadcaster implements EventHandler {
         webSocketConnectionManager.addWelcomeMessage(matchId, this::matchStateMessage);
     }
 
-    @SubscribeAll({EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class, CardGained.class,
-        PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class})
+    @SubscribeAll({ EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class,
+            CardGained.class, PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class })
     private void matchStateChanged(Event event, Match match) {
         broadcastFullMatchState(match);
     }

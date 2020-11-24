@@ -15,7 +15,6 @@
         <version.javalin>3.7.0</version.javalin>
         <version.jackson>2.10.2</version.jackson>
         <version.reflections>0.9.12</version.reflections>
-        <version.joda.time>2.10.6</version.joda.time>
         <version.mongo>4.1.1</version.mongo>
 
         <version.logging.log4j>2.13.1</version.logging.log4j>
@@ -156,11 +155,6 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${version.commons.lang}</version>
-            </dependency>
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>${version.joda.time}</version>
             </dependency>
             <dependency>
                 <groupId>org.mongodb</groupId>

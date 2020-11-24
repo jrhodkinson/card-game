@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jrh.game.common.ObjectMapperFactory;
 import jrh.game.service.websocket.server.ServerWebSocketMessages;
-import org.joda.time.DateTimeUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +33,7 @@ public class WebSocketMessageTest {
 
     @Test
     public void canParsePongMessage() throws JsonProcessingException {
-        long time = DateTimeUtils.currentTimeMillis();
+        long time = System.currentTimeMillis();
         String pongMessage = String.format("{\"type\":\"pong\", \"payload\":%s}", time);
         WebSocketMessage<Long> parsed = objectMapper.readValue(pongMessage, new TypeReference<>() {
         });

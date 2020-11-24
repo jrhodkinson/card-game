@@ -28,7 +28,8 @@ public class MatchManager {
     }
 
     public synchronized ActiveMatch newMatch(AccountId firstPlayer, AccountId secondPlayer) {
-        MutableMatch mutableMatch = new MutableMatch(assetLibrary, accounts.getAccount(firstPlayer).toUser(), accounts.getAccount(secondPlayer).toUser());
+        MutableMatch mutableMatch = new MutableMatch(assetLibrary, accounts.getAccount(firstPlayer).toUser(),
+                accounts.getAccount(secondPlayer).toUser());
         ActiveMatch match = ActiveMatch.from(mutableMatch);
         UUID matchId = match.getId();
         logger.info("Started matchId={} between {} and {}", matchId, firstPlayer, secondPlayer);

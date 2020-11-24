@@ -44,7 +44,8 @@ public class WebSocketConnectionManager {
     private final Map<UUID, List<Supplier<Optional<? extends WebSocketMessage<?>>>>> welcomeMessageSuppliersByMatchId = new ConcurrentHashMap<>();
     private final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public WebSocketConnectionManager(Javalin javalin, Accounts accounts, MatchManager matchManager, WebSocketMessageHandler webSocketMessageHandler) {
+    public WebSocketConnectionManager(Javalin javalin, Accounts accounts, MatchManager matchManager,
+            WebSocketMessageHandler webSocketMessageHandler) {
         this.javalin = javalin;
         this.accounts = accounts;
         this.matchManager = matchManager;
@@ -60,8 +61,7 @@ public class WebSocketConnectionManager {
     }
 
     public void broadcast(UUID matchId, WebSocketMessage<?> webSocketMessage) {
-            webSocketSessionsBySessionId.values().stream()
-                .filter(s -> matchId.equals(s.getMatch().getId()))
+        webSocketSessionsBySessionId.values().stream().filter(s -> matchId.equals(s.getMatch().getId()))
                 .forEach(s -> send(s, webSocketMessage));
     }
 
@@ -76,9 +76,11 @@ public class WebSocketConnectionManager {
         webSocketClientsBySessionId.get(webSocketSession.getSessionId()).send(webSocketMessage);
     }
 
-    public void addWelcomeMessage(UUID matchId, Supplier<Optional<? extends WebSocketMessage<?>>> welcomeMessageSupplier) {
+    public void addWelcomeMessage(UUID matchId,
+            Supplier<Optional<? extends WebSocketMessage<?>>> welcomeMessageSupplier) {
         logger.info("Added welcome message supplier {} for matchId={}", welcomeMessageSupplier, matchId);
-        welcomeMessageSuppliersByMatchId.computeIfAbsent(matchId, m -> new CopyOnWriteArrayList<>()).add(welcomeMessageSupplier);
+        welcomeMessageSuppliersByMatchId.computeIfAbsent(matchId, m -> new CopyOnWriteArrayList<>())
+                .add(welcomeMessageSupplier);
     }
 
     private void handleConnect(WsConnectContext wsConnectContext) {
@@ -97,7 +99,8 @@ public class WebSocketConnectionManager {
                 match.getEventBus().register(broadcaster);
                 return broadcaster;
             });
-            List<Supplier<Optional<? extends WebSocketMessage<?>>>> welcomeMessageSuppliers = welcomeMessageSuppliersByMatchId.getOrDefault(matchId, Collections.emptyList());
+            List<Supplier<Optional<? extends WebSocketMessage<?>>>> welcomeMessageSuppliers = welcomeMessageSuppliersByMatchId
+                    .getOrDefault(matchId, Collections.emptyList());
             logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());
             welcomeMessageSuppliers.forEach(supplier -> supplier.get().ifPresent(wsConnectContext::send));
         }

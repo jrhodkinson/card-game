@@ -49,11 +49,11 @@ public class Server {
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
         new LoginEndpoint(javalin, cookies, accounts, sessions);
-        new LobbyEndpoint(javalin, accounts,  matchManager, matchmaker);
+        new LobbyEndpoint(javalin, accounts, matchManager, matchmaker);
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
-        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, accounts, matchManager,
-            webSocketMessageHandler);
+        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, accounts,
+                matchManager, webSocketMessageHandler);
         webSocketConnectionManager.start();
 
         new WebSocketPinger(webSocketConnectionManager, Executors.newSingleThreadScheduledExecutor());

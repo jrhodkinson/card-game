@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ConstructBehaviourTest {
 
@@ -48,7 +48,8 @@ public class ConstructBehaviourTest {
         match.getActionHandler().accept(playCard);
 
         assertThat(match.getActivePlayer().getStructures().size(), equalTo(initialStructures + 1));
-        assertThat(match.getActivePlayer().getStructures(), hasItem(structure));
+        assertTrue(
+                match.getActivePlayer().getStructures().stream().anyMatch(s -> s.getStructureId().equals(structureId)));
     }
 
 }
