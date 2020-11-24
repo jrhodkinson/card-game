@@ -16,6 +16,7 @@
         <version.jackson>2.10.2</version.jackson>
         <version.reflections>0.9.12</version.reflections>
         <version.joda.time>2.10.6</version.joda.time>
+        <version.mongo>4.1.1</version.mongo>
 
         <version.logging.log4j>2.13.1</version.logging.log4j>
 
@@ -32,6 +33,7 @@
         <module>card-game-implementation</module>
         <module>card-game-common</module>
         <module>card-game-events</module>
+        <module>card-game-store</module>
         <module>card-game-service</module>
         <module>card-game-web</module>
     </modules>
@@ -106,6 +108,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>jrh</groupId>
+                <artifactId>card-game-store</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.javalin</groupId>
                 <artifactId>javalin</artifactId>
                 <version>${version.javalin}</version>
@@ -154,6 +161,11 @@
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${version.joda.time}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>${version.mongo}</version>
             </dependency>
 
             <dependency>
