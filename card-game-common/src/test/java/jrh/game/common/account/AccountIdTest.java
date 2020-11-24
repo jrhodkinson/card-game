@@ -1,4 +1,4 @@
-package jrh.game.service.account;
+package jrh.game.common.account;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

@@ -8,7 +8,7 @@ import io.javalin.websocket.WsContext;
 import io.javalin.websocket.WsMessageContext;
 import jrh.game.common.ObjectMapperFactory;
 import jrh.game.common.User;
-import jrh.game.service.account.AccountId;
+import jrh.game.common.account.AccountId;
 import jrh.game.service.account.Accounts;
 import jrh.game.service.lobby.ActiveMatch;
 import jrh.game.service.lobby.MatchManager;

@@ -1,6 +1,6 @@
 package jrh.game.service.lobby;
 
-import jrh.game.service.account.AccountId;
+import jrh.game.common.account.AccountId;
 
 public class Matchmaker {
 

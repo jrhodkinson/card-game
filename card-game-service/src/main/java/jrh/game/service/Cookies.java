@@ -1,7 +1,7 @@
 package jrh.game.service;
 
 import io.javalin.http.Context;
-import jrh.game.service.account.AccountId;
+import jrh.game.common.account.AccountId;
 import jrh.game.service.account.Token;
 
 import javax.servlet.http.Cookie;

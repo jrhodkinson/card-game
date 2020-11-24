@@ -1,4 +1,4 @@
-package jrh.game.service.account;
+package jrh.game.common.account;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

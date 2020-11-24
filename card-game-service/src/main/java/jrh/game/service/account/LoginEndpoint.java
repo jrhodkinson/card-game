@@ -3,6 +3,7 @@ package jrh.game.service.account;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.http.ForbiddenResponse;
+import jrh.game.common.account.AccountId;
 import jrh.game.service.Cookies;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
