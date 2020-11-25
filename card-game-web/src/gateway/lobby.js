@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export const postQueue = () => axios.post("/games/queue");
+export const postJoinQueue = () => axios.post("/games/queue/join");
 
 export const getCurrentMatch = () => axios.get("/games/mine");

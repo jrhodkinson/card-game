@@ -11,7 +11,7 @@ import jrh.game.service.account.SessionAccessManager;
 import jrh.game.service.account.Sessions;
 import jrh.game.service.lobby.LobbyEndpoint;
 import jrh.game.service.lobby.MatchManager;
-import jrh.game.service.lobby.Matchmaker;
+import jrh.game.service.lobby.MatchQueue;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessageHandler;
 import jrh.game.service.websocket.WebSocketPinger;
@@ -29,12 +29,12 @@ public class Server {
     }
 
     private final MatchManager matchManager;
-    private final Matchmaker matchmaker;
+    private final MatchQueue matchQueue;
     private final Accounts accounts;
 
-    public Server(MatchManager matchManager, Matchmaker matchmaker, Accounts accounts) {
+    public Server(MatchManager matchManager, MatchQueue matchQueue, Accounts accounts) {
         this.matchManager = matchManager;
-        this.matchmaker = matchmaker;
+        this.matchQueue = matchQueue;
         this.accounts = accounts;
     }
 
@@ -49,7 +49,7 @@ public class Server {
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
         new LoginEndpoint(javalin, cookies, accounts, sessions);
-        new LobbyEndpoint(javalin, accounts, matchManager, matchmaker);
+        new LobbyEndpoint(javalin, accounts, matchManager, matchQueue);
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
         WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, accounts,

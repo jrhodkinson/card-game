@@ -39,6 +39,10 @@ public class MatchManager {
         return match;
     }
 
+    public boolean isInAMatch(AccountId accountId) {
+        return matchIdByAccountId.containsKey(accountId);
+    }
+
     public Optional<ActiveMatch> getMatchByAccountId(AccountId accountId) {
         return Optional.ofNullable(matchIdByAccountId.get(accountId)).map(matches::get);
     }

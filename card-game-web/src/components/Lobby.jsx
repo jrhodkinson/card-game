@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postQueue } from "../gateway/lobby";
+import { postJoinQueue } from "../gateway/lobby";
 import { login, selectUser } from "../store/account/account-store";
 import {
   fetchCurrentMatch,
@@ -33,7 +33,7 @@ const Lobby = () => {
             placeholder="Username"
             onKeyUp={handleUsernameKeyUp}
           />
-          <button onClick={postQueue}>Queue</button>
+          <button onClick={postJoinQueue}>Queue</button>
         </>
       )}
       <div>Logged in as {user}</div>
