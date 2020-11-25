@@ -1,4 +1,4 @@
-package jrh.game.service.account;
+package jrh.game.service.account.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;

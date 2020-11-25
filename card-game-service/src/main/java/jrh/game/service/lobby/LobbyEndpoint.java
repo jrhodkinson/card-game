@@ -64,7 +64,8 @@ public class LobbyEndpoint {
     }
 
     private void myGames(Context context) {
-        logger.debug("RX my games request");
+        AccountId accountId = context.attribute(ACCOUNT_ID);
+        logger.debug("RX my games request for accountId={}", accountId);
         Optional<ActiveMatch> match = matchManager.getMatchByAccountId(context.attribute(ACCOUNT_ID));
         if (match.isEmpty()) {
             throw new NotFoundResponse();

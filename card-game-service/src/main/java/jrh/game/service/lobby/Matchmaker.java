@@ -16,10 +16,10 @@ public class Matchmaker {
     }
 
     public void start() {
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(this::matchMake, 0, 1, TimeUnit.SECONDS);
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(this::matchmake, 0, 1, TimeUnit.SECONDS);
     }
 
-    private void matchMake() {
+    private void matchmake() {
         while (matchQueue.size() >= 2) {
             startOneMatch();
         }

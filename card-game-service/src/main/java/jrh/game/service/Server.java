@@ -6,7 +6,7 @@ import io.javalin.plugin.json.JavalinJackson;
 import jrh.game.common.ObjectMapperFactory;
 import jrh.game.service.Cookies.Environment;
 import jrh.game.service.account.Accounts;
-import jrh.game.service.account.LoginEndpoint;
+import jrh.game.service.account.AccountEndpoint;
 import jrh.game.service.account.SessionAccessManager;
 import jrh.game.service.account.Sessions;
 import jrh.game.service.lobby.LobbyEndpoint;
@@ -48,7 +48,7 @@ public class Server {
         javalin.start(PORT);
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
-        new LoginEndpoint(javalin, cookies, accounts, sessions);
+        new AccountEndpoint(javalin, cookies, accounts, sessions);
         new LobbyEndpoint(javalin, accounts, matchManager, matchQueue);
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
