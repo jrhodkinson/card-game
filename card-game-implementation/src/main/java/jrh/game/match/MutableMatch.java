@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toUnmodifiableList;
@@ -31,6 +32,7 @@ import static org.apache.commons.lang3.RandomUtils.nextBoolean;
 
 public class MutableMatch implements Match {
 
+    private final UUID id = UUID.randomUUID();
     private final EventBus eventBus;
     private final ActionHandlerImpl actionHandler;
     private final Map<Class<? extends Controller>, Controller> controllers = new HashMap<>();
@@ -61,6 +63,11 @@ public class MutableMatch implements Match {
 
     public EventBus getEventBus() {
         return eventBus;
+    }
+
+    @Override
+    public UUID getId() {
+        return this.id;
     }
 
     @Override

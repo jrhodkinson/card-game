@@ -107,7 +107,6 @@ public class WebSocketConnectionManager {
     }
 
     private void handleMessage(WsMessageContext wsMessageContext) {
-        logger.info("{}", wsMessageContext.attributeMap());
         WebSocketMessage<?> webSocketMessage = wsMessageContext.message(WebSocketMessage.class);
         if (!webSocketMessage.getType().equals(PONG)) {
             logger.debug("RX message={} for session={}", webSocketMessage, wsMessageContext.getSessionId());

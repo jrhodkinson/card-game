@@ -3,8 +3,11 @@ package jrh.game.api;
 import jrh.game.common.User;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public interface Match {
+
+    UUID getId();
 
     ActionHandler getActionHandler();
 
