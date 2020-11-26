@@ -16,9 +16,13 @@ const Account = () => {
     }
   };
 
+  const loginUser = (user) => () => dispatch(login(user));
+
   return (
     <>
       <input type="text" placeholder="Username" onKeyUp={handleUsernameKeyUp} />
+      <button onClick={loginUser("jack")}>jack</button>
+      <button onClick={loginUser("terry")}>terry</button>
       <div>Logged in as {user}</div>
     </>
   );
