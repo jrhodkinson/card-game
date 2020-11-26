@@ -32,4 +32,5 @@ export const login = (username) => (dispatch) => {
   });
 };
 
+export const selectAccountId = (store) => store[ACCOUNT_STATE].accountId;
 export const selectUser = (store) => store[ACCOUNT_STATE].name;
