@@ -11,6 +11,7 @@ import CurrentTurn from "./CurrentTurn";
 import MatchWebSocket from "./MatchWebSocket";
 import PrimaryPlayer from "./player/PrimaryPlayer";
 import SecondaryPlayer from "./player/SecondaryPlayer";
+import QueueButton from "./QueueButton";
 import Storefront from "./Storefront";
 
 const Wrapper = styled.main`
@@ -25,12 +26,15 @@ const Match = ({ matchId }) => {
   const primaryPlayerActive = useSelector(isPrimaryPlayerActive);
 
   return (
-    <Wrapper>
+    <>
       <MatchWebSocket matchId={matchId} />
       {winner ? (
-        "Match is over, winner: " + winner
-      ) : (
         <>
+          <div>Match is over, winner: {winner}</div>
+          <QueueButton />
+        </>
+      ) : (
+        <Wrapper>
           <SecondaryPlayer
             player={secondaryPlayer}
             active={!primaryPlayerActive}
@@ -38,9 +42,9 @@ const Match = ({ matchId }) => {
           <Storefront />
           <CurrentTurn />
           <PrimaryPlayer player={primaryPlayer} active={primaryPlayerActive} />
-        </>
+        </Wrapper>
       )}
-    </Wrapper>
+    </>
   );
 };
 

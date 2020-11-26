@@ -1,4 +1,5 @@
 import Immutable from "seamless-immutable";
+import { JOINED_QUEUE } from "../lobby/lobby-store";
 import { MATCH_ENDED } from "../match/match-actions";
 import {
   PLAYED_CARD,
@@ -19,6 +20,7 @@ export default (state = defaultState, action) => {
     case PLAYED_CARD:
     case PURCHASED_CARD:
     case MATCH_ENDED:
+    case JOINED_QUEUE:
       return defaultState;
     default:
       return state;

@@ -1,4 +1,5 @@
 import Immutable from "seamless-immutable";
+import { JOINED_QUEUE } from "../lobby/lobby-store";
 import { MATCH_ENDED, RECEIVED_MATCH_STATE } from "./match-actions";
 
 export const MATCH_STATE = "match";
@@ -32,6 +33,8 @@ export default (state = defaultState, action) => {
       return state.merge(action.matchState);
     case MATCH_ENDED:
       return defaultState.set("winner", action.winner);
+    case JOINED_QUEUE:
+      return defaultState;
     default:
       return state;
   }
