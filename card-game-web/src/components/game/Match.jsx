@@ -8,6 +8,7 @@ import {
   selectSecondaryPlayer,
   selectWinner,
 } from "../../store/match/match-selector";
+import FadeIn from "../common/FadeIn";
 import PrimaryPlayer from "../player/PrimaryPlayer";
 import SecondaryPlayer from "../player/SecondaryPlayer";
 import CurrentTurn from "./CurrentTurn";
@@ -19,6 +20,7 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1100px 1fr;
   grid-template-rows: min-content min-content min-content 1fr min-content 1fr min-content min-content;
   height: 100%;
+  width: 100%;
 `;
 
 const Spacer = styled.div``;
@@ -44,21 +46,26 @@ const Match = () => {
   }
 
   return (
-    <Wrapper>
-      <SecondaryPlayer player={secondaryPlayer} active={!primaryPlayerActive} />
-      {primaryPlayerActive ? (
-        <Spacer />
-      ) : (
-        <CurrentTurn active={primaryPlayerActive} />
-      )}
-      <Storefront active={primaryPlayerActive} />
-      {primaryPlayerActive ? (
-        <CurrentTurn active={primaryPlayerActive} />
-      ) : (
-        <Spacer />
-      )}
-      <PrimaryPlayer player={primaryPlayer} active={primaryPlayerActive} />
-    </Wrapper>
+    <FadeIn fast>
+      <Wrapper>
+        <SecondaryPlayer
+          player={secondaryPlayer}
+          active={!primaryPlayerActive}
+        />
+        {primaryPlayerActive ? (
+          <Spacer />
+        ) : (
+          <CurrentTurn active={primaryPlayerActive} />
+        )}
+        <Storefront active={primaryPlayerActive} />
+        {primaryPlayerActive ? (
+          <CurrentTurn active={primaryPlayerActive} />
+        ) : (
+          <Spacer />
+        )}
+        <PrimaryPlayer player={primaryPlayer} active={primaryPlayerActive} />
+      </Wrapper>
+    </FadeIn>
   );
 };
 

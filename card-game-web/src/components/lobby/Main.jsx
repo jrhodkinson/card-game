@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCurrentMatch,
+  haveInitialisedMatchId,
   selectCurrentMatchId,
 } from "../../store/lobby/lobby-store";
-import Match from "./Match";
-import MatchWebSocket from "./MatchWebSocket";
-import QueueButton from "./QueueButton";
+import Loading from "../common/Loading";
+import MatchWrapper from "../game/MatchWrapper";
+import Lobby from "./Lobby";
 
-const Lobby = () => {
+const Main = () => {
   const matchId = useSelector(selectCurrentMatchId);
+  const haveInitialised = useSelector(haveInitialisedMatchId);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,15 +21,14 @@ const Lobby = () => {
   }, [dispatch, matchId]);
 
   if (matchId) {
-    return (
-      <>
-        <MatchWebSocket matchId={matchId} />
-        <Match matchId={matchId} />
-      </>
-    );
+    return <MatchWrapper />;
   }
 
-  return <QueueButton />;
+  if (haveInitialised) {
+    return <Lobby />;
+  }
+
+  return <Loading />;
 };
 
-export default Lobby;
+export default Main;

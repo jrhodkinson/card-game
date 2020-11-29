@@ -1,8 +1,8 @@
 import React from "react";
-import * as S from "./styles/Layout.styles";
-import Lobby from "../game/Lobby";
+import Main from "../lobby/Main";
 import Footer from "./Footer";
 import Header from "./Header";
+import * as S from "./styles/Layout.styles";
 
 const Layout = () => {
   return (
@@ -11,7 +11,7 @@ const Layout = () => {
         <Header />
       </S.Header>
       <S.Main>
-        <Lobby />
+        <Main />
       </S.Main>
       <S.Footer>
         <Footer />
