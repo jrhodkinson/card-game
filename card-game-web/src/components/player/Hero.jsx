@@ -36,7 +36,7 @@ const Health = styled.div`
   line-height: ${healthDiameter}px;
   width: ${healthDiameter}px;
   height: ${healthDiameter}px;
-  border-radius: ${healthDiameter / 2}px;
+  border-radius: ${healthDiameter / 4}px;
 `;
 
 const Hero = ({ entityId, name, health, active }) => {

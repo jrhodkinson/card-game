@@ -5,7 +5,7 @@ import { card, cost, image, header, description } from "./dimensions";
 export const Card = styled.div`
   height: ${({ short }) =>
     short
-      ? card.FULL_HEIGHT - description.HEIGHT - card.PADDING
+      ? card.FULL_HEIGHT - image.HEIGHT - card.PADDING
       : card.FULL_HEIGHT}px;
   width: ${card.WIDTH}px;
   margin: ${card.MARGIN_TOP_BOTTOM}px ${card.MARGIN_LEFT_RIGHT}px;
@@ -66,6 +66,7 @@ export const CardName = styled.div`
   justify-content: center;
   text-align: center;
   font-weight: 500;
+  font-size: ${header.FONT_SIZE}em;
 `;
 
 export const CardImage = styled.div`

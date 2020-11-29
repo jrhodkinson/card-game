@@ -1,6 +1,6 @@
 import React from "react";
 import * as c from "../colors";
-import { card } from "../card/styles/dimensions";
+import { card, header } from "../card/styles/dimensions";
 import styled from "styled-components";
 import useTooltip from "../common/useTooltip";
 
@@ -38,6 +38,7 @@ const Name = styled.div`
   justify-content: center;
   padding: ${card.PADDING}px;
   font-weight: 500;
+  font-size: ${header.FONT_SIZE}em;
 `;
 
 const healthDiameter = 36;
@@ -50,7 +51,7 @@ const Health = styled.div`
   line-height: ${healthDiameter}px;
   width: ${healthDiameter}px;
   height: ${healthDiameter}px;
-  border-radius: ${healthDiameter / 2}px;
+  border-radius: ${healthDiameter / 4}px;
 `;
 
 const Structure = ({

@@ -4,7 +4,7 @@ export const card = {
   BORDER_RADIUS: 3,
   MARGIN_TOP_BOTTOM: 10,
   MARGIN_LEFT_RIGHT: 8,
-  PADDING: 6,
+  PADDING: 4,
   STUMP_HEIGHT: 35,
 };
 
@@ -16,6 +16,7 @@ export const header = {
   WIDTH: INNER_CARD_WIDTH,
   MARGIN_BOTTOM: card.PADDING,
   LINE_HEIGHT: 16,
+  FONT_SIZE: 0.9,
 };
 
 export const cost = {
@@ -24,7 +25,7 @@ export const cost = {
 
 export const image = {
   WIDTH: INNER_CARD_WIDTH,
-  HEIGHT: 80,
+  HEIGHT: 68,
   MARGIN_BOTTOM: card.PADDING,
 };
 
