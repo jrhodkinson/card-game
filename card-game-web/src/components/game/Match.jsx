@@ -17,9 +17,11 @@ import Storefront from "./Storefront";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1100px 1fr;
-  grid-template-rows: min-content min-content 1fr min-content 1fr min-content;
+  grid-template-rows: min-content min-content 1fr min-content min-content 1fr min-content min-content;
   height: 100%;
 `;
+
+const Spacer = styled.div``;
 
 const Match = ({ matchId }) => {
   const winner = useSelector(selectWinner);
@@ -41,8 +43,17 @@ const Match = ({ matchId }) => {
             player={secondaryPlayer}
             active={!primaryPlayerActive}
           />
+          {primaryPlayerActive ? (
+            <Spacer />
+          ) : (
+            <CurrentTurn active={primaryPlayerActive} />
+          )}
           <Storefront />
-          <CurrentTurn />
+          {primaryPlayerActive ? (
+            <CurrentTurn active={primaryPlayerActive} />
+          ) : (
+            <Spacer />
+          )}
           <PrimaryPlayer player={primaryPlayer} active={primaryPlayerActive} />
         </Wrapper>
       )}

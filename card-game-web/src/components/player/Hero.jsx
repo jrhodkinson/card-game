@@ -1,4 +1,5 @@
 import React from "react";
+import * as c from "../colors";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectedTarget } from "../../store/play/play-actions";
@@ -8,7 +9,8 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
-  background-color: #ccc;
+  background-color: ${c.darkGrey};
+  color: ${c.textOnBlack};
   padding: 5px;
   width: 100%;
 
@@ -16,19 +18,18 @@ const Wrapper = styled.div`
 `;
 
 const ActiveName = styled.div`
-  font-weight: bold;
-  color: red;
+  font-weight: 500;
 `;
 
 const Name = styled.div`
-  color: #333;
+  color: ${c.textOnBlack};
 `;
 
 const healthDiameter = 36;
 
 const Health = styled.div`
-  background-color: red;
-  color: white;
+  background-color: ${c.red};
+  color: ${c.textOnRed};
   margin-left: 10px;
   text-align: center;
   line-height: ${healthDiameter}px;

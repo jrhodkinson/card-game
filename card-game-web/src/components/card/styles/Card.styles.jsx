@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as c from "../../colors";
 import { card, cost, image, header, description } from "./dimensions";
 
 export const Card = styled.div`
@@ -15,8 +16,8 @@ export const Card = styled.div`
   flex-grow: 0;
   flex-shrink: 0;
 
-  background-color: #e8e8e8;
-  color: #333;
+  background-color: ${c.offWhite};
+  color: ${c.textOnWhite};
   box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0,
     rgba(0, 0, 0, 0.12) 0 1px 2px 0;
 
@@ -33,7 +34,7 @@ export const Card = styled.div`
     if (selected) {
       styles += `
         transform: scale(1.02) translate(0, -2%);
-        box-shadow: 0 0 0 3px #111, 0 0 8px 0 #FFF;
+        box-shadow: 0 0 0 3px ${c.darkBlack}, 0 0 8px 0 ${c.white};
         
         &:hover {
           transform: scale(1.05) translate(0, -2.5%);
@@ -43,7 +44,7 @@ export const Card = styled.div`
       styles += `
         &:hover {
           transform: scale(1.05) translate(0, -2.5%);
-          box-shadow: 0 0 4px 0 #FFF;
+          box-shadow: 0 0 4px 0 ${c.white};
         }
       `;
     }
@@ -53,7 +54,7 @@ export const Card = styled.div`
 `;
 
 export const CardName = styled.div`
-  background-color: #fff;
+  background-color: ${c.white};
   height: ${header.HEIGHT}px;
   width: ${header.WIDTH}px;
   margin-bottom: ${header.MARGIN_BOTTOM}px;
@@ -68,14 +69,14 @@ export const CardName = styled.div`
 `;
 
 export const CardImage = styled.div`
-  background-color: #e8e8e8;
+  background-color: ${c.offWhite};
   height: ${image.HEIGHT}px;
   width: ${image.WIDTH}px;
   margin-bottom: ${image.MARGIN_BOTTOM}px;
 `;
 
 export const CardDescription = styled.div`
-  background-color: #fff;
+  background-color: ${c.white};
   height: ${description.HEIGHT}px;
   width: ${description.WIDTH}px;
   display: flex;
@@ -85,7 +86,7 @@ export const CardDescription = styled.div`
 `;
 
 export const ShortCardDescription = styled.div`
-  background-color: #fff;
+  background-color: ${c.white};
 
   position: absolute;
   top: ${header.HEIGHT + 2 * card.PADDING}px;
@@ -102,7 +103,7 @@ export const ShortCardDescription = styled.div`
 `;
 
 export const CardCost = styled.div`
-  background-color: #e8e8e8;
+  background-color: ${c.offWhite};
   color: black;
   font-weight: bold;
   position: absolute;

@@ -19,13 +19,13 @@ const EndTurnButton = styled.button`
   height: 30px;
 `;
 
-const CurrentTurn = () => {
+const CurrentTurn = ({ active }) => {
   const currentTurn = useSelector(selectCurrentTurn);
   return (
     <Wrapper>
       <Money>{currentTurn.money} Money</Money>
       <Cards cards={currentTurn.playedCards} short />
-      <EndTurnButton onClick={endTurn}>End turn</EndTurnButton>
+      {active && <EndTurnButton onClick={endTurn}>End turn</EndTurnButton>}
     </Wrapper>
   );
 };

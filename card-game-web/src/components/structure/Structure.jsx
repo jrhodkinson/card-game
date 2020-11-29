@@ -1,18 +1,18 @@
 import React from "react";
+import * as c from "../colors";
 import { card } from "../card/styles/dimensions";
 import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
 
 const Wrapper = styled.div`
-  border: ${card.BORDER_WIDTH}px solid #555;
   border-radius: ${card.BORDER_RADIUS}px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0,
     rgba(0, 0, 0, 0.12) 0 1px 2px 0;
   margin: ${card.MARGIN_TOP_BOTTOM}px ${card.MARGIN_LEFT_RIGHT}px;
   padding: 6px;
   width: 180px;
-  background-color: #e8e8e8;
-  color: #333;
+  background-color: ${c.offWhite};
+  color: ${c.textOnWhite};
   display: grid;
   grid-template-columns: 1fr min-content;
 
@@ -32,18 +32,19 @@ const Wrapper = styled.div`
 `;
 
 const Name = styled.div`
-  background-color: #fff;
+  background-color: ${c.white};
   display: flex;
   align-items: center;
   padding: ${card.PADDING}px;
+  font-weight: 500;
 `;
 
 const healthDiameter = 36;
 
 const Health = styled.div`
   margin: auto 0 auto 6px;
-  background-color: red;
-  color: white;
+  background-color: ${c.red};
+  color: ${c.textOnRed};
   text-align: center;
   line-height: ${healthDiameter}px;
   width: ${healthDiameter}px;
