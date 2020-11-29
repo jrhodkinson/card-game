@@ -2,6 +2,7 @@ package jrh.game.common.description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import jrh.game.common.CardId;
 import jrh.game.common.StructureId;
 import jrh.game.common.Target;
 
@@ -58,6 +59,11 @@ public class AtomicDescription {
 
         public Builder structure(StructureId structureId) {
             pieces.add(new StructureDescriptionPiece(structureId));
+            return this;
+        }
+
+        public Builder card(CardId cardId) {
+            pieces.add(new CardDescriptionPiece(cardId));
             return this;
         }
 

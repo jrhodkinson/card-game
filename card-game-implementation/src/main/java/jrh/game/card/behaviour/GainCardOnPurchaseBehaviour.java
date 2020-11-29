@@ -28,7 +28,7 @@ public class GainCardOnPurchaseBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("On purchase,").keyword("gain").plainString(cardId.toString())
+        return AtomicDescription.builder().plainString("On purchase,").keyword("gain").card(cardId)
                 .build();
     }
 

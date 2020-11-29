@@ -28,7 +28,7 @@ public class GainCardBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Gain").plainString(cardId.toString()).build();
+        return AtomicDescription.builder().keyword("Gain").card(cardId).build();
     }
 
     @Subscribe
