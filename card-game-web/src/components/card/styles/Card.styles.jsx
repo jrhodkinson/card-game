@@ -59,7 +59,7 @@ export const CardName = styled.div`
   width: ${header.WIDTH}px;
   margin-bottom: ${header.MARGIN_BOTTOM}px;
   line-height: ${header.LINE_HEIGHT}px;
-  padding: 0 ${card.PADDING}px;
+  padding: 0 8px;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -107,8 +107,8 @@ export const CardCost = styled.div`
   color: black;
   font-weight: bold;
   position: absolute;
-  top: -${0.75 * cost.RADIUS}px;
-  left: -${0.75 * cost.RADIUS}px;
+  top: -${0.6 * cost.RADIUS}px;
+  left: -${0.6 * cost.RADIUS}px;
   width: ${2 * cost.RADIUS}px;
   height: ${2 * cost.RADIUS}px;
   border-radius: ${cost.RADIUS}px;
@@ -116,18 +116,6 @@ export const CardCost = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 2;
-
-  &::after {
-    position: absolute;
-    content: "";
-    border-radius: ${cost.RADIUS}px;
-    border-bottom-color: transparent;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    width: ${2 * cost.RADIUS}px;
-    height: ${2 * cost.RADIUS}px;
-  }
 `;
 
 export const CardStump = styled(Card)`
