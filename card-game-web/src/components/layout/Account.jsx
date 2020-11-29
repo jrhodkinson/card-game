@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import * as S from "../styles/Button.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { login, selectUser, whoAmI } from "../../store/account/account-store";
 
@@ -22,8 +23,8 @@ const Account = () => {
     return (
       <>
         <div>Logged in as {user}</div>
-        <button onClick={loginUser("jack")}>jack</button>
-        <button onClick={loginUser("terry")}>terry</button>
+        <S.Button onClick={loginUser("jack")}>jack</S.Button>
+        <S.Button onClick={loginUser("terry")}>terry</S.Button>
       </>
     );
   }
