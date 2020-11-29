@@ -18,12 +18,15 @@ const Account = () => {
 
   const loginUser = (user) => () => dispatch(login(user));
 
+  if (user) {
+    return <div>Logged in as {user}</div>;
+  }
+
   return (
     <>
       <input type="text" placeholder="Username" onKeyUp={handleUsernameKeyUp} />
       <button onClick={loginUser("jack")}>jack</button>
       <button onClick={loginUser("terry")}>terry</button>
-      <div>Logged in as {user}</div>
     </>
   );
 };

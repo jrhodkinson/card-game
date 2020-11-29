@@ -7,14 +7,18 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.header`
-  background-color: red;
+  background-color: #111;
+  color: white;
 `;
 
 export const Main = styled.main`
-  background-color: blue;
+  background-color: #333;
+  color: white;
   flex: 1;
+  overflow: auto;
 `;
 
 export const Footer = styled.footer`
-  background-color: green;
+  background-color: #111;
+  color: white;
 `;
