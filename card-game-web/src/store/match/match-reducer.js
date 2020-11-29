@@ -4,17 +4,8 @@ import { MATCH_ENDED, RECEIVED_MATCH_STATE } from "./match-actions";
 
 export const MATCH_STATE = "match";
 
-export const defaultPlayer = Immutable({
-  entityId: "",
-  username: "",
-  health: 0,
-  structures: [],
-  hand: [],
-  deckSize: 0,
-  discardPile: [],
-});
-
 export const defaultState = Immutable({
+  initialised: false,
   activeUser: "",
   players: {},
   currentTurn: {
@@ -30,7 +21,7 @@ export const defaultState = Immutable({
 export default (state = defaultState, action) => {
   switch (action.type) {
     case RECEIVED_MATCH_STATE:
-      return state.merge(action.matchState);
+      return state.merge(action.matchState).set("initialised", true);
     case MATCH_ENDED:
       return defaultState.set("winner", action.winner);
     case JOINED_QUEUE:

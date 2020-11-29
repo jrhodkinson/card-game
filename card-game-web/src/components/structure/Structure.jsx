@@ -2,6 +2,7 @@ import React from "react";
 import * as c from "../colors";
 import { card, header } from "../card/styles/dimensions";
 import styled from "styled-components";
+import Health from "../common/Health";
 import useTooltip from "../common/useTooltip";
 
 const Wrapper = styled.div`
@@ -39,19 +40,7 @@ const Name = styled.div`
   padding: ${card.PADDING}px;
   font-weight: 500;
   font-size: ${header.FONT_SIZE}em;
-`;
-
-const healthDiameter = 36;
-
-const Health = styled.div`
-  margin: auto 0 auto 6px;
-  background-color: ${c.red};
-  color: ${c.textOnRed};
-  text-align: center;
-  line-height: ${healthDiameter}px;
-  width: ${healthDiameter}px;
-  height: ${healthDiameter}px;
-  border-radius: ${healthDiameter / 4}px;
+  margin-right: 6px;
 `;
 
 const Structure = ({
@@ -68,7 +57,7 @@ const Structure = ({
       data-for={id}
     >
       <Name title={structure.flavor}>{structure.name}</Name>
-      <Health>{structure.health}</Health>
+      <Health health={structure.health} />
       {tooltip}
     </Wrapper>
   );

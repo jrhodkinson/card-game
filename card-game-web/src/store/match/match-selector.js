@@ -1,5 +1,5 @@
 import { selectUser } from "../account/account-store";
-import { defaultPlayer, MATCH_STATE } from "./match-reducer";
+import { MATCH_STATE } from "./match-reducer";
 
 const selectMatchState = (store) => store[MATCH_STATE];
 
@@ -10,10 +10,13 @@ const selectSecondaryUser = (store) => {
   return users.filter((users) => users !== primaryUser)[0];
 };
 
+export const matchStateHasInitialised = (store) =>
+  store[MATCH_STATE].initialised;
+
 export const selectPrimaryPlayer = (store) =>
-  selectMatchState(store).players[selectPrimaryUser(store)] || defaultPlayer;
+  selectMatchState(store).players[selectPrimaryUser(store)];
 export const selectSecondaryPlayer = (store) =>
-  selectMatchState(store).players[selectSecondaryUser(store)] || defaultPlayer;
+  selectMatchState(store).players[selectSecondaryUser(store)];
 
 export const isPrimaryPlayerActive = (store) =>
   selectPrimaryUser(store) === selectMatchState(store).activeUser;

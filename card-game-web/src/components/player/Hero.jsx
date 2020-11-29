@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectedTarget } from "../../store/play/play-actions";
 import { selectDoesPendingCardRequireTarget } from "../../store/play/play-selector";
+import Health from "../common/Health";
 
 const Wrapper = styled.div`
   align-items: center;
@@ -17,26 +18,14 @@ const Wrapper = styled.div`
   ${({ interactable }) => interactable && "cursor: pointer"};
 `;
 
-const ActiveName = styled.div`
-  color: ${c.textOnBlack};
-  font-weight: 500;
-`;
-
 const Name = styled.div`
   color: ${c.faintTextOnBlack};
+  margin-right: 12px;
 `;
 
-const healthDiameter = 32;
-
-const Health = styled.div`
-  background-color: ${c.red};
-  color: ${c.textOnRed};
-  margin-left: 16px;
-  text-align: center;
-  line-height: ${healthDiameter}px;
-  width: ${healthDiameter}px;
-  height: ${healthDiameter}px;
-  border-radius: ${healthDiameter / 4}px;
+const ActiveName = styled(Name)`
+  color: ${c.textOnBlack};
+  font-weight: 500;
 `;
 
 const Hero = ({ entityId, name, health, active }) => {
@@ -46,7 +35,7 @@ const Hero = ({ entityId, name, health, active }) => {
   return (
     <Wrapper interactable={heroIsInteractable} onClick={handleClick}>
       {active ? <ActiveName>- {name} -</ActiveName> : <Name>{name}</Name>}
-      <Health>{health}</Health>
+      <Health health={health} />
     </Wrapper>
   );
 };

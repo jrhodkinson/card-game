@@ -8,7 +8,8 @@ export const lightGrey = "#51677B";
 export const offWhite = "#DAE1E7";
 
 export const white = "#E7EBEF";
-export const red = "#d32f2f";
+export const red = "#D32F2F";
+export const accentRed = "#c4001d";
 
 export const textOnBlack = white;
 export const faintTextOnBlack = offWhite;

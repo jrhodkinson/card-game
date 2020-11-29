@@ -5,6 +5,7 @@ import {
   selectCurrentMatchId,
 } from "../../store/lobby/lobby-store";
 import Match from "./Match";
+import MatchWebSocket from "./MatchWebSocket";
 import QueueButton from "./QueueButton";
 
 const Lobby = () => {
@@ -17,7 +18,16 @@ const Lobby = () => {
     }
   }, [dispatch, matchId]);
 
-  return <>{matchId ? <Match matchId={matchId} /> : <QueueButton />}</>;
+  if (matchId) {
+    return (
+      <>
+        <MatchWebSocket matchId={matchId} />
+        <Match matchId={matchId} />
+      </>
+    );
+  }
+
+  return <QueueButton />;
 };
 
 export default Lobby;

@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import {
   isPrimaryPlayerActive,
+  matchStateHasInitialised,
   selectPrimaryPlayer,
   selectSecondaryPlayer,
   selectWinner,
 } from "../../store/match/match-selector";
-import CurrentTurn from "./CurrentTurn";
-import MatchWebSocket from "./MatchWebSocket";
 import PrimaryPlayer from "../player/PrimaryPlayer";
 import SecondaryPlayer from "../player/SecondaryPlayer";
+import CurrentTurn from "./CurrentTurn";
 import QueueButton from "./QueueButton";
 import Storefront from "./Storefront";
 
@@ -23,41 +23,42 @@ const Wrapper = styled.div`
 
 const Spacer = styled.div``;
 
-const Match = ({ matchId }) => {
+const Match = () => {
+  const hasInitialised = useSelector(matchStateHasInitialised);
   const winner = useSelector(selectWinner);
   const primaryPlayer = useSelector(selectPrimaryPlayer);
   const secondaryPlayer = useSelector(selectSecondaryPlayer);
   const primaryPlayerActive = useSelector(isPrimaryPlayerActive);
 
+  if (!hasInitialised) {
+    return null;
+  }
+
+  if (winner) {
+    return (
+      <>
+        <div>Match is over, winner: {winner}</div>
+        <QueueButton />
+      </>
+    );
+  }
+
   return (
-    <>
-      <MatchWebSocket matchId={matchId} />
-      {winner ? (
-        <>
-          <div>Match is over, winner: {winner}</div>
-          <QueueButton />
-        </>
+    <Wrapper>
+      <SecondaryPlayer player={secondaryPlayer} active={!primaryPlayerActive} />
+      {primaryPlayerActive ? (
+        <Spacer />
       ) : (
-        <Wrapper>
-          <SecondaryPlayer
-            player={secondaryPlayer}
-            active={!primaryPlayerActive}
-          />
-          {primaryPlayerActive ? (
-            <Spacer />
-          ) : (
-            <CurrentTurn active={primaryPlayerActive} />
-          )}
-          <Storefront active={primaryPlayerActive} />
-          {primaryPlayerActive ? (
-            <CurrentTurn active={primaryPlayerActive} />
-          ) : (
-            <Spacer />
-          )}
-          <PrimaryPlayer player={primaryPlayer} active={primaryPlayerActive} />
-        </Wrapper>
+        <CurrentTurn active={primaryPlayerActive} />
       )}
-    </>
+      <Storefront active={primaryPlayerActive} />
+      {primaryPlayerActive ? (
+        <CurrentTurn active={primaryPlayerActive} />
+      ) : (
+        <Spacer />
+      )}
+      <PrimaryPlayer player={primaryPlayer} active={primaryPlayerActive} />
+    </Wrapper>
   );
 };
 
