@@ -129,3 +129,11 @@ export const CardCost = styled.div`
     height: ${2 * cost.RADIUS}px;
   }
 `;
+
+export const CardStump = styled(Card)`
+  height: ${card.STUMP_HEIGHT}px;
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: ${c.mediumGrey};
+`;

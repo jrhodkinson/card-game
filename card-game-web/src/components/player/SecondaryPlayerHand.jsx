@@ -1,12 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import CardStump from "../card/CardStump";
 
-const Wrapper = styled.div`
-  text-align: center;
-`;
-
-const SecondaryPlayerHand = ({ size }) => {
-  return <Wrapper>{size} cards</Wrapper>;
-};
+const SecondaryPlayerHand = ({ size }) =>
+  [...Array(size)].map((e, i) => <CardStump key={i} />);
 
 export default SecondaryPlayerHand;

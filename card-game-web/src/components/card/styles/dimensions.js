@@ -5,6 +5,7 @@ export const card = {
   MARGIN_TOP_BOTTOM: 12,
   MARGIN_LEFT_RIGHT: 8,
   PADDING: 5,
+  STUMP_HEIGHT: 40,
 };
 
 const INNER_CARD_WIDTH = card.WIDTH - 2 * card.PADDING;

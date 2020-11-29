@@ -10,7 +10,6 @@ const Card = ({
 }) => {
   return (
     <S.Card
-      background={card.color}
       short={short}
       interactable={interactable}
       selected={selected}
