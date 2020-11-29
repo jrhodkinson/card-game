@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   padding: 6px;
   width: 180px;
   background-color: ${cardColor("CYAN")};
+  color: #333;
   display: grid;
   grid-template-columns: 1fr min-content;
 

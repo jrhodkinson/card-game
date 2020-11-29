@@ -6,7 +6,8 @@ import { selectedCardInStorefront } from "../../store/play/play-actions";
 import Cards from "../card/Cards";
 
 const Wrapper = styled.div`
-  background-color: #c8c8c8;
+  background-color: #222;
+  grid-column: 1 / 4;
   padding: 10px;
 `;
 

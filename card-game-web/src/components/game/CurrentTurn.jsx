@@ -8,6 +8,7 @@ import Cards from "../card/Cards";
 const Wrapper = styled.div`
   text-align: center;
   display: grid;
+  grid-column: 2 / 3;
   grid-template-columns: 200px 1fr 200px;
   padding: 10px 0;
 `;

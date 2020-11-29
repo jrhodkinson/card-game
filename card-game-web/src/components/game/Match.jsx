@@ -14,9 +14,11 @@ import SecondaryPlayer from "../player/SecondaryPlayer";
 import QueueButton from "./QueueButton";
 import Storefront from "./Storefront";
 
-const Wrapper = styled.main`
-  display: flex;
-  flex-direction: column;
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1100px 1fr;
+  grid-template-rows: min-content min-content 1fr min-content 1fr min-content;
+  height: 100%;
 `;
 
 const Match = ({ matchId }) => {

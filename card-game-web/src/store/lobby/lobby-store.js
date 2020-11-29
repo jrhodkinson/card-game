@@ -40,7 +40,7 @@ export const fetchCurrentMatch = () => (dispatch, getState) => {
         dispatch({ type: RECEIVED_MATCH_ID, matchId: response.data });
         clearInterval(matchPoller);
       });
-    }, 2000);
+    }, 500);
     dispatch({ type: STARTED_MATCH_POLLER, matchPoller: matchPoller });
   }
 };

@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   align-items: flex-start;
   display: flex;
   overflow-y: auto;
+  justify-content: center;
 
   // overflow hack
   margin: -10px 0 0 -10px;
