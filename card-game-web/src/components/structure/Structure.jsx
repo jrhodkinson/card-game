@@ -1,5 +1,4 @@
 import React from "react";
-import { cardColor, darkCardColor, lightCardColor } from "../card/styles/color";
 import { card } from "../card/styles/dimensions";
 import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
@@ -12,7 +11,7 @@ const Wrapper = styled.div`
   margin: ${card.MARGIN_TOP_BOTTOM}px ${card.MARGIN_LEFT_RIGHT}px;
   padding: 6px;
   width: 180px;
-  background-color: ${cardColor("CYAN")};
+  background-color: #e8e8e8;
   color: #333;
   display: grid;
   grid-template-columns: 1fr min-content;
@@ -25,7 +24,7 @@ const Wrapper = styled.div`
           
           &:hover {
             transform: scale(1.05) translate(0, -2.5%);
-            box-shadow: ${cardColor("CYAN")} 0 0 8px 0;
+            box-shadow: #FFF 0 0 8px 0;
           }
         `;
     }
@@ -33,7 +32,7 @@ const Wrapper = styled.div`
 `;
 
 const Name = styled.div`
-  background-color: ${lightCardColor("CYAN")};
+  background-color: #fff;
   display: flex;
   align-items: center;
   padding: ${card.PADDING}px;
@@ -43,7 +42,7 @@ const healthDiameter = 36;
 
 const Health = styled.div`
   margin: auto 0 auto 6px;
-  background-color: ${darkCardColor("RED")};
+  background-color: red;
   color: white;
   text-align: center;
   line-height: ${healthDiameter}px;

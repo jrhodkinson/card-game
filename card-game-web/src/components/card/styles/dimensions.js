@@ -1,19 +1,17 @@
 export const card = {
   WIDTH: 144,
   FULL_HEIGHT: 212,
-  BORDER_WIDTH: 3,
   BORDER_RADIUS: 3,
   MARGIN_TOP_BOTTOM: 12,
   MARGIN_LEFT_RIGHT: 8,
   PADDING: 5,
 };
 
-const INNER_CARD_WIDTH = card.WIDTH - 2 * (card.PADDING + card.BORDER_WIDTH);
-const INNER_CARD_HEIGHT =
-  card.FULL_HEIGHT - 2 * (card.PADDING + card.BORDER_WIDTH);
+const INNER_CARD_WIDTH = card.WIDTH - 2 * card.PADDING;
+const INNER_CARD_HEIGHT = card.FULL_HEIGHT - 2 * card.PADDING;
 
 export const header = {
-  HEIGHT: 32,
+  HEIGHT: 36,
   WIDTH: INNER_CARD_WIDTH,
   MARGIN_BOTTOM: card.PADDING,
   LINE_HEIGHT: 16,

@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.header`
-  background-color: #111;
+  background-color: #181818;
   color: white;
 `;
 

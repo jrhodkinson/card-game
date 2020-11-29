@@ -6,34 +6,31 @@ const Card = ({
   interactable = false,
   selected = false,
   onCardClick = () => {},
-  hideDescription = false,
+  short = false,
 }) => {
-  const [mouseOver, setMouseOver] = useState(false);
   return (
     <S.Card
       background={card.color}
-      hideDescription={hideDescription}
+      short={short}
       interactable={interactable}
       selected={selected}
       onClick={() => onCardClick(card)}
-      onMouseOver={() => setMouseOver(true)}
-      onMouseOut={() => setMouseOver(false)}
     >
       <S.CardCost background={card.color}>{card.cost}</S.CardCost>
       <S.CardName background={card.color} title={card.flavor}>
         {card.name}
       </S.CardName>
-      <S.CardImage background={card.color} />
-      {hideDescription ? (
-        mouseOver && (
-          <S.CardDescriptionOverlay background={card.color}>
-            {card.description}
-          </S.CardDescriptionOverlay>
-        )
-      ) : (
-        <S.CardDescription background={card.color}>
+      {short ? (
+        <S.ShortCardDescription background={card.color}>
           {card.description}
-        </S.CardDescription>
+        </S.ShortCardDescription>
+      ) : (
+        <>
+          <S.CardImage background={card.color} />
+          <S.CardDescription background={card.color}>
+            {card.description}
+          </S.CardDescription>
+        </>
       )}
     </S.Card>
   );

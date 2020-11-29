@@ -11,6 +11,7 @@ public class MatchDto {
     public final Map<User, PlayerDto> players;
     public final TurnDto currentTurn;
     public final StoreDto storefront;
+    public final String goAway = "Yes, I know you can see the other player's cards. I'll fix this before the game goes live.";
 
     private MatchDto(User activeUser, Map<User, PlayerDto> players, TurnDto currentTurn, StoreDto store) {
         this.activeUser = activeUser;

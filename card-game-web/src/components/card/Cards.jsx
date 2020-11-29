@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 
 const Cards = ({
   cards,
-  hideDescriptions = false,
+  short = false,
   selectedCardEntityId = undefined,
   interactable = false,
   onCardClick = () => {},
@@ -28,7 +28,7 @@ const Cards = ({
           <Card
             key={entityId}
             card={card}
-            hideDescription={hideDescriptions}
+            short={short}
             interactable={interactable}
             selected={selectedCardEntityId === entityId}
             onCardClick={onCardClick}
