@@ -2,6 +2,7 @@ import React from "react";
 import { cardColor, darkCardColor, lightCardColor } from "../card/styles/color";
 import { card } from "../card/styles/dimensions";
 import styled from "styled-components";
+import ReactTooltip from "react-tooltip";
 
 const Wrapper = styled.div`
   border: ${card.BORDER_WIDTH}px solid #555;
@@ -60,10 +61,11 @@ const Structure = ({
     <Wrapper
       interactable={interactable}
       onClick={() => onStructureClick(structure)}
+      data-tip={structure.description}
     >
       <Name title={structure.flavor}>{structure.name}</Name>
       <Health>{structure.health}</Health>
-      {structure.description}
+      <ReactTooltip />
     </Wrapper>
   );
 };
