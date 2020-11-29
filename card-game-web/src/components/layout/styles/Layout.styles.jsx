@@ -21,5 +21,5 @@ export const Main = styled.main`
 
 export const Footer = styled.footer`
   background-color: ${c.darkestBlack};
-  color: ${c.textOnBlack};
+  color: ${c.faintTextOnBlack};
 `;

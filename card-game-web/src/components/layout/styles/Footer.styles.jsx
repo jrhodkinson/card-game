@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import * as c from "../../colors";
 
 export const Wrapper = styled.div`
   width: 1100px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 7px 10px;
 `;
 
 export const SocialLinks = styled.ul`
@@ -16,14 +17,14 @@ export const SocialLinks = styled.ul`
 
 export const SocialLink = styled.li`
   font-size: 0.8em;
-  margin-right: 10px;
+  margin-right: 12px;
 
   a {
     text-decoration: none;
-    color: #ddd;
+    color: ${c.faintTextOnBlack};
 
     &:hover {
-      color: white;
+      color: ${c.textOnBlack};
     }
   }
 `;

@@ -25,16 +25,11 @@ const AnimatedHealth = styled.div`
   top: 0;
 
   @keyframes focus {
-    20%,
-    60% {
-      transform: scale(1.15);
+    15% {
+      transform: scale(1.4);
       background-color: ${c.accentRed};
-      border-radius: ${healthDiameter / 8}px;
+      border-radius: ${healthDiameter / 6}px;
       font-size: 1.1em;
-    }
-    100% {
-      transform: scale(1);
-      background-color: ${c.red};
     }
   }
 
@@ -42,8 +37,6 @@ const AnimatedHealth = styled.div`
     if (state === "entering") {
       return `
         animation: focus ${animationTime / 1000}s ease-in-out;
-        z-index: 2;
-        font-weight: 500;
       `;
     }
   }};

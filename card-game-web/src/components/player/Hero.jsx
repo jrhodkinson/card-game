@@ -34,7 +34,7 @@ const Hero = ({ entityId, name, health, active }) => {
   const handleClick = () => dispatch(selectedTarget(entityId));
   return (
     <Wrapper interactable={heroIsInteractable} onClick={handleClick}>
-      {active ? <ActiveName>- {name} -</ActiveName> : <Name>{name}</Name>}
+      {active ? <ActiveName>{name}</ActiveName> : <Name>{name}</Name>}
       <Health health={health} />
     </Wrapper>
   );

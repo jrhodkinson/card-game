@@ -18,8 +18,8 @@ export const Card = styled.div`
 
   background-color: ${c.offWhite};
   color: ${c.textOnWhite};
-  box-shadow: ${c.darkestBlack} 0 2px 1px -1px, ${c.darkBlack} 0 1px 1px 0,
-    ${c.darkGrey} 0 1px 2px 0;
+  box-shadow: ${c.darkestBlack} 0 3px 2px -2px, ${c.darkBlack} 0 2px 2px 0,
+    ${c.darkGrey} 0 2px 3px 0;
 
   ${({ interactable, selected }) => {
     if (!interactable) {
@@ -108,7 +108,7 @@ export const ShortCardDescription = styled.div`
 
 export const CardCost = styled.div`
   background-color: ${c.offWhite};
-  color: black;
+  color: ${c.textOnWhite};
   font-weight: bold;
   position: absolute;
   top: -${0.6 * cost.RADIUS}px;
