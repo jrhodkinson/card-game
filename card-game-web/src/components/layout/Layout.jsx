@@ -1,13 +1,22 @@
 import React from "react";
-import Account from "./Account";
-import Lobby from "./Lobby";
+import * as S from "./styles";
+import Lobby from "../game/Lobby";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const Layout = () => {
   return (
-    <>
-      <Account />
-      <Lobby />
-    </>
+    <S.Wrapper>
+      <S.Header>
+        <Header />
+      </S.Header>
+      <S.Main>
+        <Lobby />
+      </S.Main>
+      <S.Footer>
+        <Footer />
+      </S.Footer>
+    </S.Wrapper>
   );
 };
 

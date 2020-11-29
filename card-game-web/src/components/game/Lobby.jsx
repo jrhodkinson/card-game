@@ -4,7 +4,7 @@ import {
   fetchCurrentMatch,
   selectCurrentMatchId,
 } from "../../store/lobby/lobby-store";
-import Match from "../game/Match";
+import Match from "./Match";
 import QueueButton from "./QueueButton";
 
 const Lobby = () => {

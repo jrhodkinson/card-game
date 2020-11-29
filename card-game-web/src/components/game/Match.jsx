@@ -11,7 +11,7 @@ import CurrentTurn from "./CurrentTurn";
 import MatchWebSocket from "./MatchWebSocket";
 import PrimaryPlayer from "../player/PrimaryPlayer";
 import SecondaryPlayer from "../player/SecondaryPlayer";
-import QueueButton from "../layout/QueueButton";
+import QueueButton from "./QueueButton";
 import Storefront from "./Storefront";
 
 const Wrapper = styled.main`
