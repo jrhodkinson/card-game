@@ -1,4 +1,4 @@
-const base = "#617C94";
+// #617C94
 
 export const darkestBlack = "#101519";
 export const darkBlack = "#181F25";

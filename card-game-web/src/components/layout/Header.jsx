@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./styles/Header.styles";
-import Account from "./Account";
+import Account from "../account/Account";
 import Brand from "./Brand";
 
 const Header = () => {

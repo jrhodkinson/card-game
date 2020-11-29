@@ -1,5 +1,5 @@
 import React from "react";
-import * as c from "../colors";
+import * as c from "../styles/colors";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectedTarget } from "../../store/play/play-actions";

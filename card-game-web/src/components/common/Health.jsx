@@ -1,7 +1,7 @@
 import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styled from "styled-components";
-import * as c from "../colors";
+import * as c from "../styles/colors";
 
 const healthDiameter = 32;
 const animationTime = 1100;

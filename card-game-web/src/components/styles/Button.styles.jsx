@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as c from "../colors";
+import * as c from "./colors";
 
 export const Button = styled.button`
   font-weight: 500;

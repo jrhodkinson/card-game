@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { MAIN_COLUMN_WIDTH } from "../../styles/dimensions";
 
 export const Wrapper = styled.div`
-  width: 1100px;
+  width: ${MAIN_COLUMN_WIDTH};
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;

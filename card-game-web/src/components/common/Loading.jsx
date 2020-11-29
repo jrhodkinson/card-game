@@ -1,7 +1,7 @@
 import React from "react";
 import ExternalLoading from "react-loading-components";
 import styled from "styled-components";
-import * as c from "../colors";
+import * as c from "../styles/colors";
 import FadeIn from "./FadeIn";
 
 const Wrapper = styled.div`

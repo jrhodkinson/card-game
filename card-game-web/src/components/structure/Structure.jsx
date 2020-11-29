@@ -1,5 +1,5 @@
 import React from "react";
-import * as c from "../colors";
+import * as c from "../styles/colors";
 import { card, header } from "../card/styles/dimensions";
 import styled from "styled-components";
 import Health from "../common/Health";

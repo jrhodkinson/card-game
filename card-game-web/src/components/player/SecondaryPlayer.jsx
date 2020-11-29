@@ -1,5 +1,5 @@
 import React from "react";
-import * as c from "../colors";
+import * as c from "../styles/colors";
 import styled from "styled-components";
 import * as S from "../../styles";
 import Deck from "../card/Deck";

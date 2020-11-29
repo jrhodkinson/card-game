@@ -9,15 +9,17 @@ import {
   selectWinner,
 } from "../../store/match/match-selector";
 import FadeIn from "../common/FadeIn";
+import Loading from "../common/Loading";
 import PrimaryPlayer from "../player/PrimaryPlayer";
 import SecondaryPlayer from "../player/SecondaryPlayer";
+import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
 import CurrentTurn from "./CurrentTurn";
-import QueueButton from "./QueueButton";
+import QueueButton from "../lobby/QueueButton";
 import Storefront from "./Storefront";
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1100px 1fr;
+  grid-template-columns: 1fr ${MAIN_COLUMN_WIDTH} 1fr;
   grid-template-rows: min-content min-content min-content 1fr min-content 1fr min-content min-content;
   height: 100%;
   width: 100%;
@@ -33,7 +35,7 @@ const Match = () => {
   const primaryPlayerActive = useSelector(isPrimaryPlayerActive);
 
   if (!hasInitialised) {
-    return null;
+    return <Loading />;
   }
 
   if (winner) {

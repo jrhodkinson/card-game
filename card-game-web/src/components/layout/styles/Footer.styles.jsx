@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import * as c from "../../colors";
+import * as c from "../../styles/colors";
+import { MAIN_COLUMN_WIDTH } from "../../styles/dimensions";
 
 export const Wrapper = styled.div`
-  width: 1100px;
+  width: ${MAIN_COLUMN_WIDTH};
   margin: 0 auto;
-  padding: 7px 10px;
+  padding: 10px 10px 8px;
 `;
 
 export const SocialLinks = styled.ul`
@@ -16,7 +17,7 @@ export const SocialLinks = styled.ul`
 `;
 
 export const SocialLink = styled.li`
-  font-size: 0.8em;
+  font-size: 0.85em;
   margin-right: 12px;
 
   a {

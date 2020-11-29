@@ -2,9 +2,9 @@ package jrh.game.service.lobby;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import io.javalin.http.NotFoundResponse;
 import jrh.game.common.account.AccountId;
 import jrh.game.service.account.Accounts;
+import jrh.game.service.lobby.response.QueueStatusResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,13 +30,10 @@ public class LobbyEndpoint {
 
     private void registerRoutes(Javalin javalin) {
         javalin.routes(() -> {
-            path("games", () -> {
-                path("queue", () -> {
-                    get("status", this::queueStatus);
-                    post("join", this::joinQueue);
-                    post("leave", this::leaveQueue);
-                });
-                get("mine", this::myGames);
+            path("games/queue", () -> {
+                get("status", this::queueStatus);
+                post("join", this::joinQueue);
+                post("leave", this::leaveQueue);
             });
         });
     }
@@ -44,10 +41,15 @@ public class LobbyEndpoint {
     private void queueStatus(Context context) {
         AccountId accountId = context.attribute(ACCOUNT_ID);
         logger.debug("RX queue status request for accountId={}", accountId);
+        Optional<ActiveMatch> match = matchManager.getMatchByAccountId(context.attribute(ACCOUNT_ID));
+        if (match.isPresent()) {
+            context.json(QueueStatusResponse.inMatch(match.get().getId()));
+            return;
+        }
         if (matchQueue.contains(accountId)) {
-            context.result("in queue");
+            context.json(QueueStatusResponse.queueing());
         } else {
-            context.result("not in queue");
+            context.json(QueueStatusResponse.notInQueue());
         }
     }
 
@@ -61,15 +63,5 @@ public class LobbyEndpoint {
         AccountId accountId = context.attribute(ACCOUNT_ID);
         logger.debug("RX leave queue request for accountId={}", accountId);
         matchQueue.remove(accountId);
-    }
-
-    private void myGames(Context context) {
-        AccountId accountId = context.attribute(ACCOUNT_ID);
-        logger.debug("RX my games request for accountId={}", accountId);
-        Optional<ActiveMatch> match = matchManager.getMatchByAccountId(context.attribute(ACCOUNT_ID));
-        if (match.isEmpty()) {
-            throw new NotFoundResponse();
-        }
-        context.status(200).json(match.get().getId());
     }
 }

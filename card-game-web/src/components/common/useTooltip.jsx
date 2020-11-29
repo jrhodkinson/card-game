@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
-import * as c from "../colors";
+import * as c from "../styles/colors";
 import { v4 as uuidv4 } from "uuid";
 
 const useTooltip = () => {

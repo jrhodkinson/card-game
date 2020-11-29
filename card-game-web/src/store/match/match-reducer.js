@@ -1,5 +1,6 @@
 import Immutable from "seamless-immutable";
-import { JOINED_QUEUE } from "../lobby/lobby-store";
+import { LOGGED_OUT } from "../account/account-store";
+import { IN_QUEUE } from "../lobby/lobby-store";
 import { MATCH_ENDED, RECEIVED_MATCH_STATE } from "./match-actions";
 
 export const MATCH_STATE = "match";
@@ -24,7 +25,8 @@ export default (state = defaultState, action) => {
       return state.merge(action.matchState).set("initialised", true);
     case MATCH_ENDED:
       return defaultState.set("winner", action.winner);
-    case JOINED_QUEUE:
+    case IN_QUEUE:
+    case LOGGED_OUT:
       return defaultState;
     default:
       return state;

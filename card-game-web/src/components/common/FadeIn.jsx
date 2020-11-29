@@ -21,9 +21,7 @@ const Wrapper = styled.div`
 `;
 
 const FadeIn = ({ fast = false, children }) => {
-  const parameters = fast
-    ? { delay: 0, length: 0.4 }
-    : { delay: 0.4, length: 0.8 };
+  const parameters = fast ? { delay: 0, length: 0.4 } : { delay: 1, length: 1 };
   return <Wrapper {...parameters}>{children}</Wrapper>;
 };
 
