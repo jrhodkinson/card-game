@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ReactTooltip from "react-tooltip";
+import useTooltip from "../common/useTooltip";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,10 +13,11 @@ const Wrapper = styled.div`
 const cardNames = (cards) => cards.map((card) => card.name).join("<br />");
 
 const Pile = ({ cards, name }) => {
+  const { id, tooltip } = useTooltip();
   return (
-    <Wrapper data-tip={cardNames(cards)}>
+    <Wrapper data-tip={cardNames(cards)} data-multiline data-for={id}>
       {cards.length === 0 ? `Empty ${name}` : `${cards.length} in ${name}`}
-      <ReactTooltip multiline />
+      {tooltip}
     </Wrapper>
   );
 };

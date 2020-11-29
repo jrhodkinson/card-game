@@ -1,11 +1,11 @@
 export const card = {
-  WIDTH: 144,
-  FULL_HEIGHT: 212,
+  WIDTH: 132,
+  FULL_HEIGHT: 192,
   BORDER_RADIUS: 3,
-  MARGIN_TOP_BOTTOM: 12,
-  MARGIN_LEFT_RIGHT: 8,
-  PADDING: 5,
-  STUMP_HEIGHT: 40,
+  MARGIN_TOP_BOTTOM: 10,
+  MARGIN_LEFT_RIGHT: 7,
+  PADDING: 4,
+  STUMP_HEIGHT: 35,
 };
 
 const INNER_CARD_WIDTH = card.WIDTH - 2 * card.PADDING;
@@ -24,7 +24,7 @@ export const cost = {
 
 export const image = {
   WIDTH: INNER_CARD_WIDTH,
-  HEIGHT: 96,
+  HEIGHT: 80,
   MARGIN_BOTTOM: card.PADDING,
 };
 
@@ -35,4 +35,5 @@ export const description = {
     (header.HEIGHT + header.MARGIN_BOTTOM) -
     (image.HEIGHT + image.MARGIN_BOTTOM),
   MARGIN_BOTTOM: card.PADDING,
+  FONT_SIZE: 0.8,
 };

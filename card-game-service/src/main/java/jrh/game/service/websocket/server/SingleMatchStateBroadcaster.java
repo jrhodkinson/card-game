@@ -14,6 +14,7 @@ import jrh.game.api.event.MatchStarted;
 import jrh.game.api.event.MoneyChanged;
 import jrh.game.api.event.PlayerTookDamage;
 import jrh.game.api.event.TurnEnded;
+import jrh.game.api.event.TurnStarted;
 import jrh.game.common.EventHandler;
 import jrh.game.common.User;
 import jrh.game.service.websocket.WebSocketConnectionManager;
@@ -37,7 +38,8 @@ public class SingleMatchStateBroadcaster implements EventHandler {
     }
 
     @SubscribeAll({ EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class,
-            CardGained.class, PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class })
+            CardGained.class, PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class,
+            TurnStarted.class })
     private void matchStateChanged(Event event, Match match) {
         broadcastFullMatchState(match);
     }

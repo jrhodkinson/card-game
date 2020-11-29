@@ -2,7 +2,7 @@ import React from "react";
 import * as c from "../colors";
 import { card } from "../card/styles/dimensions";
 import styled from "styled-components";
-import ReactTooltip from "react-tooltip";
+import useTooltip from "../common/useTooltip";
 
 const Wrapper = styled.div`
   border-radius: ${card.BORDER_RADIUS}px;
@@ -35,6 +35,7 @@ const Name = styled.div`
   background-color: ${c.white};
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: ${card.PADDING}px;
   font-weight: 500;
 `;
@@ -57,15 +58,17 @@ const Structure = ({
   interactable = false,
   onStructureClick = () => {},
 }) => {
+  const { id, tooltip } = useTooltip();
   return (
     <Wrapper
       interactable={interactable}
       onClick={() => onStructureClick(structure)}
       data-tip={structure.description}
+      data-for={id}
     >
       <Name title={structure.flavor}>{structure.name}</Name>
       <Health>{structure.health}</Health>
-      <ReactTooltip />
+      {tooltip}
     </Wrapper>
   );
 };

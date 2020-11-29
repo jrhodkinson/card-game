@@ -83,6 +83,7 @@ export const CardDescription = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: ${description.FONT_SIZE}em;
 `;
 
 export const ShortCardDescription = styled.div`
@@ -100,6 +101,8 @@ export const ShortCardDescription = styled.div`
   text-align: center;
 
   pointer-events: none;
+
+  font-size: ${description.FONT_SIZE}em;
 `;
 
 export const CardCost = styled.div`
