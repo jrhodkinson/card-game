@@ -6,8 +6,8 @@ import ReactTooltip from "react-tooltip";
 
 const Wrapper = styled.div`
   border-radius: ${card.BORDER_RADIUS}px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0,
-    rgba(0, 0, 0, 0.12) 0 1px 2px 0;
+  box-shadow: ${c.darkestBlack} 0 2px 1px -1px, ${c.darkBlack} 0 1px 1px 0,
+    ${c.darkGrey} 0 1px 2px 0;
   margin: ${card.MARGIN_TOP_BOTTOM}px ${card.MARGIN_LEFT_RIGHT}px;
   padding: 6px;
   width: 180px;
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
           
           &:hover {
             transform: scale(1.05) translate(0, -2.5%);
-            box-shadow: #FFF 0 0 8px 0;
+            box-shadow: ${c.white} 0 0 8px 0;
           }
         `;
     }

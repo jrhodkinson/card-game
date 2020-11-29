@@ -18,8 +18,8 @@ export const Card = styled.div`
 
   background-color: ${c.offWhite};
   color: ${c.textOnWhite};
-  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0,
-    rgba(0, 0, 0, 0.12) 0 1px 2px 0;
+  box-shadow: ${c.darkestBlack} 0 2px 1px -1px, ${c.darkBlack} 0 1px 1px 0,
+    ${c.darkGrey} 0 1px 2px 0;
 
   ${({ interactable, selected }) => {
     if (!interactable) {

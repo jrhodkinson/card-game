@@ -14,12 +14,15 @@ const SpanAll = styled(S.Centered)`
 
 const Spacer = styled.div`
   background-color: ${c.darkGrey};
+  box-shadow: 0 4px 2px -2px ${c.darkBlack};
 `;
 
 const SubGrid = styled.div`
   background-color: ${c.darkGrey};
   display: grid;
   grid-template-columns: 200px 1fr 200px;
+  box-shadow: 0 4px 2px -2px ${c.darkBlack};
+  z-index: 3;
 `;
 
 const SecondaryPlayer = ({ player, active }) => (
