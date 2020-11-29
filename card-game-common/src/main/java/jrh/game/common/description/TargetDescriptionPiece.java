@@ -4,20 +4,36 @@ import jrh.game.common.Target;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class TargetDescriptionPiece implements DescriptionPiece {
 
     private final Logger logger = LoggerFactory.getLogger(TargetDescriptionPiece.class);
 
+    private static final Map<Set<Target>, String> SPECIAL_CASES = new HashMap<>();
+    static {
+        SPECIAL_CASES.put(Set.of(Target.OWN_STRUCTURES, Target.OTHER_STRUCTURES), "all structures");
+    }
+
     private final List<Target> targets;
+    private final Set<Target> targetSet;
+
 
     public TargetDescriptionPiece(List<Target> targets) {
         this.targets = targets;
+        this.targetSet = new HashSet<>(targets);
     }
 
     @Override
     public String get(DescriptionContext descriptionContext) {
+        if (SPECIAL_CASES.containsKey(targetSet)) {
+            return SPECIAL_CASES.get(targetSet);
+        }
+
         if (targets.isEmpty()) {
             return "";
         }
