@@ -48,7 +48,7 @@ const Match = ({ matchId }) => {
           ) : (
             <CurrentTurn active={primaryPlayerActive} />
           )}
-          <Storefront />
+          <Storefront active={primaryPlayerActive} />
           {primaryPlayerActive ? (
             <CurrentTurn active={primaryPlayerActive} />
           ) : (

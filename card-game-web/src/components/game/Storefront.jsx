@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   box-shadow: 0 0 3px -3px ${c.darkBlack};
 `;
 
-const Storefront = () => {
+const Storefront = ({ active }) => {
   const storefront = useSelector(selectStorefront);
   const dispatch = useDispatch();
   const handleCardClick = (card) => dispatch(selectedCardInStorefront(card));
@@ -22,7 +22,7 @@ const Storefront = () => {
       <Cards
         cards={storefront.row}
         short
-        interactable
+        interactable={active}
         onCardClick={handleCardClick}
       />
     </Wrapper>
