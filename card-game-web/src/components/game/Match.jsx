@@ -17,7 +17,7 @@ import Storefront from "./Storefront";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1100px 1fr;
-  grid-template-rows: min-content min-content 1fr min-content min-content 1fr min-content min-content;
+  grid-template-rows: min-content min-content min-content 1fr min-content 1fr min-content min-content;
   height: 100%;
 `;
 

@@ -11,26 +11,27 @@ const Wrapper = styled.div`
   display: flex;
   background-color: ${c.darkGrey};
   color: ${c.textOnBlack};
-  padding: 5px;
+  padding: 7px;
   width: 100%;
 
   ${({ interactable }) => interactable && "cursor: pointer"};
 `;
 
 const ActiveName = styled.div`
+  color: ${c.textOnBlack};
   font-weight: 500;
 `;
 
 const Name = styled.div`
-  color: ${c.textOnBlack};
+  color: ${c.faintTextOnBlack};
 `;
 
-const healthDiameter = 36;
+const healthDiameter = 32;
 
 const Health = styled.div`
   background-color: ${c.red};
   color: ${c.textOnRed};
-  margin-left: 10px;
+  margin-left: 16px;
   text-align: center;
   line-height: ${healthDiameter}px;
   width: ${healthDiameter}px;
@@ -44,7 +45,7 @@ const Hero = ({ entityId, name, health, active }) => {
   const handleClick = () => dispatch(selectedTarget(entityId));
   return (
     <Wrapper interactable={heroIsInteractable} onClick={handleClick}>
-      {active ? <ActiveName>{name}</ActiveName> : <Name>{name}</Name>}
+      {active ? <ActiveName>- {name} -</ActiveName> : <Name>{name}</Name>}
       <Health>{health}</Health>
     </Wrapper>
   );
