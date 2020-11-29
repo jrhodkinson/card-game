@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { queue } from "../store/lobby/lobby-store";
+import { queue } from "../../store/lobby/lobby-store";
 
 const QueueButton = () => {
   const dispatch = useDispatch();

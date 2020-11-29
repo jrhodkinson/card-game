@@ -6,12 +6,12 @@ import {
   selectPrimaryPlayer,
   selectSecondaryPlayer,
   selectWinner,
-} from "../store/match/match-selector";
+} from "../../store/match/match-selector";
 import CurrentTurn from "./CurrentTurn";
 import MatchWebSocket from "./MatchWebSocket";
-import PrimaryPlayer from "./player/PrimaryPlayer";
-import SecondaryPlayer from "./player/SecondaryPlayer";
-import QueueButton from "./QueueButton";
+import PrimaryPlayer from "../player/PrimaryPlayer";
+import SecondaryPlayer from "../player/SecondaryPlayer";
+import QueueButton from "../layout/QueueButton";
 import Storefront from "./Storefront";
 
 const Wrapper = styled.main`

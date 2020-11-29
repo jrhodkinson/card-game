@@ -1,14 +1,12 @@
 import React from "react";
-import Account from "./Account";
 import { GlobalStyle } from "./GlobalStyle";
-import Lobby from "./Lobby";
+import Layout from "./layout/Layout";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Account />
-      <Lobby />
+      <Layout />
     </>
   );
 };

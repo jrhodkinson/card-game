@@ -2,22 +2,20 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCurrentMatch,
-  isQueueing,
   selectCurrentMatchId,
-} from "../store/lobby/lobby-store";
-import Match from "./Match";
+} from "../../store/lobby/lobby-store";
+import Match from "../game/Match";
 import QueueButton from "./QueueButton";
 
 const Lobby = () => {
   const matchId = useSelector(selectCurrentMatchId);
-  const isQueuing = useSelector(isQueueing);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isQueuing) {
+    if (!matchId) {
       dispatch(fetchCurrentMatch());
     }
-  }, [dispatch, isQueuing]);
+  }, [dispatch, matchId]);
 
   return <>{matchId ? <Match matchId={matchId} /> : <QueueButton />}</>;
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser, whoAmI } from "../store/account/account-store";
+import { login, selectUser, whoAmI } from "../../store/account/account-store";
 
 const Account = () => {
   const user = useSelector(selectUser);

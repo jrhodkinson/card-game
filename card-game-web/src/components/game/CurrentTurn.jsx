@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { endTurn } from "../gateway/ws";
-import { selectCurrentTurn } from "../store/match/match-selector";
-import Cards from "./card/Cards";
+import { endTurn } from "../../gateway/ws";
+import { selectCurrentTurn } from "../../store/match/match-selector";
+import Cards from "../card/Cards";
 
 const Wrapper = styled.div`
   text-align: center;
