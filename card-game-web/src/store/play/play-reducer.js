@@ -17,6 +17,9 @@ export const defaultState = Immutable({
 export default (state = defaultState, action) => {
   switch (action.type) {
     case SELECTED_CARD_REQUIRING_TARGET:
+      if (action.cardEntityId === state.pendingCardEntityId) {
+        return defaultState;
+      }
       return state.set("pendingCardEntityId", action.cardEntityId);
     case PLAYED_CARD:
     case PURCHASED_CARD:
