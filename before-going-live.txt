@@ -1,0 +1,7 @@
+- Cancel match if player never connects
+- Forfeit  match if player loses connection
+- Turn timer
+- Forfeit button
+- Tidy up cards
+- Register
+- Store outcome of match

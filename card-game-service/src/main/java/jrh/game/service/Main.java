@@ -21,11 +21,6 @@ public class Main {
         main.start();
     }
 
-    // TODO cancel match if player never connects
-    // TODO forfeit match if player loses connection
-    // TODO turn timer
-    // TODO allow player to play 2 games in a row (remove from MatchManager)
-
     private void start() {
         Database database = Database.instance();
         Accounts accounts = new Accounts(database.accountStore());
