@@ -17,17 +17,25 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr min-content;
 
+  @keyframes pulse {
+    50% {
+      transform: scale(1.03) translate(0, -1%);
+    }
+  }
+
   ${({ interactable }) => {
     if (interactable) {
       return `
-          cursor: pointer;
-          transition: transform 0.15s;
-          
-          &:hover {
-            transform: scale(1.05) translate(0, -2.5%);
-            box-shadow: ${c.white} 0 0 8px 0;
-          }
-        `;
+      cursor: pointer;
+      transition: transform 0.15s;
+      animation: pulse 1.2s infinite;
+      
+      &:hover {
+        transform: scale(1.08) translate(0, -2.5%);
+        animation: none;
+        box-shadow: ${c.white} 0 0 8px 0;
+      }
+    `;
     }
   }};
 `;
@@ -50,16 +58,18 @@ const Structure = ({
 }) => {
   const { id, tooltip } = useTooltip();
   return (
-    <Wrapper
-      interactable={interactable}
-      onClick={() => onStructureClick(structure)}
-      data-tip={structure.description}
-      data-for={id}
-    >
-      <Name title={structure.flavor}>{structure.name}</Name>
-      <Health health={structure.health} />
+    <>
+      <Wrapper
+        interactable={interactable}
+        onClick={() => onStructureClick(structure)}
+        data-tip={structure.description}
+        data-for={id}
+      >
+        <Name title={structure.flavor}>{structure.name}</Name>
+        <Health health={structure.health} />
+      </Wrapper>
       {tooltip}
-    </Wrapper>
+    </>
   );
 };
 

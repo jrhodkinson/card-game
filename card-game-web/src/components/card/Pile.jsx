@@ -15,10 +15,12 @@ const cardNames = (cards) => cards.map((card) => card.name).join("<br />");
 const Pile = ({ cards, name }) => {
   const { id, tooltip } = useTooltip();
   return (
-    <Wrapper data-tip={cardNames(cards)} data-multiline data-for={id}>
-      {cards.length === 0 ? `Empty ${name}` : `${cards.length} in ${name}`}
+    <>
+      <Wrapper data-tip={cardNames(cards)} data-multiline data-for={id}>
+        {cards.length === 0 ? `Empty ${name}` : `${cards.length} in ${name}`}
+      </Wrapper>
       {tooltip}
-    </Wrapper>
+    </>
   );
 };
 

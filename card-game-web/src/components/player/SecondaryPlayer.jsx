@@ -20,7 +20,7 @@ const Spacer = styled.div`
 const SubGrid = styled.div`
   background-color: ${c.darkGrey};
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 1fr 300px 1fr;
   box-shadow: 0 4px 2px -2px ${c.darkBlack};
   z-index: 3;
 `;

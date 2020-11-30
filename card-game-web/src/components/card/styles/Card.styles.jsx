@@ -33,8 +33,8 @@ export const Card = styled.div`
 
     if (selected) {
       styles += `
-        transform: scale(1.02) translate(0, -2%);
-        box-shadow: 0 0 0 3px ${c.darkBlack}, 0 0 8px 0 ${c.white};
+        transform: scale(1.03) translate(0, -2%);
+        box-shadow: 0 0 0 4px ${c.darkBlack}, 0 0 12px 0 ${c.white};
         
         &:hover {
           transform: scale(1.05) translate(0, -2.5%);

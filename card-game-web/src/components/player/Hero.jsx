@@ -12,10 +12,20 @@ const Wrapper = styled.div`
   display: flex;
   background-color: ${c.darkGrey};
   color: ${c.textOnBlack};
-  padding: 7px;
+  padding: 7px 0 7px 7px;
   width: 100%;
 
-  ${({ interactable }) => interactable && "cursor: pointer"};
+  ${({ interactable }) =>
+    interactable &&
+    `
+      background-color: ${c.mediumGrey};
+      cursor: pointer;
+      
+      &:hover {
+        background-color: ${c.lightGrey};
+        transform: scale(1.05) translate(0, -1.5%);
+      }
+    `};
 `;
 
 const Name = styled.div`
