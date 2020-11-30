@@ -3,7 +3,7 @@ import * as S from "./styles";
 
 const Card = ({
   card,
-  interactable = false,
+  isInteractable = () => false,
   selected = false,
   onCardClick = () => {},
   short = false,
@@ -11,7 +11,7 @@ const Card = ({
   return (
     <S.Card
       short={short}
-      interactable={interactable}
+      interactable={isInteractable(card)}
       selected={selected}
       onClick={() => onCardClick(card)}
     >

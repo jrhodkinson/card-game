@@ -15,7 +15,7 @@ const Hand = ({ hand, interactable }) => {
   return (
     <Cards
       cards={hand}
-      interactable={interactable}
+      isInteractable={(card) => interactable && card.isPlayable}
       onCardClick={handleCardClick}
       selectedCardEntityId={pendingCardEntityId}
     />

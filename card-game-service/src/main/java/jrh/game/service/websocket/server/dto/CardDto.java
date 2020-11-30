@@ -1,6 +1,7 @@
 package jrh.game.service.websocket.server.dto;
 
 import jrh.game.api.Card;
+import jrh.game.card.behaviour.UnplayableBehaviour;
 import jrh.game.common.CardId;
 import jrh.game.common.EntityId;
 
@@ -18,9 +19,10 @@ public class CardDto {
     public final CardDescriptionDto description;
     public final ColorDto color;
     public final boolean requiresTarget;
+    public final boolean isPlayable;
 
     private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost,
-            CardDescriptionDto description, ColorDto color, boolean requiresTarget) {
+            CardDescriptionDto description, ColorDto color, boolean requiresTarget, boolean isPlayable) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;
@@ -29,12 +31,13 @@ public class CardDto {
         this.description = description;
         this.color = color;
         this.requiresTarget = requiresTarget;
+        this.isPlayable = isPlayable;
     }
 
     public static CardDto fromCard(Card card) {
         return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null),
                 card.getCost(), CardDescriptionDto.fromCardDescription(card.getDescription()),
-                ColorDto.fromColor(card.getColor()), card.requiresTarget());
+                ColorDto.fromColor(card.getColor()), card.requiresTarget(), !card.hasBehaviour(UnplayableBehaviour.class));
     }
 
     public static List<CardDto> fromCards(List<Card> cards) {

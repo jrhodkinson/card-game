@@ -44,7 +44,7 @@ const Cards = ({
   cards,
   short = false,
   selectedCardEntityId = undefined,
-  interactable = false,
+  isInteractable = () => false,
   animateEntry = false,
   onCardClick = () => {},
 }) => {
@@ -53,7 +53,7 @@ const Cards = ({
       key={card.entityId}
       card={card}
       short={short}
-      interactable={interactable}
+      isInteractable={isInteractable}
       selected={selectedCardEntityId === card.entityId}
       onCardClick={onCardClick}
     />

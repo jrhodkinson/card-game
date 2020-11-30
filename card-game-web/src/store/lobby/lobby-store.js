@@ -1,6 +1,6 @@
 import Immutable from "seamless-immutable";
 import { getQueueStatus, postJoinQueue } from "../../gateway/lobby";
-import { LOGGED_OUT, RECEIVED_ACCOUNT_DETAILS } from "../account/account-store";
+import { LOGGED_OUT } from "../account/account-store";
 
 export const LOBBY_STATE = "lobby";
 export const NAMESPACE = "lobby";
