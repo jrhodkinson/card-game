@@ -6,6 +6,8 @@ export const Wrapper = styled.div`
   width: ${MAIN_COLUMN_WIDTH};
   margin: 0 auto;
   padding: 10px 10px 8px;
+  display: flex;
+  align-items: center;
 `;
 
 export const SocialLinks = styled.ul`
@@ -28,4 +30,9 @@ export const SocialLink = styled.li`
       color: ${c.textOnBlack};
     }
   }
+`;
+
+export const ActiveGames = styled.div`
+  margin-left: auto;
+  font-size: 0.8em;
 `;

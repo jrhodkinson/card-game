@@ -4,6 +4,7 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import jrh.game.common.account.AccountId;
 import jrh.game.service.account.Accounts;
+import jrh.game.service.lobby.response.ActiveGamesResponse;
 import jrh.game.service.lobby.response.QueueStatusResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,9 @@ import java.util.Optional;
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.path;
 import static io.javalin.apibuilder.ApiBuilder.post;
+import static java.util.Collections.singleton;
 import static jrh.game.service.Attributes.ACCOUNT_ID;
+import static jrh.game.service.account.AccountRole.ANYONE;
 
 public class LobbyEndpoint {
 
@@ -30,10 +33,13 @@ public class LobbyEndpoint {
 
     private void registerRoutes(Javalin javalin) {
         javalin.routes(() -> {
-            path("games/queue", () -> {
-                get("status", this::queueStatus);
-                post("join", this::joinQueue);
-                post("leave", this::leaveQueue);
+            path("games", () -> {
+                get("active", this::activeGames, singleton(ANYONE));
+                path("queue", () -> {
+                    get("status", this::queueStatus);
+                    post("join", this::joinQueue);
+                    post("leave", this::leaveQueue);
+                });
             });
         });
     }
@@ -63,5 +69,9 @@ public class LobbyEndpoint {
         AccountId accountId = context.attribute(ACCOUNT_ID);
         logger.debug("RX leave queue request for accountId={}", accountId);
         matchQueue.remove(accountId);
+    }
+
+    private void activeGames(Context context) {
+        context.json(new ActiveGamesResponse(matchManager.getActiveMatches()));
     }
 }

@@ -51,6 +51,10 @@ public class MatchManager {
         return activeMatches.get(id);
     }
 
+    public int getActiveMatches() {
+        return activeMatches.size();
+    }
+
     private void matchEnded(UUID matchId) {
         ActiveMatch activeMatch = activeMatches.remove(matchId);
         if (activeMatch != null) {

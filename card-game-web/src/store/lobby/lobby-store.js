@@ -1,5 +1,9 @@
 import Immutable from "seamless-immutable";
-import { getQueueStatus, postJoinQueue } from "../../gateway/lobby";
+import {
+  getActiveGames,
+  getQueueStatus,
+  postJoinQueue,
+} from "../../gateway/lobby";
 import { LOGGED_OUT } from "../account/account-store";
 
 export const LOBBY_STATE = "lobby";
@@ -10,8 +14,10 @@ export const defaultState = Immutable({
   matchId: undefined,
   matchPoller: undefined,
   queueing: false,
+  activeGames: 0,
 });
 
+export const RECEIVED_ACTIVE_GAMES = `${NAMESPACE}/RECEIVED_ACTIVE_GAMES`;
 export const RECEIVED_MATCH_ID = `${NAMESPACE}/RECEIVED_MATCH_ID`;
 export const RECEIVED_NO_MATCH_ID = `${NAMESPACE}/RECEIVED_NO_MATCH_ID`;
 export const STARTED_MATCH_POLLER = `${NAMESPACE}/STARTED_MATCH_POLLER`;
@@ -19,6 +25,8 @@ export const IN_QUEUE = `${NAMESPACE}/IN_QUEUE`;
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    case RECEIVED_ACTIVE_GAMES:
+      return state.set("activeGames", action.activeGames);
     case RECEIVED_MATCH_ID:
       return state
         .set("matchId", action.matchId)
@@ -35,7 +43,11 @@ export default (state = defaultState, action) => {
       if (state.matchPoller) {
         clearInterval(state.matchPoller);
       }
-      return defaultState;
+      return state
+        .set("matchId", undefined)
+        .set("initialised", true)
+        .set("matchPoller", undefined)
+        .set("queueing", false);
     default:
       return state;
   }
@@ -45,6 +57,12 @@ export const queue = () => (dispatch) => {
   postJoinQueue().then(() => {
     dispatch({ type: IN_QUEUE });
     dispatch(fetchQueueStatus());
+  });
+};
+
+export const fetchActiveGames = () => (dispatch) => {
+  getActiveGames().then(({ data }) => {
+    dispatch({ type: RECEIVED_ACTIVE_GAMES, activeGames: data.activeGames });
   });
 };
 
@@ -66,6 +84,7 @@ export const fetchQueueStatus = () => (dispatch, getState) => {
   }
 };
 
+export const selectActiveGames = (store) => store[LOBBY_STATE].activeGames;
 export const selectIsQueueing = (store) => store[LOBBY_STATE].queueing;
 export const selectCurrentMatchId = (store) => store[LOBBY_STATE].matchId;
 export const selectHaveInitialisedMatchId = (store) =>

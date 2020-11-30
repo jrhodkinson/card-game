@@ -1,4 +1,5 @@
 import React from "react";
+import ActiveGames from "../lobby/ActiveGames";
 import * as S from "./styles/Footer.styles";
 
 const SocialLink = ({ text, link }) => {
@@ -21,6 +22,9 @@ const Footer = () => {
           link="https://www.reddit.com/r/revelation218/"
         />
       </S.SocialLinks>
+      <S.ActiveGames>
+        <ActiveGames />
+      </S.ActiveGames>
     </S.Wrapper>
   );
 };
