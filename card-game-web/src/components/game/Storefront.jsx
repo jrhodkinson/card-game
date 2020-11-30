@@ -22,6 +22,7 @@ const Storefront = ({ active }) => {
       <Cards
         cards={storefront.row}
         short
+        animateEntry
         interactable={active}
         onCardClick={handleCardClick}
       />
