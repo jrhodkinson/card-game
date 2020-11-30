@@ -61,7 +61,7 @@ export const fetchQueueStatus = () => (dispatch, getState) => {
           dispatch({ type: IN_QUEUE });
         }
       });
-    }, 2500);
+    }, 1500);
     dispatch({ type: STARTED_MATCH_POLLER, matchPoller: matchPoller });
   }
 };

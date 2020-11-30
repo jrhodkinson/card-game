@@ -4,7 +4,7 @@ import styled from "styled-components";
 import * as c from "../styles/colors";
 
 const healthDiameter = 32;
-const animationTime = 1100;
+const animationTime = 800;
 
 const Wrapper = styled.div`
   position: relative;
@@ -25,8 +25,8 @@ const AnimatedHealth = styled.div`
   top: 0;
 
   @keyframes focus {
-    15% {
-      transform: scale(1.4);
+    20% {
+      transform: scale(1.3);
       background-color: ${c.accentRed};
       border-radius: ${healthDiameter / 6}px;
       font-size: 1.1em;
