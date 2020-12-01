@@ -19,10 +19,10 @@ public class AccountResponseTest {
     @Test
     public void serialisesAccountToJson() throws JsonProcessingException {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
-        Account account = new Account(AccountId.randomAccountId(), randomAlphanumeric(10));
+        Account account = new Account(AccountId.randomAccountId(), randomAlphanumeric(10), randomAlphanumeric(10));
         AccountResponse response = new AccountResponse(account);
         Map<String, String> json = objectMapper.readValue(objectMapper.writeValueAsString(response), new TypeReference<>() {});
-        Map<String, String> expectedJson = Map.of("accountId", account.getId().toString(), "name", account.getName());
+        Map<String, String> expectedJson = Map.of("accountId", account.getId().toString(), "name", account.getName(), "email", account.getEmail());
         assertThat(json, equalTo(expectedJson));
     }
 }

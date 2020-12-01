@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import * as S from "../styles/Button.styles";
 import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser, whoAmI } from "../../store/account/account-store";
+import {
+  login,
+  logout,
+  selectUser,
+  whoAmI,
+} from "../../store/account/account-store";
 
 const Account = () => {
+  const { register, handleSubmit } = useForm();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -11,13 +18,11 @@ const Account = () => {
     dispatch(whoAmI());
   }, [dispatch]);
 
-  const handleUsernameKeyUp = (e) => {
-    if (e.key === "Enter") {
-      dispatch(login(e.currentTarget.value));
-    }
+  const onSubmit = (data) => {
+    dispatch(login(data.name, data.password));
   };
 
-  const loginUser = (user) => () => dispatch(login(user));
+  const loginUser = (user) => () => dispatch(login(user, user + user));
 
   if (user) {
     return (
@@ -25,13 +30,27 @@ const Account = () => {
         <div>Logged in as {user}</div>
         <S.Button onClick={loginUser("jack")}>jack</S.Button>
         <S.Button onClick={loginUser("terry")}>terry</S.Button>
+        <S.Button onClick={() => dispatch(logout())}>logout</S.Button>
       </>
     );
   }
 
   return (
     <>
-      <input type="text" placeholder="Username" onKeyUp={handleUsernameKeyUp} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          name="name"
+          placeholder="Username or Email"
+          ref={register({ required: true })}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          ref={register({ required: true })}
+        />
+        <input type="submit" value="Login" />
+      </form>
       <button onClick={loginUser("jack")}>jack</button>
       <button onClick={loginUser("terry")}>terry</button>
     </>

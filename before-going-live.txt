@@ -3,5 +3,5 @@
 - Turn timer
 - Forfeit button
 - Tidy up cards
-- Register
-- Store outcome of match
+- Store outcome of match + some other stats about it
+- Handle bad requests during login & register

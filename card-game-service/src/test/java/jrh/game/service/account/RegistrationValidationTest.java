@@ -1,0 +1,53 @@
+package jrh.game.service.account;
+
+import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class RegistrationValidationTest {
+
+    @Test
+    public void myEmailIsValid() {
+        assertTrue(RegistrationValidation.isValidEmail("richard@revelation218.com"));
+    }
+
+    @Test
+    public void reasonableUsernameIsValid() {
+        assertTrue(RegistrationValidation.isValidUsername("jrh206"));
+    }
+
+    @Test
+    public void randomPasswordIsValid() {
+        assertTrue(RegistrationValidation.isValidPassword("£%adsfhAE!DAY$%£@£^"));
+    }
+
+    @Test
+    public void invalidEmailsAreNotValid() {
+        assertFalse(RegistrationValidation.isValidEmail(null));
+        assertFalse(RegistrationValidation.isValidEmail(""));
+        assertFalse(RegistrationValidation.isValidEmail("sfd90 .xom"));
+        assertFalse(RegistrationValidation.isValidEmail("sfd90 @s.xom"));
+        assertFalse(RegistrationValidation.isValidEmail("...@."));
+    }
+
+    @Test
+    public void invalidUsernamesAreIotValid() {
+        assertFalse(RegistrationValidation.isValidUsername(null));
+        assertFalse(RegistrationValidation.isValidUsername(""));
+        assertFalse(RegistrationValidation.isValidUsername("ab"));
+        assertFalse(RegistrationValidation.isValidUsername("£££"));
+        assertFalse(RegistrationValidation.isValidUsername("!!1"));
+        assertFalse(RegistrationValidation.isValidUsername("joe blogs"));
+    }
+
+    @Test
+    public void invalidPasswordAreNotValid() {
+        assertFalse(RegistrationValidation.isValidUsername(null));
+        assertFalse(RegistrationValidation.isValidUsername(""));
+        assertFalse(RegistrationValidation.isValidUsername("abcdefg"));
+        assertFalse(RegistrationValidation.isValidUsername("NKDSA"));
+    }
+}

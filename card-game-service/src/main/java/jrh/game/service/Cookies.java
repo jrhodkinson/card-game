@@ -9,6 +9,9 @@ import java.util.Optional;
 
 public class Cookies {
 
+    private static final String PATH = "/";
+    private static final int THIRTY_DAYS = 30 * 24 * 60 * 60;
+
     private static final String ACCOUNT_ID = "accountId";
     private static final String TOKEN = "token";
 
@@ -18,12 +21,20 @@ public class Cookies {
         this.useSecureCookies = environment != Environment.DEVELOPMENT;
     }
 
+    public void removeAccountId(Context context) {
+        context.removeCookie(ACCOUNT_ID, PATH);
+    }
+
     public Cookie accountId(AccountId accountId) {
         return cookie(ACCOUNT_ID, accountId.toString());
     }
 
     public Optional<AccountId> accountId(Context context) {
         return Optional.ofNullable(context.cookie(ACCOUNT_ID)).map(AccountId::fromString);
+    }
+
+    public void removeToken(Context context) {
+        context.removeCookie(TOKEN, PATH);
     }
 
     public Cookie token(Token token) {
@@ -37,6 +48,8 @@ public class Cookies {
     private Cookie cookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);
         cookie.setHttpOnly(true);
+        cookie.setMaxAge(THIRTY_DAYS);
+        cookie.setPath("/");
         if (useSecureCookies) {
             cookie.setSecure(true);
         }

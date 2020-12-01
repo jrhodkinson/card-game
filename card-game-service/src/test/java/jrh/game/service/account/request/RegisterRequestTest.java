@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class LoginRequestTest {
+public class RegisterRequestTest {
 
     private final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
@@ -20,8 +20,8 @@ public class LoginRequestTest {
 
     @Test
     public void deserializesFromJson() throws JsonProcessingException {
-        LoginRequest loginRequest = objectMapper.readValue("{\"name\":\"jack\",\"password\":\"£!\"}", LoginRequest.class);
-        assertThat(loginRequest, equalTo(new LoginRequest("jack", "£!")));
+        RegisterRequest registerRequest = objectMapper.readValue("{\"email\":\"e\",\"name\":\"n\",\"password\":\"p\"}", RegisterRequest.class);
+        assertThat(registerRequest, equalTo(new RegisterRequest("n", "e", "p")));
     }
 
 }
