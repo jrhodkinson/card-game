@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   opacity: 0.9;
   color: ${c.textOnWhite};
   width: 100%;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   padding: 20px 150px;
   border-radius: 10px;
   text-align: center;

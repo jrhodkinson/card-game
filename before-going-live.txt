@@ -2,4 +2,4 @@
 - Forfeit match if too long with no options
 - Forfeit button
 - Set up initial set of cards
-- Handle bad requests during login & register
+- Handle error cases during login & register

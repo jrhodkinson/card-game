@@ -22,7 +22,8 @@ export const Button = styled.button`
 
 export const BigButton = styled(Button)`
   padding: 0 20px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 1.2em;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.05em;
+  margin: 5px;
 `;
