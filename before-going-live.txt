@@ -1,7 +1,5 @@
-- Cancel match if player never connects
-- Forfeit  match if player loses connection
 - Turn timer
+- Forfeit match if too long with no options
 - Forfeit button
-- Tidy up cards
-- Store outcome of match + some other stats about it
+- Set up initial set of cards
 - Handle bad requests during login & register

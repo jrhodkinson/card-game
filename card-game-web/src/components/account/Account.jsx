@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
+import SubmitInput from "../common/SubmitInput";
+import TextInput from "../common/TextInput";
 import * as S from "../styles/Button.styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,6 +11,10 @@ import {
   selectUser,
   whoAmI,
 } from "../../store/account/account-store";
+
+const LoggedInAs = styled.div`
+  margin-right: 10px;
+`;
 
 const Account = () => {
   const { register, handleSubmit } = useForm();
@@ -27,10 +34,10 @@ const Account = () => {
   if (user) {
     return (
       <>
-        <div>Logged in as {user}</div>
+        <LoggedInAs>Logged in as {user}</LoggedInAs>
         <S.Button onClick={loginUser("jack")}>jack</S.Button>
         <S.Button onClick={loginUser("terry")}>terry</S.Button>
-        <S.Button onClick={() => dispatch(logout())}>logout</S.Button>
+        <S.Button onClick={() => dispatch(logout())}>Logout</S.Button>
       </>
     );
   }
@@ -38,21 +45,21 @@ const Account = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
+        <TextInput
           name="name"
-          placeholder="Username or Email"
+          placeholder="Username or email"
           ref={register({ required: true })}
         />
-        <input
+        <TextInput
           name="password"
-          type="password"
           placeholder="Password"
+          password
           ref={register({ required: true })}
         />
-        <input type="submit" value="Login" />
+        <SubmitInput value="Login" />
       </form>
-      <button onClick={loginUser("jack")}>jack</button>
-      <button onClick={loginUser("terry")}>terry</button>
+      <S.Button onClick={loginUser("jack")}>jack</S.Button>
+      <S.Button onClick={loginUser("terry")}>terry</S.Button>
     </>
   );
 };

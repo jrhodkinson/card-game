@@ -3,14 +3,17 @@ import * as c from "./colors";
 
 export const Button = styled.button`
   font-weight: 500;
-  border: none;
   margin: 3px;
-  padding: 4px 8px;
+  padding: 0 12px;
   background-color: ${c.lightGrey};
   color: ${c.textOnBlack};
-  border-radius: 5px;
+  border-radius: 3px;
   cursor: pointer;
   outline: none;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid ${c.mediumGrey};
+  box-shadow: ${c.darkestBlack} 0 3px 2px -2px;
 
   &:hover {
     background-color: ${c.mediumGrey};
@@ -18,5 +21,8 @@ export const Button = styled.button`
 `;
 
 export const BigButton = styled(Button)`
-  padding: 10px 20px;
+  padding: 0 20px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 1.2em;
 `;

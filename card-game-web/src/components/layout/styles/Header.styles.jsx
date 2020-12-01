@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   width: ${MAIN_COLUMN_WIDTH};
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: min-content 1fr;
   padding: 10px;
 `;
 
@@ -14,6 +14,7 @@ export const Brand = styled.div`
   align-items: center;
   font-size: 1.4em;
   font-weight: 500;
+  white-space: nowrap;
 `;
 
 export const Account = styled.div`

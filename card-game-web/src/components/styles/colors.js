@@ -16,3 +16,4 @@ export const textOnBlack = white;
 export const faintTextOnBlack = lightestGrey;
 export const textOnRed = white;
 export const textOnWhite = darkGrey;
+export const faintTextOnWhite = mediumGrey;

@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { registerAccount } from "../../store/account/account-store";
+import SubmitInput from "../common/SubmitInput";
+import TextInput from "../common/TextInput";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -13,23 +15,23 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input
+      <TextInput
         name="name"
         placeholder="Username"
         ref={register({ required: true })}
       />
-      <input
+      <TextInput
         name="email"
         placeholder="Email"
         ref={register({ required: true })}
       />
-      <input
+      <TextInput
         name="password"
-        type="password"
         placeholder="Password"
+        password
         ref={register({ required: true })}
       />
-      <input type="submit" value="Register" />
+      <SubmitInput value="Register" />
     </form>
   );
 };
