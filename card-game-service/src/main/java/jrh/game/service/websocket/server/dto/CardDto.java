@@ -37,7 +37,8 @@ public class CardDto {
     public static CardDto fromCard(Card card) {
         return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null),
                 card.getCost(), CardDescriptionDto.fromCardDescription(card.getDescription()),
-                ColorDto.fromColor(card.getColor()), card.requiresTarget(), !card.hasBehaviour(UnplayableBehaviour.class));
+                ColorDto.fromColor(card.getColor()), card.requiresTarget(),
+                !card.hasBehaviour(UnplayableBehaviour.class));
     }
 
     public static List<CardDto> fromCards(List<Card> cards) {

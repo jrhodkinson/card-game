@@ -2,8 +2,6 @@ package jrh.game.service.account;
 
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,7 +19,7 @@ public class RegistrationValidationTest {
 
     @Test
     public void randomPasswordIsValid() {
-        assertTrue(RegistrationValidation.isValidPassword("£%adsfhAE!DAY$%£@£^"));
+        assertTrue(RegistrationValidation.isValidPassword("%adsfhAE!DAY$%@^"));
     }
 
     @Test
@@ -45,9 +43,9 @@ public class RegistrationValidationTest {
 
     @Test
     public void invalidPasswordAreNotValid() {
-        assertFalse(RegistrationValidation.isValidUsername(null));
-        assertFalse(RegistrationValidation.isValidUsername(""));
-        assertFalse(RegistrationValidation.isValidUsername("abcdefg"));
-        assertFalse(RegistrationValidation.isValidUsername("NKDSA"));
+        assertFalse(RegistrationValidation.isValidPassword(null));
+        assertFalse(RegistrationValidation.isValidPassword(""));
+        assertFalse(RegistrationValidation.isValidPassword("abcdefg"));
+        assertFalse(RegistrationValidation.isValidPassword("NKDSA"));
     }
 }

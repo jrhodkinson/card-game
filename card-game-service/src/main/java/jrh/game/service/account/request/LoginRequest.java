@@ -24,23 +24,19 @@ public final class LoginRequest {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         LoginRequest that = (LoginRequest) o;
 
-        return new EqualsBuilder()
-            .append(name, that.name)
-            .append(password, that.password)
-            .isEquals();
+        return new EqualsBuilder().append(name, that.name).append(password, that.password).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-            .append(name)
-            .append(password)
-            .toHashCode();
+        return new HashCodeBuilder(17, 37).append(name).append(password).toHashCode();
     }
 }

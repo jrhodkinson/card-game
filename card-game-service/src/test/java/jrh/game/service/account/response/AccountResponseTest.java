@@ -17,12 +17,14 @@ import static org.hamcrest.Matchers.equalTo;
 public class AccountResponseTest {
 
     @Test
-    public void serialisesAccountToJson() throws JsonProcessingException {
+    public void serialisesAccountResponseToJson() throws JsonProcessingException {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
         Account account = new Account(AccountId.randomAccountId(), randomAlphanumeric(10), randomAlphanumeric(10));
         AccountResponse response = new AccountResponse(account);
-        Map<String, String> json = objectMapper.readValue(objectMapper.writeValueAsString(response), new TypeReference<>() {});
-        Map<String, String> expectedJson = Map.of("accountId", account.getId().toString(), "name", account.getName(), "email", account.getEmail());
+        Map<String, String> json = objectMapper.readValue(objectMapper.writeValueAsString(response),
+                new TypeReference<>() {
+                });
+        Map<String, String> expectedJson = Map.of("accountId", account.getId().toString(), "name", account.getName());
         assertThat(json, equalTo(expectedJson));
     }
 }

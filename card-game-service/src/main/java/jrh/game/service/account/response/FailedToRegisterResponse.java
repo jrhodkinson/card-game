@@ -18,11 +18,13 @@ public class FailedToRegisterResponse {
     }
 
     public static FailedToRegisterResponse invalidPassword() {
-        return new FailedToRegisterResponse("Invalid password", "Must be at least 8 characters, containing only letters, numbers, and these special characters: @#$%^&+=!*");
+        return new FailedToRegisterResponse("Invalid password",
+                "Must be at least 8 characters, containing only letters, numbers, and these special characters: @#$%^&+=!*");
     }
 
     public static FailedToRegisterResponse invalidUsername() {
-        return new FailedToRegisterResponse("Invalid username", "Must be at least 3 characters, containing only letters, numbers, and these special characters: .-_");
+        return new FailedToRegisterResponse("Invalid username",
+                "Must be at least 3 characters, containing only letters, numbers, and these special characters: .-_");
 
     }
 

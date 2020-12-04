@@ -7,7 +7,8 @@ import jrh.game.common.account.AccountWithHashedPassword;
 public class StoredAccountAdapter {
 
     public static AccountWithHashedPassword account(StoredAccount storedAccount) {
-        Account account = new Account(AccountId.fromUUID(storedAccount.getId()), storedAccount.getName(), storedAccount.getEmail());
+        Account account = new Account(AccountId.fromUUID(storedAccount.getId()), storedAccount.getName(),
+                storedAccount.getEmail());
         return new AccountWithHashedPassword(account, storedAccount.getBcrypt());
     }
 

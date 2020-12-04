@@ -34,11 +34,9 @@ public class Database {
 
     private MongoDatabase database() {
         CodecRegistry pojoCodecRegistry = fromRegistries(fromCodecs(new UuidCodec(UuidRepresentation.STANDARD)),
-            MongoClientSettings.getDefaultCodecRegistry(),
-            fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-        MongoClientSettings settings = MongoClientSettings.builder()
-            .codecRegistry(pojoCodecRegistry)
-            .build();
-        return MongoClients.create(settings).getDatabase(DATABASE);
+                MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+        MongoClientSettings settings = MongoClientSettings.builder().codecRegistry(pojoCodecRegistry).build();
+        return MongoClients.create().getDatabase(DATABASE);
     }
 }

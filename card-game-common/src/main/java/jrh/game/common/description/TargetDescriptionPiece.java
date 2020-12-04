@@ -22,7 +22,6 @@ public class TargetDescriptionPiece implements DescriptionPiece {
     private final List<Target> targets;
     private final Set<Target> targetSet;
 
-
     public TargetDescriptionPiece(List<Target> targets) {
         this.targets = targets;
         this.targetSet = new HashSet<>(targets);

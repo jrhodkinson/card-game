@@ -121,7 +121,7 @@ public class AccountEndpoint {
             return false;
         }
 
-        Optional<AccountId> emailAccount = accounts.getAccountIdByEmail(request.getName());
+        Optional<AccountId> emailAccount = accounts.getAccountIdByEmail(request.getEmail());
         if (emailAccount.isPresent()) {
             forbidden(context, FailedToRegisterResponse.emailAddressAlreadyExists());
             return false;

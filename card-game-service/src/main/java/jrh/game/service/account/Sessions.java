@@ -9,14 +9,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Sessions {
 
-    private final LoadingCache<AccountId, Token> tokens = CacheBuilder.newBuilder()
-        .expireAfterAccess(3, TimeUnit.DAYS)
-        .build(new CacheLoader<>() {
-            @Override
-            public Token load(AccountId accountId) {
-                return Token.randomToken();
-            }
-        });
+    private final LoadingCache<AccountId, Token> tokens = CacheBuilder.newBuilder().expireAfterAccess(3, TimeUnit.DAYS)
+            .build(new CacheLoader<>() {
+                @Override
+                public Token load(AccountId accountId) {
+                    return Token.randomToken();
+                }
+            });
 
     public Token getToken(AccountId accountId) {
         return tokens.getUnchecked(accountId);

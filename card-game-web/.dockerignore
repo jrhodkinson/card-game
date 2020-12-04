@@ -1,0 +1,7 @@
+node_modules
+target
+build
+.gitignore
+*.md
+*.iml
+pom.xml

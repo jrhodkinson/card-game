@@ -20,7 +20,8 @@ public class RegisterRequestTest {
 
     @Test
     public void deserializesFromJson() throws JsonProcessingException {
-        RegisterRequest registerRequest = objectMapper.readValue("{\"email\":\"e\",\"name\":\"n\",\"password\":\"p\"}", RegisterRequest.class);
+        RegisterRequest registerRequest = objectMapper.readValue("{\"email\":\"e\",\"name\":\"n\",\"password\":\"p\"}",
+                RegisterRequest.class);
         assertThat(registerRequest, equalTo(new RegisterRequest("n", "e", "p")));
     }
 

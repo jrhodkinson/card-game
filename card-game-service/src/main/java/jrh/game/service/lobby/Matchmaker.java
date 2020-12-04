@@ -20,7 +20,8 @@ public class Matchmaker {
     }
 
     public void start() {
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(safely(this::matchmake), 0, 1, TimeUnit.SECONDS);
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(safely(this::matchmake), 0, 1,
+                TimeUnit.SECONDS);
     }
 
     private void matchmake() {
@@ -55,7 +56,9 @@ public class Matchmaker {
             try {
                 runnable.run();
             } catch (Exception e) {
-                logger.warn("Caught Exception processing matchmaking. Some players might have been dropped from the queue. Continuing anyway.", e);
+                logger.warn(
+                        "Caught Exception processing matchmaking. Some players might have been dropped from the queue. Continuing anyway.",
+                        e);
             } catch (Throwable t) {
                 logger.error("Caught Throwable processing matchmaking. Exiting", t);
                 System.exit(1);

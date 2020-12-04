@@ -9,15 +9,21 @@ import jrh.game.structure.MutableStructure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 public class FileSystemAssetLibrary implements AssetLibrary {
 
@@ -53,43 +59,60 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     }
 
     private void loadAssets() throws IOException {
+        FileSystem fileSystem = null;
         try {
-            Path assetsDirectory = Path.of(getClass().getClassLoader().getResource(ASSETS_DIRECTORY).toURI());
+            Path assetsDirectory;
+            URI uri = getClass().getClassLoader().getResource(ASSETS_DIRECTORY).toURI();
+            if ("jar".equals(uri.getScheme())) {
+                fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap(), null);
+                assetsDirectory = fileSystem.getPath(ASSETS_DIRECTORY);
+            } else {
+                assetsDirectory = Paths.get(uri);
+            }
             ObjectMapper objectMapper = ObjectMapperFactory.create();
-            addCardsFromDirectory(assetsDirectory.resolve("cards").toFile(), objectMapper);
-            addStructuresFromDirectory(assetsDirectory.resolve("structures").toFile(), objectMapper);
+            addCardsFromDirectory(assetsDirectory.resolve("cards"), objectMapper);
+            addStructuresFromDirectory(assetsDirectory.resolve("structures"), objectMapper);
         } catch (URISyntaxException e) {
             throw new IOException(e);
-        }
-    }
-
-    private void addCardsFromDirectory(File directory, ObjectMapper objectMapper) throws IOException {
-        for (File file : Objects.requireNonNull(directory.listFiles())) {
-            if (file.isHidden()) {
-                continue;
-            }
-            if (file.isDirectory()) {
-                addCardsFromDirectory(file, objectMapper);
-            } else {
-                CardImpl card = objectMapper.readValue(file, CardImpl.class);
-                cards.put(card.getCardId(), card);
-                logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription());
+        } finally {
+            if (fileSystem != null) {
+                fileSystem.close();
             }
         }
     }
 
-    private void addStructuresFromDirectory(File directory, ObjectMapper objectMapper) throws IOException {
-        for (File file : Objects.requireNonNull(directory.listFiles())) {
-            if (file.isHidden()) {
+    private void addCardsFromDirectory(Path directory, ObjectMapper objectMapper) throws IOException {
+        List<Path> paths = Files.walk(directory).filter(p -> !Files.isDirectory(p)).collect(toList());
+        for (Path path : paths) {
+            if (Files.isHidden(path)) {
                 continue;
             }
-            if (file.isDirectory()) {
-                addStructuresFromDirectory(file, objectMapper);
-            } else {
-                MutableStructure structure = objectMapper.readValue(file, MutableStructure.class);
-                structures.put(structure.getStructureId(), structure);
-                logger.debug("Loaded structure: {}, {}, {}", structure.getStructureId(), structure.getName());
+            CardImpl card = objectMapper.readValue(Files.newInputStream(path), CardImpl.class);
+            cards.put(card.getCardId(), card);
+            logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription());
+        }
+    }
+
+    private void addStructuresFromDirectory(Path directory, ObjectMapper objectMapper) throws IOException {
+        List<Path> paths = Files.walk(directory).filter(p -> !Files.isDirectory(p)).collect(toList());
+        for (Path path : paths) {
+            if (Files.isHidden(path)) {
+                continue;
             }
+            MutableStructure structure = objectMapper.readValue(Files.newInputStream(path), MutableStructure.class);
+            structures.put(structure.getStructureId(), structure);
+            logger.debug("Loaded structure: {}, {}, {}", structure.getStructureId(), structure.getName(),
+                    structure.getDescription());
+        }
+    }
+
+    private Path getAssetsDirectoryPath() throws URISyntaxException, IOException {
+        URI uri = getClass().getClassLoader().getResource(ASSETS_DIRECTORY).toURI();
+        if ("jar".equals(uri.getScheme())) {
+            FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap(), null);
+            return fileSystem.getPath(ASSETS_DIRECTORY);
+        } else {
+            return Paths.get(uri);
         }
     }
 }
