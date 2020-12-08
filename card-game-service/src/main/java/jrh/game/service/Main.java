@@ -22,7 +22,8 @@ public class Main {
     }
 
     private void start() {
-        Database database = Database.instance();
+        ServiceConfiguration configuration = new ServiceConfiguration();
+        Database database = configuration.database();
         Accounts accounts = new Accounts(database.accountStore());
         MatchManager matchManager = new MatchManager(assetLibrary(), accounts);
         MatchQueue matchQueue = new MatchQueue();

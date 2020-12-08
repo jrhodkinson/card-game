@@ -52,7 +52,9 @@ const handleMessage = (dispatch) => (event) => {
 };
 
 export const connectToMatchWebSocket = (dispatch, matchId) => {
-  ws = new ReconnectingWebSocket(`ws://localhost:7000/match/${matchId}`);
+  ws = new ReconnectingWebSocket(
+    `${process.env.REACT_APP_MATCH_WEBSOCKET_PATH}${matchId}`
+  );
   ws.onmessage = handleMessage(dispatch);
   return () => ws.close(1000, "disconnected");
 };

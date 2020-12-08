@@ -1,18 +1,20 @@
 version: "3.8"
+
 services:
   web:
-    image: revelation/card-game-web:0.0.1-SNAPSHOT
-#    image: revelation/card-game-web:${project.version}
-    restart: always
+    image: revelation/card-game-web:${project.version}
+    restart: unless-stopped
     ports:
       - "80"
     depends_on:
       - service
 
   service:
-    image: revelation/card-game-service:0.0.1-SNAPSHOT
-#    image: revelation/card-game-service:${project.version}
-    restart: always
+    image: revelation/card-game-service:${project.version}
+    restart: unless-stopped
+    environment:
+      - DATABASE_HOST=mongo
+      - DATABASE_PORT=27017
     ports:
       - "7000"
     depends_on:
@@ -20,18 +22,15 @@ services:
 
   mongo:
     image: mongo:4.4
+    restart: unless-stopped
     ports:
       - "27017"
-    restart: always
-    environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: example
 
   nginx:
     image: nginx:1.19
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "8080:80"
+      - "3030:80"
 

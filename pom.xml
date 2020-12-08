@@ -17,6 +17,7 @@
         <docker.image.prefix>revelation</docker.image.prefix>
 
         <version.bcrypt>0.9.0</version.bcrypt>
+        <version.commons.configuration>2.7</version.commons.configuration>
         <version.commons.lang>3.9</version.commons.lang>
         <version.commons.validator>1.7</version.commons.validator>
         <version.guava>28.2-jre</version.guava>
@@ -234,6 +235,11 @@
                 <groupId>at.favre.lib</groupId>
                 <artifactId>bcrypt</artifactId>
                 <version>${version.bcrypt}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-configuration2</artifactId>
+                <version>${version.commons.configuration}</version>
             </dependency>
 
             <dependency>
