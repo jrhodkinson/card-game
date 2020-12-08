@@ -3,7 +3,6 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY yarn.lock ./
-RUN npx browserslist@latest --update-db
 RUN yarn install --frozen-lockfile
 COPY . ./
 RUN yarn build
