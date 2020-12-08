@@ -7,6 +7,7 @@ import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.description.AtomicDescription;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +31,7 @@ public class SacrificeBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Damage").targets(List.of(SELF)).number(damage).build();
+        return AtomicDescription.builder().keyword(Keyword.DAMAGE).targets(List.of(SELF)).number(damage).build();
     }
 
     @Subscribe

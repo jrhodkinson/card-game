@@ -16,13 +16,13 @@ public class AtomicDescriptionTest {
 
     @Test
     public void createsDescriptionForSimpleDamageBehaviour() {
-        AtomicDescription description = AtomicDescription.builder().keyword("Damage").number(3).build();
+        AtomicDescription description = AtomicDescription.builder().keyword(Keyword.DAMAGE).number(3).build();
         assertThat(description.get(descriptionContext), equalTo("Damage 3"));
     }
 
     @Test
     public void createsDescriptionForOnPurchaseBehaviour() {
-        AtomicDescription description = AtomicDescription.builder().plainString("On purchase,").keyword("damage")
+        AtomicDescription description = AtomicDescription.builder().plainString("On purchase,").keyword(Keyword.DAMAGE)
                 .targets(List.of(OTHER, OTHER_STRUCTURES)).plainString("by").number(4).build();
         assertThat(description.get(descriptionContext),
                 equalTo("On purchase, damage your opponent and your opponent's structures by 4"));
@@ -30,7 +30,7 @@ public class AtomicDescriptionTest {
 
     @Test
     public void createsDescriptionForConstructBehaviour() {
-        AtomicDescription description = AtomicDescription.builder().keyword("construct")
+        AtomicDescription description = AtomicDescription.builder().keyword(Keyword.CONSTRUCT)
                 .structure(new StructureId("MERCHANTS_GUILD")).build();
         assertThat(description.get(descriptionContext), equalTo("Construct Merchants' Guild"));
     }

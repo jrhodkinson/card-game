@@ -9,6 +9,7 @@ import jrh.game.api.event.CardPurchased;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.description.AtomicDescription;
 import jrh.game.common.Target;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +37,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("On purchase,").keyword("damage").targets(targets).number(amount)
+        return AtomicDescription.builder().plainString("On purchase,").keyword(Keyword.DAMAGE).targets(targets).number(amount)
                 .build();
     }
 

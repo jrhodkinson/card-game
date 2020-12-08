@@ -5,6 +5,7 @@ import jrh.game.asset.JsonKey;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.common.description.AtomicDescription;
 import jrh.game.api.Subscribe;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.HealthController;
 import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +26,7 @@ public class HealBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Heal").number(health).build();
+        return AtomicDescription.builder().keyword(Keyword.HEAL).number(health).build();
     }
 
     @Subscribe

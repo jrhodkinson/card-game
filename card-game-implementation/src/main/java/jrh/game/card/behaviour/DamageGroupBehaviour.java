@@ -9,6 +9,7 @@ import jrh.game.api.event.CardPlayed;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.description.AtomicDescription;
 import jrh.game.common.Target;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,7 +36,7 @@ public class DamageGroupBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Damage").targets(targets).number(amount).build();
+        return AtomicDescription.builder().keyword(Keyword.DAMAGE).targets(targets).number(amount).build();
     }
 
     @Subscribe

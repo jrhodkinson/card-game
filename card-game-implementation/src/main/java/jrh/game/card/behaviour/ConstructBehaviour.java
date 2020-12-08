@@ -2,12 +2,13 @@ package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.asset.JsonKey;
-import jrh.game.api.event.CardPlayed;
-import jrh.game.common.description.AtomicDescription;
-import jrh.game.api.Subscribe;
 import jrh.game.api.Match;
+import jrh.game.api.Subscribe;
+import jrh.game.api.event.CardPlayed;
+import jrh.game.asset.JsonKey;
 import jrh.game.common.StructureId;
+import jrh.game.common.description.AtomicDescription;
+import jrh.game.common.description.Keyword;
 import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +29,7 @@ public class ConstructBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Construct").structure(structureId).build();
+        return AtomicDescription.builder().keyword(Keyword.CONSTRUCT).structure(structureId).build();
     }
 
     @Subscribe

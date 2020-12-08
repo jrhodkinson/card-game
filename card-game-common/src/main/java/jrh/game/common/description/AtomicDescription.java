@@ -21,7 +21,7 @@ public class AtomicDescription {
         this.builder = builder;
     }
 
-    public static AtomicDescription keyword(String keyword) {
+    public static AtomicDescription keyword(Keyword keyword) {
         return builder().keyword(keyword).build();
     }
 
@@ -42,13 +42,18 @@ public class AtomicDescription {
 
         }
 
-        public Builder keyword(String keyword) {
+        public Builder keyword(Keyword keyword) {
             pieces.add(new KeywordDescriptionPiece(keyword));
             return this;
         }
 
         public Builder number(int number) {
             pieces.add(new IntegerDescriptionPiece(number));
+            return this;
+        }
+
+        public Builder money(int number) {
+            pieces.add(new MoneyDescriptionPiece(number));
             return this;
         }
 

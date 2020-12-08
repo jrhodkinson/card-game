@@ -7,6 +7,7 @@ import jrh.game.api.event.CardResolved;
 import jrh.game.common.description.AtomicDescription;
 import jrh.game.api.Callback;
 import jrh.game.api.Subscribe;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;
@@ -32,8 +33,9 @@ public class IncrementingDamageBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("Damage").number(damage)
-                .plainString("then increase future damage by").number(increment).build();
+        return AtomicDescription.builder().keyword(Keyword.DAMAGE).number(damage)
+                .plainString("then increase future").keyword(Keyword.DAMAGE).plainString("by").number(increment)
+                .build();
     }
 
     @Subscribe

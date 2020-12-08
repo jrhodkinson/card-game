@@ -6,6 +6,7 @@ import jrh.game.api.Subscribe;
 import jrh.game.api.event.TurnStarted;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.description.AtomicDescription;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.TurnController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class MoneyPower extends AbstractPower {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("At the start of your turn,").keyword("+ $").number(amount)
+        return AtomicDescription.builder().plainString("At the start of your turn,").keyword(Keyword.ACQUIRE).money(amount)
                 .build();
     }
 

@@ -4,8 +4,9 @@ import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardResolved;
 import jrh.game.asset.JsonKey;
-import jrh.game.common.description.AtomicDescription;
 import jrh.game.common.EventHandler;
+import jrh.game.common.description.AtomicDescription;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.CardFlowController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +22,7 @@ public class VanishBehaviour extends AbstractBehaviour implements EventHandler {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.keyword("Vanish");
+        return AtomicDescription.keyword(Keyword.VANISH);
     }
 
     @Subscribe

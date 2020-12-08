@@ -1,14 +1,15 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jrh.game.asset.JsonKey;
+import jrh.game.api.Callback;
+import jrh.game.api.Match;
+import jrh.game.api.Subscribe;
 import jrh.game.api.event.CardPlayed;
 import jrh.game.api.event.CardResolved;
+import jrh.game.asset.JsonKey;
 import jrh.game.common.description.AtomicDescription;
-import jrh.game.api.Callback;
-import jrh.game.api.Subscribe;
+import jrh.game.common.description.Keyword;
 import jrh.game.match.TurnController;
-import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,7 +32,7 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword("+ $").number(amount).plainString("then increase future $ by")
+        return AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(amount).plainString("then increase future $ by")
                 .number(increment).build();
     }
 
