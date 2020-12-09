@@ -1,4 +1,6 @@
 import React from "react";
+import * as S from "../card/styles";
+import Description from "../common/Description";
 import * as c from "../styles/colors";
 import { card, header } from "../card/styles/dimensions";
 import styled from "styled-components";
@@ -62,7 +64,7 @@ const Structure = ({
       <Wrapper
         interactable={interactable}
         onClick={() => onStructureClick(structure)}
-        data-tip={structure.description}
+        data-tip={<Description description={structure.description} />}
         data-for={id}
       >
         <Name title={structure.flavor}>{structure.name}</Name>

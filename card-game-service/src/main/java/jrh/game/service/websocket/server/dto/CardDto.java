@@ -16,13 +16,13 @@ public class CardDto {
     public final String name;
     public final String flavor;
     public final int cost;
-    public final CardDescriptionDto description;
+    public final DescriptionDto description;
     public final ColorDto color;
     public final boolean requiresTarget;
     public final boolean isPlayable;
 
     private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost,
-            CardDescriptionDto description, ColorDto color, boolean requiresTarget, boolean isPlayable) {
+                    DescriptionDto description, ColorDto color, boolean requiresTarget, boolean isPlayable) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;
@@ -36,7 +36,7 @@ public class CardDto {
 
     public static CardDto fromCard(Card card) {
         return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null),
-                card.getCost(), CardDescriptionDto.fromCardDescription(card.getDescription()),
+                card.getCost(), DescriptionDto.fromDescription(card.getDescription()),
                 ColorDto.fromColor(card.getColor()), card.requiresTarget(),
                 !card.hasBehaviour(UnplayableBehaviour.class));
     }

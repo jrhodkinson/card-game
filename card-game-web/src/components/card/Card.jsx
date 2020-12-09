@@ -1,4 +1,5 @@
 import React from "react";
+import Description from "../common/Description";
 import * as S from "./styles";
 
 const Card = ({
@@ -21,13 +22,13 @@ const Card = ({
       </S.CardName>
       {short ? (
         <S.ShortCardDescription background={card.color}>
-          {card.description}
+          <Description description={card.description} />
         </S.ShortCardDescription>
       ) : (
         <>
           <S.CardImage background={card.color} />
           <S.CardDescription background={card.color}>
-            {card.description}
+            <Description description={card.description} />
           </S.CardDescription>
         </>
       )}

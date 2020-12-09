@@ -25,4 +25,11 @@ public class DescriptionContext {
     String getName(CardId cardId) {
         return cardMapper.getName(cardId);
     }
+
+    String getHelp(Keyword keyword) {
+        if (keyword.equals(Keyword.DAMAGE)) {
+            return "Remove health from a player or structure's life total";
+        }
+        return null;
+    }
 }

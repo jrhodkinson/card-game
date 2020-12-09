@@ -7,6 +7,7 @@ import jrh.game.common.StructureId;
 import jrh.game.common.Target;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;
@@ -33,10 +34,14 @@ public class AtomicDescription {
         return builder.get(descriptionContext);
     }
 
+    public List<DescriptionPiece> getPieces() {
+        return Collections.unmodifiableList(builder.pieces);
+    }
+
     public static class Builder {
 
         @JsonValue
-        private final List<DescriptionPiece> pieces = new ArrayList<>();
+        private List<DescriptionPiece> pieces = new ArrayList<>();
 
         private Builder() {
 
@@ -78,6 +83,7 @@ public class AtomicDescription {
         }
 
         public AtomicDescription build() {
+            pieces = Collections.unmodifiableList(pieces);
             return new AtomicDescription(this);
         }
 

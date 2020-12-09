@@ -17,6 +17,7 @@ const useTooltip = () => {
         id={id}
         backgroundColor={c.darkestBlack}
         textColor={c.textOnBlack}
+        effect="solid"
       />
     ),
   };

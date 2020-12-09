@@ -9,11 +9,12 @@ export const lightestGrey = "#BECAD5";
 export const offWhite = "#DAE1E7";
 
 export const white = "#E7EBEF";
-export const red = "#D32F2F";
-export const accentRed = "#C4001D";
+export const red = "#D81B60";
+export const accentRed = "#C51162";
 
 export const textOnBlack = white;
 export const faintTextOnBlack = lightestGrey;
 export const textOnRed = white;
 export const textOnWhite = darkGrey;
+export const accentTextOnWhite = accentRed;
 export const faintTextOnWhite = mediumGrey;
