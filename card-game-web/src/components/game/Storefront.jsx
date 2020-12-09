@@ -23,7 +23,7 @@ const Storefront = ({ active }) => {
         cards={storefront.row}
         short
         animateEntry
-        interactable={() => active}
+        isInteractable={() => active}
         onCardClick={handleCardClick}
       />
     </Wrapper>

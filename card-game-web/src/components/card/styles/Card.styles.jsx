@@ -101,8 +101,6 @@ export const ShortCardDescription = styled.div`
   justify-content: center;
   text-align: center;
 
-  cursor: default;
-
   font-size: ${description.FONT_SIZE}em;
 `;
 

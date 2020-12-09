@@ -8,6 +8,7 @@ import configureStore from "./store/configureStore";
 configureAxios();
 
 const store = configureStore();
+export const root = document.getElementById("root");
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,5 +16,5 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  root
 );
