@@ -1,8 +1,12 @@
 import React from "react";
+import Countdown from "react-countdown";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { endTurn } from "../../gateway/ws";
-import { selectCurrentTurn } from "../../store/match/match-selector";
+import {
+  selectCurrentTurn,
+  selectDateTurnWillEnd,
+} from "../../store/match/match-selector";
 import Cards from "../card/Cards";
 import * as S from "../styles/Button.styles";
 
@@ -17,13 +21,40 @@ const Wrapper = styled.div`
 
 const Money = styled.div``;
 
+const Timer = styled.div`
+  font-size: 2em;
+  margin-bottom: 5px;
+  animation: 1s pulse infinite;
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1.08);
+    }
+
+    50% {
+      transform: scale(0.92);
+    }
+  }
+`;
+
 const CurrentTurn = ({ active }) => {
   const currentTurn = useSelector(selectCurrentTurn);
+  const dateTurnWillEnd = useSelector(selectDateTurnWillEnd);
+  const countdownRenderer = ({ minutes, seconds }) => {
+    const total = 60 * minutes + seconds;
+    return total <= 15 ? <Timer>{total}</Timer> : null;
+  };
   return (
     <Wrapper>
       <Money>{currentTurn.money} Money</Money>
       <Cards cards={currentTurn.playedCards} short />
       <div>
+        <Countdown
+          date={dateTurnWillEnd}
+          renderer={countdownRenderer}
+          intervalDelay={500}
+        />
         {active && <S.BigButton onClick={endTurn}>End turn</S.BigButton>}
       </div>
     </Wrapper>

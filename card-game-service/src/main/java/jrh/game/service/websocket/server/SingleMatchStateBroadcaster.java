@@ -15,12 +15,14 @@ import jrh.game.api.event.MoneyChanged;
 import jrh.game.api.event.PlayerTookDamage;
 import jrh.game.api.event.TurnEnded;
 import jrh.game.api.event.TurnStarted;
+import jrh.game.api.event.TurnWillEndAt;
 import jrh.game.common.EventHandler;
 import jrh.game.common.User;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessage;
 import jrh.game.service.websocket.server.dto.MatchDto;
 
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +30,7 @@ public class SingleMatchStateBroadcaster implements EventHandler {
 
     private final WebSocketConnectionManager webSocketConnectionManager;
     private final UUID matchId;
+    private Instant turnWillEndAt;
     private MatchDto latestMatchState;
     private User winner;
 
@@ -35,13 +38,20 @@ public class SingleMatchStateBroadcaster implements EventHandler {
         this.webSocketConnectionManager = webSocketConnectionManager;
         this.matchId = matchId;
         webSocketConnectionManager.addWelcomeMessage(matchId, this::matchStateMessage);
+        webSocketConnectionManager.addWelcomeMessage(matchId, this::turnWillEndAt);
     }
 
-    @SubscribeAll({ EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class,
-            CardGained.class, PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class,
-            TurnStarted.class })
+    @SubscribeAll({EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class,
+        CardGained.class, PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class,
+        TurnStarted.class})
     private void matchStateChanged(Event event, Match match) {
         broadcastFullMatchState(match);
+    }
+
+    @Subscribe
+    private void turnWillEndAt(TurnWillEndAt turnWillEndAt) {
+        this.turnWillEndAt = turnWillEndAt.getInstant();
+        webSocketConnectionManager.broadcast(matchId, turnWillEndAt().orElseThrow());
     }
 
     @Subscribe
@@ -60,5 +70,9 @@ public class SingleMatchStateBroadcaster implements EventHandler {
             return Optional.of(ServerWebSocketMessages.matchEnded(winner));
         }
         return Optional.ofNullable(latestMatchState).map(ServerWebSocketMessages::matchState);
+    }
+
+    private Optional<WebSocketMessage<Long>> turnWillEndAt() {
+        return Optional.ofNullable(turnWillEndAt).map(ServerWebSocketMessages::turnWillEndAt);
     }
 }

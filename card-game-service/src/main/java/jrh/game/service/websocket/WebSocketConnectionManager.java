@@ -102,7 +102,7 @@ public class WebSocketConnectionManager {
             List<Supplier<Optional<? extends WebSocketMessage<?>>>> welcomeMessageSuppliers = welcomeMessageSuppliersByMatchId
                     .getOrDefault(matchId, Collections.emptyList());
             logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());
-            welcomeMessageSuppliers.forEach(supplier -> supplier.get().ifPresent(wsConnectContext::send));
+            welcomeMessageSuppliers.forEach(supplier -> supplier.get().ifPresent(m -> send(webSocketSession, m)));
         }
     }
 

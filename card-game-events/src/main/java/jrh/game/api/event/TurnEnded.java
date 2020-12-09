@@ -2,6 +2,8 @@ package jrh.game.api.event;
 
 import jrh.game.api.Event;
 import jrh.game.api.Player;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class TurnEnded implements Event {
 
@@ -23,6 +25,9 @@ public class TurnEnded implements Event {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("previousPlayer", previousPlayer)
+            .append("newPlayer", newPlayer)
+            .toString();
     }
 }

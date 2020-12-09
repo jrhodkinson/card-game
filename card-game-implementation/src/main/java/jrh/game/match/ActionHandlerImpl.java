@@ -2,6 +2,8 @@ package jrh.game.match;
 
 import jrh.game.api.Action;
 import jrh.game.api.ActionHandler;
+import jrh.game.api.Callback;
+import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
 import jrh.game.api.action.BuyCard;
 import jrh.game.api.action.EndTurn;
@@ -40,9 +42,9 @@ public class ActionHandlerImpl implements ActionHandler, EventHandler {
     }
 
     @Subscribe
-    private void endTurn(EndTurn endTurn) {
+    private void endTurn(EndTurn endTurn, Match match, Callback callback) {
         if (match.getActivePlayer().getUser().equals(endTurn.getActor())) {
-            match.getController(MatchStateController.class).endTurn();
+            match.getController(MatchStateController.class).endTurn(callback::enqueue);
         }
     }
 }

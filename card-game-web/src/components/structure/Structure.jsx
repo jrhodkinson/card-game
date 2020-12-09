@@ -1,5 +1,4 @@
 import React from "react";
-import * as S from "../card/styles";
 import Description from "../common/Description";
 import * as c from "../styles/colors";
 import { card, header } from "../card/styles/dimensions";

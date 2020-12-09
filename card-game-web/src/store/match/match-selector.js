@@ -1,7 +1,7 @@
 import { selectUser } from "../account/account-store";
 import { MATCH_STATE } from "./match-reducer";
 
-const selectMatchState = (store) => store[MATCH_STATE];
+const selectMatchState = (store) => store[MATCH_STATE].state;
 
 const selectPrimaryUser = (store) => selectUser(store);
 const selectSecondaryUser = (store) => {
@@ -25,3 +25,6 @@ export const selectCurrentTurn = (store) => selectMatchState(store).currentTurn;
 export const selectStorefront = (store) => selectMatchState(store).storefront;
 
 export const selectWinner = (store) => selectMatchState(store).winner;
+
+export const selectDateTurnWillEnd = (store) =>
+  new Date(store[MATCH_STATE].turnWillEndAt);
