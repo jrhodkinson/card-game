@@ -29,13 +29,13 @@ public class DescriptionDtoTest {
 
     @Test
     public void transformsDescriptionToJson() throws JsonProcessingException {
-        Description description = Description.of(List.of(
-            AtomicDescription.builder().keyword(Keyword.DAMAGE).number(3).build(),
-            AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(2).plainString("ok?").build()
-        ));
+        Description description = Description
+                .of(List.of(AtomicDescription.builder().keyword(Keyword.DAMAGE).number(3).build(),
+                        AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(2).plainString("ok?").build()));
 
         String json = objectMapper.writeValueAsString(DescriptionDto.fromDescription(description));
-        List<List<Map<String, Object>>> parsed = objectMapper.readValue(json, new TypeReference<>() {});
+        List<List<Map<String, Object>>> parsed = objectMapper.readValue(json, new TypeReference<>() {
+        });
 
         assertThat(parsed, hasSize(2));
 

@@ -28,21 +28,19 @@ public final class Keyword {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Keyword keyword1 = (Keyword) o;
 
-        return new EqualsBuilder()
-            .append(keyword, keyword1.keyword)
-            .isEquals();
+        return new EqualsBuilder().append(keyword, keyword1.keyword).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-            .append(keyword)
-            .toHashCode();
+        return new HashCodeBuilder(17, 37).append(keyword).toHashCode();
     }
 }

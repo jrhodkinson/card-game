@@ -25,6 +25,8 @@ services:
     restart: unless-stopped
     ports:
       - "27017"
+    volumes:
+      - mongo:/data/db
 
   nginx:
     image: nginx:1.19
@@ -34,3 +36,5 @@ services:
     ports:
       - "3030:80"
 
+volumes:
+  mongo:

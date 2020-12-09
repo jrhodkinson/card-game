@@ -21,8 +21,8 @@ public class CardDto {
     public final boolean requiresTarget;
     public final boolean isPlayable;
 
-    private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost,
-                    DescriptionDto description, ColorDto color, boolean requiresTarget, boolean isPlayable) {
+    private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost, DescriptionDto description,
+            ColorDto color, boolean requiresTarget, boolean isPlayable) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;

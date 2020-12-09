@@ -33,9 +33,8 @@ public class IncrementingDamageBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword(Keyword.DAMAGE).number(damage)
-                .plainString("then increase future").keyword(Keyword.DAMAGE).plainString("by").number(increment)
-                .build();
+        return AtomicDescription.builder().keyword(Keyword.DAMAGE).number(damage).plainString("then increase future")
+                .keyword(Keyword.DAMAGE).plainString("by").number(increment).build();
     }
 
     @Subscribe
