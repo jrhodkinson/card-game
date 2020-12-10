@@ -27,9 +27,6 @@ public class DescriptionContext {
     }
 
     String getHelp(Keyword keyword) {
-        if (keyword.equals(Keyword.DAMAGE)) {
-            return "Remove health from a player or structure's life total";
-        }
-        return null;
+        return keyword.getHelp();
     }
 }

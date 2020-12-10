@@ -5,20 +5,26 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class Keyword {
 
-    public static final Keyword ACQUIRE = new Keyword("acquire");
-    public static final Keyword CONSTRUCT = new Keyword("construct");
-    public static final Keyword DAMAGE = new Keyword("damage");
-    public static final Keyword DRAW = new Keyword("draw");
-    public static final Keyword GAIN = new Keyword("gain");
-    public static final Keyword HEAL = new Keyword("heal");
-    public static final Keyword TAUNT = new Keyword("taunt");
-    public static final Keyword UNPLAYABLE = new Keyword("unplayable");
-    public static final Keyword VANISH = new Keyword("vanish");
+    public static final Keyword ACQUIRE = new Keyword("acquire", "Accumulate money, used to purchase cards");
+    public static final Keyword CONSTRUCT = new Keyword("construct", "Build a structure");
+    public static final Keyword DAMAGE = new Keyword("damage", "Remove health from a player's or structure's life total");
+    public static final Keyword DRAW = new Keyword("draw", "Pick up cards from your deck");
+    public static final Keyword GAIN = new Keyword("gain", "Add a card to your deck");
+    public static final Keyword HEAL = new Keyword("heal", "Add health to a player's or structure's life total");
+    public static final Keyword TAUNT = new Keyword("taunt", "Any attacks must be directed at structures with taunt");
+    public static final Keyword UNPLAYABLE = new Keyword("unplayable", "Cannot be played");
+    public static final Keyword VANISH = new Keyword("vanish", "After being played, is removed from the game");
 
     private final String keyword;
+    private final String help;
 
-    private Keyword(String keyword) {
+    private Keyword(String keyword, String help) {
         this.keyword = keyword;
+        this.help = help;
+    }
+
+    String getHelp() {
+        return help;
     }
 
     @Override
