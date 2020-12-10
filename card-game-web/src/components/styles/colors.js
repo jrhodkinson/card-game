@@ -13,7 +13,7 @@ export const red = "#D81B60";
 export const accentRed = "#C51162";
 
 export const textOnBlack = white;
-export const faintTextOnBlack = lightestGrey;
+export const faintTextOnBlack = lightGrey;
 export const textOnRed = white;
 export const textOnWhite = darkGrey;
 export const primaryAccentTextOnWhite = accentRed;

@@ -1,22 +1,24 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   opacity: 0;
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  animation: ${({ delay, length }) => {
-    return `fadeIn ${length}s ease ${delay}s forwards;`;
+  ${({ delay, length }) => {
+    return css`
+      animation: ${fadeIn} ${length}s ease ${delay}s forwards;
+    `;
   }};
 `;
 

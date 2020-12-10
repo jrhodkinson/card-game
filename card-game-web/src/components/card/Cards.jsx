@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Card from "./Card";
 
 const animationDelay = 200;
@@ -17,21 +17,22 @@ const Wrapper = styled.div`
   padding: 10px 0 0 10px;
 `;
 
-const AnimationWrapper = styled.div`
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
   }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
+const AnimationWrapper = styled.div`
   &.enter {
     opacity: 0;
   }
   &.enter-active {
-    animation: fadeIn ${animationDuration - animationDelay}ms
+    animation: ${fadeIn} ${animationDuration - animationDelay}ms
       ${animationDelay}ms;
   }
   &.exit,

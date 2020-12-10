@@ -1,6 +1,6 @@
 import React from "react";
 import Countdown from "react-countdown";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useSelector } from "react-redux";
 import { endTurn } from "../../gateway/ws";
 import {
@@ -21,21 +21,21 @@ const Wrapper = styled.div`
 
 const Money = styled.div``;
 
+const pulse = keyframes`
+  0%,
+  100% {
+    transform: scale(1.08);
+  }
+
+  50% {
+    transform: scale(0.92);
+  }
+`;
+
 const Timer = styled.div`
   font-size: 2em;
   margin-bottom: 5px;
-  animation: 1s pulse infinite;
-
-  @keyframes pulse {
-    0%,
-    100% {
-      transform: scale(1.08);
-    }
-
-    50% {
-      transform: scale(0.92);
-    }
-  }
+  animation: 1s ${pulse} infinite;
 `;
 
 const CurrentTurn = ({ active }) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import * as c from "../styles/colors";
 
 const healthDiameter = 32;
@@ -10,6 +10,15 @@ const Wrapper = styled.div`
   position: relative;
   width: ${healthDiameter}px;
   height: ${healthDiameter}px;
+`;
+
+const focus = keyframes`
+  20% {
+    transform: scale(1.3);
+    background-color: ${c.accentRed};
+    border-radius: ${healthDiameter / 6}px;
+    font-size: 1.1em;
+  }
 `;
 
 const AnimatedHealth = styled.div`
@@ -24,19 +33,10 @@ const AnimatedHealth = styled.div`
   left: 0;
   top: 0;
 
-  @keyframes focus {
-    20% {
-      transform: scale(1.3);
-      background-color: ${c.accentRed};
-      border-radius: ${healthDiameter / 6}px;
-      font-size: 1.1em;
-    }
-  }
-
   ${({ state }) => {
     if (state === "entering") {
       return `
-        animation: focus ${animationTime / 1000}s ease-in-out;
+        animation: ${focus} ${animationTime / 1000}s ease-in-out;
       `;
     }
   }};
