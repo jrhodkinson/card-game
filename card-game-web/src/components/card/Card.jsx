@@ -17,9 +17,7 @@ const Card = ({
       onClick={() => onCardClick(card)}
     >
       <S.CardCost background={card.color}>{card.cost}</S.CardCost>
-      <S.CardName background={card.color} title={card.flavor}>
-        {card.name}
-      </S.CardName>
+      <S.CardName background={card.color}>{card.name}</S.CardName>
       {short ? (
         <S.ShortCardDescription background={card.color}>
           <Description description={card.description} />
