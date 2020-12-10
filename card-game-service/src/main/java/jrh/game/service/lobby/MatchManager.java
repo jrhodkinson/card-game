@@ -1,6 +1,6 @@
 package jrh.game.service.lobby;
 
-import jrh.game.asset.AssetLibrary;
+import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.common.account.AccountId;
 import jrh.game.match.MutableMatch;
 import jrh.game.service.account.Accounts;
@@ -16,12 +16,12 @@ public class MatchManager {
 
     private static final Logger logger = LogManager.getLogger(MatchManager.class);
 
-    private final AssetLibrary assetLibrary;
+    private final ConcreteAssetLibrary assetLibrary;
     private final Accounts accounts;
     private final Map<AccountId, UUID> matchIdByAccountId = new ConcurrentHashMap<>();
     private final Map<UUID, ActiveMatch> activeMatches = new ConcurrentHashMap<>();
 
-    public MatchManager(AssetLibrary assetLibrary, Accounts accounts) {
+    public MatchManager(ConcreteAssetLibrary assetLibrary, Accounts accounts) {
         this.assetLibrary = assetLibrary;
         this.accounts = accounts;
     }

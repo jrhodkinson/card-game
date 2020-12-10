@@ -11,8 +11,6 @@ import static java.util.stream.Collectors.toList;
 
 public class DescriptionDto {
 
-    private static final DescriptionContext CONTEXT = DescriptionContext.defaultContext();
-
     @JsonValue
     public final List<DescriptionLine> description;
 
@@ -20,19 +18,28 @@ public class DescriptionDto {
         this.description = description;
     }
 
-    public static DescriptionDto fromDescription(Description description) {
-        return new DescriptionDto(descriptionLines(description));
-    }
+    public static class Factory {
 
-    private static List<DescriptionLine> descriptionLines(Description description) {
-        return description.getAtomicDescriptions().stream().map(DescriptionDto::descriptionTokens)
+        private final DescriptionContext descriptionContext;
+
+        public Factory(DescriptionContext descriptionContext) {
+            this.descriptionContext = descriptionContext;
+        }
+
+        public DescriptionDto descriptionDto(Description description) {
+            return new DescriptionDto(descriptionLines(description));
+        }
+
+        private List<DescriptionLine> descriptionLines(Description description) {
+            return description.getAtomicDescriptions().stream().map(this::descriptionTokens)
                 .map(DescriptionLine::new).collect(toList());
-    }
+        }
 
-    private static List<DescriptionToken> descriptionTokens(AtomicDescription atomicDescription) {
-        return atomicDescription.getPieces().stream()
-                .map(dp -> new DescriptionToken(dp.get(CONTEXT), dp.getContext(CONTEXT).orElse(null)))
+        private List<DescriptionToken> descriptionTokens(AtomicDescription atomicDescription) {
+            return atomicDescription.getPieces().stream()
+                .map(dp -> new DescriptionToken(dp.get(descriptionContext), dp.getType(), dp.getHelp(descriptionContext).orElse(null)))
                 .collect(toList());
+        }
     }
 
     public static class DescriptionLine {
@@ -48,15 +55,21 @@ public class DescriptionDto {
     public static class DescriptionToken {
 
         public final String token;
+        public final String type;
         public final String context;
 
-        private DescriptionToken(String token, String context) {
+        private DescriptionToken(String token, String type, String context) {
             this.token = token;
+            this.type = type;
             this.context = context;
         }
 
         public String getToken() {
             return token;
+        }
+
+        public String getType() {
+            return type;
         }
 
         public String getContext() {

@@ -1,32 +1,40 @@
 package jrh.game.common.description;
 
+import jrh.game.api.Card;
+import jrh.game.api.Structure;
 import jrh.game.common.CardId;
 import jrh.game.common.StructureId;
+import jrh.game.common.asset.AssetLibrary;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DescriptionContext {
 
-    private final StructureMapper structureMapper;
-    private final CardMapper cardMapper;
+    private final AssetLibrary assetLibrary;
 
-    public DescriptionContext(StructureMapper structureMapper, CardMapper cardMapper) {
-        this.structureMapper = structureMapper;
-        this.cardMapper = cardMapper;
-    }
-
-    public static DescriptionContext defaultContext() {
-        HardCodedMapper hardCodedMapper = new HardCodedMapper();
-        return new DescriptionContext(hardCodedMapper, hardCodedMapper);
+    public DescriptionContext(AssetLibrary assetLibrary) {
+        this.assetLibrary = assetLibrary;
     }
 
     String getName(StructureId structureId) {
-        return structureMapper.getName(structureId);
+        return assetLibrary.getStructure(structureId).map(Structure::getName).orElse(structureId.toString());
     }
 
     String getName(CardId cardId) {
-        return cardMapper.getName(cardId);
+        return assetLibrary.getCard(cardId).map(Card::getName).orElse(cardId.toString());
     }
 
-    String getHelp(Keyword keyword) {
-        return keyword.getHelp();
+    Optional<String> getDescription(StructureId structureId) {
+        return assetLibrary.getStructure(structureId).map(Structure::getDescription).map(this::descriptionString);
+    }
+
+    Optional<String> getDescription(CardId cardId) {
+        return assetLibrary.getCard(cardId).map(Card::getDescription).map(this::descriptionString);
+    }
+
+    private String descriptionString(Description description) {
+        return description.getAtomicDescriptions().stream()
+            .map(ad -> ad.get(this)).collect(Collectors.joining(". ")) + ".";
     }
 }

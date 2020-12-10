@@ -16,7 +16,7 @@ public class KeywordDescriptionPiece implements DescriptionPiece {
     }
 
     @Override
-    public Optional<String> getContext(DescriptionContext descriptionContext) {
-        return Optional.ofNullable(descriptionContext.getHelp(keyword));
+    public Optional<String> getHelp(DescriptionContext descriptionContext) {
+        return Optional.ofNullable(keyword.getHelp());
     }
 }

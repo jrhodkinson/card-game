@@ -22,7 +22,7 @@ public class CardDto {
     public final boolean isPlayable;
 
     private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost, DescriptionDto description,
-            ColorDto color, boolean requiresTarget, boolean isPlayable) {
+                    ColorDto color, boolean requiresTarget, boolean isPlayable) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;
@@ -34,14 +34,24 @@ public class CardDto {
         this.isPlayable = isPlayable;
     }
 
-    public static CardDto fromCard(Card card) {
-        return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null),
-                card.getCost(), DescriptionDto.fromDescription(card.getDescription()),
+    public static class Factory {
+
+        private final DescriptionDto.Factory descriptionFactory;
+
+        public Factory(DescriptionDto.Factory descriptionFactory) {
+            this.descriptionFactory = descriptionFactory;
+        }
+
+        public CardDto cardDto(Card card) {
+            return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null),
+                card.getCost(), descriptionFactory.descriptionDto(card.getDescription()),
                 ColorDto.fromColor(card.getColor()), card.requiresTarget(),
                 !card.hasBehaviour(UnplayableBehaviour.class));
-    }
+        }
 
-    public static List<CardDto> fromCards(List<Card> cards) {
-        return cards.stream().map(CardDto::fromCard).collect(toList());
+        public List<CardDto> cardDtos(List<Card> cards) {
+            return cards.stream().map(this::cardDto).collect(toList());
+        }
+
     }
 }

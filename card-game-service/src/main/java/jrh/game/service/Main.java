@@ -1,6 +1,6 @@
 package jrh.game.service;
 
-import jrh.game.asset.AssetLibrary;
+import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.asset.FileSystemAssetLibrary;
 import jrh.game.card.store.Database;
 import jrh.game.service.account.Accounts;
@@ -25,17 +25,18 @@ public class Main {
         ServiceConfiguration configuration = new ServiceConfiguration();
         Database database = configuration.database();
         Accounts accounts = new Accounts(database.accountStore());
-        MatchManager matchManager = new MatchManager(assetLibrary(), accounts);
+        ConcreteAssetLibrary assetLibrary = assetLibrary();
+        MatchManager matchManager = new MatchManager(assetLibrary, accounts);
         MatchQueue matchQueue = new MatchQueue();
         Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
-        Server server = new Server(matchManager, matchQueue, accounts);
+        Server server = new Server(matchManager, matchQueue, accounts, assetLibrary);
 
         matchmaker.start();
         server.start();
     }
 
-    private AssetLibrary assetLibrary() {
-        AssetLibrary assetLibrary = null;
+    private ConcreteAssetLibrary assetLibrary() {
+        ConcreteAssetLibrary assetLibrary = null;
         try {
             return new FileSystemAssetLibrary();
         } catch (IOException e) {

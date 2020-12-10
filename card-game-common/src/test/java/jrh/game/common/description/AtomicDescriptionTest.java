@@ -1,6 +1,5 @@
 package jrh.game.common.description;
 
-import jrh.game.common.StructureId;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class AtomicDescriptionTest {
 
-    private final DescriptionContext descriptionContext = DescriptionContext.defaultContext();
+    private final DescriptionContext descriptionContext = new DescriptionContext(null);
 
     @Test
     public void createsDescriptionForSimpleDamageBehaviour() {
@@ -26,12 +25,5 @@ public class AtomicDescriptionTest {
                 .targets(List.of(OTHER, OTHER_STRUCTURES)).plainString("by").number(4).build();
         assertThat(description.get(descriptionContext),
                 equalTo("On purchase, damage your opponent and your opponent's structures by 4"));
-    }
-
-    @Test
-    public void createsDescriptionForConstructBehaviour() {
-        AtomicDescription description = AtomicDescription.builder().keyword(Keyword.CONSTRUCT)
-                .structure(new StructureId("MERCHANTS_GUILD")).build();
-        assertThat(description.get(descriptionContext), equalTo("Construct Merchants' Guild"));
     }
 }

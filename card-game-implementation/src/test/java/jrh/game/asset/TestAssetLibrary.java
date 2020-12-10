@@ -15,7 +15,7 @@ import java.util.Optional;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toMap;
 
-public class TestAssetLibrary implements AssetLibrary {
+public class TestAssetLibrary implements ConcreteAssetLibrary {
 
     private final Map<CardId, CardImpl> cards;
     private final Map<StructureId, MutableStructure> structures;
@@ -25,24 +25,29 @@ public class TestAssetLibrary implements AssetLibrary {
         this.structures = structures.stream().collect(toMap(Structure::getStructureId, s -> s));
     }
 
-    public static AssetLibrary of(CardImpl... cards) {
+    public static ConcreteAssetLibrary of(CardImpl... cards) {
         return new TestAssetLibrary(List.of(cards), emptyList());
     }
 
-    public static AssetLibrary of(MutableStructure... structures) {
+    public static ConcreteAssetLibrary of(MutableStructure... structures) {
         return new TestAssetLibrary(emptyList(), List.of(structures));
     }
 
-    public static AssetLibrary of(CardImpl card, MutableStructure structure) {
+    public static ConcreteAssetLibrary of(CardImpl card, MutableStructure structure) {
         return new TestAssetLibrary(List.of(card), List.of(structure));
     }
 
-    public static AssetLibrary of(List<CardImpl> cards, List<MutableStructure> structures) {
+    public static ConcreteAssetLibrary of(List<CardImpl> cards, List<MutableStructure> structures) {
         return new TestAssetLibrary(new ArrayList<>(cards), new ArrayList<>(structures));
     }
 
     @Override
-    public Optional<CardImpl> getCard(CardId cardId) {
+    public Optional<Card> getCard(CardId cardId) {
+        return Optional.ofNullable(cards.get(cardId));
+    }
+
+    @Override
+    public Optional<CardImpl> getCardImpl(CardId cardId) {
         return Optional.ofNullable(cards.get(cardId));
     }
 
@@ -52,7 +57,12 @@ public class TestAssetLibrary implements AssetLibrary {
     }
 
     @Override
-    public Optional<MutableStructure> getStructure(StructureId structureId) {
+    public Optional<Structure> getStructure(StructureId structureId) {
+        return Optional.ofNullable(structures.get(structureId));
+    }
+
+    @Override
+    public Optional<MutableStructure> getMutableStructure(StructureId structureId) {
         return Optional.ofNullable(structures.get(structureId));
     }
 

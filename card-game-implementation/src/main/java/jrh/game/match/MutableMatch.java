@@ -7,7 +7,7 @@ import jrh.game.api.EventBus;
 import jrh.game.api.Match;
 import jrh.game.api.Player;
 import jrh.game.api.Structure;
-import jrh.game.asset.AssetLibrary;
+import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.card.CardBehaviourRegistrar;
 import jrh.game.card.CardImplFactory;
 import jrh.game.common.User;
@@ -47,7 +47,7 @@ public class MutableMatch implements Match {
     private boolean isOver = false;
     private MutablePlayer winner = null;
 
-    public MutableMatch(AssetLibrary assetLibrary, User firstUser, User secondUser) {
+    public MutableMatch(ConcreteAssetLibrary assetLibrary, User firstUser, User secondUser) {
         this.eventBus = new SingleMatchEventBus(this);
         eventBus.register(new CardBehaviourRegistrar());
         this.actionHandler = new ActionHandlerImpl(this);

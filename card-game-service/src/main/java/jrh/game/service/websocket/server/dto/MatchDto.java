@@ -20,12 +20,25 @@ public class MatchDto {
         this.storefront = store;
     }
 
-    public static MatchDto fromMatch(Match match) {
-        User activeUser = match.getActivePlayer().getUser();
-        PlayerDto activePlayer = PlayerDto.fromPlayer(match.getActivePlayer());
-        PlayerDto inactivePlayer = PlayerDto.fromPlayer(match.getInactivePlayer());
-        Map<User, PlayerDto> players = Map.of(activePlayer.user, activePlayer, inactivePlayer.user, inactivePlayer);
-        return new MatchDto(activeUser, players, TurnDto.fromTurn(match.getCurrentTurn()),
-                StoreDto.fromStore(match.getStore()));
+    public static class Factory {
+
+        private final PlayerDto.Factory playerFactory;
+        private final TurnDto.Factory turnFactory;
+        private final StoreDto.Factory storeFactory;
+
+        public Factory(PlayerDto.Factory playerFactory, TurnDto.Factory turnFactory, StoreDto.Factory storeFactory) {
+            this.playerFactory = playerFactory;
+            this.turnFactory = turnFactory;
+            this.storeFactory = storeFactory;
+        }
+
+        public MatchDto matchDto(Match match) {
+            User activeUser = match.getActivePlayer().getUser();
+            PlayerDto activePlayer = playerFactory.playerDto(match.getActivePlayer());
+            PlayerDto inactivePlayer = playerFactory.playerDto(match.getInactivePlayer());
+            Map<User, PlayerDto> players = Map.of(activePlayer.user, activePlayer, inactivePlayer.user, inactivePlayer);
+            return new MatchDto(activeUser, players, turnFactory.turnDto(match.getCurrentTurn()),
+                storeFactory.storeDto(match.getStore()));
+        }
     }
 }

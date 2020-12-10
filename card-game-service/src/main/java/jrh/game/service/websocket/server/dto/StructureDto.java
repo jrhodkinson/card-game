@@ -14,7 +14,7 @@ public class StructureDto {
     public final DescriptionDto description;
 
     private StructureDto(EntityId entityId, StructureId structureId, String name, String flavor, int health,
-            DescriptionDto description) {
+                         DescriptionDto description) {
         this.entityId = entityId;
         this.structureId = structureId;
         this.name = name;
@@ -23,9 +23,18 @@ public class StructureDto {
         this.description = description;
     }
 
-    public static StructureDto fromStructure(Structure structure) {
-        return new StructureDto(structure.getEntityId(), structure.getStructureId(), structure.getName(),
+    public static class Factory {
+
+        private final DescriptionDto.Factory descriptionFactory;
+
+        public Factory(DescriptionDto.Factory descriptionFactory) {
+            this.descriptionFactory = descriptionFactory;
+        }
+
+        public StructureDto structureDto(Structure structure) {
+            return new StructureDto(structure.getEntityId(), structure.getStructureId(), structure.getName(),
                 structure.getFlavorText().orElse(null), structure.getHealth(),
-                DescriptionDto.fromDescription(structure.getDescription()));
+                descriptionFactory.descriptionDto(structure.getDescription()));
+        }
     }
 }

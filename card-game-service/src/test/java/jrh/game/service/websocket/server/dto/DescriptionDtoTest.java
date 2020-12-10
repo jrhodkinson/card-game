@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jrh.game.common.ObjectMapperFactory;
 import jrh.game.common.description.AtomicDescription;
 import jrh.game.common.description.Description;
+import jrh.game.common.description.DescriptionContext;
 import jrh.game.common.description.Keyword;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,8 @@ public class DescriptionDtoTest {
                 .of(List.of(AtomicDescription.builder().keyword(Keyword.DAMAGE).number(3).build(),
                         AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(2).plainString("ok?").build()));
 
-        String json = objectMapper.writeValueAsString(DescriptionDto.fromDescription(description));
+        DescriptionDto.Factory factory = new DescriptionDto.Factory(new DescriptionContext(null));
+        String json = objectMapper.writeValueAsString(factory.descriptionDto(description));
         List<List<Map<String, Object>>> parsed = objectMapper.readValue(json, new TypeReference<>() {
         });
 

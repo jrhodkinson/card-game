@@ -14,7 +14,16 @@ public class StoreDto {
         this.row = row;
     }
 
-    public static StoreDto fromStore(Store store) {
-        return new StoreDto(store.getRow().stream().map(CardDto::fromCard).collect(toList()));
+    public static class Factory {
+
+        private final CardDto.Factory cardFactory;
+
+        public Factory(CardDto.Factory cardFactory) {
+            this.cardFactory = cardFactory;
+        }
+
+        public StoreDto storeDto(Store store) {
+            return new StoreDto(store.getRow().stream().map(cardFactory::cardDto).collect(toList()));
+        }
     }
 }

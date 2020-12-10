@@ -8,7 +8,14 @@ const uppercaseFirstLetter = (str) =>
 
 const Bold = styled.strong`
   font-weight: 500;
-  color: ${c.accentTextOnWhite};
+`;
+
+const BoldAndPrimaryAccent = styled(Bold)`
+  color: ${c.primaryAccentTextOnWhite};
+`;
+
+const BoldAndSecondaryAccent = styled(Bold)`
+  color: ${c.secondaryAccentTextOnWhite};
 `;
 
 const DescriptionPiece = ({ piece, first }) => {
@@ -18,7 +25,11 @@ const DescriptionPiece = ({ piece, first }) => {
     return text;
   }
 
-  return <Bold>{text}</Bold>;
+  if (piece.type === "Keyword") {
+    return <BoldAndPrimaryAccent>{text}</BoldAndPrimaryAccent>;
+  } else {
+    return <BoldAndSecondaryAccent>{text}</BoldAndSecondaryAccent>;
+  }
 };
 
 const DescriptionLine = ({ line }) => {
@@ -39,12 +50,10 @@ const Description = ({ description }) => {
   );
 
   if (piecesWithContext.length > 0) {
-    const tooltipText =
-      piecesWithContext
-        .map(
-          (piece) => `${uppercaseFirstLetter(piece.token)}: ${piece.context}`
-        )
-        .join(".<br />") + ".";
+    const tooltipText = piecesWithContext
+      .map((piece) => `${uppercaseFirstLetter(piece.token)}: ${piece.context}`)
+      .map((text) => (text.endsWith(".") ? text : text + "."))
+      .join("<br />");
     return (
       <>
         <span

@@ -39,7 +39,6 @@
     </properties>
 
     <modules>
-        <module>card-game-api</module>
         <module>card-game-implementation</module>
         <module>card-game-common</module>
         <module>card-game-events</module>
@@ -151,11 +150,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>jrh</groupId>
-                <artifactId>card-game-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>jrh</groupId>
                 <artifactId>card-game-common</artifactId>

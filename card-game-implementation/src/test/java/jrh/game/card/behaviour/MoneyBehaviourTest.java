@@ -3,7 +3,7 @@ package jrh.game.card.behaviour;
 import jrh.game.api.Card;
 import jrh.game.api.Player;
 import jrh.game.api.action.PlayCard;
-import jrh.game.asset.AssetLibrary;
+import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.asset.TestAssetLibrary;
 import jrh.game.card.CardImpl;
 import jrh.game.card.TestCard;
@@ -27,7 +27,7 @@ public class MoneyBehaviourTest {
         MoneyBehaviour moneyBehaviour = new MoneyBehaviour(3);
 
         CardImpl testCard = TestCard.forBehaviour(moneyBehaviour);
-        AssetLibrary assetLibrary = TestAssetLibrary.of(testCard);
+        ConcreteAssetLibrary assetLibrary = TestAssetLibrary.of(testCard);
         User firstUser = new User("a");
         User secondUser = new User("b");
         MutableMatch match = new MutableMatch(assetLibrary, firstUser, secondUser);

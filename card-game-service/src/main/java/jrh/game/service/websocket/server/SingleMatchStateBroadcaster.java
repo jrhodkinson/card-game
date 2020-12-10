@@ -29,13 +29,16 @@ import java.util.UUID;
 public class SingleMatchStateBroadcaster implements EventHandler {
 
     private final WebSocketConnectionManager webSocketConnectionManager;
+    private final MatchDto.Factory matchDtoFactory;
     private final UUID matchId;
     private Instant turnWillEndAt;
     private MatchDto latestMatchState;
     private User winner;
 
-    public SingleMatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager, UUID matchId) {
+    public SingleMatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager, UUID matchId,
+                                       MatchDto.Factory matchDtoFactory) {
         this.webSocketConnectionManager = webSocketConnectionManager;
+        this.matchDtoFactory = matchDtoFactory;
         this.matchId = matchId;
         webSocketConnectionManager.addWelcomeMessage(matchId, this::matchStateMessage);
         webSocketConnectionManager.addWelcomeMessage(matchId, this::turnWillEndAt);
@@ -61,7 +64,7 @@ public class SingleMatchStateBroadcaster implements EventHandler {
     }
 
     private void broadcastFullMatchState(Match match) {
-        latestMatchState = MatchDto.fromMatch(match);
+        latestMatchState = matchDtoFactory.matchDto(match);
         matchStateMessage().ifPresent(m -> webSocketConnectionManager.broadcast(matchId, m));
     }
 

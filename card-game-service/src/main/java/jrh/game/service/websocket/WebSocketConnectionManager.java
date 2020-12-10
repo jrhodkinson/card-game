@@ -13,6 +13,7 @@ import jrh.game.service.account.Accounts;
 import jrh.game.service.lobby.ActiveMatch;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.websocket.server.SingleMatchStateBroadcaster;
+import jrh.game.service.websocket.server.dto.MatchDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,6 +39,7 @@ public class WebSocketConnectionManager {
     private final Accounts accounts;
     private final MatchManager matchManager;
     private final WebSocketMessageHandler webSocketMessageHandler;
+    private final MatchDto.Factory matchDtoFactory;
     private final Map<UUID, SingleMatchStateBroadcaster> singleMatchStateBroadcasters = new ConcurrentHashMap<>();
     private final Map<String, WsContext> webSocketClientsBySessionId = new ConcurrentHashMap<>();
     private final Map<String, WebSocketSession> webSocketSessionsBySessionId = new ConcurrentHashMap<>();
@@ -45,11 +47,12 @@ public class WebSocketConnectionManager {
     private final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
     public WebSocketConnectionManager(Javalin javalin, Accounts accounts, MatchManager matchManager,
-            WebSocketMessageHandler webSocketMessageHandler) {
+            WebSocketMessageHandler webSocketMessageHandler, MatchDto.Factory matchDtoFactory) {
         this.javalin = javalin;
         this.accounts = accounts;
         this.matchManager = matchManager;
         this.webSocketMessageHandler = webSocketMessageHandler;
+        this.matchDtoFactory = matchDtoFactory;
     }
 
     public void start() {
@@ -95,7 +98,7 @@ public class WebSocketConnectionManager {
             webSocketClientsBySessionId.put(sessionId, wsConnectContext);
             webSocketSessionsBySessionId.put(sessionId, webSocketSession);
             singleMatchStateBroadcasters.computeIfAbsent(matchId, m -> {
-                SingleMatchStateBroadcaster broadcaster = new SingleMatchStateBroadcaster(this, m);
+                SingleMatchStateBroadcaster broadcaster = new SingleMatchStateBroadcaster(this, m, matchDtoFactory);
                 match.getEventBus().register(broadcaster);
                 return broadcaster;
             });

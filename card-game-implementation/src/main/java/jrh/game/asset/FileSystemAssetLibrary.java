@@ -1,6 +1,8 @@
 package jrh.game.asset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jrh.game.api.Card;
+import jrh.game.api.Structure;
 import jrh.game.card.CardImpl;
 import jrh.game.common.CardId;
 import jrh.game.common.ObjectMapperFactory;
@@ -25,7 +27,7 @@ import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
-public class FileSystemAssetLibrary implements AssetLibrary {
+public class FileSystemAssetLibrary implements ConcreteAssetLibrary {
 
     static final String ASSETS_DIRECTORY = "assets";
 
@@ -39,18 +41,28 @@ public class FileSystemAssetLibrary implements AssetLibrary {
     }
 
     @Override
-    public Optional<CardImpl> getCard(CardId cardId) {
+    public Optional<Card> getCard(CardId cardId) {
         return Optional.ofNullable(cards.get(cardId));
+    }
+
+    @Override
+    public Optional<CardImpl> getCardImpl(CardId cardId) {
+        return Optional.ofNullable(cards.get(cardId));
+    }
+
+    @Override
+    public Optional<Structure> getStructure(StructureId structureId) {
+        return Optional.ofNullable(structures.get(structureId));
+    }
+
+    @Override
+    public Optional<MutableStructure> getMutableStructure(StructureId structureId) {
+        return Optional.ofNullable(structures.get(structureId));
     }
 
     @Override
     public List<CardId> getAllCardIds() {
         return List.copyOf(cards.keySet());
-    }
-
-    @Override
-    public Optional<MutableStructure> getStructure(StructureId structureId) {
-        return Optional.ofNullable(structures.get(structureId));
     }
 
     @Override

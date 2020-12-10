@@ -2,7 +2,7 @@ package jrh.game.structure;
 
 import jrh.game.api.EventBus;
 import jrh.game.api.event.StructureCreated;
-import jrh.game.asset.MutableStructureLibrary;
+import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.common.StructureId;
 
 import java.util.Optional;
@@ -10,16 +10,16 @@ import java.util.Optional;
 public class StructureFactory {
 
     private final EventBus eventBus;
-    private final MutableStructureLibrary mutableStructureLibrary;
+    private final ConcreteAssetLibrary concreteAssetLibrary;
 
-    public StructureFactory(EventBus eventBus, MutableStructureLibrary mutableStructureLibrary) {
+    public StructureFactory(EventBus eventBus, ConcreteAssetLibrary concreteAssetLibrary) {
         this.eventBus = eventBus;
-        this.mutableStructureLibrary = mutableStructureLibrary;
+        this.concreteAssetLibrary = concreteAssetLibrary;
     }
 
     public Optional<MutableStructure> create(StructureId structureId) {
-        Optional<MutableStructure> optionalStructure = mutableStructureLibrary.getStructure(structureId)
-                .map(MutableStructure::duplicate);
+        Optional<MutableStructure> optionalStructure = concreteAssetLibrary.getMutableStructure(structureId)
+            .map(MutableStructure::duplicate);
         optionalStructure.ifPresent(structure -> eventBus.dispatch(new StructureCreated(structure)));
         return optionalStructure;
     }

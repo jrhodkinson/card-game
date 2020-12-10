@@ -16,7 +16,17 @@ public class TurnDto {
         this.playedCards = playedCards;
     }
 
-    public static TurnDto fromTurn(Turn turn) {
-        return new TurnDto(turn.getMoney(), turn.getPlayedCards().stream().map(CardDto::fromCard).collect(toList()));
+
+    public static class Factory {
+
+        private final CardDto.Factory cardFactory;
+
+        public Factory(CardDto.Factory cardFactory) {
+            this.cardFactory = cardFactory;
+        }
+
+        public TurnDto turnDto(Turn turn) {
+            return new TurnDto(turn.getMoney(), turn.getPlayedCards().stream().map(cardFactory::cardDto).collect(toList()));
+        }
     }
 }

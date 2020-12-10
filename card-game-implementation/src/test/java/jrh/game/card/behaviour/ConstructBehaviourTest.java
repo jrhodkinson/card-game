@@ -3,7 +3,7 @@ package jrh.game.card.behaviour;
 import jrh.game.api.Card;
 import jrh.game.api.Player;
 import jrh.game.api.action.PlayCard;
-import jrh.game.asset.AssetLibrary;
+import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.asset.TestAssetLibrary;
 import jrh.game.card.CardImpl;
 import jrh.game.card.TestCard;
@@ -31,7 +31,7 @@ public class ConstructBehaviourTest {
         ConstructBehaviour constructBehaviour = new ConstructBehaviour(structureId);
         CardImpl testCard = TestCard.forBehaviour(constructBehaviour);
         MutableStructure structure = new MutableStructure(structureId, randomAlphabetic(10), 4);
-        AssetLibrary assetLibrary = TestAssetLibrary.of(testCard, structure);
+        ConcreteAssetLibrary assetLibrary = TestAssetLibrary.of(testCard, structure);
 
         User firstUser = new User("a");
         User secondUser = new User("b");

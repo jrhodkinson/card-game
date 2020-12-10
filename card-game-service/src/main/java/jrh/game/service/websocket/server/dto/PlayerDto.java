@@ -29,10 +29,22 @@ public class PlayerDto {
         this.deckSize = deckSize;
     }
 
-    public static PlayerDto fromPlayer(Player player) {
-        return new PlayerDto(player.getEntityId(), player.getUser(), player.getHealth(),
-                player.getStructures().stream().map(StructureDto::fromStructure).collect(toList()),
-                CardDto.fromCards(player.getHand()), CardDto.fromCards(player.getDiscardPile()),
+    public static class Factory {
+
+        private final CardDto.Factory cardFactory;
+        private final StructureDto.Factory structureFactory;
+
+        public Factory(CardDto.Factory cardFactory, StructureDto.Factory structureFactory) {
+            this.cardFactory = cardFactory;
+            this.structureFactory = structureFactory;
+        }
+
+        public PlayerDto playerDto(Player player) {
+            return new PlayerDto(player.getEntityId(), player.getUser(), player.getHealth(),
+                player.getStructures().stream().map(structureFactory::structureDto).collect(toList()),
+                cardFactory.cardDtos(player.getHand()), cardFactory.cardDtos(player.getDiscardPile()),
                 player.getDeck().size());
+        }
     }
+
 }

@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class Keyword {
 
-    public static final Keyword ACQUIRE = new Keyword("acquire", "Accumulate money, used to purchase cards");
+    public static final Keyword ACQUIRE = new Keyword("acquire", "Accumulate money, used to purchase cards during the current turn only");
     public static final Keyword CONSTRUCT = new Keyword("construct", "Build a structure");
     public static final Keyword DAMAGE = new Keyword("damage", "Remove health from a player's or structure's life total");
     public static final Keyword DRAW = new Keyword("draw", "Pick up cards from your deck");
