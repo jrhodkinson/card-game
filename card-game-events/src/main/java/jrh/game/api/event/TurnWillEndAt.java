@@ -20,8 +20,6 @@ public class TurnWillEndAt implements Event {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("instant", instant)
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("instant", instant).toString();
     }
 }

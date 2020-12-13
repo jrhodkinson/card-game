@@ -35,8 +35,11 @@ public class TurnTimer implements EventHandler {
         cancel();
         TurnWillEndAt turnWillEndAt = new TurnWillEndAt(Instant.now().plusSeconds(TURN_TIMEOUT_IN_SECONDS));
         eventBus.dispatch(turnWillEndAt);
-        reminder = scheduledExecutorService.schedule(() -> eventBus.dispatch(turnWillEndAt), TURN_TIMEOUT_IN_SECONDS - 20, TimeUnit.SECONDS);
-        forceEndTurn = scheduledExecutorService.schedule(() -> eventBus.dispatch(new PlayerRanOutOfTime(turnStarted.getNewPlayer())), TURN_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS);
+        reminder = scheduledExecutorService.schedule(() -> eventBus.dispatch(turnWillEndAt),
+                TURN_TIMEOUT_IN_SECONDS - 20, TimeUnit.SECONDS);
+        forceEndTurn = scheduledExecutorService.schedule(
+                () -> eventBus.dispatch(new PlayerRanOutOfTime(turnStarted.getNewPlayer())), TURN_TIMEOUT_IN_SECONDS,
+                TimeUnit.SECONDS);
     }
 
     @Subscribe

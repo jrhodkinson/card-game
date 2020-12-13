@@ -19,8 +19,6 @@ public class PlayerRanOutOfTime implements Event {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("player", player)
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("player", player).toString();
     }
 }

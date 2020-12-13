@@ -21,6 +21,7 @@ public class Description {
     }
 
     public String get(DescriptionContext descriptionContext) {
-        return atomicDescriptions.stream().map(ad -> ad.get(descriptionContext)).collect(Collectors.joining(". ")) + ".";
+        return atomicDescriptions.stream().map(ad -> ad.get(descriptionContext)).collect(Collectors.joining(". "))
+                + ".";
     }
 }

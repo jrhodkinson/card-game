@@ -22,7 +22,7 @@ public class CardDto {
     public final boolean isPlayable;
 
     private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost, DescriptionDto description,
-                    ColorDto color, boolean requiresTarget, boolean isPlayable) {
+            ColorDto color, boolean requiresTarget, boolean isPlayable) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;
@@ -44,9 +44,9 @@ public class CardDto {
 
         public CardDto cardDto(Card card) {
             return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null),
-                card.getCost(), descriptionFactory.descriptionDto(card.getDescription()),
-                ColorDto.fromColor(card.getColor()), card.requiresTarget(),
-                !card.hasBehaviour(UnplayableBehaviour.class));
+                    card.getCost(), descriptionFactory.descriptionDto(card.getDescription()),
+                    ColorDto.fromColor(card.getColor()), card.requiresTarget(),
+                    !card.hasBehaviour(UnplayableBehaviour.class));
         }
 
         public List<CardDto> cardDtos(List<Card> cards) {

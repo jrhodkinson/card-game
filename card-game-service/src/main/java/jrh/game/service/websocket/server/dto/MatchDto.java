@@ -38,7 +38,7 @@ public class MatchDto {
             PlayerDto inactivePlayer = playerFactory.playerDto(match.getInactivePlayer());
             Map<User, PlayerDto> players = Map.of(activePlayer.user, activePlayer, inactivePlayer.user, inactivePlayer);
             return new MatchDto(activeUser, players, turnFactory.turnDto(match.getCurrentTurn()),
-                storeFactory.storeDto(match.getStore()));
+                    storeFactory.storeDto(match.getStore()));
         }
     }
 }

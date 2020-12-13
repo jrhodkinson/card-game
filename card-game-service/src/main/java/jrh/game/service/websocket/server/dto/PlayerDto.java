@@ -41,9 +41,9 @@ public class PlayerDto {
 
         public PlayerDto playerDto(Player player) {
             return new PlayerDto(player.getEntityId(), player.getUser(), player.getHealth(),
-                player.getStructures().stream().map(structureFactory::structureDto).collect(toList()),
-                cardFactory.cardDtos(player.getHand()), cardFactory.cardDtos(player.getDiscardPile()),
-                player.getDeck().size());
+                    player.getStructures().stream().map(structureFactory::structureDto).collect(toList()),
+                    cardFactory.cardDtos(player.getHand()), cardFactory.cardDtos(player.getDiscardPile()),
+                    player.getDeck().size());
         }
     }
 

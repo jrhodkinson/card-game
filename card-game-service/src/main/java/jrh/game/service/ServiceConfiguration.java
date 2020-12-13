@@ -4,7 +4,12 @@ import jrh.game.card.store.Database;
 import org.apache.commons.configuration2.BaseConfiguration;
 import org.apache.commons.configuration2.CompositeConfiguration;
 import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.FileBasedConfiguration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.SystemConfiguration;
+import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
+import org.apache.commons.configuration2.builder.fluent.Parameters;
+import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,10 +37,25 @@ public class ServiceConfiguration {
 
     private Configuration buildConfiguration() {
         CompositeConfiguration cc = new CompositeConfiguration();
+        cc.addConfiguration(propertiesFile());
         cc.addConfiguration(environment());
         cc.addConfiguration(new SystemConfiguration());
         cc.setThrowExceptionOnMissing(false);
+        System.out.println(cc.getString("game.version"));
         return cc;
+    }
+
+    private Configuration propertiesFile() {
+        Parameters params = new Parameters();
+        FileBasedConfigurationBuilder<FileBasedConfiguration> builder = new FileBasedConfigurationBuilder<FileBasedConfiguration>(
+                PropertiesConfiguration.class).configure(params.properties().setFileName("service.properties"));
+        try {
+            return builder.getConfiguration();
+        } catch (ConfigurationException e) {
+            logger.info("Error loading properties configuration. Exiting.", e);
+            System.exit(1);
+        }
+        return null;
     }
 
     private Configuration environment() {

@@ -27,9 +27,7 @@ public class TurnStarted implements Event {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("startTime", startTime)
-            .append("newPlayer", newPlayer)
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("startTime", startTime)
+                .append("newPlayer", newPlayer).toString();
     }
 }

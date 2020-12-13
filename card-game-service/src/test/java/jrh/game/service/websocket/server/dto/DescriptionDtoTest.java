@@ -32,29 +32,30 @@ public class DescriptionDtoTest {
     public void transformsDescriptionToJson() throws JsonProcessingException {
         Description description = Description
                 .of(List.of(AtomicDescription.builder().keyword(Keyword.DAMAGE).number(3).build(),
-                        AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(2).plainString("ok?").build()));
+                        AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(2).plainString("ok").build()));
 
         DescriptionDto.Factory factory = new DescriptionDto.Factory(new DescriptionContext(null));
         String json = objectMapper.writeValueAsString(factory.descriptionDto(description));
-        List<List<Map<String, Object>>> parsed = objectMapper.readValue(json, new TypeReference<>() {
+        Map<String, Object> parsed = objectMapper.readValue(json, new TypeReference<>() {
         });
 
-        assertThat(parsed, hasSize(2));
+        assertThat(parsed.size(), equalTo(2));
+        assertThat(parsed.get("text"), equalTo("Damage 3. Acquire $2 ok."));
+        List<List<Map<String, Object>>> lines = (List<List<Map<String, Object>>>) parsed.get("lines");
 
-        List<Map<String, Object>> first = parsed.get(0);
+        List<Map<String, Object>> first = lines.get(0);
         assertThat(first, hasSize(2));
-        assertThat(first.get(0).get("token"), equalTo("damage"));
-        assertThat(first.get(0).get("context"), equalTo("Remove health from a player or structure's life total"));
+        assertThat(first.get(0).get("token"), equalTo(Keyword.DAMAGE.toString()));
+        assertThat(first.get(0).get("context"), equalTo(Keyword.DAMAGE.getHelp()));
         assertThat(first.get(1).get("token"), equalTo("3"));
         assertThat(first.get(1).get("context"), nullValue());
-
-        List<Map<String, Object>> second = parsed.get(1);
+        List<Map<String, Object>> second = lines.get(1);
         assertThat(second, hasSize(3));
-        assertThat(second.get(0).get("token"), equalTo("acquire"));
-        assertThat(second.get(0).get("context"), nullValue());
+        assertThat(second.get(0).get("token"), equalTo(Keyword.ACQUIRE.toString()));
+        assertThat(second.get(0).get("context"), equalTo(Keyword.ACQUIRE.getHelp()));
         assertThat(second.get(1).get("token"), equalTo("$2"));
         assertThat(second.get(1).get("context"), nullValue());
-        assertThat(second.get(2).get("token"), equalTo("ok?"));
+        assertThat(second.get(2).get("token"), equalTo("ok"));
         assertThat(second.get(2).get("context"), nullValue());
     }
 

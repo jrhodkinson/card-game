@@ -14,7 +14,7 @@ public class StructureDto {
     public final DescriptionDto description;
 
     private StructureDto(EntityId entityId, StructureId structureId, String name, String flavor, int health,
-                         DescriptionDto description) {
+            DescriptionDto description) {
         this.entityId = entityId;
         this.structureId = structureId;
         this.name = name;
@@ -33,8 +33,8 @@ public class StructureDto {
 
         public StructureDto structureDto(Structure structure) {
             return new StructureDto(structure.getEntityId(), structure.getStructureId(), structure.getName(),
-                structure.getFlavorText().orElse(null), structure.getHealth(),
-                descriptionFactory.descriptionDto(structure.getDescription()));
+                    structure.getFlavorText().orElse(null), structure.getHealth(),
+                    descriptionFactory.descriptionDto(structure.getDescription()));
         }
     }
 }

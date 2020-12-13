@@ -19,7 +19,7 @@ public class StructureFactory {
 
     public Optional<MutableStructure> create(StructureId structureId) {
         Optional<MutableStructure> optionalStructure = concreteAssetLibrary.getMutableStructure(structureId)
-            .map(MutableStructure::duplicate);
+                .map(MutableStructure::duplicate);
         optionalStructure.ifPresent(structure -> eventBus.dispatch(new StructureCreated(structure)));
         return optionalStructure;
     }

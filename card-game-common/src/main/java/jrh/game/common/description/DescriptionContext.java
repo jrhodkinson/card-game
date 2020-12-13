@@ -34,7 +34,7 @@ public class DescriptionContext {
     }
 
     private String descriptionString(Description description) {
-        return description.getAtomicDescriptions().stream()
-            .map(ad -> ad.get(this)).collect(Collectors.joining(". ")) + ".";
+        return description.getAtomicDescriptions().stream().map(ad -> ad.get(this)).collect(Collectors.joining(". "))
+                + ".";
     }
 }

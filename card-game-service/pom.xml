@@ -15,6 +15,12 @@
     <name>Card Game Service</name>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -57,10 +63,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>jrh</groupId>
-            <artifactId>card-game-api</artifactId>
-        </dependency>
         <dependency>
             <groupId>jrh</groupId>
             <artifactId>card-game-common</artifactId>

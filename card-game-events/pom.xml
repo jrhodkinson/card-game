@@ -17,10 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>jrh</groupId>
-            <artifactId>card-game-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jrh</groupId>
             <artifactId>card-game-common</artifactId>
         </dependency>
     </dependencies>

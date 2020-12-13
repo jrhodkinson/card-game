@@ -40,14 +40,13 @@ public class DescriptionDto {
         }
 
         private List<DescriptionLine> descriptionLines(Description description) {
-            return description.getAtomicDescriptions().stream().map(this::descriptionTokens)
-                .map(DescriptionLine::new).collect(toList());
+            return description.getAtomicDescriptions().stream().map(this::descriptionTokens).map(DescriptionLine::new)
+                    .collect(toList());
         }
 
         private List<DescriptionToken> descriptionTokens(AtomicDescription atomicDescription) {
-            return atomicDescription.getPieces().stream()
-                .map(dp -> new DescriptionToken(dp.get(descriptionContext), dp.getType(), dp.getHelp(descriptionContext).orElse(null)))
-                .collect(toList());
+            return atomicDescription.getPieces().stream().map(dp -> new DescriptionToken(dp.get(descriptionContext),
+                    dp.getType(), dp.getHelp(descriptionContext).orElse(null))).collect(toList());
         }
     }
 

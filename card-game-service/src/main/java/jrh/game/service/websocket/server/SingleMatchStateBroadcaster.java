@@ -36,7 +36,7 @@ public class SingleMatchStateBroadcaster implements EventHandler {
     private User winner;
 
     public SingleMatchStateBroadcaster(WebSocketConnectionManager webSocketConnectionManager, UUID matchId,
-                                       MatchDto.Factory matchDtoFactory) {
+            MatchDto.Factory matchDtoFactory) {
         this.webSocketConnectionManager = webSocketConnectionManager;
         this.matchDtoFactory = matchDtoFactory;
         this.matchId = matchId;
@@ -44,9 +44,9 @@ public class SingleMatchStateBroadcaster implements EventHandler {
         webSocketConnectionManager.addWelcomeMessage(matchId, this::turnWillEndAt);
     }
 
-    @SubscribeAll({EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class,
-        CardGained.class, PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class,
-        TurnStarted.class})
+    @SubscribeAll({ EventHandlerRegistered.class, CardResolved.class, CardDestroyed.class, CardPurchased.class,
+            CardGained.class, PlayerTookDamage.class, MatchStarted.class, TurnEnded.class, MoneyChanged.class,
+            TurnStarted.class })
     private void matchStateChanged(Event event, Match match) {
         broadcastFullMatchState(match);
     }
