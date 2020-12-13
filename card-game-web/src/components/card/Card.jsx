@@ -16,16 +16,16 @@ const Card = ({
       selected={selected}
       onClick={() => onCardClick(card)}
     >
-      <S.CardCost background={card.color}>{card.cost}</S.CardCost>
-      <S.CardName background={card.color}>{card.name}</S.CardName>
+      <S.CardCost>{card.cost}</S.CardCost>
+      <S.CardName>{card.name}</S.CardName>
       {short ? (
-        <S.ShortCardDescription background={card.color}>
+        <S.ShortCardDescription>
           <Description lines={card.description.lines} />
         </S.ShortCardDescription>
       ) : (
         <>
-          <S.CardImage background={card.color} />
-          <S.CardDescription background={card.color}>
+          <S.CardImage />
+          <S.CardDescription>
             <Description lines={card.description.lines} />
           </S.CardDescription>
         </>

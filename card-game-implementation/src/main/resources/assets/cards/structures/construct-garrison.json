@@ -2,7 +2,6 @@
   "id": "construct:GARRISON",
   "name": "Construct Garrison",
   "cost": 5,
-  "color": "CYAN",
   "behaviours": [
     [
       "construct",

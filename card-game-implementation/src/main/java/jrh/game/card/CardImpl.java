@@ -10,7 +10,6 @@ import jrh.game.asset.CardImplDeserializer;
 import jrh.game.asset.CardImplSerializer;
 import jrh.game.card.behaviour.AbstractBehaviour;
 import jrh.game.common.CardId;
-import jrh.game.common.Color;
 import jrh.game.common.EntityId;
 import jrh.game.common.description.Description;
 
@@ -29,7 +28,6 @@ public class CardImpl implements Card {
     private final CardId cardId;
     private final String name;
     private final int cost;
-    private final Color color;
     private final String flavorText;
     private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours;
 
@@ -37,7 +35,6 @@ public class CardImpl implements Card {
         this.cardId = builder.cardId;
         this.name = builder.name;
         this.cost = builder.cost;
-        this.color = builder.color;
         this.behaviours = builder.behaviours;
         this.flavorText = builder.flavorText;
         this.behaviours.values().forEach(behaviour -> behaviour.forCard(this));
@@ -73,11 +70,6 @@ public class CardImpl implements Card {
     }
 
     @Override
-    public Color getColor() {
-        return color;
-    }
-
-    @Override
     public Description getDescription() {
         return Description.of(getAllBehaviours().stream().map(Behaviour::getDescription).collect(toList()));
     }
@@ -103,7 +95,7 @@ public class CardImpl implements Card {
     }
 
     CardImpl duplicate() {
-        CardImpl.Builder duplicateBuilder = CardImpl.card(cardId).withName(name).withCost(cost).withColor(color)
+        CardImpl.Builder duplicateBuilder = CardImpl.card(cardId).withName(name).withCost(cost)
                 .withFlavorText(flavorText);
         behaviours.values().forEach(behaviour -> duplicateBuilder.withBehaviour(behaviour.duplicate()));
         return duplicateBuilder.build();
@@ -111,7 +103,7 @@ public class CardImpl implements Card {
 
     @Override
     public String toString() {
-        return String.format("%s%s%s", color, name, Color.RESET);
+        return name;
     }
 
     @Override
@@ -133,19 +125,14 @@ public class CardImpl implements Card {
     }
 
     public interface CostSetter {
-        ColorSetter withCost(int cost);
+        Builder withCost(int cost);
     }
 
-    public interface ColorSetter {
-        Builder withColor(Color color);
-    }
-
-    public static class Builder implements NameSetter, CostSetter, ColorSetter {
+    public static class Builder implements NameSetter, CostSetter {
 
         private final CardId cardId;
         private String name;
         private int cost;
-        private Color color;
         private String flavorText;
         private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours = LinkedListMultimap
                 .create();
@@ -161,11 +148,6 @@ public class CardImpl implements Card {
 
         public Builder withCost(int cost) {
             this.cost = cost;
-            return this;
-        }
-
-        public Builder withColor(Color color) {
-            this.color = color;
             return this;
         }
 

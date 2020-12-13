@@ -8,7 +8,6 @@ import jrh.game.api.Card;
 import jrh.game.card.CardImpl;
 import jrh.game.card.behaviour.AbstractBehaviour;
 import jrh.game.common.CardId;
-import jrh.game.common.Color;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,8 +28,7 @@ public class CardImplDeserializer extends StdDeserializer<CardImpl> {
         CardId id = tree.get("id").traverse(jp.getCodec()).readValueAs(CardId.class);
         String name = tree.get("name").traverse(jp.getCodec()).readValueAs(String.class);
         Integer cost = tree.get("cost").traverse(jp.getCodec()).readValueAs(Integer.class);
-        Color color = tree.get("color").traverse(jp.getCodec()).readValueAs(Color.class);
-        CardImpl.Builder cardBuilder = CardImpl.card(id).withName(name).withCost(cost).withColor(color);
+        CardImpl.Builder cardBuilder = CardImpl.card(id).withName(name).withCost(cost);
         JsonNode flavorNode = tree.get("flavor");
         if (flavorNode != null) {
             cardBuilder = cardBuilder.withFlavorText(flavorNode.traverse(jp.getCodec()).readValueAs(String.class));

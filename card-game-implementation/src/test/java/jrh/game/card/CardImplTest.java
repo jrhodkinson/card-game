@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jrh.game.api.Card;
 import jrh.game.common.CardId;
-import jrh.game.common.Color;
 import jrh.game.common.ObjectMapperFactory;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ public class CardImplTest {
     public void flavorTextRoundTripsViaJson() throws JsonProcessingException {
         String flavorText = randomAlphanumeric(12);
         Card card = CardImpl.card(new CardId(UUID.randomUUID().toString())).withName("test card").withCost(1)
-                .withColor(Color.BLACK).withFlavorText(flavorText).build();
+                .withFlavorText(flavorText).build();
         String json = objectMapper.writeValueAsString(card);
         CardImpl parsedCard = objectMapper.readValue(json, CardImpl.class);
         assertThat(parsedCard.getFlavorText().get(), equalTo(flavorText));

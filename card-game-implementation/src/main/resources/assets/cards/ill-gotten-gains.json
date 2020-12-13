@@ -2,7 +2,6 @@
   "id": "ILL_GOTTEN_GAINS",
   "name": "Ill-gotten gains",
   "cost": 4,
-  "color": "YELLOW",
   "behaviours": [
     [
       "damageOnPurchase",

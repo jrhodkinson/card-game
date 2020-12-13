@@ -5,7 +5,6 @@ import jrh.game.api.Behaviour;
 import jrh.game.api.Card;
 import jrh.game.card.CardImpl;
 import jrh.game.common.CardId;
-import jrh.game.common.Color;
 import jrh.game.common.ObjectMapperFactory;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +21,7 @@ public class TestBehaviour {
     public static void roundTripsViaJson(AbstractBehaviour behaviour) {
         try {
             Class<? extends AbstractBehaviour> behaviourClass = behaviour.getClass();
-            Card card = CardImpl.card(new CardId("test")).withName("Test").withCost(1).withColor(Color.BLACK)
+            Card card = CardImpl.card(new CardId("test")).withName("Test").withCost(1)
                     .withBehaviour(behaviour).build();
             Card parsed = objectMapper.readValue(objectMapper.writeValueAsString(card), CardImpl.class);
             Behaviour parsedBehaviour = parsed.getBehaviours(behaviourClass).get(0);

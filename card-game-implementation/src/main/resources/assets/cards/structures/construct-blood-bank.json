@@ -2,7 +2,6 @@
   "id": "construct:BLOOD_BANK",
   "name": "Construct Blood Bank",
   "cost": 4,
-  "color": "CYAN",
   "behaviours": [
     [
       "construct",

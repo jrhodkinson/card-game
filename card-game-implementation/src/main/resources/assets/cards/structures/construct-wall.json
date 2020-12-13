@@ -2,7 +2,6 @@
   "id": "construct:WALL",
   "name": "Construct Wall",
   "cost": 4,
-  "color": "CYAN",
   "behaviours": [
     [
       "construct",

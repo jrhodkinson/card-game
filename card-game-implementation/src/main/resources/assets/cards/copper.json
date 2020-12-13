@@ -2,7 +2,6 @@
   "id": "COPPER",
   "name": "Copper",
   "cost": 1,
-  "color": "YELLOW",
   "behaviours": [
     [
       "money",

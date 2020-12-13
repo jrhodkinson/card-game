@@ -2,7 +2,6 @@
   "id": "GOLD",
   "name": "Gold",
   "cost": 6,
-  "color": "YELLOW",
   "behaviours": [
     [
       "money",

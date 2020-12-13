@@ -22,7 +22,6 @@ public class CardImplSerializer extends StdSerializer<CardImpl> {
         gen.writeObjectField("id", card.getCardId());
         gen.writeObjectField("name", card.getName());
         gen.writeObjectField("cost", card.getCost());
-        gen.writeObjectField("color", card.getColor());
         if (card.getFlavorText().isPresent()) {
             gen.writeObjectField("flavor", card.getFlavorText().get());
         }

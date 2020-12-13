@@ -2,7 +2,6 @@
   "id": "construct:MERCHANTS_GUILD",
   "name": "Construct Guild",
   "cost": 1,
-  "color": "CYAN",
   "behaviours": [
     [
       "construct",

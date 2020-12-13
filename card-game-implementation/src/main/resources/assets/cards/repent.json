@@ -2,7 +2,6 @@
   "id": "REPENT",
   "name": "Repent",
   "cost": 1,
-  "color": "WHITE",
   "flavor": "Turn yourself from your idols",
   "behaviours": [
     [

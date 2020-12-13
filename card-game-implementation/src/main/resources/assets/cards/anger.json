@@ -2,7 +2,6 @@
   "id": "ANGER",
   "name": "Anger",
   "cost": 3,
-  "color": "RED",
   "behaviours": [
     [
       "incrementingDamage",

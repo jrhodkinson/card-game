@@ -2,7 +2,6 @@
   "id": "DRAW_TWO",
   "name": "Draw 2",
   "cost": 5,
-  "color": "BLUE",
   "behaviours": [
     [
       "draw",

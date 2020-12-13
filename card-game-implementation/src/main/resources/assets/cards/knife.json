@@ -2,7 +2,6 @@
   "id": "KNIFE",
   "name": "Knife",
   "cost": 1,
-  "color": "RED",
   "flavor": "It's just a knife",
   "behaviours": [
     [

@@ -2,7 +2,6 @@
   "id": "DEAD_WEIGHT",
   "name": "Dead Weight",
   "cost": 1,
-  "color": "WHITE",
   "behaviours": [
     [
       "unplayable"

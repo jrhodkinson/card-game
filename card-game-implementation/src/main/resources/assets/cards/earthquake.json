@@ -2,7 +2,6 @@
   "id": "EARTHQUAKE",
   "name": "Earthquake",
   "cost": 3,
-  "color": "RED",
   "behaviours": [
     [
       "damageGroup",

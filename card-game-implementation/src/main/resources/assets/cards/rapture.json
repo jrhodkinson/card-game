@@ -2,7 +2,6 @@
   "id": "RAPTURE",
   "name": "Rapture",
   "cost": 3,
-  "color": "RED",
   "behaviours": [
     [
       "damageGroup",

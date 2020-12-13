@@ -2,7 +2,6 @@
   "id": "HEIRLOOM",
   "name": "Heirloom",
   "cost": 4,
-  "color": "YELLOW",
   "behaviours": [
     [
       "incrementingMoney",

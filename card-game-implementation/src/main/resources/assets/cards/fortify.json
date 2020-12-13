@@ -2,7 +2,6 @@
   "id": "FORTIFY",
   "name": "Fortify",
   "cost": 1,
-  "color": "GREEN",
   "behaviours": [
     [
       "healGroup",
