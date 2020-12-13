@@ -1,11 +1,11 @@
 {
   "id": "DAMAGE:3",
   "name": "Sword",
-  "cost": 4,
+  "cost": 1,
   "behaviours": [
     [
       "damage",
-      3
+      2
     ]
   ]
 }

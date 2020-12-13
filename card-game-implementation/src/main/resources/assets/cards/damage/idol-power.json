@@ -1,0 +1,15 @@
+{
+  "id": "IDOL:POWER",
+  "name": "Power, Idol",
+  "cost": 8,
+  "behaviours": [
+    [
+      "gainCardOnPurchase",
+      "REGRET"
+    ],
+    [
+      "damage",
+      7
+    ]
+  ]
+}

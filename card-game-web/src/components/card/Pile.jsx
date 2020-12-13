@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const cardNames = (cards) => cards.map((card) => card.name).join("<br />");
 
 const Pile = ({ cards, name }) => {
-  const { id, tooltip } = useTooltip();
+  const { id, tooltip } = useTooltip({ fixed: false });
   return (
     <>
       <Wrapper data-tip={cardNames(cards)} data-multiline data-for={id}>

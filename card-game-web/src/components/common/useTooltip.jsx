@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { root } from "../../index";
 import * as c from "../styles/colors";
 
-const useTooltip = () => {
+const useTooltip = ({ fixed = true } = {}) => {
   const [id, setId] = useState(uuidv4());
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const useTooltip = () => {
         id={id}
         backgroundColor={c.darkestBlack}
         textColor={c.textOnBlack}
-        effect="solid"
+        effect={fixed ? "solid" : "float"}
       />,
       root
     ),

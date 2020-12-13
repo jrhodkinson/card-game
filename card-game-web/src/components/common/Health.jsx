@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import * as c from "../styles/colors";
 
 const healthDiameter = 32;
@@ -35,7 +35,7 @@ const AnimatedHealth = styled.div`
 
   ${({ state }) => {
     if (state === "entering") {
-      return `
+      return css`
         animation: ${focus} ${animationTime / 1000}s ease-in-out;
       `;
     }

@@ -61,8 +61,12 @@ public class LobbyEndpoint {
 
     private void joinQueue(Context context) {
         AccountId accountId = context.attribute(ACCOUNT_ID);
-        logger.debug("RX join queue request for accountId={}", accountId);
-        matchQueue.join(accountId);
+        if (!matchManager.isInAMatch(accountId)) {
+            logger.debug("RX join queue request for accountId={}", accountId);
+            matchQueue.join(accountId);
+        } else {
+            logger.debug("RX join queue request for accountId={}, but they were already in a match", accountId);
+        }
     }
 
     private void leaveQueue(Context context) {
