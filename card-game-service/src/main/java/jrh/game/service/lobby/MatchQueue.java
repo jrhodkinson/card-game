@@ -22,18 +22,21 @@ public class MatchQueue {
             logger.info("accountId={} joined the back of the queue", accountId);
             queue.addLast(accountId);
         }
+        logger.debug("Queue now contains {} accounts", queue.size());
     }
 
     public void prioritise(AccountId accountId) {
         queue.remove(accountId);
         logger.info("accountId={} joined the front of the queue", accountId);
         queue.addFirst(accountId);
+        logger.debug("Queue now contains {} accounts", queue.size());
     }
 
     public void remove(AccountId accountId) {
         if (queue.remove(accountId)) {
             logger.info("accountId={} left the queue", accountId);
         }
+        logger.debug("Queue now contains {} accounts", queue.size());
     }
 
     public boolean contains(AccountId accountId) {

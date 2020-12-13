@@ -47,7 +47,7 @@ const CurrentTurn = ({ active }) => {
   };
   return (
     <Wrapper>
-      <Money>{currentTurn.money} Money</Money>
+      <Money>{currentTurn.money}M</Money>
       <Cards cards={currentTurn.playedCards} short />
       <div>
         <Countdown

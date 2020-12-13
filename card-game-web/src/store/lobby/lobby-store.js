@@ -3,6 +3,7 @@ import {
   getActiveGames,
   getQueueStatus,
   postJoinQueue,
+  postLeaveQueue,
 } from "../../gateway/lobby";
 import { LOGGED_OUT } from "../account/account-store";
 
@@ -22,6 +23,7 @@ export const RECEIVED_MATCH_ID = `${NAMESPACE}/RECEIVED_MATCH_ID`;
 export const RECEIVED_NO_MATCH_ID = `${NAMESPACE}/RECEIVED_NO_MATCH_ID`;
 export const STARTED_MATCH_POLLER = `${NAMESPACE}/STARTED_MATCH_POLLER`;
 export const IN_QUEUE = `${NAMESPACE}/IN_QUEUE`;
+export const LEFT_QUEUE = `${NAMESPACE}/LEFT_QUEUE`;
 
 export default (state = defaultState, action) => {
   switch (action.type) {
@@ -39,6 +41,7 @@ export default (state = defaultState, action) => {
       return state.set("matchId", undefined).set("queueing", true);
     case STARTED_MATCH_POLLER:
       return state.set("matchPoller", action.matchPoller);
+    case LEFT_QUEUE:
     case LOGGED_OUT:
       if (state.matchPoller) {
         clearInterval(state.matchPoller);
@@ -57,6 +60,12 @@ export const queue = () => (dispatch) => {
   postJoinQueue().then(() => {
     dispatch({ type: IN_QUEUE });
     dispatch(fetchQueueStatus());
+  });
+};
+
+export const leaveQueue = () => (dispatch) => {
+  postLeaveQueue().then(() => {
+    dispatch({ type: LEFT_QUEUE });
   });
 };
 

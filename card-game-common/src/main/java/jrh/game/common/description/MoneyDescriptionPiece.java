@@ -10,6 +10,6 @@ public class MoneyDescriptionPiece implements DescriptionPiece {
 
     @Override
     public String get(DescriptionContext descriptionContext) {
-        return String.format("$%s", value);
+        return String.format("%sM", value);
     }
 }
