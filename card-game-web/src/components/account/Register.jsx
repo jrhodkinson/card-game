@@ -2,7 +2,8 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { registerAccount } from "../../store/account/account-store";
+import { postRegister } from "../../gateway/account";
+import { login, logout } from "../../store/account/account-store";
 import SubmitInput from "../common/SubmitInput";
 import TextInput from "../common/TextInput";
 import * as c from "../styles/colors";
@@ -11,8 +12,7 @@ import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
 const Wrapper = styled.div`
   width: ${MAIN_COLUMN_WIDTH};
   color: ${c.textOnBlack};
-  margin: 0 auto;
-  padding: 0 10px 10%;
+  margin: auto;
   display: flex;
   height: 100%;
   justify-content: center;
@@ -53,13 +53,45 @@ const ErrorWrapper = styled.p`
 `;
 
 const Register = () => {
-  const { register, handleSubmit, errors, watch } = useForm();
+  const { register, handleSubmit, errors, watch, setError } = useForm();
   const password = useRef({});
   password.current = watch("password");
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(registerAccount(data.name, data.email, data.password));
+    const { username, email, password } = data;
+    dispatch(logout());
+    postRegister(username, email, password)
+      .then(() => {
+        dispatch(login(username, password));
+      })
+      .catch((error) => {
+        const data = error.response.data;
+        if (data.reason) {
+          switch (data.reason) {
+            case "username":
+              setError("username", {
+                type: "server",
+                message: data.details,
+              });
+              break;
+            case "email":
+              setError("email", {
+                type: "server",
+                message: data.details,
+              });
+              break;
+            case "password":
+              setError("password", {
+                type: "server",
+                message: data.details,
+              });
+              break;
+            default:
+            // not supported
+          }
+        }
+      });
   };
 
   return (
@@ -68,7 +100,7 @@ const Register = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <InputWrapper>
           <TextInput
-            name="name"
+            name="username"
             label="Username"
             large
             ref={register({
@@ -79,7 +111,9 @@ const Register = () => {
               },
             })}
           />
-          {errors.name && <ErrorWrapper>{errors.name.message}</ErrorWrapper>}
+          {errors.username && (
+            <ErrorWrapper>{errors.username.message}</ErrorWrapper>
+          )}
         </InputWrapper>
         <InputWrapper>
           <TextInput

@@ -53,13 +53,6 @@ export const logout = () => (dispatch) => {
   postLogout().then(() => dispatch({ type: LOGGED_OUT }));
 };
 
-export const registerAccount = (name, email, password) => (dispatch) => {
-  dispatch({ type: LOGGED_OUT });
-  postRegister(name, email, password).then((response) => {
-    dispatch({ type: RECEIVED_ACCOUNT_DETAILS, account: response.data });
-  });
-};
-
 export const selectHaveInitialisedAccountId = (store) =>
   store[ACCOUNT_STATE].initialised;
 export const selectAccountId = (store) => store[ACCOUNT_STATE].accountId;

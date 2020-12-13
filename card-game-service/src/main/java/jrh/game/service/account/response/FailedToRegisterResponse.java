@@ -6,25 +6,23 @@ public class FailedToRegisterResponse {
     private final String details;
 
     public static FailedToRegisterResponse usernameAlreadyExists() {
-        return new FailedToRegisterResponse("Username already taken");
+        return new FailedToRegisterResponse("username", "Username already taken");
     }
 
     public static FailedToRegisterResponse emailAddressAlreadyExists() {
-        return new FailedToRegisterResponse("Email already taken");
+        return new FailedToRegisterResponse("email", "Email already taken");
     }
 
     public static FailedToRegisterResponse invalidEmailAddress() {
-        return new FailedToRegisterResponse("Invalid email address");
+        return new FailedToRegisterResponse("email", "Invalid email address");
     }
 
     public static FailedToRegisterResponse invalidPassword() {
-        return new FailedToRegisterResponse("Invalid password",
-                "Must be at least 8 characters, containing only letters, numbers, and these special characters: @#$%^&+=!*");
+        return new FailedToRegisterResponse("password", "Must be 8+ characters of: letters, numbers, or @#$%^&+=!*");
     }
 
     public static FailedToRegisterResponse invalidUsername() {
-        return new FailedToRegisterResponse("Invalid username",
-                "Must be at least 3 characters, containing only letters, numbers, and these special characters: .-_");
+        return new FailedToRegisterResponse("username", "Must be 3+ characters of: letters, numbers, or .-_");
 
     }
 

@@ -1,2 +1,2 @@
 - Set up initial set of cards
-- Handle error cases during login & register
+- Handle error cases during login
