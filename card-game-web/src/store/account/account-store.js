@@ -1,10 +1,5 @@
 import Immutable from "seamless-immutable";
-import {
-  getMe,
-  postLogin,
-  postLogout,
-  postRegister,
-} from "../../gateway/account";
+import { getMe, postLogout } from "../../gateway/account";
 
 export const ACCOUNT_STATE = "account";
 export const NAMESPACE = "account";
@@ -42,11 +37,8 @@ export const whoAmI = () => (dispatch) => {
     });
 };
 
-export const login = (name, password) => (dispatch) => {
-  dispatch({ type: LOGGED_OUT });
-  postLogin(name, password).then((response) => {
-    dispatch({ type: RECEIVED_ACCOUNT_DETAILS, account: response.data });
-  });
+export const receivedAccountDetails = (details) => (dispatch) => {
+  dispatch({ type: RECEIVED_ACCOUNT_DETAILS, account: details });
 };
 
 export const logout = () => (dispatch) => {

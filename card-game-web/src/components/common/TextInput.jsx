@@ -55,11 +55,39 @@ const InputWrapper = styled.input`
   ::-ms-input-placeholder {
     color: ${c.faintTextOnWhite};
   }
+
+  ${({ invalid }) => {
+    if (invalid) {
+      return `
+        background-color: ${c.red};
+        color: ${c.textOnRed};
+        
+        ::placeholder {
+          color: ${c.textOnRed};
+        }
+      
+        :-ms-input-placeholder {
+          color: ${c.textOnRed};
+        }
+      
+        ::-ms-input-placeholder {
+          color: ${c.textOnRed};
+        }
+      `;
+    }
+  }};
 `;
 
 const TextInput = React.forwardRef(
   (
-    { name, placeholder, label = null, large = false, password = false },
+    {
+      name,
+      placeholder,
+      label = null,
+      large = false,
+      password = false,
+      invalid = false,
+    },
     ref
   ) => {
     if (label) {
@@ -72,6 +100,7 @@ const TextInput = React.forwardRef(
             name={name}
             type={password ? "password" : "text"}
             placeholder={placeholder}
+            invalid={invalid}
             large={large}
             ref={ref}
           />
@@ -83,6 +112,7 @@ const TextInput = React.forwardRef(
         name={name}
         type={password ? "password" : "text"}
         placeholder={placeholder}
+        invalid={invalid}
         large={large}
         ref={ref}
       />

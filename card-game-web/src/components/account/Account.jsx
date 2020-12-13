@@ -1,23 +1,24 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
-import SubmitInput from "../common/SubmitInput";
-import TextInput from "../common/TextInput";
-import * as S from "../styles/Button.styles";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { postLogin } from "../../gateway/account";
 import {
-  login,
   logout,
+  receivedAccountDetails,
   selectUser,
   whoAmI,
 } from "../../store/account/account-store";
+import SubmitInput from "../common/SubmitInput";
+import TextInput from "../common/TextInput";
+import * as S from "../styles/Button.styles";
 
 const LoggedInAs = styled.div`
   margin-right: 10px;
 `;
 
 const Account = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors, setError } = useForm();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -25,18 +26,24 @@ const Account = () => {
     dispatch(whoAmI());
   }, [dispatch]);
 
-  const onSubmit = (data) => {
-    dispatch(login(data.name, data.password));
+  const onSubmit = (form) => {
+    const { name, password } = form;
+    postLogin(name, password)
+      .then(({ data }) => {
+        dispatch(receivedAccountDetails(data));
+      })
+      .catch(({ response }) => {
+        if (response.status === 403) {
+          setError("name", "");
+          setError("password", "");
+        }
+      });
   };
-
-  const loginUser = (user) => () => dispatch(login(user, user + user));
 
   if (user) {
     return (
       <>
         <LoggedInAs>Logged in as {user}</LoggedInAs>
-        <S.Button onClick={loginUser("jack")}>jack</S.Button>
-        <S.Button onClick={loginUser("terry")}>terry</S.Button>
         <S.Button onClick={() => dispatch(logout())}>Logout</S.Button>
       </>
     );
@@ -48,18 +55,18 @@ const Account = () => {
         <TextInput
           name="name"
           placeholder="Username or email"
+          invalid={errors.name}
           ref={register({ required: true })}
         />
         <TextInput
           name="password"
           placeholder="Password"
           password
+          invalid={errors.password}
           ref={register({ required: true })}
         />
         <SubmitInput value="Login" />
       </form>
-      <S.Button onClick={loginUser("jack")}>jack</S.Button>
-      <S.Button onClick={loginUser("terry")}>terry</S.Button>
     </>
   );
 };

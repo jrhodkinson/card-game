@@ -3,7 +3,10 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { postRegister } from "../../gateway/account";
-import { login, logout } from "../../store/account/account-store";
+import {
+  logout,
+  receivedAccountDetails,
+} from "../../store/account/account-store";
 import SubmitInput from "../common/SubmitInput";
 import TextInput from "../common/TextInput";
 import * as c from "../styles/colors";
@@ -47,8 +50,8 @@ const InputWrapper = styled.div`
 `;
 
 const ErrorWrapper = styled.p`
-  color: ${c.accentRed};
-  font-size: 0.75em;
+  color: ${c.red};
+  font-size: 0.85em;
   margin: 0 5px 6px;
 `;
 
@@ -62,8 +65,8 @@ const Register = () => {
     const { username, email, password } = data;
     dispatch(logout());
     postRegister(username, email, password)
-      .then(() => {
-        dispatch(login(username, password));
+      .then(({ data }) => {
+        dispatch(receivedAccountDetails(data));
       })
       .catch((error) => {
         const data = error.response.data;

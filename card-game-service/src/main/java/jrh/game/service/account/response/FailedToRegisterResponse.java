@@ -18,11 +18,11 @@ public class FailedToRegisterResponse {
     }
 
     public static FailedToRegisterResponse invalidPassword() {
-        return new FailedToRegisterResponse("password", "Must be 8+ characters of: letters, numbers, or @#$%^&+=!*");
+        return new FailedToRegisterResponse("password", "Must be 8+ characters of only: letters, numbers, or @#$%^&+=!*");
     }
 
     public static FailedToRegisterResponse invalidUsername() {
-        return new FailedToRegisterResponse("username", "Must be 3+ characters of: letters, numbers, or .-_");
+        return new FailedToRegisterResponse("username", "Must be 3+ characters of only: letters, numbers, or .-_");
 
     }
 
