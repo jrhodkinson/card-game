@@ -18,7 +18,7 @@ const LabelWrapper = styled.label`
 `;
 
 const InputWrapper = styled.input`
-  background-color: ${c.offWhite};
+  background-color: ${c.white};
   border: 1px solid ${c.darkestBlack};
   border-radius: 3px;
   color: ${c.textOnWhite};
