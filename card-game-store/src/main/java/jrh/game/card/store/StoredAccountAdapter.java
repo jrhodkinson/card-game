@@ -4,11 +4,13 @@ import jrh.game.common.account.Account;
 import jrh.game.common.account.AccountId;
 import jrh.game.common.account.AccountWithHashedPassword;
 
+import java.time.Instant;
+
 public class StoredAccountAdapter {
 
     public static AccountWithHashedPassword account(StoredAccount storedAccount) {
         Account account = new Account(AccountId.fromUUID(storedAccount.getId()), storedAccount.getName(),
-                storedAccount.getEmail());
+                storedAccount.getEmail(), Instant.ofEpochMilli(storedAccount.getRegistered()));
         return new AccountWithHashedPassword(account, storedAccount.getBcrypt());
     }
 
@@ -17,6 +19,7 @@ public class StoredAccountAdapter {
         storedAccount.setId(account.getAccount().getId().toUUID());
         storedAccount.setName(account.getAccount().getName());
         storedAccount.setEmail(account.getAccount().getEmail());
+        storedAccount.setRegistered(account.getAccount().getRegistrationTime().toEpochMilli());
         storedAccount.setBcrypt(account.getHashedPassword());
         return storedAccount;
     }

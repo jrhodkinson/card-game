@@ -8,6 +8,7 @@ public class StoredAccount {
     private String name;
     private String email;
     private String bcrypt;
+    private long registered;
 
     public UUID getId() {
         return id;
@@ -39,5 +40,13 @@ public class StoredAccount {
 
     public void setBcrypt(String bcrypt) {
         this.bcrypt = bcrypt;
+    }
+
+    public long getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(long registered) {
+        this.registered = registered;
     }
 }
