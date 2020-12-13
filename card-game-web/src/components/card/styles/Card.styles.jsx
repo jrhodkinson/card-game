@@ -34,7 +34,7 @@ export const Card = styled.div`
     if (selected) {
       styles += `
         transform: scale(1.03) translate(0, -2%);
-        box-shadow: 0 0 0 4px ${c.darkBlack}, 0 0 12px 0 ${c.white};
+        box-shadow: 0 0 0 1px ${c.darkBlack}, 0 0 12px 0 ${c.white};
         
         &:hover {
           transform: scale(1.05) translate(0, -2.5%);
@@ -44,7 +44,7 @@ export const Card = styled.div`
       styles += `
         &:hover {
           transform: scale(1.05) translate(0, -2.5%);
-          box-shadow: 0 0 4px 0 ${c.white};
+          box-shadow: 0 0 4px 0 ${c.mediumGrey};
         }
       `;
     }
@@ -105,7 +105,7 @@ export const ShortCardDescription = styled.div`
 `;
 
 export const CardCost = styled.div`
-  background-color: ${c.offWhite};
+  background-color: ${c.white};
   color: ${c.textOnWhite};
   font-weight: bold;
   position: absolute;

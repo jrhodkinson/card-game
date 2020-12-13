@@ -25,9 +25,6 @@ const send = (type, payload) => {
   } else {
     message = JSON.stringify({ type, payload });
   }
-  if (type !== PONG) {
-    console.log(`[ws] TX: ${JSON.stringify(message)}`);
-  }
   ws.send(message);
 };
 
@@ -47,8 +44,6 @@ const handleMessage = (dispatch) => (event) => {
   const message = JSON.parse(event.data);
   if (message.type === PING) {
     send(PONG, message.payload);
-  } else {
-    console.log(`[ws] RX: ${JSON.stringify(message)}`);
   }
   const action = toAction(message);
   if (action) {
