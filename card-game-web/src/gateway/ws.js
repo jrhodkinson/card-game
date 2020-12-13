@@ -2,6 +2,7 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import {
   matchEnded,
   receivedMatchState,
+  turnEnded,
   turnWillEndAt,
 } from "../store/match/match-actions";
 import { receivedPing } from "../store/socket/socket-actions";
@@ -14,8 +15,9 @@ let ws;
 const MESSAGE_ACTION_CREATORS = {
   ping: (payload) => receivedPing(payload),
   matchState: (payload) => receivedMatchState(payload),
-  matchEnded: (payload) => matchEnded(payload),
   turnWillEndAt: (payload) => turnWillEndAt(payload),
+  turnEnded: (payload) => turnEnded(payload),
+  matchEnded: (payload) => matchEnded(payload),
 };
 
 const send = (type, payload) => {
