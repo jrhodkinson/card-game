@@ -1,5 +1,4 @@
 import React from "react";
-import Description from "../common/Description";
 import * as c from "../styles/colors";
 import { card, header } from "../card/styles/dimensions";
 import styled, { keyframes } from "styled-components";

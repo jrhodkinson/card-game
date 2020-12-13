@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as c from "../../styles/colors";
 import { MAIN_COLUMN_WIDTH } from "../../styles/dimensions";
 
 export const Wrapper = styled.div`
@@ -9,12 +10,22 @@ export const Wrapper = styled.div`
   padding: 10px;
 `;
 
-export const Brand = styled.div`
+export const Left = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
+  white-space: nowrap;
+  margin: auto 0;
+`;
+
+export const Brand = styled.div`
   font-size: 1.4em;
   font-weight: 500;
-  white-space: nowrap;
+  margin-right: 10px;
+`;
+
+export const Version = styled.div`
+  color: ${c.faintTextOnBlack};
 `;
 
 export const Account = styled.div`

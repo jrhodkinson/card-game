@@ -5,7 +5,7 @@ export const darkBlack = "#181F25";
 export const darkGrey = "#202931";
 export const mediumGrey = "#415363";
 export const lightGrey = "#51677B";
-export const lightestGrey = "#BECAD5";
+export const lightestGrey = "#8898A6";
 export const offWhite = "#DAE1E7";
 
 export const white = "#E7EBEF";
@@ -13,7 +13,7 @@ export const red = "#D81B60";
 export const accentRed = "#C51162";
 
 export const textOnBlack = white;
-export const faintTextOnBlack = lightGrey;
+export const faintTextOnBlack = lightestGrey;
 export const textOnRed = white;
 export const textOnWhite = darkGrey;
 export const primaryAccentTextOnWhite = accentRed;

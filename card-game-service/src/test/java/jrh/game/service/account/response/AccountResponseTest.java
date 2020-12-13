@@ -20,7 +20,8 @@ public class AccountResponseTest {
     @Test
     public void serialisesAccountResponseToJson() throws JsonProcessingException {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
-        Account account = new Account(AccountId.randomAccountId(), randomAlphanumeric(10), randomAlphanumeric(10), Instant.now());
+        Account account = new Account(AccountId.randomAccountId(), randomAlphanumeric(10), randomAlphanumeric(10),
+                Instant.now());
         AccountResponse response = new AccountResponse(account);
         Map<String, String> json = objectMapper.readValue(objectMapper.writeValueAsString(response),
                 new TypeReference<>() {

@@ -20,6 +20,7 @@ public class ServiceConfiguration {
 
     private static final Logger logger = LogManager.getLogger(ServiceConfiguration.class);
 
+    private static final String VERSION = "game.version";
     private static final String DATABASE_HOST = "database.host";
     private static final String DATABASE_PORT = "database.port";
 
@@ -27,6 +28,10 @@ public class ServiceConfiguration {
 
     public ServiceConfiguration() {
         configuration = buildConfiguration();
+    }
+
+    public String version() {
+        return configuration.getString(VERSION);
     }
 
     public Database database() {
@@ -41,7 +46,6 @@ public class ServiceConfiguration {
         cc.addConfiguration(environment());
         cc.addConfiguration(new SystemConfiguration());
         cc.setThrowExceptionOnMissing(false);
-        System.out.println(cc.getString("game.version"));
         return cc;
     }
 

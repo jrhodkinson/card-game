@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.time.Instant;
 
 public class Main {
 
@@ -23,13 +24,17 @@ public class Main {
 
     private void start() {
         ServiceConfiguration configuration = new ServiceConfiguration();
+        String version = configuration.version();
+
+        logger.info("Started {} version={} at {}", getClass(), version, Instant.now());
+
         Database database = configuration.database();
         Accounts accounts = new Accounts(database.accountStore());
         ConcreteAssetLibrary assetLibrary = assetLibrary();
         MatchManager matchManager = new MatchManager(assetLibrary, accounts);
         MatchQueue matchQueue = new MatchQueue();
         Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
-        Server server = new Server(matchManager, matchQueue, accounts, assetLibrary);
+        Server server = new Server(version, matchManager, matchQueue, accounts, assetLibrary);
 
         matchmaker.start();
         server.start();

@@ -37,12 +37,14 @@ public class Server {
         JavalinValidation.register(UUID.class, UUID::fromString);
     }
 
+    private final String version;
     private final MatchManager matchManager;
     private final MatchQueue matchQueue;
     private final Accounts accounts;
     private final AssetLibrary assetLibrary;
 
-    public Server(MatchManager matchManager, MatchQueue matchQueue, Accounts accounts, AssetLibrary assetLibrary) {
+    public Server(String version, MatchManager matchManager, MatchQueue matchQueue, Accounts accounts, AssetLibrary assetLibrary) {
+        this.version = version;
         this.matchManager = matchManager;
         this.matchQueue = matchQueue;
         this.accounts = accounts;
@@ -59,6 +61,7 @@ public class Server {
         javalin.start(PORT);
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
+        new VersionEndpoint(javalin, version);
         new AccountEndpoint(javalin, cookies, accounts, sessions);
         new LobbyEndpoint(javalin, accounts, matchManager, matchQueue);
 
