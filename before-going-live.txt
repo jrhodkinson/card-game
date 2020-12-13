@@ -1,2 +1,3 @@
 - Set up initial set of cards
 - Handle error cases during login & register
+- Version indicator

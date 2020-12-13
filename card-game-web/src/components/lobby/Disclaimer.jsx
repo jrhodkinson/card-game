@@ -4,14 +4,14 @@ import * as c from "../styles/colors";
 
 const Wrapper = styled.div`
   background-color: ${c.offWhite};
-  opacity: 0.9;
   color: ${c.textOnWhite};
   width: 100%;
   margin-bottom: 20px;
-  padding: 20px 150px;
-  border-radius: 10px;
+  padding: 20px 150px 15px;
+  border-radius: 3px;
   text-align: center;
   font-size: 1.1em;
+  box-shadow: ${c.darkestBlack} 0 0 5px 5px;
 
   strong {
     font-weight: 700;
