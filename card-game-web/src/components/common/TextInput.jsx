@@ -2,13 +2,28 @@ import React from "react";
 import styled from "styled-components";
 import * as c from "../styles/colors";
 
-const Wrapper = styled.input`
+const LabelWrapper = styled.label`
+  font-size: 0.9em;
+
+  ${({ large }) => {
+    if (large) {
+      return `
+        margin: 2px 5px;
+      `;
+    }
+    return `
+      margin: 2px 3px;
+    `;
+  }};
+`;
+
+const InputWrapper = styled.input`
   background-color: ${c.offWhite};
   border: 1px solid ${c.darkestBlack};
   border-radius: 3px;
   color: ${c.textOnWhite};
   padding: 0 5px;
-  box-shadow: ${c.darkestBlack} 0 3px 2px -2px;
+  box-shadow: ${c.darkGrey} 0 1px 3px -1px;
   outline: none;
 
   ${({ large }) => {
@@ -43,15 +58,36 @@ const Wrapper = styled.input`
 `;
 
 const TextInput = React.forwardRef(
-  ({ name, placeholder, large = false, password = false }, ref) => (
-    <Wrapper
-      name={name}
-      type={password ? "password" : "text"}
-      placeholder={placeholder}
-      large={large}
-      ref={ref}
-    />
-  )
+  (
+    { name, placeholder, label = null, large = false, password = false },
+    ref
+  ) => {
+    if (label) {
+      return (
+        <>
+          <LabelWrapper htmlFor={name} large={large}>
+            {label}
+          </LabelWrapper>
+          <InputWrapper
+            name={name}
+            type={password ? "password" : "text"}
+            placeholder={placeholder}
+            large={large}
+            ref={ref}
+          />
+        </>
+      );
+    }
+    return (
+      <InputWrapper
+        name={name}
+        type={password ? "password" : "text"}
+        placeholder={placeholder}
+        large={large}
+        ref={ref}
+      />
+    );
+  }
 );
 
 export default TextInput;
