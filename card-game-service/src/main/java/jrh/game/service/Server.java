@@ -43,7 +43,8 @@ public class Server {
     private final Accounts accounts;
     private final AssetLibrary assetLibrary;
 
-    public Server(String version, MatchManager matchManager, MatchQueue matchQueue, Accounts accounts, AssetLibrary assetLibrary) {
+    public Server(String version, MatchManager matchManager, MatchQueue matchQueue, Accounts accounts,
+            AssetLibrary assetLibrary) {
         this.version = version;
         this.matchManager = matchManager;
         this.matchQueue = matchQueue;
