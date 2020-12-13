@@ -11,11 +11,20 @@ import static java.util.stream.Collectors.toList;
 
 public class DescriptionDto {
 
-    @JsonValue
-    public final List<DescriptionLine> description;
+    private final String text;
+    private final List<DescriptionLine> lines;
 
-    private DescriptionDto(List<DescriptionLine> description) {
-        this.description = description;
+    private DescriptionDto(String text, List<DescriptionLine> lines) {
+        this.text = text;
+        this.lines = lines;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public List<DescriptionLine> getLines() {
+        return lines;
     }
 
     public static class Factory {
@@ -27,7 +36,7 @@ public class DescriptionDto {
         }
 
         public DescriptionDto descriptionDto(Description description) {
-            return new DescriptionDto(descriptionLines(description));
+            return new DescriptionDto(description.get(descriptionContext), descriptionLines(description));
         }
 
         private List<DescriptionLine> descriptionLines(Description description) {

@@ -63,7 +63,7 @@ const Structure = ({
       <Wrapper
         interactable={interactable}
         onClick={() => onStructureClick(structure)}
-        data-tip={<Description description={structure.description} />}
+        data-tip={structure.description.text}
         data-for={id}
       >
         <Name title={structure.flavor}>{structure.name}</Name>

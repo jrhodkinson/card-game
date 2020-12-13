@@ -2,6 +2,7 @@ package jrh.game.common.description;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Description {
 
@@ -17,5 +18,9 @@ public class Description {
 
     public List<AtomicDescription> getAtomicDescriptions() {
         return Collections.unmodifiableList(atomicDescriptions);
+    }
+
+    public String get(DescriptionContext descriptionContext) {
+        return atomicDescriptions.stream().map(ad -> ad.get(descriptionContext)).collect(Collectors.joining(". ")) + ".";
     }
 }

@@ -20,13 +20,13 @@ const Card = ({
       <S.CardName background={card.color}>{card.name}</S.CardName>
       {short ? (
         <S.ShortCardDescription background={card.color}>
-          <Description description={card.description} />
+          <Description lines={card.description.lines} />
         </S.ShortCardDescription>
       ) : (
         <>
           <S.CardImage background={card.color} />
           <S.CardDescription background={card.color}>
-            <Description description={card.description} />
+            <Description lines={card.description.lines} />
           </S.CardDescription>
         </>
       )}

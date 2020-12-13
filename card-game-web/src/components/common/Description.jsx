@@ -40,9 +40,9 @@ const DescriptionLine = ({ line }) => {
     .reduce((prev, curr) => [prev, " ", curr]);
 };
 
-const Description = ({ description }) => {
+const Description = ({ lines }) => {
   const { id, tooltip } = useTooltip();
-  let piecesWithContext = description.flat().filter((piece) => piece.context);
+  let piecesWithContext = lines.flat().filter((piece) => piece.context);
   piecesWithContext = piecesWithContext.filter(
     (item, pos) =>
       piecesWithContext.findIndex((piece) => piece.context === item.context) ===
@@ -62,7 +62,7 @@ const Description = ({ description }) => {
           data-multiline
           data-delay-show="750"
         >
-          {description
+          {lines
             .map((line, index) => <DescriptionLine line={line} key={index} />)
             .reduce((prev, curr) => [prev, ". ", curr])}
           .
@@ -74,7 +74,7 @@ const Description = ({ description }) => {
   return (
     <>
       <span>
-        {description
+        {lines
           .map((line, index) => <DescriptionLine line={line} key={index} />)
           .reduce((prev, curr) => [prev, ". ", curr])}
         .
