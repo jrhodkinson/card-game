@@ -1,6 +1,6 @@
 {
-  "id": "GOLD",
-  "name": "Gold",
+  "id": "MONEY:4",
+  "name": "Stater",
   "cost": 6,
   "behaviours": [
     [

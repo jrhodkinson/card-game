@@ -1,5 +1,5 @@
 {
-  "id": "CONTINGENCY_PLAN",
+  "id": "DRAW:1",
   "name": "Contingency Plan",
   "cost": 7,
   "behaviours": [
@@ -9,7 +9,7 @@
     ],
     [
       "heal",
-      3
+      2
     ]
   ]
 }

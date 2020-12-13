@@ -1,8 +1,12 @@
 {
-  "id": "ANGER",
-  "name": "Anger",
-  "cost": 3,
+  "id": "IDOL:ANGER",
+  "name": "Anger, Idol",
+  "cost": 5,
   "behaviours": [
+    [
+      "gainCardOnPurchase",
+      "REGRET"
+    ],
     [
       "incrementingDamage",
       {

@@ -1,19 +1,19 @@
 {
   "id": "GREED",
   "name": "Greed",
-  "cost": 0,
+  "cost": 1,
   "behaviours": [
     [
       "gainCard",
-      "COPPER"
+      "MONEY:1"
     ],
     [
       "gainCard",
-      "SILVER"
+      "MONEY:2"
     ],
     [
       "gainCard",
-      "GOLD"
+      "MONEY:3"
     ]
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "id": "IDOL",
-  "name": "Idol",
-  "cost": 4,
+  "id": "IDOL:MONEY",
+  "name": "Aureus, Idol",
+  "cost": 5,
   "behaviours": [
     [
       "gainCardOnPurchase",
-      "REPENT"
+      "REGRET"
     ],
     [
       "money",

@@ -1,1 +1,2 @@
 - Set up initial set of cards
+- Make blood bank / modify outgoing damage powers change the numbers on the screen

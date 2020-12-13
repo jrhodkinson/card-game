@@ -1,0 +1,11 @@
+{
+  "id": "DAMAGE:1",
+  "name": "Dagger",
+  "cost": 0,
+  "behaviours": [
+    [
+      "damage",
+      1
+    ]
+  ]
+}

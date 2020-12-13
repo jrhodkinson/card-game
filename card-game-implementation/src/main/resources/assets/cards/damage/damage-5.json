@@ -1,0 +1,11 @@
+{
+  "id": "DAMAGE:5",
+  "name": "Lance, Holy",
+  "cost": 7,
+  "behaviours": [
+    [
+      "damage",
+      5
+    ]
+  ]
+}

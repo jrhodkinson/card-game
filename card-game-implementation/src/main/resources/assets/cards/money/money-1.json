@@ -1,7 +1,7 @@
 {
-  "id": "COPPER",
-  "name": "Copper",
-  "cost": 1,
+  "id": "MONEY:1",
+  "name": "Denarius",
+  "cost": 0,
   "behaviours": [
     [
       "money",

@@ -1,14 +1,14 @@
 {
   "id": "REPENT",
   "name": "Repent",
-  "cost": 1,
+  "cost": 0,
   "flavor": "Turn yourself from your idols",
   "behaviours": [
     [
       "damageGroup",
       {
         "targets": [ "SELF" ],
-        "amount": 1
+        "amount": 3
       }
     ],
     [ "vanish" ]

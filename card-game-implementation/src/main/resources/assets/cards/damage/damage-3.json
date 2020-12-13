@@ -1,7 +1,7 @@
 {
-  "id": "SWORD",
+  "id": "DAMAGE:3",
   "name": "Sword",
-  "cost": 3,
+  "cost": 4,
   "behaviours": [
     [
       "damage",

@@ -1,0 +1,14 @@
+{
+  "id": "REGRET",
+  "name": "Regret",
+  "cost": 1,
+  "behaviours": [
+    [
+      "gainCard",
+      "REPENT"
+    ],
+    [
+      "vanish"
+    ]
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "id": "SILVER",
-  "name": "Silver",
+  "id": "MONEY:2",
+  "name": "Half shekel",
   "cost": 3,
   "behaviours": [
     [
