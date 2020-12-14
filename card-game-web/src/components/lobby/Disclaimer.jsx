@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   color: ${c.textOnWhite};
   width: 100%;
   margin-bottom: 20px;
-  padding: 20px 150px 15px;
+  padding: 20px 20% 15px;
   border-radius: 3px;
   text-align: center;
   font-size: 1.1em;
@@ -34,16 +34,11 @@ const Wrapper = styled.div`
 const Disclaimer = () => (
   <Wrapper>
     <p>
-      Revelation 21:8 is in <strong>pre-alpha</strong> — unpolished and
-      incomplete.
-    </p>
-    <p>Thank you for taking the time to play it.</p>
-    <p>
-      Unfortunately there's a chance that bugs slip through the net. For these,
-      I apologise, and request that you report them via the{" "}
-      <strong>#bug&#8209;reports</strong> Discord channel.
+      Revelation 21:8 is in <strong>alpha</strong> — unpolished and incomplete.
     </p>
     <p>Your feedback is instrumental in improving this game.</p>
+    <p>Updates on the 1st and 3rd Saturday of each month.</p>
+    <p>Thank you for taking the time to play.</p>
     <p className="signature">~ RD</p>
   </Wrapper>
 );

@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   width: ${MAIN_COLUMN_WIDTH};
   color: ${c.textOnBlack};
   margin: auto;
+  padding-bottom: 5%;
   display: flex;
   height: 100%;
   justify-content: center;
