@@ -14,6 +14,8 @@ import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.DAMAGEABLE;
+
 @JsonKey("incrementingDamage")
 public class IncrementingDamageBehaviour extends AbstractBehaviour {
 
@@ -26,7 +28,7 @@ public class IncrementingDamageBehaviour extends AbstractBehaviour {
     private final int increment;
 
     public IncrementingDamageBehaviour(@JsonProperty("damage") int damage, @JsonProperty("increment") int increment) {
-        super(true);
+        super(DAMAGEABLE);
         this.damage = damage;
         this.increment = increment;
     }
@@ -39,8 +41,8 @@ public class IncrementingDamageBehaviour extends AbstractBehaviour {
 
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
-        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
-            Damageable target = cardPlayed.getTarget().get();
+        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getDamageableTarget().isPresent()) {
+            Damageable target = cardPlayed.getDamageableTarget().get();
             logger.info("Damaging target={} by amount={}", target, damage);
             match.getController(HealthController.class).damage(cardPlayed.getPlayer(), target, this.damage);
         }

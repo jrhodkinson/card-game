@@ -17,6 +17,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("damageOnPurchase")
 public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
@@ -30,7 +32,7 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
     public DamageOnPurchaseBehaviour(@JsonProperty("targets") List<Target> targets,
             @JsonProperty("amount") int amount) {
-        super(false);
+        super(NO_TARGET);
         this.targets = targets;
         this.amount = amount;
     }

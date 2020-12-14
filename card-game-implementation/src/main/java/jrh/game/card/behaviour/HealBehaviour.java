@@ -11,6 +11,8 @@ import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.DAMAGEABLE;
+
 @JsonKey("heal")
 public class HealBehaviour extends AbstractBehaviour {
 
@@ -20,7 +22,7 @@ public class HealBehaviour extends AbstractBehaviour {
     private final int health;
 
     public HealBehaviour(int health) {
-        super(true);
+        super(DAMAGEABLE);
         this.health = health;
     }
 
@@ -31,10 +33,10 @@ public class HealBehaviour extends AbstractBehaviour {
 
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
-        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
-            logger.info("Healing {} by {}", cardPlayed.getTarget().get(), this.health);
-            match.getController(HealthController.class).heal(cardPlayed.getPlayer(), cardPlayed.getTarget().get(),
-                    this.health);
+        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getDamageableTarget().isPresent()) {
+            logger.info("Healing {} by {}", cardPlayed.getDamageableTarget().get(), this.health);
+            match.getController(HealthController.class).heal(cardPlayed.getPlayer(),
+                    cardPlayed.getDamageableTarget().get(), this.health);
         }
     }
 

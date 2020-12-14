@@ -11,13 +11,15 @@ import jrh.game.match.CardFlowController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("vanish")
 public class VanishBehaviour extends AbstractBehaviour implements EventHandler {
 
     private static final Logger logger = LogManager.getLogger(VanishBehaviour.class);
 
     public VanishBehaviour() {
-        super(false);
+        super(NO_TARGET);
     }
 
     @Override

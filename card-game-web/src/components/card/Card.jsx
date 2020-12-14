@@ -8,6 +8,7 @@ const Card = ({
   selected = false,
   onCardClick = () => {},
   short = false,
+  shaking = false,
 }) => {
   return (
     <S.Card
@@ -15,6 +16,7 @@ const Card = ({
       interactable={isInteractable(card)}
       selected={selected}
       onClick={() => onCardClick(card)}
+      shaking={shaking}
     >
       <S.CardCost>{card.cost}</S.CardCost>
       <S.CardName>{card.name}</S.CardName>

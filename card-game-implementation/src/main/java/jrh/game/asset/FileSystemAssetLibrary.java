@@ -7,6 +7,7 @@ import jrh.game.card.CardImpl;
 import jrh.game.common.CardId;
 import jrh.game.common.ObjectMapperFactory;
 import jrh.game.common.StructureId;
+import jrh.game.common.description.DescriptionContext;
 import jrh.game.structure.MutableStructure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,7 @@ public class FileSystemAssetLibrary implements ConcreteAssetLibrary {
 
     public FileSystemAssetLibrary() throws IOException {
         loadAssets();
+        logAssets();
     }
 
     @Override
@@ -93,6 +96,18 @@ public class FileSystemAssetLibrary implements ConcreteAssetLibrary {
         }
     }
 
+    private void logAssets() {
+        DescriptionContext descriptionContext = new DescriptionContext(this);
+        cards.keySet().stream().sorted(Comparator.comparing(CardId::toString)).forEach((cardId) -> {
+            Card card = cards.get(cardId);
+            logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription().get(descriptionContext));
+        });
+        structures.keySet().stream().sorted(Comparator.comparing(StructureId::toString)).forEach((structureId) -> {
+            Structure structure = structures.get(structureId);
+            logger.debug("Loaded structure: {}, {}, {}", structure.getStructureId(), structure.getName(), structure.getDescription().get(descriptionContext));
+        });
+    }
+
     private void addCardsFromDirectory(Path directory, ObjectMapper objectMapper) throws IOException {
         List<Path> paths = Files.walk(directory).filter(p -> !Files.isDirectory(p)).collect(toList());
         for (Path path : paths) {
@@ -101,7 +116,6 @@ public class FileSystemAssetLibrary implements ConcreteAssetLibrary {
             }
             CardImpl card = objectMapper.readValue(Files.newInputStream(path), CardImpl.class);
             cards.put(card.getCardId(), card);
-            logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription());
         }
     }
 
@@ -113,8 +127,6 @@ public class FileSystemAssetLibrary implements ConcreteAssetLibrary {
             }
             MutableStructure structure = objectMapper.readValue(Files.newInputStream(path), MutableStructure.class);
             structures.put(structure.getStructureId(), structure);
-            logger.debug("Loaded structure: {}, {}, {}", structure.getStructureId(), structure.getName(),
-                    structure.getDescription());
         }
     }
 

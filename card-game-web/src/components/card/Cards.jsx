@@ -48,6 +48,7 @@ const Cards = ({
   isInteractable = () => false,
   animateEntry = false,
   onCardClick = () => {},
+  shaking = false,
 }) => {
   const cardComponent = (card) => (
     <Card
@@ -57,6 +58,7 @@ const Cards = ({
       isInteractable={isInteractable}
       selected={selectedCardEntityId === card.entityId}
       onCardClick={onCardClick}
+      shaking={shaking}
     />
   );
 

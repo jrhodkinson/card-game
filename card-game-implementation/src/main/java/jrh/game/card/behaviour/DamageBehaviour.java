@@ -1,16 +1,18 @@
 package jrh.game.card.behaviour;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import jrh.game.asset.JsonKey;
-import jrh.game.api.event.CardPlayed;
-import jrh.game.common.description.AtomicDescription;
-import jrh.game.api.Subscribe;
-import jrh.game.common.description.Keyword;
-import jrh.game.match.HealthController;
 import jrh.game.api.Damageable;
 import jrh.game.api.Match;
+import jrh.game.api.Subscribe;
+import jrh.game.api.event.CardPlayed;
+import jrh.game.asset.JsonKey;
+import jrh.game.common.description.AtomicDescription;
+import jrh.game.common.description.Keyword;
+import jrh.game.match.HealthController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.DAMAGEABLE;
 
 @JsonKey("damage")
 public class DamageBehaviour extends AbstractBehaviour {
@@ -21,7 +23,7 @@ public class DamageBehaviour extends AbstractBehaviour {
     private final int damage;
 
     public DamageBehaviour(int damage) {
-        super(true);
+        super(DAMAGEABLE);
         this.damage = damage;
     }
 
@@ -32,8 +34,8 @@ public class DamageBehaviour extends AbstractBehaviour {
 
     @Subscribe
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
-        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getTarget().isPresent()) {
-            Damageable target = cardPlayed.getTarget().get();
+        if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getDamageableTarget().isPresent()) {
+            Damageable target = cardPlayed.getDamageableTarget().get();
             logger.info("Damaging target={} by amount={}", target, damage);
             match.getController(HealthController.class).damage(cardPlayed.getPlayer(), target, this.damage);
         }

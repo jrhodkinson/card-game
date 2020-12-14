@@ -2,16 +2,16 @@ package jrh.game.card.behaviour;
 
 import org.junit.jupiter.api.Test;
 
-public class VanishBehaviourTest {
+public class PurgeBehaviourTest {
 
     @Test
     public void roundTripsViaJson() {
-        TestBehaviour.roundTripsViaJson(new VanishBehaviour());
+        TestBehaviour.roundTripsViaJson(new PurgeBehaviour());
     }
 
     @Test
     public void duplication() {
-        TestBehaviour.duplicatingGivesSameInstance(new VanishBehaviour());
+        TestBehaviour.duplicatingGivesSameInstance(new PurgeBehaviour());
     }
 
 }

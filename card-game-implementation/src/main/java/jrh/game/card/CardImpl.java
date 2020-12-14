@@ -90,8 +90,13 @@ public class CardImpl implements Card {
     }
 
     @Override
-    public boolean requiresTarget() {
-        return behaviours.values().stream().anyMatch(AbstractBehaviour::requiresTarget);
+    public boolean requiresDamageableTarget() {
+        return behaviours.values().stream().anyMatch(AbstractBehaviour::requiresDamageableTarget);
+    }
+
+    @Override
+    public boolean requiresStoreTarget() {
+        return behaviours.values().stream().anyMatch(AbstractBehaviour::requiresStoreTarget);
     }
 
     CardImpl duplicate() {

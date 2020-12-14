@@ -13,6 +13,8 @@ import jrh.game.match.TurnController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("incrementingMoney")
 public class IncrementingMoneyBehaviour extends AbstractBehaviour {
 
@@ -25,7 +27,7 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
     private final int increment;
 
     public IncrementingMoneyBehaviour(@JsonProperty("amount") int amount, @JsonProperty("increment") int increment) {
-        super(false);
+        super(NO_TARGET);
         this.amount = amount;
         this.increment = increment;
     }

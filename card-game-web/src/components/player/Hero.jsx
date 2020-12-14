@@ -3,7 +3,7 @@ import * as c from "../styles/colors";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { keyframes } from "styled-components";
 import { selectedTarget } from "../../store/play/play-actions";
-import { selectDoesPendingCardRequireTarget } from "../../store/play/play-selector";
+import { selectDoesPendingCardRequireDamageableTarget } from "../../store/play/play-selector";
 import Health from "../common/Health";
 
 const Wrapper = styled.div`
@@ -52,7 +52,9 @@ const ActiveName = styled(Name)`
 
 const Hero = ({ entityId, name, health, active }) => {
   const dispatch = useDispatch();
-  const heroIsInteractable = useSelector(selectDoesPendingCardRequireTarget);
+  const heroIsInteractable = useSelector(
+    selectDoesPendingCardRequireDamageableTarget
+  );
   const handleClick = () => dispatch(selectedTarget(entityId));
   return (
     <Wrapper interactable={heroIsInteractable} onClick={handleClick}>

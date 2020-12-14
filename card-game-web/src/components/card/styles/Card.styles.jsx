@@ -1,6 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import * as c from "../../styles/colors";
 import { card, cost, image, header, description } from "./dimensions";
+
+const shakingKeyframes = keyframes`
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(1deg); }
+  30% { transform: rotate(-1deg); }
+  40% { transform: rotate(0deg); }
+`;
 
 export const Card = styled.div`
   height: ${({ short }) =>
@@ -20,6 +27,14 @@ export const Card = styled.div`
   color: ${c.textOnWhite};
   box-shadow: ${c.darkestBlack} 0 3px 2px -2px, ${c.darkBlack} 0 2px 2px 0,
     ${c.darkGrey} 0 2px 3px 0;
+
+  ${({ shaking }) => {
+    if (shaking) {
+      return css`
+        animation: ${shakingKeyframes} 1s infinite;
+      `;
+    }
+  }};
 
   ${({ interactable, selected }) => {
     if (!interactable) {
@@ -43,7 +58,7 @@ export const Card = styled.div`
     } else {
       styles += `
         &:hover {
-          transform: scale(1.05) translate(0, -2.5%);
+          transform: scale(1.05) translate(0, -2.5%) !important;
           box-shadow: 0 0 4px 0 ${c.mediumGrey};
         }
       `;

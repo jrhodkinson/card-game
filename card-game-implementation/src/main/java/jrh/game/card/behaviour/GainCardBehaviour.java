@@ -13,6 +13,8 @@ import jrh.game.match.CardFlowController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("gainCard")
 public class GainCardBehaviour extends AbstractBehaviour {
 
@@ -23,7 +25,7 @@ public class GainCardBehaviour extends AbstractBehaviour {
 
     @JsonCreator
     public GainCardBehaviour(CardId cardId) {
-        super(false);
+        super(NO_TARGET);
         this.cardId = cardId;
     }
 

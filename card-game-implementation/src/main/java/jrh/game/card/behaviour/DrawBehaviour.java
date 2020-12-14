@@ -11,6 +11,8 @@ import jrh.game.match.CardFlowController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("draw")
 public class DrawBehaviour extends AbstractBehaviour {
 
@@ -20,7 +22,7 @@ public class DrawBehaviour extends AbstractBehaviour {
     private final int amountToDraw;
 
     public DrawBehaviour(int amountToDraw) {
-        super(false);
+        super(NO_TARGET);
         this.amountToDraw = amountToDraw;
     }
 

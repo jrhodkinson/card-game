@@ -28,5 +28,8 @@ public interface Card {
 
     List<Behaviour> getBehaviours(Class<? extends Behaviour> behaviourClass);
 
-    boolean requiresTarget();
+    boolean requiresDamageableTarget();
+
+    boolean requiresStoreTarget();
+
 }

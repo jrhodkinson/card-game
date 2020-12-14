@@ -17,18 +17,20 @@ public class CardDto {
     public final String flavor;
     public final int cost;
     public final DescriptionDto description;
-    public final boolean requiresTarget;
+    public final boolean requiresDamageableTarget;
+    public final boolean requiresStoreTarget;
     public final boolean isPlayable;
 
     private CardDto(EntityId entityId, CardId cardId, String name, String flavor, int cost, DescriptionDto description,
-            boolean requiresTarget, boolean isPlayable) {
+            boolean requiresDamageableTarget, boolean requiresStoreTarget, boolean isPlayable) {
         this.entityId = entityId;
         this.cardId = cardId;
         this.name = name;
         this.flavor = flavor;
         this.cost = cost;
         this.description = description;
-        this.requiresTarget = requiresTarget;
+        this.requiresDamageableTarget = requiresDamageableTarget;
+        this.requiresStoreTarget = requiresStoreTarget;
         this.isPlayable = isPlayable;
     }
 
@@ -42,7 +44,8 @@ public class CardDto {
 
         public CardDto cardDto(Card card) {
             return new CardDto(card.getEntityId(), card.getCardId(), card.getName(), card.getFlavorText().orElse(null),
-                    card.getCost(), descriptionFactory.descriptionDto(card.getDescription()), card.requiresTarget(),
+                    card.getCost(), descriptionFactory.descriptionDto(card.getDescription()),
+                    card.requiresDamageableTarget(), card.requiresStoreTarget(),
                     !card.hasBehaviour(UnplayableBehaviour.class));
         }
 

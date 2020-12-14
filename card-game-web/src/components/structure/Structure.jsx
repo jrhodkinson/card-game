@@ -1,7 +1,7 @@
 import React from "react";
 import * as c from "../styles/colors";
 import { card, header } from "../card/styles/dimensions";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import Health from "../common/Health";
 import useTooltip from "../common/useTooltip";
 
@@ -25,17 +25,17 @@ const Wrapper = styled.div`
 
   ${({ interactable }) => {
     if (interactable) {
-      return `
-      cursor: pointer;
-      transition: transform 0.15s;
-      animation: ${pulse} 1.2s infinite;
-      
-      &:hover {
-        transform: scale(1.08) translate(0, -2.5%);
-        animation: none;
-        box-shadow: ${c.white} 0 0 8px 0;
-      }
-    `;
+      return css`
+        cursor: pointer;
+        transition: transform 0.15s;
+        animation: ${pulse} 1.2s infinite;
+
+        &:hover {
+          transform: scale(1.08) translate(0, -2.5%);
+          animation: none;
+          box-shadow: ${c.white} 0 0 8px 0;
+        }
+      `;
     }
   }};
 `;

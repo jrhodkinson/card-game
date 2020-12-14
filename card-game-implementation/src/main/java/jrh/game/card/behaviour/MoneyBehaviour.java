@@ -11,6 +11,8 @@ import jrh.game.api.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("money")
 public class MoneyBehaviour extends AbstractBehaviour {
 
@@ -20,7 +22,7 @@ public class MoneyBehaviour extends AbstractBehaviour {
     private final int amount;
 
     public MoneyBehaviour(int amount) {
-        super(false);
+        super(NO_TARGET);
         this.amount = amount;
     }
 

@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
 import static jrh.game.common.Target.SELF;
 
 @JsonKey("sacrifice")
@@ -25,7 +26,7 @@ public class SacrificeBehaviour extends AbstractBehaviour {
     private final int damage;
 
     public SacrificeBehaviour(int damage) {
-        super(false);
+        super(NO_TARGET);
         this.damage = damage;
     }
 

@@ -13,6 +13,8 @@ import jrh.game.structure.StructureStateController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("construct")
 public class ConstructBehaviour extends AbstractBehaviour {
 
@@ -23,7 +25,7 @@ public class ConstructBehaviour extends AbstractBehaviour {
 
     @JsonCreator
     public ConstructBehaviour(StructureId structureId) {
-        super(false);
+        super(NO_TARGET);
         this.structureId = structureId;
     }
 

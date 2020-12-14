@@ -36,4 +36,9 @@ public class TestBehaviour {
         }
     }
 
+    public static void duplicatingGivesSameInstance(AbstractBehaviour behaviour) {
+        Behaviour duplicatedBehaviour = behaviour.duplicate();
+        assertThat(duplicatedBehaviour.getClass(), equalTo(behaviour.getClass()));
+    }
+
 }

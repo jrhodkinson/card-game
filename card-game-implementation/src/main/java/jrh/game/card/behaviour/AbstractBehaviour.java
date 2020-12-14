@@ -5,13 +5,16 @@ import jrh.game.api.Behaviour;
 import jrh.game.api.Card;
 import jrh.game.common.description.AtomicDescription;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.DAMAGEABLE;
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.STORE;
+
 public abstract class AbstractBehaviour implements Behaviour {
 
-    private final boolean requiresTarget;
+    private final TargetType targetType;
     private Card card;
 
-    protected AbstractBehaviour(boolean requiresTarget) {
-        this.requiresTarget = requiresTarget;
+    protected AbstractBehaviour(TargetType targetType) {
+        this.targetType = targetType;
     }
 
     public final void forCard(Card card) {
@@ -23,8 +26,13 @@ public abstract class AbstractBehaviour implements Behaviour {
     }
 
     @Override
-    public final boolean requiresTarget() {
-        return requiresTarget;
+    public final boolean requiresDamageableTarget() {
+        return DAMAGEABLE.equals(targetType);
+    }
+
+    @Override
+    public final boolean requiresStoreTarget() {
+        return STORE.equals(targetType);
     }
 
     @Override
@@ -32,4 +40,8 @@ public abstract class AbstractBehaviour implements Behaviour {
     abstract public AtomicDescription getDescription();
 
     abstract public AbstractBehaviour duplicate();
+
+    protected enum TargetType {
+        NO_TARGET, DAMAGEABLE, STORE
+    }
 }

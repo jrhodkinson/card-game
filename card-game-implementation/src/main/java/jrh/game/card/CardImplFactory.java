@@ -41,7 +41,7 @@ public class CardImplFactory {
     public Deck startingDeck() {
         Deck deck = new Deck();
         List<CardId> startingDeck = new ArrayList<>();
-        Stream.of(CardId.Debug.MONEY, CardId.Debug.DAMAGE, CardId.Debug.DRAW).map(this::create)
+        Stream.of(CardId.Debug.MONEY, CardId.Debug.DAMAGE, CardId.Debug.DRAW, new CardId("PURGE")).map(this::create)
                 .filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
         while (deck.size() < Constants.INITIAL_HAND_SIZE) {
             deck.add(randomCard());

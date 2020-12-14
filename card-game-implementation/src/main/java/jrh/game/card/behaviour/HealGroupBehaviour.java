@@ -17,6 +17,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
+
 @JsonKey("healGroup")
 public class HealGroupBehaviour extends AbstractBehaviour {
 
@@ -29,7 +31,7 @@ public class HealGroupBehaviour extends AbstractBehaviour {
     private final int amount;
 
     public HealGroupBehaviour(@JsonProperty("targets") List<Target> targets, @JsonProperty("amount") int amount) {
-        super(false);
+        super(NO_TARGET);
         this.targets = targets;
         this.amount = amount;
     }

@@ -68,24 +68,25 @@ public class CardFlowController implements Controller {
             logger.info("Not playing card={}, it has UnplayableBehaviour", card);
             return;
         }
-        Damageable damageable = null;
-        if (target != null) {
-            damageable = getDamageableTarget(target);
-            if (damageable == null) {
-                logger.warn("Not playing card={}, target={} was not damageable", card, target);
+        CardPlayed cardPlayed;
+        if (card.requiresDamageableTarget()) {
+            Damageable damageable = getDamageableTarget(target);
+            if (!validateDamageableTarget(card, damageable, player)) {
+                logger.info("Damageable failed validation");
                 return;
             }
-        }
-        if (card.requiresTarget() && damageable == null) {
-            logger.warn("Not playing card={}, it requires a target", card);
-            return;
-        }
-        if (card.requiresTarget() && anotherEnemyStructureHasTaunt(player, damageable)) {
-            logger.warn("Not playing card={}, at least one other enemy structure has taunt", card);
-            return;
+            cardPlayed = CardPlayed.damageableTarget(player, card, damageable);
+        } else if (card.requiresStoreTarget()) {
+            if (!validateStoreTarget(card, target)) {
+                logger.info("Store target failed validation");
+                return;
+            }
+            cardPlayed = CardPlayed.storeTarget(player, card, target);
+        } else {
+            cardPlayed = CardPlayed.noTarget(player, card);
         }
         player.getHand().remove(card);
-        match.getEventBus().dispatch(new CardPlayed(player, damageable, card));
+        match.getEventBus().dispatch(cardPlayed);
         match.getCurrentTurn().addPlayedCard(card);
         match.getEventBus().dispatch(new CardResolved(player, card));
     }
@@ -157,12 +158,27 @@ public class CardFlowController implements Controller {
         }
     }
 
+    public void destroyStoreCard(EntityId entityId) {
+        Optional<Card> optionalCard = match.getStore().getRow().stream().filter(c -> c.getEntityId().equals(entityId))
+                .findFirst();
+        if (optionalCard.isPresent()) {
+            Card card = optionalCard.get();
+            match.getStore().removeFromRow(card);
+            match.getEventBus().dispatch(new CardDestroyed(card));
+        } else {
+            logger.info("Could not destroy card with entityId={}, it wasn't in the store", entityId);
+        }
+    }
+
     public void destroyPlayedCard(Card card) {
         match.getCurrentTurn().removePlayedCard(card);
         match.getEventBus().dispatch(new CardDestroyed(card));
     }
 
     private Damageable getDamageableTarget(EntityId target) {
+        if (target == null) {
+            return null;
+        }
         Optional<Structure> optionalStructure = match.getAllStructures().stream()
                 .filter(structure -> structure.getEntityId().equals(target)).findFirst();
         if (optionalStructure.isPresent()) {
@@ -175,6 +191,26 @@ public class CardFlowController implements Controller {
             return match.getInactivePlayer();
         }
         return null;
+    }
+
+    private boolean validateDamageableTarget(Card card, Damageable damageable, Player player) {
+        if (damageable == null) {
+            logger.warn("Not playing card={}, couldn't find damageable target", card);
+            return false;
+        }
+        if (anotherEnemyStructureHasTaunt(player, damageable)) {
+            logger.warn("Not playing card={}, at least one other enemy structure has taunt", card);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateStoreTarget(Card card, EntityId entityId) {
+        if (entityId == null) {
+            logger.warn("Not playing card={}, couldn't find storefront target", card);
+            return false;
+        }
+        return match.getStore().getRow().stream().anyMatch(c -> c.getEntityId().equals(entityId));
     }
 
     private boolean anotherEnemyStructureHasTaunt(Player source, Damageable target) {

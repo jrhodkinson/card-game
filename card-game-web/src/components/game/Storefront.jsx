@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectStorefront } from "../../store/match/match-selector";
 import { selectedCardInStorefront } from "../../store/play/play-actions";
+import { selectDoesPendingCardRequireStoreTarget } from "../../store/play/play-selector";
 import Cards from "../card/Cards";
 
 const Wrapper = styled.div`
@@ -15,15 +16,21 @@ const Wrapper = styled.div`
 
 const Storefront = ({ active }) => {
   const storefront = useSelector(selectStorefront);
+  const selectedCardRequiresStoreFront = useSelector(
+    selectDoesPendingCardRequireStoreTarget
+  );
   const dispatch = useDispatch();
-  const handleCardClick = (card) => dispatch(selectedCardInStorefront(card));
+  const handleCardClick = (card) => {
+    dispatch(selectedCardInStorefront(card));
+  };
   return (
     <Wrapper>
       <Cards
         cards={storefront.row}
         short
         animateEntry
-        isInteractable={() => active}
+        isInteractable={() => active || selectedCardRequiresStoreFront}
+        shaking={selectedCardRequiresStoreFront}
         onCardClick={handleCardClick}
       />
     </Wrapper>

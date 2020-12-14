@@ -40,7 +40,7 @@ public class DescriptionDtoTest {
         });
 
         assertThat(parsed.size(), equalTo(2));
-        assertThat(parsed.get("text"), equalTo("Damage 3. Acquire $2 ok."));
+        assertThat(parsed.get("text"), equalTo("Damage 3. Acquire 2M ok."));
         List<List<Map<String, Object>>> lines = (List<List<Map<String, Object>>>) parsed.get("lines");
 
         List<Map<String, Object>> first = lines.get(0);
@@ -53,7 +53,7 @@ public class DescriptionDtoTest {
         assertThat(second, hasSize(3));
         assertThat(second.get(0).get("token"), equalTo(Keyword.ACQUIRE.toString()));
         assertThat(second.get(0).get("context"), equalTo(Keyword.ACQUIRE.getHelp()));
-        assertThat(second.get(1).get("token"), equalTo("$2"));
+        assertThat(second.get(1).get("token"), equalTo("2M"));
         assertThat(second.get(1).get("context"), nullValue());
         assertThat(second.get(2).get("token"), equalTo("ok"));
         assertThat(second.get(2).get("context"), nullValue());
