@@ -2,6 +2,7 @@
   "id": "RAPTURE",
   "name": "Rapture",
   "cost": 2,
+  "purchasable": true,
   "behaviours": [
     [
       "damageGroup",

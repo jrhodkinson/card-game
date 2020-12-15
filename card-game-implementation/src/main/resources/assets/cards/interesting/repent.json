@@ -2,6 +2,7 @@
   "id": "REPENT",
   "name": "Repent",
   "cost": 0,
+  "purchasable": false,
   "flavor": "Turn yourself from your idols",
   "behaviours": [
     [

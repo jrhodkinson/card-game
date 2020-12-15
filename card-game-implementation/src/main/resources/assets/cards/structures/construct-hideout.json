@@ -2,6 +2,7 @@
   "id": "construct:HIDEOUT",
   "name": "Construct Hideout",
   "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "construct",

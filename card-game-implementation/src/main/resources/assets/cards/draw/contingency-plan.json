@@ -2,6 +2,7 @@
   "id": "DRAW:2",
   "name": "Contingency Plan",
   "cost": 6,
+  "purchasable": true,
   "behaviours": [
     [
       "draw",

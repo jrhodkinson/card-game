@@ -2,6 +2,7 @@
   "id": "IDOL:POWER",
   "name": "Power, Idol",
   "cost": 7,
+  "purchasable": true,
   "behaviours": [
     [
       "gainCardOnPurchase",

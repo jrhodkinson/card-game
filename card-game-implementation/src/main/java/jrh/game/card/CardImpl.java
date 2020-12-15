@@ -29,12 +29,14 @@ public class CardImpl implements Card {
     private final String name;
     private final int cost;
     private final String flavorText;
+    private final boolean purchasable;
     private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours;
 
     private CardImpl(Builder builder) {
         this.cardId = builder.cardId;
         this.name = builder.name;
         this.cost = builder.cost;
+        this.purchasable = builder.purchasable;
         this.behaviours = builder.behaviours;
         this.flavorText = builder.flavorText;
         this.behaviours.values().forEach(behaviour -> behaviour.forCard(this));
@@ -70,6 +72,11 @@ public class CardImpl implements Card {
     }
 
     @Override
+    public boolean isPurchasable() {
+        return purchasable;
+    }
+
+    @Override
     public Description getDescription() {
         return Description.of(getAllBehaviours().stream().map(Behaviour::getDescription).collect(toList()));
     }
@@ -101,7 +108,7 @@ public class CardImpl implements Card {
 
     CardImpl duplicate() {
         CardImpl.Builder duplicateBuilder = CardImpl.card(cardId).withName(name).withCost(cost)
-                .withFlavorText(flavorText);
+                .isPurchasable(purchasable).withFlavorText(flavorText);
         behaviours.values().forEach(behaviour -> duplicateBuilder.withBehaviour(behaviour.duplicate()));
         return duplicateBuilder.build();
     }
@@ -130,15 +137,20 @@ public class CardImpl implements Card {
     }
 
     public interface CostSetter {
-        Builder withCost(int cost);
+        IsPurchasableSetter withCost(int cost);
     }
 
-    public static class Builder implements NameSetter, CostSetter {
+    public interface IsPurchasableSetter {
+        Builder isPurchasable(boolean purchasable);
+    }
+
+    public static class Builder implements NameSetter, CostSetter, IsPurchasableSetter {
 
         private final CardId cardId;
         private String name;
         private int cost;
         private String flavorText;
+        private boolean purchasable;
         private final ListMultimap<Class<? extends Behaviour>, AbstractBehaviour> behaviours = LinkedListMultimap
                 .create();
 
@@ -146,13 +158,21 @@ public class CardImpl implements Card {
             this.cardId = cardId;
         }
 
+        @Override
         public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
+        @Override
         public Builder withCost(int cost) {
             this.cost = cost;
+            return this;
+        }
+
+        @Override
+        public Builder isPurchasable(boolean purchasable) {
+            this.purchasable = purchasable;
             return this;
         }
 

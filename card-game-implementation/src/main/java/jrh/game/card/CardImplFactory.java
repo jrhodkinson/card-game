@@ -1,6 +1,6 @@
 package jrh.game.card;
 
-import jrh.game.Constants;
+import com.google.common.collect.Streams;
 import jrh.game.api.EventBus;
 import jrh.game.api.event.CardCreated;
 import jrh.game.asset.ConcreteAssetLibrary;
@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class CardImplFactory {
 
@@ -41,12 +41,24 @@ public class CardImplFactory {
     public Deck startingDeck() {
         Deck deck = new Deck();
         List<CardId> startingDeck = new ArrayList<>();
-        Stream.of(CardId.Debug.MONEY, CardId.Debug.DAMAGE, CardId.Debug.DRAW, new CardId("PURGE")).map(this::create)
-                .filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
-        while (deck.size() < Constants.INITIAL_HAND_SIZE) {
-            deck.add(randomCard());
-        }
+        Streams.concat(
+            Collections.nCopies(6, new CardId("MONEY:1")).stream(),
+            Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
+            Collections.nCopies(1, new CardId("FAVOUR")).stream()
+        )
+            .map(this::create)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .forEach(deck::add);
         Collections.shuffle(deck);
         return deck;
+    }
+
+    public List<CardImpl> startingStore() {
+        return Collections.nCopies(2, new CardId("MONEY:2")).stream()
+            .map(this::create)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.toList());
     }
 }

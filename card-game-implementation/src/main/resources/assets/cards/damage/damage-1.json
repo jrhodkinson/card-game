@@ -2,6 +2,7 @@
   "id": "DAMAGE:1",
   "name": "Blunt Dagger",
   "cost": 0,
+  "purchasable": true,
   "behaviours": [
     [
       "damage",

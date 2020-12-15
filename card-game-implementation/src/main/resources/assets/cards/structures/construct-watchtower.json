@@ -2,6 +2,7 @@
   "id": "construct:WATCHTOWER",
   "name": "Construct Watchtower",
   "cost": 4,
+  "purchasable": true,
   "behaviours": [
     [
       "construct",

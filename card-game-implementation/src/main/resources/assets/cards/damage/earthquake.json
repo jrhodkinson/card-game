@@ -2,6 +2,7 @@
   "id": "EARTHQUAKE",
   "name": "Tremor",
   "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "damageGroup",

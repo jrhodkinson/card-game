@@ -2,6 +2,7 @@
   "id": "IDOL:MONEY",
   "name": "Aureus, Idol",
   "cost": 5,
+  "purchasable": true,
   "behaviours": [
     [
       "gainCardOnPurchase",

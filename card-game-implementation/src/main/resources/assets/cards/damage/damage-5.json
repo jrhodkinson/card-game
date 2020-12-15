@@ -2,6 +2,7 @@
   "id": "DAMAGE:5",
   "name": "Holy Lance",
   "cost": 6,
+  "purchasable": true,
   "behaviours": [
     [
       "damage",

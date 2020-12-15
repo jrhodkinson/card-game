@@ -2,6 +2,7 @@
   "id": "MONEY:1",
   "name": "Denarius",
   "cost": 0,
+  "purchasable": true,
   "behaviours": [
     [
       "money",

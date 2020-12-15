@@ -2,6 +2,7 @@
   "id": "RICHES",
   "name": "Riches and Wonders",
   "cost": 7,
+  "purchasable": true,
   "behaviours": [
     [
       "damageOnPurchase",

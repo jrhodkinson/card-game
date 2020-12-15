@@ -2,6 +2,7 @@
   "id": "construct:HARBOUR",
   "name": "Construct Harbour",
   "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "construct",

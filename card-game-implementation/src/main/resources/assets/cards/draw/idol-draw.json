@@ -2,6 +2,7 @@
   "id": "IDOL:DRAW",
   "name": "Ease, Idol",
   "cost": 5,
+  "purchasable": true,
   "behaviours": [
     [
       "gainCardOnPurchase",

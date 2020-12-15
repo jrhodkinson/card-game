@@ -1,7 +1,8 @@
 {
-  "id": "Favour",
+  "id": "FAVOUR",
   "name": "Small Favour",
-  "cost": 1,
+  "cost": 2,
+  "purchasable": true,
   "behaviours": [
     [
       "money",

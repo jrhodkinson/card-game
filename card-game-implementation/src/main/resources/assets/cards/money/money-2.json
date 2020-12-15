@@ -1,7 +1,8 @@
 {
   "id": "MONEY:2",
   "name": "Half Shekel",
-  "cost": 3,
+  "cost": 1,
+  "purchasable": true,
   "behaviours": [
     [
       "money",

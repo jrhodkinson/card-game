@@ -2,6 +2,7 @@
   "id": "BLOOD_MONEY",
   "name": "Passion",
   "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "sacrifice",

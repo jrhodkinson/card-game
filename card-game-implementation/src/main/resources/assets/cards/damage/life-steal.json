@@ -2,6 +2,7 @@
   "id": "LIFE_STEAL",
   "name": "Siphon",
   "cost": 2,
+  "purchasable": true,
   "behaviours": [
     [
       "damage",

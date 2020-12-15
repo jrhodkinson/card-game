@@ -2,6 +2,7 @@
   "id": "ILL_GOTTEN_GAINS",
   "name": "Ill-gotten Gains",
   "cost": 2,
+  "purchasable": true,
   "behaviours": [
     [
       "damageOnPurchase",

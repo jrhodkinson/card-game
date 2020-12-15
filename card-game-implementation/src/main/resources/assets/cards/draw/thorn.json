@@ -2,6 +2,7 @@
   "id": "THORN",
   "name": "Rose Thorn",
   "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "damageGroup",

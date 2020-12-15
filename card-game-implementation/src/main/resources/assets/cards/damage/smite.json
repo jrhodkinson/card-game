@@ -2,6 +2,7 @@
   "id": "DAMAGE_VANISH",
   "name": "Smite",
   "cost": 9,
+  "purchasable": true,
   "behaviours": [
     [
       "damage",

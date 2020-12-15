@@ -2,6 +2,7 @@
   "id": "MIRACLE",
   "name": "Miracle",
   "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "draw",

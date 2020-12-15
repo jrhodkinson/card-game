@@ -2,6 +2,7 @@
   "id": "ARMAMENTS",
   "name": "Armaments",
   "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "gainCard",

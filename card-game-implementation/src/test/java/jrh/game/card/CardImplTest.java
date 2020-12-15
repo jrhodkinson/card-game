@@ -21,7 +21,7 @@ public class CardImplTest {
     public void flavorTextRoundTripsViaJson() throws JsonProcessingException {
         String flavorText = randomAlphanumeric(12);
         Card card = CardImpl.card(new CardId(UUID.randomUUID().toString())).withName("test card").withCost(1)
-                .withFlavorText(flavorText).build();
+                .isPurchasable(true).withFlavorText(flavorText).build();
         String json = objectMapper.writeValueAsString(card);
         CardImpl parsedCard = objectMapper.readValue(json, CardImpl.class);
         assertThat(parsedCard.getFlavorText().get(), equalTo(flavorText));

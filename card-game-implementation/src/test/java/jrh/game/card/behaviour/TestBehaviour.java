@@ -21,7 +21,7 @@ public class TestBehaviour {
     public static void roundTripsViaJson(AbstractBehaviour behaviour) {
         try {
             Class<? extends AbstractBehaviour> behaviourClass = behaviour.getClass();
-            Card card = CardImpl.card(new CardId("test")).withName("Test").withCost(1).withBehaviour(behaviour).build();
+            Card card = CardImpl.card(new CardId("test")).withName("Test").withCost(1).isPurchasable(true).withBehaviour(behaviour).build();
             Card parsed = objectMapper.readValue(objectMapper.writeValueAsString(card), CardImpl.class);
             Behaviour parsedBehaviour = parsed.getBehaviours(behaviourClass).get(0);
             for (Field field : behaviourClass.getDeclaredFields()) {

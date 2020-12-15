@@ -2,6 +2,7 @@
   "id": "CHARITY",
   "name": "Charity",
   "cost": 4,
+  "purchasable": true,
   "behaviours": [
     [
       "healGroup",

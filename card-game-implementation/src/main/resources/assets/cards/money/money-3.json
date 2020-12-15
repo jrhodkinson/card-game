@@ -1,7 +1,8 @@
 {
   "id": "MONEY:3",
   "name": "Stater",
-  "cost": 5,
+  "cost": 3,
+  "purchasable": true,
   "behaviours": [
     [
       "money",

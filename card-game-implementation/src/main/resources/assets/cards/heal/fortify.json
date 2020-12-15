@@ -2,6 +2,7 @@
   "id": "FORTIFY",
   "name": "Fortify",
   "cost": 1,
+  "purchasable": true,
   "behaviours": [
     [
       "healGroup",

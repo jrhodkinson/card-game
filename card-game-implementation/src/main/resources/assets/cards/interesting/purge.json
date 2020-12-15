@@ -2,6 +2,7 @@
   "id": "PURGE",
   "name": "Cast Out",
   "cost": 2,
+  "purchasable": true,
   "behaviours": [
     [
       "purge"

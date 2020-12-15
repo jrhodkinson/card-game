@@ -2,6 +2,7 @@
   "id": "REGRET",
   "name": "Regret",
   "cost": 0,
+  "purchasable": false,
   "behaviours": [
     [
       "gainCard",

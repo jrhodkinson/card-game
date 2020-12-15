@@ -2,6 +2,7 @@
   "id": "DRAW:DAMAGE",
   "name": "Sleight of Hand",
   "cost": 7,
+  "purchasable": true,
   "behaviours": [
     [
       "damage",

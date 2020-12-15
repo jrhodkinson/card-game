@@ -2,6 +2,7 @@
   "id": "construct:TOWER",
   "name": "Construct Tower",
   "cost": 6,
+  "purchasable": true,
   "behaviours": [
     [
       "construct",

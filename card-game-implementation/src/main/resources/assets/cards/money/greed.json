@@ -2,6 +2,7 @@
   "id": "GREED",
   "name": "Greed",
   "cost": 1,
+  "purchasable": true,
   "behaviours": [
     [
       "gainCard",

@@ -2,6 +2,7 @@
   "id": "DRAW:PROMISE",
   "name": "Promise of Eternity",
   "cost": 0,
+  "purchasable": false,
   "behaviours": [
     [
       "heal",

@@ -2,6 +2,7 @@
   "id": "ALCHEMISE",
   "name": "Alchemise",
   "cost": 4,
+  "purchasable": true,
   "behaviours": [
     [
       "purge"
