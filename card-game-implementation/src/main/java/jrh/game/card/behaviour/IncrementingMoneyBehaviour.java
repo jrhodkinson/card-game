@@ -35,7 +35,7 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
     @Override
     public AtomicDescription getDescription() {
         return AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(amount)
-                .plainString("then increase future $ by").number(increment).build();
+                .plainString("then increase by").money(increment).build();
     }
 
     @Subscribe

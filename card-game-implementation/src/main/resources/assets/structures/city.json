@@ -1,0 +1,14 @@
+{
+  "id": "CITY",
+  "name": "City",
+  "health": 12,
+  "powers": [
+    [
+      "incrementingDamage",
+      {
+        "amount": 3,
+        "increment": 1
+      }
+    ]
+  ]
+}

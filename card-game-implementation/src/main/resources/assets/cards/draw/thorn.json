@@ -1,0 +1,18 @@
+{
+  "id": "THORN",
+  "name": "Rose Thorn",
+  "cost": 3,
+  "behaviours": [
+    [
+      "damageGroup",
+      {
+        "targets": ["SELF", "OTHER"],
+        "amount": 4
+      }
+    ],
+    [
+      "draw",
+      1
+    ]
+  ]
+}

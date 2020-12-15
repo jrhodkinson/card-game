@@ -1,0 +1,12 @@
+{
+  "id": "construct:TOWER",
+  "name": "Construct Tower",
+  "cost": 6,
+  "behaviours": [
+    [
+      "construct",
+      "TOWER"
+    ],
+    [ "vanish" ]
+  ]
+}

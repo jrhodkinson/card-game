@@ -1,0 +1,18 @@
+{
+  "id": "WATCHTOWER",
+  "name": "Watchower",
+  "health": 3,
+  "powers": [
+    [
+      "money",
+      4
+    ],
+    [
+      "damageOnPurchase",
+      {
+        "purchasers": [ "OTHER" ],
+        "amount": 1
+      }
+    ]
+  ]
+}

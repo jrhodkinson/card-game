@@ -1,0 +1,12 @@
+{
+  "id": "DAMAGE_VANISH",
+  "name": "Smite",
+  "cost": 9,
+  "behaviours": [
+    [
+      "damage",
+      12
+    ],
+    [ "vanish" ]
+  ]
+}

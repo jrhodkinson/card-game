@@ -1,0 +1,18 @@
+{
+  "id": "CHARITY",
+  "name": "Charity",
+  "cost": 4,
+  "behaviours": [
+    [
+      "healGroup",
+      {
+        "amount": 7,
+        "targets": ["OTHER"]
+      }
+    ],
+    [
+      "draw",
+      3
+    ]
+  ]
+}

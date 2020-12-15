@@ -1,0 +1,10 @@
+{
+  "id": "PALISADE",
+  "name": "Palisade",
+  "health": 4,
+  "powers": [
+    [
+      "taunt"
+    ]
+  ]
+}

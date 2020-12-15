@@ -1,0 +1,14 @@
+{
+  "id": "HIDEOUT",
+  "name": "Hideout",
+  "health": 5,
+  "powers": [
+    [
+      "damageOnPurchase",
+      {
+        "purchasers": [ "SELF" ],
+        "amount": 2
+      }
+    ]
+  ]
+}

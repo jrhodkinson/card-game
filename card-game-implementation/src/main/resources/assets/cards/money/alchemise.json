@@ -1,0 +1,14 @@
+{
+  "id": "ALCHEMISE",
+  "name": "Alchemise",
+  "cost": 4,
+  "behaviours": [
+    [
+      "purge"
+    ],
+    [
+      "money",
+      3
+    ]
+  ]
+}

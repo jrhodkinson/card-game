@@ -1,14 +1,14 @@
 {
   "id": "HARBOUR",
   "name": "Harbour",
-  "health": 15,
+  "health": 3,
   "powers": [
     [
       "taunt"
     ],
     [
       "money",
-      3
+      2
     ]
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "id": "DRAW:ETERNITY",
+  "name": "Eternity",
+  "cost": 0,
+  "behaviours": [
+    [
+      "heal",
+      3
+    ],
+    [
+      "draw",
+      2
+    ]
+  ]
+}

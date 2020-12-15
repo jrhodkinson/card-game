@@ -100,11 +100,13 @@ public class FileSystemAssetLibrary implements ConcreteAssetLibrary {
         DescriptionContext descriptionContext = new DescriptionContext(this);
         cards.keySet().stream().sorted(Comparator.comparing(CardId::toString)).forEach((cardId) -> {
             Card card = cards.get(cardId);
-            logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(), card.getDescription().get(descriptionContext));
+            logger.debug("Loaded card: {}, {}, {}", card.getCardId(), card.getName(),
+                    card.getDescription().get(descriptionContext));
         });
         structures.keySet().stream().sorted(Comparator.comparing(StructureId::toString)).forEach((structureId) -> {
             Structure structure = structures.get(structureId);
-            logger.debug("Loaded structure: {}, {}, {}", structure.getStructureId(), structure.getName(), structure.getDescription().get(descriptionContext));
+            logger.debug("Loaded structure: {}, {}, {}", structure.getStructureId(), structure.getName(),
+                    structure.getDescription().get(descriptionContext));
         });
     }
 

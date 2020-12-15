@@ -1,7 +1,7 @@
 {
   "id": "ANGER",
-  "name": "Anger",
-  "cost": 5,
+  "name": "Wrath",
+  "cost": 4,
   "behaviours": [
     [
       "incrementingDamage",

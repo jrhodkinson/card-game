@@ -1,11 +1,11 @@
 {
-  "id": "construct:HARBOUR",
-  "name": "Construct Harbour",
+  "id": "construct:HIDEOUT",
+  "name": "Construct Hideout",
   "cost": 3,
   "behaviours": [
     [
       "construct",
-      "HARBOUR"
+      "HIDEOUT"
     ],
     [ "vanish" ]
   ]

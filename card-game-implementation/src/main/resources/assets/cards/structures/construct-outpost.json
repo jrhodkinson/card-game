@@ -1,11 +1,11 @@
 {
-  "id": "construct:GARRISON",
-  "name": "Construct Garrison",
+  "id": "construct:OUTPOST",
+  "name": "Construct Outpost",
   "cost": 5,
   "behaviours": [
     [
       "construct",
-      "GARRISON"
+      "OUTPOST"
     ],
     [ "vanish" ]
   ]

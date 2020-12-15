@@ -1,11 +1,11 @@
 {
-  "id": "construct:WALL",
-  "name": "Construct Wall",
+  "id": "construct:WATCHTOWER",
+  "name": "Construct Watchtower",
   "cost": 4,
   "behaviours": [
     [
       "construct",
-      "WALL"
+      "WATCHTOWER"
     ],
     [ "vanish" ]
   ]

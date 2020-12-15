@@ -1,0 +1,21 @@
+{
+  "id": "RICHES",
+  "name": "Riches and Wonders",
+  "cost": 7,
+  "behaviours": [
+    [
+      "damageOnPurchase",
+      {
+        "amount": 3,
+        "targets": ["SELF"]
+      }
+    ],
+    [
+      "incrementingMoney",
+      {
+        "amount": 3,
+        "increment": 2
+      }
+    ]
+  ]
+}

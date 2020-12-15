@@ -1,0 +1,15 @@
+{
+  "id": "DRAW:DAMAGE",
+  "name": "Sleight of Hand",
+  "cost": 7,
+  "behaviours": [
+    [
+      "damage",
+      4
+    ],
+    [
+      "draw",
+      2
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "id": "FORTIFY",
   "name": "Fortify",
-  "cost": 2,
+  "cost": 1,
   "behaviours": [
     [
       "healGroup",

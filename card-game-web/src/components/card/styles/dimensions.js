@@ -1,9 +1,9 @@
 export const card = {
-  WIDTH: 132,
+  WIDTH: 136,
   FULL_HEIGHT: 192,
   BORDER_RADIUS: 3,
   MARGIN_TOP_BOTTOM: 10,
-  MARGIN_LEFT_RIGHT: 8,
+  MARGIN_LEFT_RIGHT: 6,
   PADDING: 4,
   STUMP_HEIGHT: 35,
 };
@@ -36,5 +36,5 @@ export const description = {
     (header.HEIGHT + header.MARGIN_BOTTOM) -
     (image.HEIGHT + image.MARGIN_BOTTOM),
   MARGIN_BOTTOM: card.PADDING,
-  FONT_SIZE: 0.88,
+  FONT_SIZE: 0.84,
 };

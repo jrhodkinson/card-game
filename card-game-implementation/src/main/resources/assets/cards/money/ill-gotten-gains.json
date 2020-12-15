@@ -1,7 +1,7 @@
 {
   "id": "ILL_GOTTEN_GAINS",
-  "name": "Ill-gotten gains",
-  "cost": 4,
+  "name": "Ill-gotten Gains",
+  "cost": 2,
   "behaviours": [
     [
       "damageOnPurchase",

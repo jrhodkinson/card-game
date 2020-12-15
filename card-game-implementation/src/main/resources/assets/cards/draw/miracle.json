@@ -1,0 +1,12 @@
+{
+  "id": "MIRACLE",
+  "name": "Miracle",
+  "cost": 3,
+  "behaviours": [
+    [
+      "draw",
+      3
+    ],
+    [ "vanish" ]
+  ]
+}

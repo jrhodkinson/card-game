@@ -1,7 +1,7 @@
 {
   "id": "RAPTURE",
   "name": "Rapture",
-  "cost": 3,
+  "cost": 2,
   "behaviours": [
     [
       "damageGroup",

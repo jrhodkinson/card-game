@@ -1,10 +1,10 @@
 {
-  "id": "DRAW:2",
-  "name": "Contingency Plan",
-  "cost": 6,
+  "id": "Favour",
+  "name": "Small Favour",
+  "cost": 1,
   "behaviours": [
     [
-      "draw",
+      "money",
       2
     ],
     [

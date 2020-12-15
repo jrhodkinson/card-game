@@ -1,0 +1,18 @@
+{
+  "id": "DRAW:PROMISE",
+  "name": "Promise of Eternity",
+  "cost": 0,
+  "behaviours": [
+    [
+      "heal",
+      2
+    ],
+    [
+      "gainCard",
+      "DRAW:ETERNITY"
+    ],
+    [
+      "vanish"
+    ]
+  ]
+}

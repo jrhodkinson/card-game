@@ -1,0 +1,14 @@
+{
+  "id": "DRAW:PRAYER",
+  "name": "Prayer",
+  "cost": 0,
+  "behaviours": [
+    [
+      "gainCard",
+      "DRAW:PROMISE"
+    ],
+    [
+      "vanish"
+    ]
+  ]
+}

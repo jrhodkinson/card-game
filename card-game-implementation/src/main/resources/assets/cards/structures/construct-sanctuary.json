@@ -1,0 +1,11 @@
+{
+  "id": "construct:SANCTUARY",
+  "name": "Take Sanctuary",
+  "cost": 3,
+  "behaviours": [
+    [
+      "construct",
+      "SANCTUARY"
+    ]
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "ARMAMENTS",
+  "name": "Armaments",
+  "cost": 3,
+  "behaviours": [
+    [
+      "gainCard",
+      "DAMAGE:3"
+    ]
+  ]
+}

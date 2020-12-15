@@ -1,0 +1,12 @@
+{
+  "id": "construct:PALISADE",
+  "name": "Construct Palisade",
+  "cost": 5,
+  "behaviours": [
+    [
+      "construct",
+      "PALISADE"
+    ],
+    [ "vanish" ]
+  ]
+}

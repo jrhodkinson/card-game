@@ -1,7 +1,7 @@
 {
-  "id": "GARRISON",
-  "name": "Garrison",
-  "health": 12,
+  "id": "OUTPOST",
+  "name": "Outpost",
+  "health": 7,
   "powers": [
     [
       "incrementingDamage",
