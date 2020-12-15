@@ -42,8 +42,9 @@ public class CardImplFactory {
         Deck deck = new Deck();
         List<CardId> startingDeck = new ArrayList<>();
         Streams.concat(
-            Collections.nCopies(6, new CardId("MONEY:1")).stream(),
+            Collections.nCopies(4, new CardId("MONEY:1")).stream(),
             Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
+            Collections.nCopies(2, new CardId("MONEY:2")).stream(),
             Collections.nCopies(1, new CardId("FAVOUR")).stream()
         )
             .map(this::create)

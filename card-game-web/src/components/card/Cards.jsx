@@ -1,4 +1,5 @@
 import React from "react";
+import { card, image } from "./styles/dimensions";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styled, { keyframes } from "styled-components";
 import Card from "./Card";
@@ -15,6 +16,11 @@ const Wrapper = styled.div`
   // overflow hack
   margin: -10px 0 0 -10px;
   padding: 10px 0 0 10px;
+
+  min-height: ${({ short }) =>
+    short
+      ? card.FULL_HEIGHT - image.HEIGHT - card.PADDING
+      : card.FULL_HEIGHT}px;
 `;
 
 const fadeIn = keyframes`
@@ -64,7 +70,7 @@ const Cards = ({
 
   if (animateEntry) {
     return (
-      <Wrapper>
+      <Wrapper short={short}>
         <TransitionGroup component={null}>
           {cards.map((card) => (
             <CSSTransition key={card.entityId} timeout={animationDuration}>

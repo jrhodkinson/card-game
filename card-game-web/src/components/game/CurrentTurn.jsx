@@ -1,7 +1,7 @@
 import React from "react";
 import Countdown from "react-countdown";
-import styled, { keyframes } from "styled-components";
 import { useSelector } from "react-redux";
+import styled, { keyframes } from "styled-components";
 import { endTurn } from "../../gateway/ws";
 import {
   selectCurrentTurn,
@@ -9,12 +9,14 @@ import {
 } from "../../store/match/match-selector";
 import Cards from "../card/Cards";
 import * as S from "../styles/Button.styles";
+import { MAIN_COLUMN_WIDTH_PX } from "../styles/dimensions";
 
 const Wrapper = styled.div`
   text-align: center;
   display: grid;
-  grid-column: 2 / 3;
-  grid-template-columns: 200px 1fr 200px;
+  grid-column: 1 / 4;
+  grid-template-columns: 200px minmax(${MAIN_COLUMN_WIDTH_PX - 400}px, 1fr) 200px;
+  margin: auto;
   align-items: center;
   padding: 10px 0;
 `;
