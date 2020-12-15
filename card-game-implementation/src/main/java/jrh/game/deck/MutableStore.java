@@ -3,7 +3,6 @@ package jrh.game.deck;
 import jrh.game.api.Card;
 import jrh.game.api.Store;
 import jrh.game.card.CardImplFactory;
-import jrh.game.common.CardId;
 import jrh.game.common.EntityId;
 
 import java.util.Collections;
@@ -25,7 +24,7 @@ public class MutableStore implements Store {
         int index = row.indexOf(card);
         if (index != -1) {
             row.remove(card);
-            row.add(index, cardImplFactory.randomCard());
+            row.add(index, cardImplFactory.randomPurchasableCard());
             return true;
         }
         return false;
@@ -34,7 +33,7 @@ public class MutableStore implements Store {
     private void initialise(int size) {
         row.addAll(cardImplFactory.startingStore());
         while (row.size() < size) {
-            row.add(cardImplFactory.randomCard());
+            row.add(cardImplFactory.randomPurchasableCard());
         }
         Collections.shuffle(row);
     }

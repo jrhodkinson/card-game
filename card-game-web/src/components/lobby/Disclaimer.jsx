@@ -36,9 +36,8 @@ const Disclaimer = () => (
     <p>
       Revelation 21:8 is in <strong>alpha</strong> — unpolished and incomplete.
     </p>
-    <p>Your feedback is instrumental in improving this game.</p>
-    <p>Updates on the 1st and 3rd Saturday of each month.</p>
-    <p>Thank you for taking the time to play.</p>
+    <p>Thanks for taking the time to play. Your feedback helps.</p>
+    <p>Updates on the 1st and 3rd Saturday of the month.</p>
     <p className="signature">~ RD</p>
   </Wrapper>
 );

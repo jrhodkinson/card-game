@@ -50,7 +50,7 @@ const CurrentTurn = ({ active }) => {
   return (
     <Wrapper>
       <Money>{currentTurn.money}M</Money>
-      <Cards cards={currentTurn.playedCards} short />
+      <Cards cards={currentTurn.playedCards} short animateExit />
       <div>
         <Countdown
           date={dateTurnWillEnd}

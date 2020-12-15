@@ -1,7 +1,7 @@
 import React from "react";
 import { card, image } from "./styles/dimensions";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import Card from "./Card";
 
 const animationDelay = 200;
@@ -33,18 +33,51 @@ const fadeIn = keyframes`
   }
 `;
 
-const AnimationWrapper = styled.div`
-  &.enter {
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+
+  100% {
     opacity: 0;
   }
-  &.enter-active {
-    animation: ${fadeIn} ${animationDuration - animationDelay}ms
-      ${animationDelay}ms;
-  }
-  &.exit,
-  .exit-active {
-    display: none;
-  }
+`;
+
+const AnimationWrapper = styled.div`
+  ${({ animateEntry }) => {
+    if (animateEntry) {
+      return css`
+        &.enter {
+          opacity: 0;
+        }
+
+        &.enter-active {
+          animation: ${fadeIn} ${animationDuration - animationDelay}ms
+            ${animationDelay}ms;
+        }
+
+        &.exit,
+        .exit-active {
+          display: none;
+        }
+      `;
+    }
+  }};
+
+  ${({ animateExit }) => {
+    if (animateExit) {
+      return css`
+        .exit {
+          opacity: 0;
+        }
+
+        .exit-active {
+          animation: ${fadeOut} ${animationDuration - animationDelay}ms
+            ${animationDelay}ms;
+        }
+      `;
+    }
+  }};
 `;
 
 const Cards = ({
@@ -53,6 +86,7 @@ const Cards = ({
   selectedCardEntityId = undefined,
   isInteractable = () => false,
   animateEntry = false,
+  animateExit = false,
   onCardClick = () => {},
   shaking = false,
 }) => {
@@ -68,13 +102,18 @@ const Cards = ({
     />
   );
 
-  if (animateEntry) {
+  if (animateEntry || animateExit) {
     return (
       <Wrapper short={short}>
         <TransitionGroup component={null}>
           {cards.map((card) => (
             <CSSTransition key={card.entityId} timeout={animationDuration}>
-              <AnimationWrapper>{cardComponent(card)}</AnimationWrapper>
+              <AnimationWrapper
+                animateEntry={animateEntry}
+                animateExit={animateExit}
+              >
+                {cardComponent(card)}
+              </AnimationWrapper>
             </CSSTransition>
           ))}
         </TransitionGroup>
