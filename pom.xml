@@ -7,6 +7,10 @@
     <artifactId>card-game</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <scm>
+        <developerConnection>scm:svn:https://github.com/jrhodkinson/card-game.git</developerConnection>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -136,6 +140,11 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
             </plugin>
         </plugins>
     </build>
