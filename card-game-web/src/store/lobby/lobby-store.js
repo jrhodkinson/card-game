@@ -16,9 +16,11 @@ export const defaultState = Immutable({
   matchPoller: undefined,
   queueing: false,
   activeGames: 0,
+  gameOffline: false,
 });
 
 export const RECEIVED_ACTIVE_GAMES = `${NAMESPACE}/RECEIVED_ACTIVE_GAMES`;
+export const RECEIVED_GAME_OFFLINE = `${NAMESPACE}/RECEIVED_GAME_OFFLINE`;
 export const RECEIVED_MATCH_ID = `${NAMESPACE}/RECEIVED_MATCH_ID`;
 export const RECEIVED_NO_MATCH_ID = `${NAMESPACE}/RECEIVED_NO_MATCH_ID`;
 export const STARTED_MATCH_POLLER = `${NAMESPACE}/STARTED_MATCH_POLLER`;
@@ -41,6 +43,8 @@ export default (state = defaultState, action) => {
       return state.set("matchId", undefined).set("queueing", true);
     case STARTED_MATCH_POLLER:
       return state.set("matchPoller", action.matchPoller);
+    case RECEIVED_GAME_OFFLINE:
+      return state.set("gameOffline", true);
     case LEFT_QUEUE:
     case LOGGED_OUT:
       if (state.matchPoller) {
@@ -70,24 +74,37 @@ export const leaveQueue = () => (dispatch) => {
 };
 
 export const fetchActiveGames = () => (dispatch) => {
-  getActiveGames().then(({ data }) => {
-    dispatch({ type: RECEIVED_ACTIVE_GAMES, activeGames: data.activeGames });
-  });
+  getActiveGames()
+    .then(({ data }) => {
+      dispatch({ type: RECEIVED_ACTIVE_GAMES, activeGames: data.activeGames });
+    })
+    .catch(({ response }) => {
+      if (response.status === 404) {
+        dispatch({ type: RECEIVED_GAME_OFFLINE });
+      }
+    });
 };
 
 export const fetchQueueStatus = () => (dispatch, getState) => {
   if (!getState()[LOBBY_STATE].matchPoller) {
     const matchPoller = setInterval(() => {
-      getQueueStatus().then(({ data }) => {
-        if (data.type === "in match") {
-          dispatch({ type: RECEIVED_MATCH_ID, matchId: data.matchId });
-          clearInterval(matchPoller);
-        }
-        dispatch({ type: RECEIVED_NO_MATCH_ID });
-        if (data.type === "in queue") {
-          dispatch({ type: IN_QUEUE });
-        }
-      });
+      getQueueStatus()
+        .then(({ data }) => {
+          if (data.type === "in match") {
+            dispatch({ type: RECEIVED_MATCH_ID, matchId: data.matchId });
+            clearInterval(matchPoller);
+          }
+          dispatch({ type: RECEIVED_NO_MATCH_ID });
+          if (data.type === "in queue") {
+            dispatch({ type: IN_QUEUE });
+          }
+        })
+        .catch(({ response }) => {
+          if (response.status === 404) {
+            dispatch({ type: RECEIVED_NO_MATCH_ID });
+            clearInterval(matchPoller);
+          }
+        });
     }, 1500);
     dispatch({ type: STARTED_MATCH_POLLER, matchPoller: matchPoller });
   }
@@ -98,3 +115,4 @@ export const selectIsQueueing = (store) => store[LOBBY_STATE].queueing;
 export const selectCurrentMatchId = (store) => store[LOBBY_STATE].matchId;
 export const selectHaveInitialisedMatchId = (store) =>
   store[LOBBY_STATE].initialised;
+export const selectIsGameOffline = (store) => store[LOBBY_STATE].gameOffline;

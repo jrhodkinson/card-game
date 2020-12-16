@@ -6,7 +6,6 @@ import io.javalin.plugin.json.JavalinJackson;
 import jrh.game.common.ObjectMapperFactory;
 import jrh.game.common.asset.AssetLibrary;
 import jrh.game.common.description.DescriptionContext;
-import jrh.game.service.Cookies.Environment;
 import jrh.game.service.account.AccountEndpoint;
 import jrh.game.service.account.Accounts;
 import jrh.game.service.account.SessionAccessManager;
@@ -38,14 +37,18 @@ public class Server {
     }
 
     private final String version;
+    private final Cookies cookies;
+    private final Sessions sessions;
     private final MatchManager matchManager;
     private final MatchQueue matchQueue;
     private final Accounts accounts;
     private final AssetLibrary assetLibrary;
 
-    public Server(String version, MatchManager matchManager, MatchQueue matchQueue, Accounts accounts,
-            AssetLibrary assetLibrary) {
+    public Server(String version, Cookies cookies, Sessions sessions, MatchManager matchManager, MatchQueue matchQueue, Accounts accounts,
+                  AssetLibrary assetLibrary) {
         this.version = version;
+        this.cookies = cookies;
+        this.sessions = sessions;
         this.matchManager = matchManager;
         this.matchQueue = matchQueue;
         this.accounts = accounts;
@@ -53,9 +56,6 @@ public class Server {
     }
 
     public void start() {
-        Cookies cookies = new Cookies(Environment.DEVELOPMENT);
-        Sessions sessions = new Sessions();
-
         SessionAccessManager accessManager = new SessionAccessManager(cookies, sessions);
 
         Javalin javalin = Javalin.create(config -> config.accessManager(accessManager));

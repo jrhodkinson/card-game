@@ -4,6 +4,7 @@ import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.asset.FileSystemAssetLibrary;
 import jrh.game.card.store.Database;
 import jrh.game.service.account.Accounts;
+import jrh.game.service.account.Sessions;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.lobby.MatchQueue;
 import jrh.game.service.lobby.Matchmaker;
@@ -26,18 +27,26 @@ public class Main {
         ServiceConfiguration configuration = new ServiceConfiguration();
         String version = configuration.version();
 
-        logger.info("Started {} version={} at {}", getClass(), version, Instant.now());
+        logger.info("Started {} version={} at {} in environment={}", getClass(), version, Instant.now(), configuration.environment());
 
+        Cookies cookies = new Cookies(configuration.environment());
+        Sessions sessions = new Sessions();
         Database database = configuration.database();
         Accounts accounts = new Accounts(database.accountStore());
-        ConcreteAssetLibrary assetLibrary = assetLibrary();
-        MatchManager matchManager = new MatchManager(assetLibrary, accounts);
-        MatchQueue matchQueue = new MatchQueue();
-        Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
-        Server server = new Server(version, matchManager, matchQueue, accounts, assetLibrary);
-
-        matchmaker.start();
-        server.start();
+        if (configuration.shouldEnablePlay()) {
+            logger.info("Starting Server");
+            ConcreteAssetLibrary assetLibrary = assetLibrary();
+            MatchManager matchManager = new MatchManager(assetLibrary, accounts);
+            MatchQueue matchQueue = new MatchQueue();
+            Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
+            Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
+            matchmaker.start();
+            server.start();
+        } else {
+            logger.info("Starting NoPlayServer");
+            NoPlayServer noPlayServer = new NoPlayServer(version, cookies, sessions, accounts);
+            noPlayServer.start();
+        }
     }
 
     private ConcreteAssetLibrary assetLibrary() {

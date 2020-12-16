@@ -56,7 +56,4 @@ public class Cookies {
         return cookie;
     }
 
-    public enum Environment {
-        DEVELOPMENT
-    }
 }
