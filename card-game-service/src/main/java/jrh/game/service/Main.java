@@ -27,7 +27,8 @@ public class Main {
         ServiceConfiguration configuration = new ServiceConfiguration();
         String version = configuration.version();
 
-        logger.info("Started {} version={} at {} in environment={}", getClass(), version, Instant.now(), configuration.environment());
+        logger.info("Started {} version={} at {} in environment={}", getClass(), version, Instant.now(),
+                configuration.environment());
 
         Cookies cookies = new Cookies(configuration.environment());
         Sessions sessions = new Sessions();

@@ -44,8 +44,8 @@ public class Server {
     private final Accounts accounts;
     private final AssetLibrary assetLibrary;
 
-    public Server(String version, Cookies cookies, Sessions sessions, MatchManager matchManager, MatchQueue matchQueue, Accounts accounts,
-                  AssetLibrary assetLibrary) {
+    public Server(String version, Cookies cookies, Sessions sessions, MatchManager matchManager, MatchQueue matchQueue,
+            Accounts accounts, AssetLibrary assetLibrary) {
         this.version = version;
         this.cookies = cookies;
         this.sessions = sessions;
