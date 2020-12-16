@@ -16,7 +16,7 @@ services:
       - EMAIL=richard@revelation218.com
       - STAGING=false
     volumes:
-      - ssl:/config
+      - ssl_config:/config
       - ./nginx_ssl_proxy.conf:/config/nginx/site-confs/default
     ports:
       - 443:443
