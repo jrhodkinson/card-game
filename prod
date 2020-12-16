@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "up" ]; then
+  docker-compose -f card-game-docker/target/docker/docker-compose.yml -p revelation up -d
+elif [ "$1" == "down" ]; then
+  docker-compose -f card-game-docker/target/docker/docker-compose.yml -p revelation down
+elif [ "$1" == "logs" ]; then
+  docker-compose -f card-game-docker/target/docker/docker-compose.yml -p revelation logs -f
+fi
