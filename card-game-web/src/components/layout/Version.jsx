@@ -13,7 +13,7 @@ const Version = () => {
     return null;
   }
 
-  return version;
+  return version + " (alpha)";
 };
 
 export default Version;
