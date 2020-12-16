@@ -16,7 +16,6 @@ services:
       - ENVIRONMENT=PRODUCTION
       - DATABASE_HOST=mongo
       - DATABASE_PORT=27017
-      - ENABLE_PLAY=false
     ports:
       - "7000"
     depends_on:
