@@ -41,9 +41,7 @@ const GameOffline = () => (
         coming months will shape this game.
       </p>
       <p>
-        <strong>
-          Doors open Saturday at 19:00 GMT (13:00 CST, Sunday 08:00 NZDT).
-        </strong>
+        <strong>Doors open Saturday at 16:00 GMT (10:00 CST).</strong>
       </p>
       <p>
         If you haven't already, please join the{" "}
