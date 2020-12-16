@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <scm>
-        <developerConnection>scm:svn:https://github.com/jrhodkinson/card-game.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/jrhodkinson/card-game.git</developerConnection>
     </scm>
 
     <properties>
