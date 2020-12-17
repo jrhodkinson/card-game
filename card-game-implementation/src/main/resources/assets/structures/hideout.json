@@ -4,6 +4,10 @@
   "health": 5,
   "powers": [
     [
+      "money",
+      4
+    ],
+    [
       "damageOnPurchase",
       {
         "purchasers": [ "SELF" ],
