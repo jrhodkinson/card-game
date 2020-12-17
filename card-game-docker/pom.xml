@@ -4,7 +4,7 @@
     <parent>
         <groupId>jrh</groupId>
         <artifactId>card-game</artifactId>
-        <version>0.0.3</version>
+        <version>0.0.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>card-game-docker</artifactId>
