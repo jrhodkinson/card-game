@@ -3,6 +3,7 @@
 - Reword the help text for 'Gain' to specify that gained cards go directly to the discard pile (previously stated the card was added 'to your deck')
 - Change the text displayed when a player's discard pile is empty to be '0 cards in discard pile' (previously was 'empty discard pile')
 - Increase the turn timer to 75s (was 60s)
+- Remove the delay before the help text pops up when hovering over a card
 
 # 0.0.3
 - Fix 'Hideout' and 'Watchtower' powers
