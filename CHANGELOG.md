@@ -2,6 +2,7 @@
 - Add structures' health to their descriptions
 - Reword the help text for 'Gain' to specify that gained cards go directly to the discard pile (previously stated the card was added 'to your deck')
 - Change the text displayed when a player's discard pile is empty to be '0 cards in discard pile' (previously was 'empty discard pile')
+- Increase the turn timer to 75s (was 60s)
 
 # 0.0.3
 - Fix 'Hideout' and 'Watchtower' powers

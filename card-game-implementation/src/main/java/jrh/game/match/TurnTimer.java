@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TurnTimer implements EventHandler {
 
-    private final int TURN_TIMEOUT_IN_SECONDS = 60;
+    private final int TURN_TIMEOUT_IN_SECONDS = 75;
 
     private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
