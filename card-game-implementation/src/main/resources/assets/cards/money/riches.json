@@ -7,7 +7,7 @@
     [
       "damageOnPurchase",
       {
-        "amount": 3,
+        "amount": 5,
         "targets": ["SELF"]
       }
     ],
@@ -15,7 +15,7 @@
       "incrementingMoney",
       {
         "amount": 3,
-        "increment": 2
+        "increment": 1
       }
     ]
   ]

@@ -1,7 +1,7 @@
 {
   "id": "CITY",
   "name": "City",
-  "health": 12,
+  "health": 9,
   "powers": [
     [
       "incrementingDamage",
