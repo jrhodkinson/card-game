@@ -22,10 +22,6 @@ public class AtomicDescription {
         this.builder = builder;
     }
 
-    public static AtomicDescription keyword(Keyword keyword) {
-        return builder().keyword(keyword).build();
-    }
-
     public static AtomicDescription.Builder builder() {
         return new Builder();
     }
@@ -74,6 +70,11 @@ public class AtomicDescription {
 
         public Builder card(CardId cardId) {
             pieces.add(new CardDescriptionPiece(cardId));
+            return this;
+        }
+
+        public Builder health(int health) {
+            pieces.add(new HealthDescriptionPiece(health));
             return this;
         }
 

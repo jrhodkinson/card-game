@@ -56,12 +56,7 @@ const Description = ({ lines }) => {
       .join("<br />");
     return (
       <>
-        <span
-          data-tip={tooltipText}
-          data-for={id}
-          data-multiline
-          data-delay-show="750"
-        >
+        <span data-tip={tooltipText} data-for={id} data-multiline>
           {lines
             .map((line, index) => <DescriptionLine line={line} key={index} />)
             .reduce((prev, curr) => [prev, ". ", curr])}

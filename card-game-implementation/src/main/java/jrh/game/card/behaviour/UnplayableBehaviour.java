@@ -15,7 +15,7 @@ public class UnplayableBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.keyword(Keyword.UNPLAYABLE);
+        return AtomicDescription.builder().keyword(Keyword.UNPLAYABLE).build();
     }
 
     @Override

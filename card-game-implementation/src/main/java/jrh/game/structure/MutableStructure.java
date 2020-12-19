@@ -10,9 +10,11 @@ import jrh.game.asset.MutableStructureDeserializer;
 import jrh.game.asset.MutableStructureSerializer;
 import jrh.game.common.EntityId;
 import jrh.game.common.StructureId;
+import jrh.game.common.description.AtomicDescription;
 import jrh.game.common.description.Description;
 import jrh.game.structure.power.AbstractPower;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -69,7 +71,10 @@ public class MutableStructure implements Structure {
 
     @Override
     public Description getDescription() {
-        return Description.of(getAllPowers().stream().map(Power::getDescription).collect(toList()));
+        List<AtomicDescription> atomicDescriptions = new ArrayList<>();
+        atomicDescriptions.add(AtomicDescription.builder().health(health).build());
+        getAllPowers().stream().map(Power::getDescription).forEachOrdered(atomicDescriptions::add);
+        return Description.of(atomicDescriptions);
     }
 
     void changeHealth(int amount) {

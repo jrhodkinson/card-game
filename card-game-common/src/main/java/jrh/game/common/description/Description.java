@@ -13,7 +13,7 @@ public class Description {
     }
 
     public static Description of(List<AtomicDescription> atomicDescriptions) {
-        return new Description(List.copyOf(atomicDescriptions));
+        return new Description(atomicDescriptions);
     }
 
     public List<AtomicDescription> getAtomicDescriptions() {

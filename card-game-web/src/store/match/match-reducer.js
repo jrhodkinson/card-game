@@ -11,7 +11,6 @@ export const MATCH_STATE = "match";
 
 export const defaultState = Immutable({
   state: {
-    initialised: false,
     activeUser: "",
     players: {},
     currentTurn: {
@@ -21,8 +20,9 @@ export const defaultState = Immutable({
     storefront: {
       row: [],
     },
-    winner: null,
   },
+  initialised: false,
+  winner: null,
   turnWillEndAt: Number.MAX_SAFE_INTEGER,
 });
 
@@ -33,7 +33,7 @@ export default (state = defaultState, action) => {
     case TURN_WILL_END_AT:
       return state.set("turnWillEndAt", action.time);
     case MATCH_ENDED:
-      return defaultState.set("winner", action.winner);
+      return defaultState.set("winner", action.winner).set("initialised", true);
     case IN_QUEUE:
     case LOGGED_OUT:
       return defaultState;

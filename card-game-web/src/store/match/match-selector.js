@@ -24,7 +24,7 @@ export const isPrimaryPlayerActive = (store) =>
 export const selectCurrentTurn = (store) => selectMatchState(store).currentTurn;
 export const selectStorefront = (store) => selectMatchState(store).storefront;
 
-export const selectWinner = (store) => selectMatchState(store).winner;
+export const selectWinner = (store) => store[MATCH_STATE].winner;
 
 export const selectDateTurnWillEnd = (store) =>
   new Date(store[MATCH_STATE].turnWillEndAt);
