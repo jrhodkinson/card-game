@@ -17,7 +17,9 @@ const Pile = ({ cards, name }) => {
   return (
     <>
       <Wrapper data-tip={cardNames(cards)} data-multiline data-for={id}>
-        {cards.length === 0 ? `Empty ${name}` : `${cards.length} in ${name}`}
+        {cards.length === 1
+          ? `1 card in ${name}`
+          : `${cards.length} cards in ${name}`}
       </Wrapper>
       {tooltip}
     </>
