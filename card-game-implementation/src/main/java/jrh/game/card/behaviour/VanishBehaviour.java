@@ -24,7 +24,7 @@ public class VanishBehaviour extends AbstractBehaviour implements EventHandler {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.keyword(Keyword.VANISH);
+        return AtomicDescription.builder().keyword(Keyword.VANISH).build();
     }
 
     @Subscribe
