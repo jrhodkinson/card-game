@@ -25,6 +25,20 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
+const MatchOver = styled.div`
+  width: ${MAIN_COLUMN_WIDTH};
+  margin: 0 auto;
+  padding: 30px 10px 0;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const Winner = styled.div`
+  margin-bottom: 20px;
+`;
+
 const Spacer = styled.div``;
 
 const Match = () => {
@@ -40,10 +54,10 @@ const Match = () => {
 
   if (winner) {
     return (
-      <>
-        <div>Match is over, winner: {winner}</div>
+      <MatchOver>
+        <Winner>Match is over, winner: {winner}</Winner>
         <QueueButton />
-      </>
+      </MatchOver>
     );
   }
 

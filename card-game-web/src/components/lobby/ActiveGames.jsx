@@ -13,7 +13,7 @@ const ActiveGames = () => {
     dispatch(fetchActiveGames());
     const poller = setInterval(() => {
       dispatch(fetchActiveGames());
-    }, 60000);
+    }, 30000);
     return () => {
       clearInterval(poller);
     };
