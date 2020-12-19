@@ -8,8 +8,7 @@ public final class Keyword {
     public static final Keyword ACQUIRE = new Keyword("acquire",
             "Accumulate mammon (M), used to purchase cards during the current turn only");
     public static final Keyword CONSTRUCT = new Keyword("construct", "Build a structure");
-    public static final Keyword DAMAGE = new Keyword("damage",
-            "Remove health from a player or structure's life total");
+    public static final Keyword DAMAGE = new Keyword("damage", "Remove health from a player or structure's life total");
     public static final Keyword DRAW = new Keyword("draw", "Pick up cards from your deck");
     public static final Keyword GAIN = new Keyword("gain", "Add a card to your discard pile");
     public static final Keyword HEAL = new Keyword("heal", "Add health to a player or structure's life total");
