@@ -7,13 +7,13 @@
     [
       "healGroup",
       {
-        "amount": 7,
+        "amount": 4,
         "targets": ["OTHER"]
       }
     ],
     [
       "draw",
-      3
+      2
     ]
   ]
 }
