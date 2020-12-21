@@ -1,0 +1,19 @@
+{
+  "id": "SIPHON",
+  "name": "Siphon Essence",
+  "cost": 6,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "damage",
+      3
+    ],
+    [
+      "healGroup",
+      {
+        "amount": 2,
+        "targets": ["SELF"]
+      }
+    ]
+  ]
+}
