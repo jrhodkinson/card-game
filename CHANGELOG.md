@@ -1,5 +1,6 @@
 # 0.0.6
-- [Web] Allow passwords to contain any printable ASCII character
+- [Account] Allow passwords to contain any printable ASCII character
+- [Web] Always display the number of active games, even if it is 0
 
 # 0.0.5
 - [Game] Swap the two starting Half Shekels with Denarius and Cast Out. New starting deck: 5x Denarius, 3x Blunt Dagger, Cast Out, Small Favour

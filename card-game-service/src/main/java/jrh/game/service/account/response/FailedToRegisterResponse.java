@@ -18,8 +18,7 @@ public class FailedToRegisterResponse {
     }
 
     public static FailedToRegisterResponse invalidPassword() {
-        return new FailedToRegisterResponse("password",
-                "Must be 8+ characters");
+        return new FailedToRegisterResponse("password", "Must be 8+ characters");
     }
 
     public static FailedToRegisterResponse invalidUsername() {

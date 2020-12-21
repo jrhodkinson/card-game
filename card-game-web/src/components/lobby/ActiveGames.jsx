@@ -19,12 +19,8 @@ const ActiveGames = () => {
     };
   }, [dispatch]);
 
-  if (!activeGames) {
-    return null;
-  }
-
   return `${activeGames} game${
-    activeGames > 1 ? "s" : ""
+    activeGames === 1 ? "" : "s"
   } being played right now`;
 };
 
