@@ -20,6 +20,7 @@ public class RegistrationValidationTest {
     @Test
     public void randomPasswordIsValid() {
         assertTrue(RegistrationValidation.isValidPassword("%adsfhAE!DAY$%@^"));
+        assertTrue(RegistrationValidation.isValidPassword("% !DAY$adsf345@123098fsdv9p8+_$Q@%N\" W%@^"));
     }
 
     @Test

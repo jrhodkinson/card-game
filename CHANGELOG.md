@@ -1,4 +1,11 @@
+# 0.0.6
+- [Account] Allow passwords to contain any printable ASCII character
+- [Web] Always display the number of active games, even if it is 0
+
 # 0.0.5
+- [Game] Swap the two starting Half Shekels with Denarius and Cast Out. New starting deck: 5x Denarius, 3x Blunt Dagger, Cast Out, Small Favour
+- [Game] Rename 'Siphon' to 'Siphon Essence'
+- [Game] Rename 'Hideout' to 'Artefact Smuggler'
 - [New Card] Miracle, Lesser: Cost 2M. 'Draw 2. Vanish.'
 - [New Card] Leech: Cost 2M. 'Damage 1. Heal yourself 1.'
 - [Balance] Miracle: Increase draw to 4 and cost to 6M (was 3 and 3M)
@@ -13,9 +20,6 @@
 - [Balance] City: Reduce health to 8 (was 9). Reduce initial damage to 2 (was 3)
 - [Balance] Wrath: Increase cost to 8M (was 6M)
 - [Balance] Holy Lance: Increase cost to 7M (was 6M)
-- [Game] Swap the two starting Half Shekels with Denarius and Cast Out. New starting deck: 5x Denarius, 3x Blunt Dagger, Cast Out, Small Favour
-- [Game] Rename 'Siphon' to 'Siphon Essence'
-- [Game] Rename 'Hideout' to 'Artefact Smuggler'
 - [Fix] Fix typo in 'Watchtower' structure name (was 'Watchower')
 
 # 0.0.4

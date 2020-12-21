@@ -110,7 +110,7 @@ export const fetchQueueStatus = () => (dispatch, getState) => {
   }
 };
 
-export const selectActiveGames = (store) => store[LOBBY_STATE].activeGames;
+export const selectActiveGames = (store) => store[LOBBY_STATE].activeGames || 0;
 export const selectIsQueueing = (store) => store[LOBBY_STATE].queueing;
 export const selectCurrentMatchId = (store) => store[LOBBY_STATE].matchId;
 export const selectHaveInitialisedMatchId = (store) =>
