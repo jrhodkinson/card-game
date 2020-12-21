@@ -1,7 +1,7 @@
 {
   "id": "ANGER",
   "name": "Wrath",
-  "cost": 6,
+  "cost": 8,
   "purchasable": true,
   "behaviours": [
     [

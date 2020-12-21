@@ -11,6 +11,7 @@
 - [Balance] (Siphon)/Leech: Reduce damage and heal, now is 'Damage 1. Heal yourself 1.' (was 'Damage 2. Heal yourself 2.)
 - [Balance] Charity: Reduce draw and heal, now is 'Heal your opponent 4. Draw 2.' (was 'Heal your opponent 7. Draw 3.')
 - [Balance] City: Reduce health to 8 (was 9). Reduce initial damage to 2 (was 3)
+- [Balance] Wrath: Increase cost to 8M (was 6M)
 - [Game] Rename 'Siphon' to 'Leech'
 - [Game] Rename 'Hideout' to 'Artefact Smuggler'
 
