@@ -1,12 +1,12 @@
 {
   "id": "MIRACLE",
-  "name": "Miracle",
-  "cost": 6,
+  "name": "Miracle, Lesser",
+  "cost": 2,
   "purchasable": true,
   "behaviours": [
     [
       "draw",
-      4
+      2
     ],
     [ "vanish" ]
   ]

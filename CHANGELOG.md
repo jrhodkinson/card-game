@@ -1,4 +1,6 @@
 # 0.0.5
+- [New Card] Miracle, Lesser: Cost 2M. 'Draw 2. Vanish.'
+- [Balance] Miracle: Increase draw to 4 and cost to 6M (was 3 and 3M)
 - [Balance] Aureus, Idol: Reduce mammon to 6 (was 8)
 - [Balance] Power, Idol: Increase damage to 8 and cost to 9M (was 7 and 7M)
 - [Balance] Regret: Increase self damage to 1 (was 0)
