@@ -19,7 +19,7 @@ public class FailedToRegisterResponse {
 
     public static FailedToRegisterResponse invalidPassword() {
         return new FailedToRegisterResponse("password",
-                "Must be 8+ characters of only: letters, numbers, or @#$%^&+=!*");
+                "Must be 8+ characters");
     }
 
     public static FailedToRegisterResponse invalidUsername() {

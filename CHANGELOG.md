@@ -1,3 +1,6 @@
+# 0.0.6
+- [Web] Allow passwords to contain any printable ASCII character
+
 # 0.0.5
 - [Game] Swap the two starting Half Shekels with Denarius and Cast Out. New starting deck: 5x Denarius, 3x Blunt Dagger, Cast Out, Small Favour
 - [Game] Rename 'Siphon' to 'Siphon Essence'
