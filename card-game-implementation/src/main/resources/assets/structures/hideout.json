@@ -1,17 +1,17 @@
 {
   "id": "HIDEOUT",
-  "name": "Hideout",
-  "health": 5,
+  "name": "Artefact Smuggler",
+  "health": 4,
   "powers": [
     [
       "money",
-      4
+      5
     ],
     [
       "damageOnPurchase",
       {
         "purchasers": [ "SELF" ],
-        "amount": 2
+        "amount": 1
       }
     ]
   ]

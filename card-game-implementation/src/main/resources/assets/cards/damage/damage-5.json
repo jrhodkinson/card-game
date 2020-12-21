@@ -1,7 +1,7 @@
 {
   "id": "DAMAGE:5",
   "name": "Holy Lance",
-  "cost": 6,
+  "cost": 7,
   "purchasable": true,
   "behaviours": [
     [

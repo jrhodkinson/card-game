@@ -1,12 +1,12 @@
 {
   "id": "CITY",
   "name": "City",
-  "health": 9,
+  "health": 8,
   "powers": [
     [
       "incrementingDamage",
       {
-        "amount": 3,
+        "amount": 2,
         "increment": 1
       }
     ]
