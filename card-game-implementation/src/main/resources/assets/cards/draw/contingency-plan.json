@@ -5,12 +5,12 @@
   "purchasable": true,
   "behaviours": [
     [
-      "draw",
-      2
+      "heal",
+      3
     ],
     [
-      "heal",
-      2
+      "draw",
+      1
     ]
   ]
 }

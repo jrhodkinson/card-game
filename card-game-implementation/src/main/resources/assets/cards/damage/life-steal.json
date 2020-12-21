@@ -1,17 +1,17 @@
 {
   "id": "LIFE_STEAL",
-  "name": "Siphon",
+  "name": "Leech",
   "cost": 2,
   "purchasable": true,
   "behaviours": [
     [
       "damage",
-      2
+      1
     ],
     [
       "healGroup",
       {
-        "amount": 2,
+        "amount": 1,
         "targets": ["SELF"]
       }
     ]
