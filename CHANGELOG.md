@@ -14,6 +14,7 @@
 - [Balance] City: Reduce health to 8 (was 9). Reduce initial damage to 2 (was 3)
 - [Balance] Wrath: Increase cost to 8M (was 6M)
 - [Balance] Holy Lance: Increase cost to 7M (was 6M)
+- [Game] Swap the two starting Half Shekels with Denarius and Cast Out. New starting deck: 5x Denarius, 3x Blunt Dagger, Cast Out, Small Favour
 - [Game] Rename 'Siphon' to 'Siphon Essence'
 - [Game] Rename 'Hideout' to 'Artefact Smuggler'
 - [Fix] Fix typo in 'Watchtower' structure name (was 'Watchower')
