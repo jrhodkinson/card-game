@@ -2,11 +2,10 @@
 - [New Card] Miracle, Lesser: Cost 2M. 'Draw 2. Vanish.'
 - [New Card] Leech: Cost 2M. 'Damage 1. Heal yourself 1.'
 - [Balance] Miracle: Increase draw to 4 and cost to 6M (was 3 and 3M)
-- [Balance] Aureus, Idol: Reduce mammon to 6 (was 8)
+- [Balance] Aureus, Idol: Reduce mammon gain to 6M (was 8M)
 - [Balance] Power, Idol: Increase damage to 8 and cost to 9M (was 7 and 7M)
-- [Balance] Regret: Increase self damage to 1 (was 0)
 - [Balance] Repent: Increase self damage to 7 (was 3)
-- [Balance] (Hideout)/Artefact Smuggler: Reduce health to 4, increase mammon per turn to 5, decrease damage when purchasing a card to 1 (was 5 health, 4M and 2 damage)
+- [Balance] (Hideout)/Artefact Smuggler: Reduce health to 4, increase mammon per turn to 5M, decrease damage when purchasing a card to 1 (was 5 health, 4M and 2 damage)
 - [Balance] Sleight of Hand: Reduce draw, now is 'Damage 4. Draw 1.' (was 'Damage 4. Draw 2.')
 - [Balance] Contingency Plan: Reduce draw and increase heal, now is 'Heal 3. Draw 1.' (was 'Draw 2. Heal 2.')
 - [Balance] (Siphon)/Siphon Essence: Increase damage to 3 and cost to 6M (was 2 and 2M)

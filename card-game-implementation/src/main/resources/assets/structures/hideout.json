@@ -1,7 +1,7 @@
 {
   "id": "HIDEOUT",
   "name": "Artefact Smuggler",
-  "health": 5,
+  "health": 4,
   "powers": [
     [
       "money",
