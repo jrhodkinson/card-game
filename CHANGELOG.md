@@ -1,9 +1,9 @@
 # 0.0.5
+- [Balance] Hideout/Artefact Smuggler: Increased mammon per turn to 5, decrease damage when purchasing a card to 1 (was 4M and 2 damage)
 - [Balance] Sleight of Hand: Reduced draw, now is 'Damage 4. Draw 1.' (was 'Damage 4. Draw 2.')
 - [Balance] Contingency Plan: Reduced draw and increased heal, now is 'Heal 3. Draw 1.' (was 'Draw 2. Heal 2.')
 - [Balance] Siphon/Leech: Reduced damage and heal, now is 'Damage 1. Heal yourself 1.' (was 'Damage 2. Heal yourself 2.)
 - [Balance] Charity: Reduced draw and heal, now is 'Heal your opponent 4. Draw 2.' (was 'Heal your opponent 7. Draw 3.')
-- [Balance] Hideout/Artefact Smuggler: Increased mammon per turn to 5, decrease damage when purchasing a card to 1 (was 4M and 2 damage)
 - [Game] Renamed 'Siphon' to 'Leech'
 - [Game] Renamed 'Hideout' to 'Artefact Smuggler'
 
