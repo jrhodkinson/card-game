@@ -9,7 +9,7 @@
       "damageGroup",
       {
         "targets": [ "SELF" ],
-        "amount": 3
+        "amount": 7
       }
     ],
     [ "vanish" ]

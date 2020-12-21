@@ -5,6 +5,13 @@
   "purchasable": false,
   "behaviours": [
     [
+      "damageGroup",
+      {
+        "targets": [ "SELF" ],
+        "amount": 1
+      }
+    ],
+    [
       "gainCard",
       "REPENT"
     ],

@@ -1,10 +1,12 @@
 # 0.0.5
-- [Balance] Hideout/Artefact Smuggler: Reduce health to 4, increase mammon per turn to 5, decrease damage when purchasing a card to 1 (was 5 health, 4M and 2 damage)
-- [Balance] Power, Idol: Increase damage to 8 and cost to 9 (was 7 and 7)
 - [Balance] Aureus, Idol: Reduce mammon to 6 (was 8)
+- [Balance] Power, Idol: Increase damage to 8 and cost to 9M (was 7 and 7M)
+- [Balance] Regret: Increase self damage to 1 (was 0)
+- [Balance] Repent: Increase self damage to 7 (was 3)
+- [Balance] (Hideout)/Artefact Smuggler: Reduce health to 4, increase mammon per turn to 5, decrease damage when purchasing a card to 1 (was 5 health, 4M and 2 damage)
 - [Balance] Sleight of Hand: Reduce draw, now is 'Damage 4. Draw 1.' (was 'Damage 4. Draw 2.')
 - [Balance] Contingency Plan: Reduce draw and increase heal, now is 'Heal 3. Draw 1.' (was 'Draw 2. Heal 2.')
-- [Balance] Siphon/Leech: Reduce damage and heal, now is 'Damage 1. Heal yourself 1.' (was 'Damage 2. Heal yourself 2.)
+- [Balance] (Siphon)/Leech: Reduce damage and heal, now is 'Damage 1. Heal yourself 1.' (was 'Damage 2. Heal yourself 2.)
 - [Balance] Charity: Reduce draw and heal, now is 'Heal your opponent 4. Draw 2.' (was 'Heal your opponent 7. Draw 3.')
 - [Game] Rename 'Siphon' to 'Leech'
 - [Game] Rename 'Hideout' to 'Artefact Smuggler'
