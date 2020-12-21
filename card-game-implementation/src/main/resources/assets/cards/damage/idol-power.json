@@ -1,7 +1,7 @@
 {
   "id": "IDOL:POWER",
   "name": "Power, Idol",
-  "cost": 7,
+  "cost": 9,
   "purchasable": true,
   "behaviours": [
     [
@@ -10,7 +10,7 @@
     ],
     [
       "damage",
-      7
+      8
     ]
   ]
 }
