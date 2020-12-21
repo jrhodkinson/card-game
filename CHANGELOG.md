@@ -14,6 +14,7 @@
 - [Balance] Wrath: Increase cost to 8M (was 6M)
 - [Game] Rename 'Siphon' to 'Leech'
 - [Game] Rename 'Hideout' to 'Artefact Smuggler'
+- [Fix] Fix typo in 'Watchtower' structure name (was 'Watchower')
 
 # 0.0.4
 - [Balance] Wrath: Increase cost to 6 (was 4)
