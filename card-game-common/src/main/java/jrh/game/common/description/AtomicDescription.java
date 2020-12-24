@@ -58,6 +58,11 @@ public class AtomicDescription {
             return this;
         }
 
+        public Builder actors(List<Target> actors) {
+            pieces.add(new ActorDescriptionPiece(actors));
+            return this;
+        }
+
         public Builder targets(List<Target> targets) {
             pieces.add(new TargetDescriptionPiece(targets));
             return this;
