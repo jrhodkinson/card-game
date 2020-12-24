@@ -1,7 +1,7 @@
 {
   "id": "RICHES",
   "name": "Riches and Wonders",
-  "cost": 7,
+  "cost": 8,
   "purchasable": true,
   "behaviours": [
     [

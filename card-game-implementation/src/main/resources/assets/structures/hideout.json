@@ -11,7 +11,7 @@
       "damageOnPurchase",
       {
         "purchasers": [ "SELF" ],
-        "amount": 1
+        "amount": 2
       }
     ]
   ]

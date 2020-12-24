@@ -1,6 +1,10 @@
 # 0.0.7
 - [Game] Swap a starting Denarius and Small Favour with Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out
 - [New Card] Devotion: Not purchasable. 'Damage yourself 3. Acquire 2M.'
+- [Balance] Aureus, Idol: Increase cost to 7M (was 5M)
+- [Balance] Riches and Wonders: Increase cost to 8M (was 7M)
+- [Balance] Approach Artefact Smuggler: Increase cost to 5M (was 3M)
+- [Balance] Artefact Smuggler: Increase self damage on purchasing a card to 2 (was 1)
 
 # 0.0.6
 - [Account] Allow passwords to contain any printable ASCII character
