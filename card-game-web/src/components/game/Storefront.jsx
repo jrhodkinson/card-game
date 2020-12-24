@@ -8,7 +8,7 @@ import { selectDoesPendingCardRequireStoreTarget } from "../../store/play/play-s
 import Cards from "../card/Cards";
 
 const Wrapper = styled.div`
-  background-color: ${c.darkGrey};
+  background-color: ${c.mediumGrey};
   grid-column: 1 / 4;
   padding: 10px;
   box-shadow: 0 0 3px -3px ${c.darkBlack};

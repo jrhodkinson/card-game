@@ -1,3 +1,6 @@
+# NEXT / 0.1.0
+- [UI] Make the market's background more distinctive
+
 # 0.0.7
 - [Game] Swap a starting Denarius and Small Favour with 2x Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out
 - [Game] The initial market is now guaranteed to contain a Half Shekel and a Stater (was guaranteed to contain 2x Half Shekel only)
