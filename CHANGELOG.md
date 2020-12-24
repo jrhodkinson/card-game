@@ -1,5 +1,6 @@
 # NEXT / 0.1.0
 - [UI] Make the market's background more distinctive
+- [UI] Don't display the cost of cards in your hand, to avoid confusion
 
 # 0.0.7
 - [Game] Swap a starting Denarius and Small Favour with 2x Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out

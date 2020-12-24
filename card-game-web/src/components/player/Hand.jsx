@@ -18,6 +18,7 @@ const Hand = ({ hand, interactable }) => {
       isInteractable={(card) => interactable && card.isPlayable}
       onCardClick={handleCardClick}
       selectedCardEntityId={pendingCardEntityId}
+      displayCost={false}
     />
   );
 };

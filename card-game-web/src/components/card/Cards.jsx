@@ -89,6 +89,7 @@ const Cards = ({
   animateExit = false,
   onCardClick = () => {},
   shaking = false,
+  displayCost = true,
 }) => {
   const cardComponent = (card) => (
     <Card
@@ -99,6 +100,7 @@ const Cards = ({
       selected={selectedCardEntityId === card.entityId}
       onCardClick={onCardClick}
       shaking={shaking}
+      displayCost={displayCost}
     />
   );
 
