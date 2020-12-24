@@ -18,6 +18,11 @@ public class TestBehaviour {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
+    public static void passesAllTests(AbstractBehaviour behaviour) {
+        TestBehaviour.roundTripsViaJson(behaviour);
+        TestBehaviour.duplicatingGivesSameClass(behaviour);
+    }
+
     public static void roundTripsViaJson(AbstractBehaviour behaviour) {
         try {
             Class<? extends AbstractBehaviour> behaviourClass = behaviour.getClass();
@@ -37,7 +42,7 @@ public class TestBehaviour {
         }
     }
 
-    public static void duplicatingGivesSameInstance(AbstractBehaviour behaviour) {
+    public static void duplicatingGivesSameClass(AbstractBehaviour behaviour) {
         Behaviour duplicatedBehaviour = behaviour.duplicate();
         assertThat(duplicatedBehaviour.getClass(), equalTo(behaviour.getClass()));
     }

@@ -11,7 +11,7 @@ public class VanishBehaviourTest {
 
     @Test
     public void duplication() {
-        TestBehaviour.duplicatingGivesSameInstance(new VanishBehaviour());
+        TestBehaviour.duplicatingGivesSameClass(new VanishBehaviour());
     }
 
 }

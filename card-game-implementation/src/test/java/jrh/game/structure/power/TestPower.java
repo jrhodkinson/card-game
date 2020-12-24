@@ -17,6 +17,11 @@ public class TestPower {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
+    public static void passesAllTests(AbstractPower power) {
+        TestPower.roundTripsViaJson(power);
+        TestPower.duplicatingGivesSameClass(power);
+    }
+
     public static void roundTripsViaJson(AbstractPower power) {
         try {
             Class<? extends AbstractPower> powerClass = power.getClass();
@@ -35,6 +40,11 @@ public class TestPower {
         } catch (IllegalAccessException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void duplicatingGivesSameClass(AbstractPower power) {
+        Power duplicatedPower = power.duplicate();
+        assertThat(duplicatedPower.getClass(), equalTo(power.getClass()));
     }
 
 }
