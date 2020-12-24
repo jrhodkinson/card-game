@@ -18,7 +18,7 @@ public class TestBehaviour {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public static void passesAllTests(AbstractBehaviour behaviour) {
+    public static void passesAllStandardTests(AbstractBehaviour behaviour) {
         TestBehaviour.roundTripsViaJson(behaviour);
         TestBehaviour.duplicatingGivesSameClass(behaviour);
     }
