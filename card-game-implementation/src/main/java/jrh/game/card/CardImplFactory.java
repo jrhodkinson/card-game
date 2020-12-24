@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -56,7 +57,7 @@ public class CardImplFactory {
         Streams.concat(Collections.nCopies(4, new CardId("MONEY:1")).stream(),
             Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
             Collections.nCopies(2, new CardId("DEVOTION")).stream(),
-            Collections.nCopies(1, new CardId("PURGE")).stream()
+            Stream.of(new CardId("PURGE"))
         )
             .map(this::create)
             .filter(Optional::isPresent)
@@ -70,7 +71,10 @@ public class CardImplFactory {
     }
 
     public List<CardImpl> startingStore() {
-        return Collections.nCopies(2, new CardId("MONEY:2")).stream().map(this::create).filter(Optional::isPresent)
-            .map(Optional::get).collect(toList());
+        return Stream.of(new CardId("MONEY:2"), new CardId("MONEY:3"))
+            .map(this::create)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(toList());
     }
 }

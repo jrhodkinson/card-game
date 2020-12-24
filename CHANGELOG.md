@@ -1,5 +1,6 @@
 # 0.0.7
-- [Game] Swap a starting Denarius and Small Favour with Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out
+- [Game] Swap a starting Denarius and Small Favour with 2x Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out
+- [Game] The initial market is now guaranteed to contain a Half Shekel and a Stater (previously was guaranteed to contain 2x Half Shekel only)
 - [New Card] Devotion: Not purchasable. 'Damage yourself 3. Acquire 2M.'
 - [Balance] Aureus, Idol: Increase cost to 7M (was 5M)
 - [Balance] Riches and Wonders: Increase cost to 8M (was 7M)
