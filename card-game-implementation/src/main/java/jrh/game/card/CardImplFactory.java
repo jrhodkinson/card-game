@@ -59,7 +59,7 @@ public class CardImplFactory {
                 Collections.nCopies(2, new CardId("DEVOTION")).stream(), Stream.of(new CardId("PURGE")))
                 .map(this::create).filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
         Collections.shuffle(deck);
-        while (deck.size() < Constants.INITIAL_HAND_SIZE) {
+        while (deck.size() < Constants.MINIMUM_INITIAL_DECK_SIZE) {
             deck.add(randomPurchasableCard());
         }
         return deck;
