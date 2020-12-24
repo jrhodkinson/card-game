@@ -44,8 +44,8 @@ public class CardImplFactory {
 
     public CardImpl randomPurchasableCard() {
         List<CardId> purchasableCards = concreteAssetLibrary.getAllCardIds().stream()
-                .map(concreteAssetLibrary::getCardImpl).filter(Objects::nonNull).map(Optional::get)
-                .filter(Card::isPurchasable).map(Card::getCardId).collect(toList());
+            .map(concreteAssetLibrary::getCardImpl).filter(Objects::nonNull).map(Optional::get)
+            .filter(Card::isPurchasable).map(Card::getCardId).collect(toList());
         CardId cardId = purchasableCards.get(random.nextInt(purchasableCards.size()));
         return create(cardId).orElseThrow();
     }
@@ -53,11 +53,15 @@ public class CardImplFactory {
     public Deck startingDeck() {
         Deck deck = new Deck();
         List<CardId> startingDeck = new ArrayList<>();
-        Streams.concat(Collections.nCopies(5, new CardId("MONEY:1")).stream(),
-                Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
-                Collections.nCopies(1, new CardId("PURGE")).stream(),
-                Collections.nCopies(1, new CardId("FAVOUR")).stream()).map(this::create).filter(Optional::isPresent)
-                .map(Optional::get).forEach(deck::add);
+        Streams.concat(Collections.nCopies(4, new CardId("MONEY:1")).stream(),
+            Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
+            Collections.nCopies(2, new CardId("DEVOTION")).stream(),
+            Collections.nCopies(1, new CardId("PURGE")).stream()
+        )
+            .map(this::create)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .forEach(deck::add);
         Collections.shuffle(deck);
         while (deck.size() < Constants.INITIAL_HAND_SIZE) {
             deck.add(randomPurchasableCard());
@@ -67,6 +71,6 @@ public class CardImplFactory {
 
     public List<CardImpl> startingStore() {
         return Collections.nCopies(2, new CardId("MONEY:2")).stream().map(this::create).filter(Optional::isPresent)
-                .map(Optional::get).collect(toList());
+            .map(Optional::get).collect(toList());
     }
 }

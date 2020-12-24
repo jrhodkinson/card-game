@@ -1,3 +1,7 @@
+# 0.0.7
+- [Game] Swap a starting Denarius and Small Favour with Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out
+- [New Card] Devotion: Not purchasable. 'Damage yourself 3. Acquire 2M.'
+
 # 0.0.6
 - [Account] Allow passwords to contain any printable ASCII character
 - [Web] Always display the number of active games, even if it is 0
