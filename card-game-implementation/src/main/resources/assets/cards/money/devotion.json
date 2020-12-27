@@ -1,0 +1,16 @@
+{
+  "id": "DEVOTION",
+  "name": "Devotion",
+  "cost": 0,
+  "purchasable": false,
+  "behaviours": [
+    [
+      "sacrifice",
+      3
+    ],
+    [
+      "money",
+      2
+    ]
+  ]
+}

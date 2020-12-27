@@ -45,7 +45,7 @@ const CurrentTurn = ({ active }) => {
   const dateTurnWillEnd = useSelector(selectDateTurnWillEnd);
   const countdownRenderer = ({ minutes, seconds }) => {
     const total = 60 * minutes + seconds;
-    return total <= 15 ? <Timer>{total}</Timer> : null;
+    return total <= 30 ? <Timer>{total}</Timer> : null;
   };
   return (
     <Wrapper>

@@ -1,7 +1,7 @@
 {
   "id": "IDOL:MONEY",
   "name": "Aureus, Idol",
-  "cost": 5,
+  "cost": 7,
   "purchasable": true,
   "behaviours": [
     [

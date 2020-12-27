@@ -1,3 +1,13 @@
+# 0.0.7
+- [Game] Swap a starting Denarius and Small Favour with 2x Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out
+- [Game] The initial market is now guaranteed to contain a Half Shekel and a Stater (was guaranteed to contain 2x Half Shekel only)
+- [Game] The turn timer is now visible when there are <30 seconds left in a turn (was 15s)
+- [New Card] Devotion: Not purchasable. 'Damage yourself 3. Acquire 2M.'
+- [Balance] Aureus, Idol: Increase cost to 7M (was 5M)
+- [Balance] Riches and Wonders: Increase cost to 8M (was 7M)
+- [Balance] Approach Artefact Smuggler: Increase cost to 5M (was 3M)
+- [Balance] Artefact Smuggler: Increase self damage on purchasing a card to 2 (was 1)
+
 # 0.0.6
 - [Account] Allow passwords to contain any printable ASCII character
 - [Web] Always display the number of active games, even if it is 0

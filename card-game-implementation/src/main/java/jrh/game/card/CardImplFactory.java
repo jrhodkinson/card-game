@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -53,11 +54,10 @@ public class CardImplFactory {
     public Deck startingDeck() {
         Deck deck = new Deck();
         List<CardId> startingDeck = new ArrayList<>();
-        Streams.concat(Collections.nCopies(5, new CardId("MONEY:1")).stream(),
+        Streams.concat(Collections.nCopies(4, new CardId("MONEY:1")).stream(),
                 Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
-                Collections.nCopies(1, new CardId("PURGE")).stream(),
-                Collections.nCopies(1, new CardId("FAVOUR")).stream()).map(this::create).filter(Optional::isPresent)
-                .map(Optional::get).forEach(deck::add);
+                Collections.nCopies(2, new CardId("DEVOTION")).stream(), Stream.of(new CardId("PURGE")))
+                .map(this::create).filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
         Collections.shuffle(deck);
         while (deck.size() < Constants.INITIAL_HAND_SIZE) {
             deck.add(randomPurchasableCard());
@@ -66,7 +66,7 @@ public class CardImplFactory {
     }
 
     public List<CardImpl> startingStore() {
-        return Collections.nCopies(2, new CardId("MONEY:2")).stream().map(this::create).filter(Optional::isPresent)
+        return Stream.of(new CardId("MONEY:2"), new CardId("MONEY:3")).map(this::create).filter(Optional::isPresent)
                 .map(Optional::get).collect(toList());
     }
 }
