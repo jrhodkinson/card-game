@@ -8,11 +8,13 @@ public class WebSocketSession {
     private final String sessionId;
     private final ActiveMatch match;
     private final User user;
+    private final boolean isSpectator;
 
-    public WebSocketSession(String sessionId, ActiveMatch match, User user) {
+    public WebSocketSession(String sessionId, ActiveMatch match, User user, boolean isSpectator) {
         this.sessionId = sessionId;
         this.match = match;
         this.user = user;
+        this.isSpectator = isSpectator;
     }
 
     public String getSessionId() {
@@ -25,6 +27,10 @@ public class WebSocketSession {
 
     public User getUser() {
         return user;
+    }
+
+    public boolean isSpectator() {
+        return isSpectator;
     }
 
     @Override

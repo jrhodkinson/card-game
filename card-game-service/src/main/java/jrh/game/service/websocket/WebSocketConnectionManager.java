@@ -94,7 +94,8 @@ public class WebSocketConnectionManager {
         ActiveMatch match = matchManager.getMatchById(matchId);
         if (match != null) {
             User user = accounts.getAccount(accountId).toUser();
-            WebSocketSession webSocketSession = new WebSocketSession(sessionId, match, user);
+            boolean isSpectator = !match.getInvolvedAccountIds().contains(accountId);
+            WebSocketSession webSocketSession = new WebSocketSession(sessionId, match, user, isSpectator);
             webSocketClientsBySessionId.put(sessionId, wsConnectContext);
             webSocketSessionsBySessionId.put(sessionId, webSocketSession);
             singleMatchStateBroadcasters.computeIfAbsent(matchId, m -> {

@@ -12,6 +12,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.BUY_CARD;
+import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN;
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.PLAY_CARD;
 
 public class WebSocketMessageHandler {
@@ -19,6 +20,9 @@ public class WebSocketMessageHandler {
     private static final Logger logger = LogManager.getLogger(WebSocketMessageHandler.class);
 
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) {
+        if (webSocketSession.isSpectator()) {
+            return;
+        }
         with(webSocketMessage, webSocketSession).handle(this::endTurn).handle(PLAY_CARD, this::playCard)
                 .handle(BUY_CARD, this::buyCard).end();
     }
@@ -59,8 +63,7 @@ public class WebSocketMessageHandler {
         }
 
         private <T> MessageContext handle(Consumer<WebSocketSession> consumer) {
-            if (jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN
-                    .equals(webSocketMessage.getType())) {
+            if (END_TURN.equals(webSocketMessage.getType())) {
                 wasHandled = true;
                 consumer.accept(webSocketSession);
             }

@@ -1,4 +1,5 @@
 import { buyCard, playCard } from "../../gateway/ws";
+import { selectIsSpectating } from "../lobby/lobby-store";
 import {
   selectDoesPendingCardRequireDamageableTarget,
   selectDoesPendingCardRequireStoreTarget,
@@ -12,7 +13,10 @@ export const SELECTED_CARD_REQUIRING_STORE_TARGET = `${NAMESPACE}/SELECTED_CARD_
 export const PLAYED_CARD = `${NAMESPACE}/PLAYED_CARD`;
 export const PURCHASED_CARD = `${NAMESPACE}/PURCHASED_CARD`;
 
-export const selectedCardInHand = (card) => (dispatch) => {
+export const selectedCardInHand = (card) => (dispatch, getState) => {
+  if (selectIsSpectating(getState())) {
+    return;
+  }
   const { entityId } = card;
   if (card.requiresDamageableTarget) {
     dispatch({
@@ -31,6 +35,9 @@ export const selectedCardInHand = (card) => (dispatch) => {
 };
 
 export const selectedTarget = (targetEntityId) => (dispatch, getState) => {
+  if (selectIsSpectating(getState())) {
+    return;
+  }
   const requiresDamageableTarget = selectDoesPendingCardRequireDamageableTarget(
     getState()
   );
@@ -42,6 +49,9 @@ export const selectedTarget = (targetEntityId) => (dispatch, getState) => {
 };
 
 export const selectedCardInStorefront = (card) => (dispatch, getState) => {
+  if (selectIsSpectating(getState())) {
+    return;
+  }
   const requireStoreTarget = selectDoesPendingCardRequireStoreTarget(
     getState()
   );
