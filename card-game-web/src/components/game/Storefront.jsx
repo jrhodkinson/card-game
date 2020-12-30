@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 
 const LabelWrapper = styled.div`
   position: relative;
-  margin: 0 10px 0 30px;
+  margin: 0 10px 0 35px;
 `;
 
 const Label = styled.div`
@@ -30,6 +30,7 @@ const Label = styled.div`
   left: 50%;
   opacity: 0.8;
   letter-spacing: 1px;
+  font-size: 0.9em;
 `;
 
 const NextCard = styled.div`
