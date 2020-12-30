@@ -4,7 +4,7 @@ export const card = {
   BORDER_RADIUS: 3,
   MARGIN_TOP_BOTTOM: 10,
   MARGIN_LEFT_RIGHT: 6,
-  PADDING: 4,
+  PADDING: 5,
   STUMP_HEIGHT: 35,
 };
 
