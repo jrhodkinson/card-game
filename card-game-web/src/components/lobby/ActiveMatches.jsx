@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchActiveMatchCount,
-  selectActiveMatches,
+  selectActiveMatchCount,
 } from "../../store/lobby/lobby-store";
 
 const ActiveMatches = () => {
   const dispatch = useDispatch();
-  const activeGames = useSelector(selectActiveMatches);
+  const activeGames = useSelector(selectActiveMatchCount);
 
   useEffect(() => {
     dispatch(fetchActiveMatchCount());

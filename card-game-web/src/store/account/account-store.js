@@ -42,7 +42,9 @@ export const receivedAccountDetails = (details) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  postLogout().then(() => dispatch({ type: LOGGED_OUT }));
+  postLogout()
+    .then(() => dispatch({ type: LOGGED_OUT }))
+    .catch(() => {});
 };
 
 export const selectHaveInitialisedAccountId = (store) =>

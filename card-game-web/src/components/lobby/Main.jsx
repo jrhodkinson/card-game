@@ -5,7 +5,7 @@ import {
   selectHaveInitialisedAccountId,
 } from "../../store/account/account-store";
 import {
-  fetchQueueStatus,
+  continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue,
   selectHaveInitialisedMatchId,
   selectCurrentMatchId,
   selectIsGameOffline,
@@ -26,7 +26,7 @@ const Main = () => {
 
   useEffect(() => {
     if (accountId && (!matchId || !haveInitialisedMatchId)) {
-      dispatch(fetchQueueStatus());
+      dispatch(continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue());
     }
   }, [accountId, dispatch, haveInitialisedMatchId, matchId]);
 

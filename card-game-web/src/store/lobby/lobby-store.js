@@ -1,6 +1,7 @@
 import Immutable from "seamless-immutable";
 import {
   getActiveMatchCount,
+  getAllActiveMatches,
   getQueueStatus,
   postJoinQueue,
   postLeaveQueue,
@@ -15,10 +16,12 @@ export const defaultState = Immutable({
   matchId: undefined,
   matchPoller: undefined,
   queueing: false,
-  activeMatches: 0,
   gameOffline: false,
+  activeMatches: [],
+  activeMatchCount: 0,
 });
 
+export const RECEIVED_ACTIVE_MATCHES = `${NAMESPACE}/RECEIVED_ACTIVE_MATCHES`;
 export const RECEIVED_ACTIVE_MATCH_COUNT = `${NAMESPACE}/RECEIVED_ACTIVE_MATCH_COUNT`;
 export const RECEIVED_GAME_OFFLINE = `${NAMESPACE}/RECEIVED_GAME_OFFLINE`;
 export const RECEIVED_MATCH_ID = `${NAMESPACE}/RECEIVED_MATCH_ID`;
@@ -29,8 +32,10 @@ export const LEFT_QUEUE = `${NAMESPACE}/LEFT_QUEUE`;
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case RECEIVED_ACTIVE_MATCH_COUNT:
+    case RECEIVED_ACTIVE_MATCHES:
       return state.set("activeMatches", action.activeMatches);
+    case RECEIVED_ACTIVE_MATCH_COUNT:
+      return state.set("activeMatchCount", action.activeMatchCount);
     case RECEIVED_MATCH_ID:
       return state
         .set("matchId", action.matchId)
@@ -63,7 +68,7 @@ export default (state = defaultState, action) => {
 export const queue = () => (dispatch) => {
   postJoinQueue().then(() => {
     dispatch({ type: IN_QUEUE });
-    dispatch(fetchQueueStatus());
+    dispatch(continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue());
   });
 };
 
@@ -78,7 +83,7 @@ export const fetchActiveMatchCount = () => (dispatch) => {
     .then(({ data }) => {
       dispatch({
         type: RECEIVED_ACTIVE_MATCH_COUNT,
-        activeMatches: data.activeMatches,
+        activeMatchCount: data.activeMatches,
       });
     })
     .catch(({ response }) => {
@@ -88,35 +93,42 @@ export const fetchActiveMatchCount = () => (dispatch) => {
     });
 };
 
-export const fetchQueueStatus = () => (dispatch, getState) => {
+export const fetchAllActiveMatches = () => (dispatch) => {
+  getAllActiveMatches().then(({ data }) => {
+    dispatch({ type: RECEIVED_ACTIVE_MATCHES, activeMatches: data.matches });
+  });
+};
+
+export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () => (
+  dispatch,
+  getState
+) => {
   if (!getState()[LOBBY_STATE].matchPoller) {
     const matchPoller = setInterval(() => {
-      getQueueStatus()
-        .then(({ data }) => {
-          if (data.type === "in match") {
-            dispatch({ type: RECEIVED_MATCH_ID, matchId: data.matchId });
-            clearInterval(matchPoller);
-          }
-          dispatch({ type: RECEIVED_NO_MATCH_ID });
-          if (data.type === "in queue") {
-            dispatch({ type: IN_QUEUE });
-          }
-        })
-        .catch(({ response }) => {
-          if (response.status === 404) {
-            dispatch({ type: RECEIVED_NO_MATCH_ID });
-            clearInterval(matchPoller);
-          }
-        });
+      getQueueStatus().then(({ data }) => {
+        if (data.type === "in match") {
+          dispatch({ type: RECEIVED_MATCH_ID, matchId: data.matchId });
+          clearInterval(matchPoller);
+        }
+        dispatch({ type: RECEIVED_NO_MATCH_ID });
+        if (data.type === "in queue") {
+          dispatch({ type: IN_QUEUE });
+        } else {
+          clearInterval(matchPoller);
+        }
+      });
     }, 1500);
     dispatch({ type: STARTED_MATCH_POLLER, matchPoller: matchPoller });
   }
 };
 
+const lobbyState = (store) => store[LOBBY_STATE];
 export const selectActiveMatches = (store) =>
-  store[LOBBY_STATE].activeMatches || 0;
-export const selectIsQueueing = (store) => store[LOBBY_STATE].queueing;
-export const selectCurrentMatchId = (store) => store[LOBBY_STATE].matchId;
+  lobbyState(store).activeMatches || [];
+export const selectActiveMatchCount = (store) =>
+  lobbyState(store).activeMatchCount || 0;
+export const selectIsQueueing = (store) => lobbyState(store).queueing;
+export const selectCurrentMatchId = (store) => lobbyState(store).matchId;
 export const selectHaveInitialisedMatchId = (store) =>
-  store[LOBBY_STATE].initialised;
-export const selectIsGameOffline = (store) => store[LOBBY_STATE].gameOffline;
+  lobbyState(store).initialised;
+export const selectIsGameOffline = (store) => lobbyState(store).gameOffline;
