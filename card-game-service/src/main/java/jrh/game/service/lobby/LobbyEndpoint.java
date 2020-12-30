@@ -4,7 +4,8 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import jrh.game.common.account.AccountId;
 import jrh.game.service.account.Accounts;
-import jrh.game.service.lobby.response.ActiveGamesResponse;
+import jrh.game.service.lobby.response.MatchCountResponse;
+import jrh.game.service.lobby.response.MatchListResponse;
 import jrh.game.service.lobby.response.QueueStatusResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,8 +34,9 @@ public class LobbyEndpoint {
 
     private void registerRoutes(Javalin javalin) {
         javalin.routes(() -> {
-            path("games", () -> {
-                get("count", this::activeGames, singleton(ANYONE));
+            path("matches", () -> {
+                get("count", this::gamesCount, singleton(ANYONE));
+                get("all", this::allGames);
                 path("queue", () -> {
                     get("status", this::queueStatus);
                     post("join", this::joinQueue);
@@ -75,7 +77,11 @@ public class LobbyEndpoint {
         matchQueue.remove(accountId);
     }
 
-    private void activeGames(Context context) {
-        context.json(new ActiveGamesResponse(matchManager.getActiveMatches()));
+    private void gamesCount(Context context) {
+        context.json(new MatchCountResponse(matchManager.getActiveMatchCount()));
+    }
+
+    private void allGames(Context context) {
+        context.json(new MatchListResponse(matchManager.getAllActiveMatches()));
     }
 }
