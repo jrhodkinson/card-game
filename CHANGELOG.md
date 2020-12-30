@@ -1,5 +1,8 @@
 # NEXT / 0.1.0
 - [Meta] Introduce new 'Spectator Mode' - you can watch an active match by clicking 'spectate' next to it in the lobby
+- [Game] The next card to be available in the market is now visible to the right of the market
+- [Game] Reduce the number of cards available for purchase in the market to 5 (was 6)
+- [Game] Rename 'Artefact Smuggler' to 'Smuggler'
 - [UI] Make the market's background more distinctive
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
 - [UI] Display the contents of players' decks (shuffled) in a tooltip (hover over "N cards in deck")

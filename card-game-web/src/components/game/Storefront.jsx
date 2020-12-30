@@ -11,7 +11,7 @@ import Cards from "../card/Cards";
 const Wrapper = styled.div`
   grid-column: 1 / 4;
   padding: 10px;
-  background-color: ${c.darkGrey};
+  background-color: ${c.mediumGrey};
   box-shadow: 0 0 3px -3px ${c.darkBlack};
   display: flex;
   justify-content: center;
@@ -23,12 +23,12 @@ const LabelWrapper = styled.div`
 `;
 
 const Label = styled.div`
-  color: ${c.faintTextOnBlack};
+  color: ${c.textOnBlack};
   transform: translateX(-50%) translateY(-50%) rotate(-90deg);
   position: absolute;
   top: 50%;
   left: 50%;
-  opacity: 0.8;
+  opacity: 0.6;
   letter-spacing: 1px;
   font-size: 0.9em;
 `;
