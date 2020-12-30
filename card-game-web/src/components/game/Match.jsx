@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectIsSpectating } from "../../store/lobby/lobby-store";
 import {
   isPrimaryPlayerActive,
   matchStateHasInitialised,
@@ -48,6 +49,7 @@ const Match = () => {
   const primaryPlayer = useSelector(selectPrimaryPlayer);
   const secondaryPlayer = useSelector(selectSecondaryPlayer);
   const primaryPlayerActive = useSelector(isPrimaryPlayerActive);
+  const isSpectating = useSelector(selectIsSpectating);
 
   if (!hasInitialised) {
     return <Loading />;
@@ -73,11 +75,11 @@ const Match = () => {
         {primaryPlayerActive ? (
           <Spacer />
         ) : (
-          <CurrentTurn active={primaryPlayerActive} />
+          <CurrentTurn active={primaryPlayerActive && !isSpectating} />
         )}
-        <Storefront active={primaryPlayerActive} />
+        <Storefront active={primaryPlayerActive && !isSpectating} />
         {primaryPlayerActive ? (
-          <CurrentTurn active={primaryPlayerActive} />
+          <CurrentTurn active={primaryPlayerActive && !isSpectating} />
         ) : (
           <Spacer />
         )}
