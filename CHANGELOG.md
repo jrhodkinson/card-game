@@ -1,4 +1,5 @@
 # NEXT / 0.1.0
+- [Meta] Introduce new 'Spectator Mode' - you can watch an active match by clicking 'spectate' next to it in the lobby
 - [UI] Make the market's background more distinctive
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
 

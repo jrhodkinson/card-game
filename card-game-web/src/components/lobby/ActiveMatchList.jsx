@@ -10,6 +10,10 @@ import {
 } from "../../store/lobby/lobby-store";
 import usePolling from "../common/usePolling";
 
+const NoActiveMatches = styled.div`
+  margin: 10px;
+`;
+
 const Wrapper = styled.div`
   margin: 10px;
   padding: 0;
@@ -56,7 +60,9 @@ const ActiveMatchList = () => {
   usePolling(callback, 15000);
 
   if (activeMatches.length === 0) {
-    return null;
+    return (
+      <NoActiveMatches>No games are being played right now</NoActiveMatches>
+    );
   }
 
   return (
