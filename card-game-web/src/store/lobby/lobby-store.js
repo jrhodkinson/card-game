@@ -123,7 +123,7 @@ export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () =>
 };
 
 const lobbyState = (store) => store[LOBBY_STATE];
-export const selectActiveMatches = (store) =>
+export const selectAllActiveMatches = (store) =>
   lobbyState(store).activeMatches || [];
 export const selectActiveMatchCount = (store) =>
   lobbyState(store).activeMatchCount || 0;

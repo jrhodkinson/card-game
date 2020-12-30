@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectIsQueueing } from "../../store/lobby/lobby-store";
+import ActiveMatchList from "./ActiveMatchList";
 import Disclaimer from "./Disclaimer";
 import QueueButton from "./QueueButton";
 import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
@@ -23,6 +24,7 @@ const Lobby = () => {
     <Wrapper>
       <Disclaimer />
       {isQueueing ? <InQueue /> : <QueueButton />}
+      <ActiveMatchList />
     </Wrapper>
   );
 };

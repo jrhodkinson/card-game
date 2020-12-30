@@ -1,26 +1,22 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchActiveMatchCount,
   selectActiveMatchCount,
 } from "../../store/lobby/lobby-store";
+import usePoll from "../common/usePoll";
 
 const ActiveMatchCount = () => {
   const dispatch = useDispatch();
-  const activeGames = useSelector(selectActiveMatchCount);
-
-  useEffect(() => {
+  const activeMatchCount = useSelector(selectActiveMatchCount);
+  const callback = useCallback(() => {
     dispatch(fetchActiveMatchCount());
-    const poller = setInterval(() => {
-      dispatch(fetchActiveMatchCount());
-    }, 30000);
-    return () => {
-      clearInterval(poller);
-    };
   }, [dispatch]);
 
-  return `${activeGames} game${
-    activeGames === 1 ? "" : "s"
+  usePoll(callback, 30000);
+
+  return `${activeMatchCount} game${
+    activeMatchCount === 1 ? "" : "s"
   } being played right now`;
 };
 
