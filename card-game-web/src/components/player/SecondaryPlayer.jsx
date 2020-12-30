@@ -1,9 +1,10 @@
 import React from "react";
 import { ORIENTATIONS } from "../card/CardStump";
+import Deck from "../card/Deck";
+import DiscardPile from "../card/DiscardPile";
 import * as c from "../styles/colors";
 import styled from "styled-components";
 import * as S from "../../styles";
-import Deck from "../card/Deck";
 import Pile from "../card/Pile";
 import Structures from "../structure/Structures";
 import Hero from "./Hero";
@@ -31,14 +32,14 @@ const SecondaryPlayer = ({ player, active }) => (
   <>
     <Spacer />
     <SubGrid>
-      <Deck size={player.deckSize} />
+      <Deck cards={player.deck} />
       <Hero
         entityId={player.entityId}
         name={player.user}
         health={player.health}
         active={active}
       />
-      <Pile cards={player.discardPile} name="discard pile" />
+      <DiscardPile cards={player.discardPile} />
     </SubGrid>
     <Spacer />
     <SpanAll>

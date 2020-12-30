@@ -2,6 +2,7 @@
 - [Meta] Introduce new 'Spectator Mode' - you can watch an active match by clicking 'spectate' next to it in the lobby
 - [UI] Make the market's background more distinctive
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
+- [UI] Display the contents of players' decks (shuffled) in a tooltip (hover over "N cards in deck")
 
 # 0.0.7
 - [Game] Swap a starting Denarius and Small Favour with 2x Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out

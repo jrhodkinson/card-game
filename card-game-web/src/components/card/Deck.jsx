@@ -1,13 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import Pile from "./Pile";
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  text-align: right;
-`;
-
-const Deck = ({ size }) => <Wrapper>{size} in deck</Wrapper>;
+const Deck = ({ cards }) => (
+  <Pile cards={cards} name="deck" tooltipHeader="(shuffled)" />
+);
 
 export default Deck;

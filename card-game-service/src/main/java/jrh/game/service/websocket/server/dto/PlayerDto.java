@@ -1,9 +1,12 @@
 package jrh.game.service.websocket.server.dto;
 
+import jrh.game.api.Card;
 import jrh.game.api.Player;
 import jrh.game.common.EntityId;
 import jrh.game.common.User;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -16,17 +19,17 @@ public class PlayerDto {
     public final List<StructureDto> structures;
     public final List<CardDto> hand;
     public final List<CardDto> discardPile;
-    public final int deckSize;
+    public final List<CardDto> deck;
 
     private PlayerDto(EntityId entityId, User user, int health, List<StructureDto> structures, List<CardDto> hand,
-            List<CardDto> discardPile, int deckSize) {
+            List<CardDto> discardPile, List<CardDto> deck) {
         this.entityId = entityId;
         this.user = user;
         this.health = health;
         this.structures = structures;
         this.hand = hand;
         this.discardPile = discardPile;
-        this.deckSize = deckSize;
+        this.deck = deck;
     }
 
     public static class Factory {
@@ -40,10 +43,12 @@ public class PlayerDto {
         }
 
         public PlayerDto playerDto(Player player) {
+            List<Card> deckCopy = new ArrayList<>(player.getDeck());
+            Collections.shuffle(deckCopy);
             return new PlayerDto(player.getEntityId(), player.getUser(), player.getHealth(),
                     player.getStructures().stream().map(structureFactory::structureDto).collect(toList()),
                     cardFactory.cardDtos(player.getHand()), cardFactory.cardDtos(player.getDiscardPile()),
-                    player.getDeck().size());
+                    cardFactory.cardDtos(deckCopy));
         }
     }
 
