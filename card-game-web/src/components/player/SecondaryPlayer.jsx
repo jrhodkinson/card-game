@@ -1,4 +1,5 @@
 import React from "react";
+import { ORIENTATIONS } from "../card/CardStump";
 import * as c from "../styles/colors";
 import styled from "styled-components";
 import * as S from "../../styles";
@@ -6,7 +7,7 @@ import Deck from "../card/Deck";
 import Pile from "../card/Pile";
 import Structures from "../structure/Structures";
 import Hero from "./Hero";
-import SecondaryPlayerHand from "./SecondaryPlayerHand";
+import StumpHand from "./StumpHand";
 
 const SpanAll = styled(S.Centered)`
   grid-column: span 3;
@@ -41,7 +42,7 @@ const SecondaryPlayer = ({ player, active }) => (
     </SubGrid>
     <Spacer />
     <SpanAll>
-      <SecondaryPlayerHand size={player.hand.length} />
+      <StumpHand size={player.hand.length} orientation={ORIENTATIONS.BOTTOM} />
     </SpanAll>
     <SpanAll>
       <Structures structures={player.structures} />

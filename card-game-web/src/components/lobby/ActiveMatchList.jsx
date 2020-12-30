@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchAllActiveMatches,
   selectAllActiveMatches,
+  spectateMatch,
 } from "../../store/lobby/lobby-store";
 import usePolling from "../common/usePolling";
 
@@ -70,7 +71,9 @@ const ActiveMatchList = () => {
                 .map((player) => <Player key={player}>{player}</Player>)
                 .reduce((prev, curr) => [prev, " vs ", curr])}
             </Players>
-            <Button>Spectate</Button>
+            <Button onClick={() => dispatch(spectateMatch(match.id))}>
+              Spectate
+            </Button>
           </ActiveMatch>
         ))}
       </List>

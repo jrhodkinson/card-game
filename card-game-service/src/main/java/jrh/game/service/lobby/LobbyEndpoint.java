@@ -10,10 +10,7 @@ import jrh.game.service.lobby.response.QueueStatusResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.path;
@@ -21,7 +18,6 @@ import static io.javalin.apibuilder.ApiBuilder.post;
 import static java.util.Collections.singleton;
 import static jrh.game.service.Attributes.ACCOUNT_ID;
 import static jrh.game.service.account.AccountRole.ANYONE;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class LobbyEndpoint {
 
@@ -86,10 +82,6 @@ public class LobbyEndpoint {
     }
 
     private void allGames(Context context) {
-        List<MatchMetadata> fakeMetadata = new ArrayList<>();
-        fakeMetadata.add(new MatchMetadata(UUID.randomUUID(), List.of(randomAlphabetic(10), randomAlphabetic(10))));
-        fakeMetadata.add(new MatchMetadata(UUID.randomUUID(), List.of(randomAlphabetic(10), randomAlphabetic(10))));
-        context.json(new MatchListResponse(fakeMetadata));
-//        context.json(new MatchListResponse(matchManager.getAllActiveMatches()));
+        context.json(new MatchListResponse(matchManager.getAllActiveMatches()));
     }
 }

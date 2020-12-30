@@ -1,9 +1,18 @@
 import { selectUser } from "../account/account-store";
+import { selectIsSpectating } from "../lobby/lobby-store";
 import { MATCH_STATE } from "./match-reducer";
 
 const selectMatchState = (store) => store[MATCH_STATE].state;
 
-const selectPrimaryUser = (store) => selectUser(store);
+const selectPrimaryUser = (store) => {
+  if (selectIsSpectating(store)) {
+    return Object.keys(selectMatchState(store).players).sort((a, b) =>
+      a.localeCompare(b)
+    )[0];
+  } else {
+    selectUser(store);
+  }
+};
 const selectSecondaryUser = (store) => {
   const users = Object.keys(selectMatchState(store).players);
   const primaryUser = selectPrimaryUser(store);

@@ -9,12 +9,12 @@ const Wrapper = styled.div`
   min-height: ${card.STUMP_HEIGHT};
 `;
 
-const SecondaryPlayerHand = ({ size }) => (
+const StumpHand = ({ size, orientation }) => (
   <Wrapper>
     {[...Array(size)].map((e, i) => (
-      <CardStump key={i} />
+      <CardStump key={i} orientation={orientation} />
     ))}
   </Wrapper>
 );
 
-export default SecondaryPlayerHand;
+export default StumpHand;

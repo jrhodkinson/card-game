@@ -3,10 +3,18 @@ import * as c from "../../styles/colors";
 import { card, cost, image, header, description } from "./dimensions";
 
 const shakingKeyframes = keyframes`
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(1deg); }
-  30% { transform: rotate(-1deg); }
-  40% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(1deg);
+  }
+  30% {
+    transform: rotate(-1deg);
+  }
+  40% {
+    transform: rotate(0deg);
+  }
 `;
 
 export const Card = styled.div`
@@ -137,8 +145,20 @@ export const CardCost = styled.div`
 
 export const CardStump = styled(Card)`
   height: ${card.STUMP_HEIGHT}px;
-  margin-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   background-color: ${c.mediumGrey};
+
+  ${({ orientation }) => {
+    if (orientation === "bottom") {
+      return css`
+        margin-top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      `;
+    }
+    return css`
+      margin-bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    `;
+  }};
 `;

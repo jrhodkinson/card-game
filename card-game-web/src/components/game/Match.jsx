@@ -10,6 +10,7 @@ import {
 } from "../../store/match/match-selector";
 import FadeIn from "../common/FadeIn";
 import Loading from "../common/Loading";
+import ActiveMatchList from "../lobby/ActiveMatchList";
 import PrimaryPlayer from "../player/PrimaryPlayer";
 import SecondaryPlayer from "../player/SecondaryPlayer";
 import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
@@ -57,6 +58,7 @@ const Match = () => {
       <MatchOver>
         <Winner>Match is over, winner: {winner}</Winner>
         <QueueButton />
+        <ActiveMatchList />
       </MatchOver>
     );
   }
