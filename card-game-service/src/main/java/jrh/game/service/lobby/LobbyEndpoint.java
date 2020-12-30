@@ -34,7 +34,7 @@ public class LobbyEndpoint {
     private void registerRoutes(Javalin javalin) {
         javalin.routes(() -> {
             path("games", () -> {
-                get("active", this::activeGames, singleton(ANYONE));
+                get("count", this::activeGames, singleton(ANYONE));
                 path("queue", () -> {
                     get("status", this::queueStatus);
                     post("join", this::joinQueue);

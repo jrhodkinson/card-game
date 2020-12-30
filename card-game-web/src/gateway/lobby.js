@@ -6,4 +6,4 @@ export const postLeaveQueue = () => axios.post("/games/queue/leave");
 
 export const getQueueStatus = () => axios.get("/games/queue/status");
 
-export const getActiveGames = () => axios.get("/games/active");
+export const getActiveGamesCount = () => axios.get("/games/count");

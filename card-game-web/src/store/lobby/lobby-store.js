@@ -1,6 +1,6 @@
 import Immutable from "seamless-immutable";
 import {
-  getActiveGames,
+  getActiveGamesCount,
   getQueueStatus,
   postJoinQueue,
   postLeaveQueue,
@@ -73,8 +73,8 @@ export const leaveQueue = () => (dispatch) => {
   });
 };
 
-export const fetchActiveGames = () => (dispatch) => {
-  getActiveGames()
+export const fetchActiveGamesCount = () => (dispatch) => {
+  getActiveGamesCount()
     .then(({ data }) => {
       dispatch({ type: RECEIVED_ACTIVE_GAMES, activeGames: data.activeGames });
     })

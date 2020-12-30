@@ -36,19 +36,16 @@ const Link = ({ text, link }) => {
 const GameOffline = () => (
   <Wrapper>
     <Message>
+      <p>The game is currently down for essential maintenance.</p>
       <p>
-        Thank you for registering to play Revelation 21:8. Your input over the
-        coming months will shape this game.
-      </p>
-      <p>
-        <strong>Doors open Saturday at 16:00 GMT (10:00 CST).</strong>
-      </p>
-      <p>
-        If you haven't already, please join the{" "}
+        Please join the{" "}
         <Link text="Discord" link="https://discord.gg/52RjnmSrHQ" />
         {" or "}
-        <Link text="subreddit" link="https://www.reddit.com/r/revelation218/" />
-        .
+        <Link
+          text="subreddit"
+          link="https://www.reddit.com/r/revelation218/"
+        />{" "}
+        for updates.
       </p>
     </Message>
   </Wrapper>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  fetchActiveGames,
+  fetchActiveGamesCount,
   selectActiveGames,
 } from "../../store/lobby/lobby-store";
 
@@ -10,9 +10,9 @@ const ActiveGames = () => {
   const activeGames = useSelector(selectActiveGames);
 
   useEffect(() => {
-    dispatch(fetchActiveGames());
+    dispatch(fetchActiveGamesCount());
     const poller = setInterval(() => {
-      dispatch(fetchActiveGames());
+      dispatch(fetchActiveGamesCount());
     }, 30000);
     return () => {
       clearInterval(poller);
