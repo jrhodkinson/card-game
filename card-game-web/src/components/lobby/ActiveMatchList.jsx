@@ -50,7 +50,6 @@ const ActiveMatchList = () => {
   const dispatch = useDispatch();
   const activeMatches = useSelector(selectAllActiveMatches);
   const callback = useCallback(() => {
-    console.log("polling");
     dispatch(fetchAllActiveMatches());
   }, [dispatch]);
 

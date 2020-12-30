@@ -10,7 +10,7 @@ const selectPrimaryUser = (store) => {
       a.localeCompare(b)
     )[0];
   } else {
-    selectUser(store);
+    return selectUser(store);
   }
 };
 const selectSecondaryUser = (store) => {
