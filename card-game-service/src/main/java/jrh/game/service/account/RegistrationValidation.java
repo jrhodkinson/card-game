@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class RegistrationValidation {
 
-    private static final Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9._\\-]{3,}$");
+    private static final Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9._\\-]{3,18}$");
     private static final Pattern PASSWORD_REGEX = Pattern.compile("^\\p{Print}{8,}$");
 
     public static boolean isValidEmail(String email) {

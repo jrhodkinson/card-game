@@ -22,7 +22,7 @@ public class FailedToRegisterResponse {
     }
 
     public static FailedToRegisterResponse invalidUsername() {
-        return new FailedToRegisterResponse("username", "Must be 3+ characters of only: letters, numbers, or .-_");
+        return new FailedToRegisterResponse("username", "Must be 3-18 characters of only: letters, numbers, or .-_");
 
     }
 
