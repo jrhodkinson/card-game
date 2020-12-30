@@ -32,7 +32,7 @@ export const SocialLink = styled.li`
   }
 `;
 
-export const ActiveMatches = styled.div`
+export const ActiveMatchCount = styled.div`
   margin-left: auto;
   font-size: 0.8em;
 `;

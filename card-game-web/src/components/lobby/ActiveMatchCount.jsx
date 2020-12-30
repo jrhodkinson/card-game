@@ -5,7 +5,7 @@ import {
   selectActiveMatchCount,
 } from "../../store/lobby/lobby-store";
 
-const ActiveMatches = () => {
+const ActiveMatchCount = () => {
   const dispatch = useDispatch();
   const activeGames = useSelector(selectActiveMatchCount);
 
@@ -24,4 +24,4 @@ const ActiveMatches = () => {
   } being played right now`;
 };
 
-export default ActiveMatches;
+export default ActiveMatchCount;

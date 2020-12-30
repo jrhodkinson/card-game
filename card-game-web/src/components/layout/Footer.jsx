@@ -1,5 +1,5 @@
 import React from "react";
-import ActiveMatches from "../lobby/ActiveMatches";
+import ActiveMatchCount from "../lobby/ActiveMatchCount";
 import * as S from "./styles/Footer.styles";
 
 const SocialLink = ({ text, link }) => {
@@ -22,9 +22,9 @@ const Footer = () => {
           link="https://www.reddit.com/r/revelation218/"
         />
       </S.SocialLinks>
-      <S.ActiveMatches>
-        <ActiveMatches />
-      </S.ActiveMatches>
+      <S.ActiveMatchCount>
+        <ActiveMatchCount />
+      </S.ActiveMatchCount>
     </S.Wrapper>
   );
 };
