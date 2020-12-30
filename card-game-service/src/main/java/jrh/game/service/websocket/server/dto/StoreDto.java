@@ -4,14 +4,14 @@ import jrh.game.api.Store;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class StoreDto {
 
     public final List<CardDto> row;
+    public final CardDto next;
 
-    private StoreDto(List<CardDto> row) {
+    private StoreDto(List<CardDto> row, CardDto next) {
         this.row = row;
+        this.next = next;
     }
 
     public static class Factory {
@@ -23,7 +23,7 @@ public class StoreDto {
         }
 
         public StoreDto storeDto(Store store) {
-            return new StoreDto(store.getRow().stream().map(cardFactory::cardDto).collect(toList()));
+            return new StoreDto(cardFactory.cardDtos(store.getRow()), cardFactory.cardDto(store.getNext()));
         }
     }
 }

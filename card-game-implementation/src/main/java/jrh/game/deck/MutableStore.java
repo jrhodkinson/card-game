@@ -5,6 +5,7 @@ import jrh.game.api.Store;
 import jrh.game.card.CardImplFactory;
 import jrh.game.common.EntityId;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -12,11 +13,11 @@ import java.util.Optional;
 public class MutableStore implements Store {
 
     private final CardImplFactory cardImplFactory;
-    private final Row row;
+    private final List<Card> row = new ArrayList<>();
+    private Card next;
 
     public MutableStore(CardImplFactory cardImplFactory, int rowSize) {
         this.cardImplFactory = cardImplFactory;
-        this.row = new Row();
         initialise(rowSize);
     }
 
@@ -24,7 +25,8 @@ public class MutableStore implements Store {
         int index = row.indexOf(card);
         if (index != -1) {
             row.remove(card);
-            row.add(index, cardImplFactory.randomPurchasableCard());
+            row.add(index, next);
+            next = cardImplFactory.randomPurchasableCard();
             return true;
         }
         return false;
@@ -36,11 +38,17 @@ public class MutableStore implements Store {
             row.add(cardImplFactory.randomPurchasableCard());
         }
         Collections.shuffle(row);
+        next = cardImplFactory.randomCard();
     }
 
     @Override
     public List<Card> getRow() {
         return Collections.unmodifiableList(row);
+    }
+
+    @Override
+    public Card getNext() {
+        return next;
     }
 
     public Optional<Card> getCard(EntityId entityId) {
