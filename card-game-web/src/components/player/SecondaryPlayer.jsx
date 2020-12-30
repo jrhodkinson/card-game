@@ -5,7 +5,6 @@ import DiscardPile from "../card/DiscardPile";
 import * as c from "../styles/colors";
 import styled from "styled-components";
 import * as S from "../../styles";
-import Pile from "../card/Pile";
 import Structures from "../structure/Structures";
 import Hero from "./Hero";
 import StumpHand from "./StumpHand";

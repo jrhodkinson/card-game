@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "../card/Card";
 import * as c from "../styles/colors";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -8,10 +9,31 @@ import { selectDoesPendingCardRequireStoreTarget } from "../../store/play/play-s
 import Cards from "../card/Cards";
 
 const Wrapper = styled.div`
-  background-color: ${c.mediumGrey};
   grid-column: 1 / 4;
   padding: 10px;
+  background-color: ${c.darkGrey};
   box-shadow: 0 0 3px -3px ${c.darkBlack};
+  display: flex;
+  justify-content: center;
+`;
+
+const LabelWrapper = styled.div`
+  position: relative;
+  margin: 0 10px 0 30px;
+`;
+
+const Label = styled.div`
+  color: ${c.faintTextOnBlack};
+  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0.8;
+  letter-spacing: 1px;
+`;
+
+const NextCard = styled.div`
+  opacity: 0.5;
 `;
 
 const Storefront = ({ active }) => {
@@ -33,6 +55,12 @@ const Storefront = ({ active }) => {
         shaking={selectedCardRequiresStoreFront}
         onCardClick={handleCardClick}
       />
+      <LabelWrapper>
+        <Label>Next</Label>
+      </LabelWrapper>
+      <NextCard>
+        <Card card={storefront.next} short displayCost faint />
+      </NextCard>
     </Wrapper>
   );
 };

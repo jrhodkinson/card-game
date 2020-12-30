@@ -11,7 +11,7 @@ import {
 import usePolling from "../common/usePolling";
 
 const NoActiveMatches = styled.div`
-  margin: 10px;
+  margin-top: 20px;
 `;
 
 const Wrapper = styled.div`
