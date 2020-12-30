@@ -7,7 +7,7 @@ import {
   fetchAllActiveMatches,
   selectAllActiveMatches,
 } from "../../store/lobby/lobby-store";
-import usePoll from "../common/usePoll";
+import usePolling from "../common/usePolling";
 
 const Wrapper = styled.div`
   margin: 10px;
@@ -53,7 +53,7 @@ const ActiveMatchList = () => {
     dispatch(fetchAllActiveMatches());
   }, [dispatch]);
 
-  usePoll(callback, 15000);
+  usePolling(callback, 15000);
 
   if (activeMatches.length === 0) {
     return null;

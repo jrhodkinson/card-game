@@ -4,7 +4,7 @@ import {
   fetchActiveMatchCount,
   selectActiveMatchCount,
 } from "../../store/lobby/lobby-store";
-import usePoll from "../common/usePoll";
+import usePolling from "../common/usePolling";
 
 const ActiveMatchCount = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const ActiveMatchCount = () => {
     dispatch(fetchActiveMatchCount());
   }, [dispatch]);
 
-  usePoll(callback, 30000);
+  usePolling(callback, 30000);
 
   return `${activeMatchCount} game${
     activeMatchCount === 1 ? "" : "s"
