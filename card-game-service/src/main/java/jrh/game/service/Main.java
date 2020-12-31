@@ -14,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.time.Instant;
 
+import static jrh.game.service.Environment.DEVELOPMENT;
+
 public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
@@ -43,6 +45,11 @@ public class Main {
             Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
             matchmaker.start();
             server.start();
+            if (configuration.environment().equals(DEVELOPMENT)) {
+                logger.info("In development environment, so queueing jack and terry.");
+                matchQueue.join(accounts.getAccountIdByName("jack").orElseThrow());
+                matchQueue.join(accounts.getAccountIdByName("terry").orElseThrow());
+            }
         } else {
             logger.info("Starting NoPlayServer");
             NoPlayServer noPlayServer = new NoPlayServer(version, cookies, sessions, accounts);
