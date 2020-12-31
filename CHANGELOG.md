@@ -3,7 +3,7 @@
 - [Game] The next card to be available in the market is now visible to the right of the market
 - [Game] Reduce the number of cards available for purchase in the market to 5 (was 6)
 - [Game] Rename 'Artefact Smuggler' to 'Smuggler'
-- [UI] Display the contents of players' decks (shuffled) in a tooltip (hover over "N cards in deck")
+- [UI] Display the contents of players' decks (in alphabetical order) in a tooltip (hover over "N cards in deck")
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
 
 # 0.0.7

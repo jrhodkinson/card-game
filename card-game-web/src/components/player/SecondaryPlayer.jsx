@@ -31,7 +31,7 @@ const SecondaryPlayer = ({ player, active }) => (
   <>
     <Spacer />
     <SubGrid>
-      <Deck cards={player.deck} />
+      <Deck size={player.deck.length} />
       <Hero
         entityId={player.entityId}
         name={player.user}

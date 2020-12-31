@@ -5,8 +5,7 @@ import jrh.game.api.Player;
 import jrh.game.common.EntityId;
 import jrh.game.common.User;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -43,12 +42,14 @@ public class PlayerDto {
         }
 
         public PlayerDto playerDto(Player player) {
-            List<Card> deckCopy = new ArrayList<>(player.getDeck());
-            Collections.shuffle(deckCopy);
+            List<CardDto> alphabeticalDeck = player.getDeck().stream()
+                .sorted(Comparator.comparing(Card::getName))
+                .map(cardFactory::cardDto)
+                .collect(toList());
             return new PlayerDto(player.getEntityId(), player.getUser(), player.getHealth(),
                     player.getStructures().stream().map(structureFactory::structureDto).collect(toList()),
                     cardFactory.cardDtos(player.getHand()), cardFactory.cardDtos(player.getDiscardPile()),
-                    cardFactory.cardDtos(deckCopy));
+                    alphabeticalDeck);
         }
     }
 

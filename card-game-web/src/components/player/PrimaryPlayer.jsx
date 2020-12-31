@@ -46,7 +46,11 @@ const PrimaryPlayer = ({ player, active }) => {
       </SpanAll>
       <Spacer />
       <SubGrid>
-        <Deck cards={player.deck} />
+        {isSpectating ? (
+          <Deck size={player.deck.length} />
+        ) : (
+          <Deck cards={player.deck} />
+        )}
         <Hero
           entityId={player.entityId}
           name={player.user}
