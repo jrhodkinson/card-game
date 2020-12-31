@@ -55,6 +55,7 @@ public class LobbyEndpoint {
             return;
         }
         if (matchQueue.contains(accountId)) {
+            matchQueue.refresh(accountId);
             context.json(QueueStatusResponse.queueing());
         } else {
             context.json(QueueStatusResponse.notInQueue());

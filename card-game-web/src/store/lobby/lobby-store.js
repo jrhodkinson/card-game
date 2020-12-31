@@ -31,6 +31,7 @@ export const STARTED_MATCH_POLLER = `${NAMESPACE}/STARTED_MATCH_POLLER`;
 export const CLEAR_MATCH_POLLER = `${NAMESPACE}/CLEAR_MATCH_POLLER`;
 export const SPECTATE_MATCH = `${NAMESPACE}/SPECTATE_MATCH`;
 export const IN_QUEUE = `${NAMESPACE}/IN_QUEUE`;
+export const NOT_IN_QUEUE = `${NAMESPACE}/NOT_IN_QUEUE`;
 export const LEFT_QUEUE = `${NAMESPACE}/LEFT_QUEUE`;
 
 export default (state = defaultState, action) => {
@@ -49,6 +50,8 @@ export default (state = defaultState, action) => {
       return state.set("initialised", true);
     case IN_QUEUE:
       return state.set("matchId", undefined).set("queueing", true);
+    case NOT_IN_QUEUE:
+      return state.set("queueing", false);
     case STARTED_MATCH_POLLER:
       return state.set("matchPoller", action.matchPoller);
     case RECEIVED_GAME_OFFLINE:
@@ -116,7 +119,7 @@ export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () =>
   getState
 ) => {
   if (!getState()[LOBBY_STATE].matchPoller) {
-    const matchPoller = setInterval(() => {
+    const getAndProcessQueueStatus = () => {
       getQueueStatus().then(({ data }) => {
         if (data.type === "in match") {
           dispatch({ type: CLEAR_MATCH_POLLER });
@@ -129,10 +132,13 @@ export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () =>
         if (data.type === "in queue") {
           dispatch({ type: IN_QUEUE });
         } else {
+          dispatch({ type: NOT_IN_QUEUE });
           dispatch({ type: CLEAR_MATCH_POLLER });
         }
       });
-    }, 1500);
+    };
+    getAndProcessQueueStatus();
+    const matchPoller = setInterval(getAndProcessQueueStatus, 5000);
     dispatch({ type: STARTED_MATCH_POLLER, matchPoller: matchPoller });
   }
 };
