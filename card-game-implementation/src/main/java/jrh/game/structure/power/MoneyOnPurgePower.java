@@ -28,12 +28,8 @@ public class MoneyOnPurgePower extends AbstractPower {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder()
-            .keyword(ACQUIRE)
-            .money(amount)
-            .plainString("whenever you")
-            .keyword(PURGE)
-            .build();
+        return AtomicDescription.builder().keyword(ACQUIRE).money(amount).plainString("whenever you").keyword(PURGE)
+                .build();
     }
 
     @Subscribe

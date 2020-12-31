@@ -40,7 +40,8 @@ public class EndTurnBehaviourTest {
         match.getActionHandler().accept(playCard);
 
         assertThat(match.getInactivePlayer(), equalTo(activePlayer));
-        assertThat(match.getActivePlayer().getUser(), equalTo(activePlayer.getUser().equals(firstUser) ? secondUser : firstUser));
+        assertThat(match.getActivePlayer().getUser(),
+                equalTo(activePlayer.getUser().equals(firstUser) ? secondUser : firstUser));
     }
 
 }
