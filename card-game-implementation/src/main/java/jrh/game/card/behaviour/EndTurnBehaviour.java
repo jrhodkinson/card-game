@@ -3,7 +3,7 @@ package jrh.game.card.behaviour;
 import jrh.game.api.Callback;
 import jrh.game.api.Match;
 import jrh.game.api.Subscribe;
-import jrh.game.api.event.CardPlayed;
+import jrh.game.api.event.CardResolved;
 import jrh.game.asset.JsonKey;
 import jrh.game.common.description.AtomicDescription;
 import jrh.game.match.MatchStateController;
@@ -27,8 +27,8 @@ public class EndTurnBehaviour extends AbstractBehaviour {
     }
 
     @Subscribe
-    private void cardPlayed(CardPlayed cardPlayed, Match match, Callback callback) {
-        if (cardPlayed.getCard().equals(this.getCard())) {
+    private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
+        if (cardResolved.getCard().equals(this.getCard())) {
             logger.info("Ending the current turn");
             match.getController(MatchStateController.class).endTurn(callback::enqueue);
         }

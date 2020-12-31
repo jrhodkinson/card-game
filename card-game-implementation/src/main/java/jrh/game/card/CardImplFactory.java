@@ -54,10 +54,9 @@ public class CardImplFactory {
     public Deck startingDeck() {
         Deck deck = new Deck();
         List<CardId> startingDeck = new ArrayList<>();
-//        Streams.concat(Collections.nCopies(4, new CardId("MONEY:1")).stream(),
-//                Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
-//                Collections.nCopies(2, new CardId("DEVOTION")).stream(), Stream.of(new CardId("PURGE")))
-        Streams.concat(Stream.of(new CardId("LAST_REQUEST"), new CardId("")))
+        Streams.concat(Collections.nCopies(4, new CardId("MONEY:1")).stream(),
+                Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
+                Collections.nCopies(2, new CardId("DEVOTION")).stream(), Stream.of(new CardId("PURGE")))
                 .map(this::create).filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
         Collections.shuffle(deck);
         while (deck.size() < Constants.MINIMUM_INITIAL_DECK_SIZE) {
