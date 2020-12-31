@@ -167,7 +167,7 @@ public class CardFlowController implements Controller {
         }
     }
 
-    public void destroyStoreCard(EntityId entityId) {
+    public Optional<Card> destroyStoreCard(EntityId entityId) {
         Optional<Card> optionalCard = match.getStore().getRow().stream().filter(c -> c.getEntityId().equals(entityId))
                 .findFirst();
         if (optionalCard.isPresent()) {
@@ -177,6 +177,7 @@ public class CardFlowController implements Controller {
         } else {
             logger.info("Could not destroy card with entityId={}, it wasn't in the store", entityId);
         }
+        return optionalCard;
     }
 
     public void destroyPlayedCard(Card card) {

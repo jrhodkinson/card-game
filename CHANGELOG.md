@@ -6,7 +6,7 @@
 - [Game] Rename 'Artefact Smuggler' to 'Smuggler'
 - [Game] The player who goes second receives an additional card in their first hand, Patience ('Acquire 2M. Vanish.').
 - [New Card] Patience: Not purchasable. 'Acquire 2M. Vanish.'
-- [UI] Display the contents of players' decks (in alphabetical order) in a tooltip (hover over "N cards in deck")
+- [UI] Display the contents of your deck (in alphabetical order) in a tooltip (hover over "N cards in deck")
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
 
 # 0.0.7
