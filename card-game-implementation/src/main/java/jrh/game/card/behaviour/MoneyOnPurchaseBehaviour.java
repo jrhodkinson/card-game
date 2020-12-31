@@ -28,7 +28,7 @@ public class MoneyOnPurchaseBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("On purchase,").keyword(Keyword.ACQUIRE).number(amount).build();
+        return AtomicDescription.builder().plainString("On purchase,").keyword(Keyword.ACQUIRE).money(amount).build();
     }
 
     @Subscribe

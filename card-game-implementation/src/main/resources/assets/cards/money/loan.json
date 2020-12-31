@@ -1,0 +1,15 @@
+{
+  "id": "LOAN",
+  "name": "Loan",
+  "cost": 0,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "moneyOnPurchase",
+      5
+    ],
+    [
+      "unplayable"
+    ]
+  ]
+}

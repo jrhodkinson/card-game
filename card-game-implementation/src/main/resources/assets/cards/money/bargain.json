@@ -1,0 +1,19 @@
+{
+  "id": "BARGAIN",
+  "name": "Bargain",
+  "cost": 0,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "moneyOnPurchase",
+      3
+    ],
+    [
+      "sacrifice",
+      3
+    ],
+    [
+      "vanish"
+    ]
+  ]
+}
