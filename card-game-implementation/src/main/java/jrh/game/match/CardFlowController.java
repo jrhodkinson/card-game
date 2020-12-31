@@ -86,8 +86,8 @@ public class CardFlowController implements Controller {
             cardPlayed = CardPlayed.noTarget(player, card);
         }
         player.getHand().remove(card);
-        match.getEventBus().dispatch(cardPlayed);
         match.getCurrentTurn().addPlayedCard(card);
+        match.getEventBus().dispatch(cardPlayed);
         match.getEventBus().dispatch(new CardResolved(player, card));
     }
 
@@ -125,7 +125,7 @@ public class CardFlowController implements Controller {
             return;
         }
         match.getCurrentTurn().setMoney(money - cost);
-        match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
+        match.getCurrentTurn().addPlayedCard(card);
         match.getEventBus().dispatch(new CardPurchased(match.getActivePlayer(), card));
         match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
     }
@@ -137,7 +137,7 @@ public class CardFlowController implements Controller {
             return;
         }
         CardImpl card = optionalCard.get();
-        match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
+        match.getCurrentTurn().addPlayedCard(card);
         match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
     }
 
