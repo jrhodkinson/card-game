@@ -1,0 +1,13 @@
+{
+  "id": "construct:Trader",
+  "name": "Approach Soul Trader",
+  "cost": 4,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "construct",
+      "TRADER"
+    ],
+    [ "vanish" ]
+  ]
+}

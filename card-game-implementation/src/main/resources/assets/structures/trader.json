@@ -1,0 +1,11 @@
+{
+  "id": "TRADER",
+  "name": "Soul Trader",
+  "health": 1,
+  "powers": [
+    [
+      "moneyOnPurge",
+      1
+    ]
+  ]
+}
