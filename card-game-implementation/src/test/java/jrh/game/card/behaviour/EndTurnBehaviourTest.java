@@ -11,22 +11,21 @@ import jrh.game.common.User;
 import jrh.game.match.MutableMatch;
 import org.junit.jupiter.api.Test;
 
-import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class MoneyBehaviourTest {
+public class EndTurnBehaviourTest {
 
     @Test
-    public void roundTripsViaJson() {
-        TestBehaviour.passesAllStandardTests(new MoneyBehaviour(nextInt()));
+    public void standardTests() {
+        TestBehaviour.passesAllStandardTests(new EndTurnBehaviour());
     }
 
     @Test
-    public void addsMoneyToCurrentTurn() {
-        MoneyBehaviour moneyBehaviour = new MoneyBehaviour(3);
+    public void endsCurrentTurn() {
+        EndTurnBehaviour behaviour = new EndTurnBehaviour();
 
-        CardImpl testCard = TestCard.forBehaviour(moneyBehaviour);
+        CardImpl testCard = TestCard.forBehaviour(behaviour);
         ConcreteAssetLibrary assetLibrary = TestAssetLibrary.of(testCard);
         User firstUser = new User("a");
         User secondUser = new User("b");
@@ -34,13 +33,14 @@ public class MoneyBehaviourTest {
         match.start();
 
         Player activePlayer = match.getActivePlayer();
-        Card moneyCard = activePlayer.getHand().get(0);
-        assertThat(moneyCard.getCardId(), equalTo(testCard.getCardId()));
+        Card card = activePlayer.getHand().get(0);
+        assertThat(card.getCardId(), equalTo(testCard.getCardId()));
 
-        assertThat(match.getCurrentTurn().getMoney(), equalTo(0));
-        PlayCard playCard = new PlayCard(activePlayer.getUser(), moneyCard.getEntityId(), null);
+        PlayCard playCard = new PlayCard(activePlayer.getUser(), card.getEntityId(), null);
         match.getActionHandler().accept(playCard);
 
-        assertThat(match.getCurrentTurn().getMoney(), equalTo(3));
+        assertThat(match.getInactivePlayer(), equalTo(activePlayer));
+        assertThat(match.getActivePlayer().getUser(), equalTo(activePlayer.getUser().equals(firstUser) ? secondUser : firstUser));
     }
+
 }

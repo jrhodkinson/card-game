@@ -17,7 +17,7 @@ public class TestPower {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public static void passesAllTests(AbstractPower power) {
+    public static void passesAllStandardTests(AbstractPower power) {
         TestPower.roundTripsViaJson(power);
         TestPower.duplicatingGivesSameClass(power);
     }
