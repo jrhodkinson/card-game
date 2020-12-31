@@ -33,7 +33,8 @@ public class MoneyOnPurchaseBehaviour extends AbstractBehaviour {
 
     @Subscribe
     private void cardPurchased(CardPurchased cardPurchased, Match match) {
-        if (cardPurchased.getCard().equals(this.getCard()) && match.getActivePlayer().equals(cardPurchased.getPurchaser())) {
+        if (cardPurchased.getCard().equals(this.getCard())
+                && match.getActivePlayer().equals(cardPurchased.getPurchaser())) {
             logger.info("Adding {} money to current turn", amount);
             match.getController(TurnController.class).changeMoney(amount);
         }

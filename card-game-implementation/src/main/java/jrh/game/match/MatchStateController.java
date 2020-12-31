@@ -39,6 +39,7 @@ public class MatchStateController implements Controller, EventHandler {
         CardFlowController cardFlowController = match.getController(CardFlowController.class);
         cardFlowController.drawCards(match.getActivePlayer(), Constants.INITIAL_HAND_SIZE);
         cardFlowController.drawCards(match.getInactivePlayer(), Constants.INITIAL_HAND_SIZE);
+        cardFlowController.giveSecondPlayerBonus(match.getInactivePlayer().getUser());
         match.getEventBus().dispatch(new MatchStarted());
         match.getEventBus().dispatch(new TurnStarted(Instant.now(), match.getActivePlayer()));
     }

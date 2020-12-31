@@ -28,7 +28,7 @@ public class DamagePower extends AbstractPower {
     @Override
     public AtomicDescription getDescription() {
         return AtomicDescription.builder().plainString("At the end of your opponent's turn,").keyword(Keyword.DAMAGE)
-            .plainString("them by").number(amount).build();
+                .plainString("them by").number(amount).build();
     }
 
     @Subscribe

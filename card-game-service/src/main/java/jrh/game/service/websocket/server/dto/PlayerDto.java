@@ -42,10 +42,8 @@ public class PlayerDto {
         }
 
         public PlayerDto playerDto(Player player) {
-            List<CardDto> alphabeticalDeck = player.getDeck().stream()
-                .sorted(Comparator.comparing(Card::getName))
-                .map(cardFactory::cardDto)
-                .collect(toList());
+            List<CardDto> alphabeticalDeck = player.getDeck().stream().sorted(Comparator.comparing(Card::getName))
+                    .map(cardFactory::cardDto).collect(toList());
             return new PlayerDto(player.getEntityId(), player.getUser(), player.getHealth(),
                     player.getStructures().stream().map(structureFactory::structureDto).collect(toList()),
                     cardFactory.cardDtos(player.getHand()), cardFactory.cardDtos(player.getDiscardPile()),

@@ -141,6 +141,15 @@ public class CardFlowController implements Controller {
         match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
     }
 
+    public void giveSecondPlayerBonus(User user) {
+        Optional<CardImpl> bonus = cardImplFactory.secondPlayerBonus();
+        if (bonus.isPresent()) {
+            match.getPlayer(user).getHand().add(bonus.get());
+        } else {
+            logger.error("Could not grant second player bonus to user={}. The factory didn't create one", user);
+        }
+    }
+
     public void discardCard(Player player, Card card) {
         MutablePlayer mutablePlayer = match.getPlayerAsMutable(player);
         DiscardPile discardPile = mutablePlayer.getDeckAndDiscardPile().getDiscardPile();

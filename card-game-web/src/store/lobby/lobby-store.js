@@ -28,6 +28,7 @@ export const RECEIVED_GAME_OFFLINE = `${NAMESPACE}/RECEIVED_GAME_OFFLINE`;
 export const RECEIVED_MATCH_ID_FROM_QUEUE = `${NAMESPACE}/RECEIVED_MATCH_ID_FROM_QUEUE`;
 export const RECEIVED_NO_MATCH_ID = `${NAMESPACE}/RECEIVED_NO_MATCH_ID`;
 export const STARTED_MATCH_POLLER = `${NAMESPACE}/STARTED_MATCH_POLLER`;
+export const CLEAR_MATCH_POLLER = `${NAMESPACE}/CLEAR_MATCH_POLLER`;
 export const SPECTATE_MATCH = `${NAMESPACE}/SPECTATE_MATCH`;
 export const IN_QUEUE = `${NAMESPACE}/IN_QUEUE`;
 export const LEFT_QUEUE = `${NAMESPACE}/LEFT_QUEUE`;
@@ -42,7 +43,6 @@ export default (state = defaultState, action) => {
       return state
         .set("matchId", action.matchId)
         .set("initialised", true)
-        .set("matchPoller", undefined)
         .set("queueing", false)
         .set("isSpectating", false);
     case RECEIVED_NO_MATCH_ID:
@@ -58,6 +58,10 @@ export default (state = defaultState, action) => {
         .set("matchId", action.matchId)
         .set("initialised", true)
         .set("isSpectating", true);
+    case CLEAR_MATCH_POLLER: {
+      clearInterval(state.matchPoller);
+      return state.set("matchPoller", undefined);
+    }
     case LEFT_QUEUE:
     case LOGGED_OUT:
       if (state.matchPoller) {
@@ -115,17 +119,17 @@ export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () =>
     const matchPoller = setInterval(() => {
       getQueueStatus().then(({ data }) => {
         if (data.type === "in match") {
+          dispatch({ type: CLEAR_MATCH_POLLER });
           dispatch({
             type: RECEIVED_MATCH_ID_FROM_QUEUE,
             matchId: data.matchId,
           });
-          clearInterval(matchPoller);
         }
         dispatch({ type: RECEIVED_NO_MATCH_ID });
         if (data.type === "in queue") {
           dispatch({ type: IN_QUEUE });
         } else {
-          clearInterval(matchPoller);
+          dispatch({ type: CLEAR_MATCH_POLLER });
         }
       });
     }, 1500);

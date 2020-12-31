@@ -37,17 +37,17 @@ public class ActorDescriptionPiece implements DescriptionPiece {
 
     private String actorString(Target target) {
         switch (target) {
-            case SELF:
-                return "you";
-            case OTHER:
-                return "your opponent";
-            case OWN_STRUCTURES:
-                return "your structures";
-            case OTHER_STRUCTURES:
-                return "your opponent's structures";
-            default:
-                logger.error("Unsupported target={}", target);
-                return "~" + target.toString() + "~";
+        case SELF:
+            return "you";
+        case OTHER:
+            return "your opponent";
+        case OWN_STRUCTURES:
+            return "your structures";
+        case OTHER_STRUCTURES:
+            return "your opponent's structures";
+        default:
+            logger.error("Unsupported target={}", target);
+            return "~" + target.toString() + "~";
         }
     }
 }

@@ -69,4 +69,8 @@ public class CardImplFactory {
         return Stream.of(new CardId("MONEY:2"), new CardId("MONEY:3")).map(this::create).filter(Optional::isPresent)
                 .map(Optional::get).collect(toList());
     }
+
+    public Optional<CardImpl> secondPlayerBonus() {
+        return create(new CardId("PATIENCE"));
+    }
 }
