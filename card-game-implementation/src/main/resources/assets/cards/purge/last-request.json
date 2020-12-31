@@ -1,0 +1,14 @@
+{
+  "id": "LAST_REQUEST",
+  "name": "Last Request",
+  "cost": 1,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "purge"
+    ],
+    [
+      "endTurn"
+    ]
+  ]
+}
