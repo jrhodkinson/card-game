@@ -62,11 +62,10 @@ public class CardImplFactory {
         List<CardId> startingDeck = new ArrayList<>();
         Streams
             .concat(
-                Collections.nCopies(4, new CardId("MONEY:1")).stream(),
-                Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
-                Collections.nCopies(2, new CardId("DEVOTION")).stream(),
-                Stream.of(new CardId("PURGE"))
-            )
+                    Collections.nCopies(4, new CardId("MONEY:1")).stream(),
+                    Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
+                    Collections.nCopies(2, new CardId("DEVOTION")).stream(),
+                    Stream.of(new CardId("PURGE")))
             .map(this::create)
             .filter(Optional::isPresent)
             .map(Optional::get)
