@@ -7,7 +7,7 @@ import useTooltip from "../common/useTooltip";
 
 const pulse = keyframes`
   50% {
-    transform: scale(1.03) translate(0, -1%);
+    transform: scale(1.06) translate(0, -1%);
   }
 `;
 
