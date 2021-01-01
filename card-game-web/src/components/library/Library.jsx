@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { getCards, getStructures } from "../../gateway/assets";
+import Loading from "../common/Loading";
 import * as c from "../styles/colors";
 import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
 import LibraryCard from "./LibraryCard";
@@ -9,7 +10,7 @@ import LibraryStructure from "./LibraryStructure";
 const Wrapper = styled.div`
   width: ${MAIN_COLUMN_WIDTH};
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 10px 10px;
 `;
 
 const Header = styled.h2`
@@ -51,23 +52,31 @@ const Library = () => {
   return (
     <Wrapper>
       <Header>Cards</Header>
-      <Details>
-        <Element strong>Name</Element>
-        <Element strong>Cost</Element>
-        <Element strong>Description</Element>
-        {cards.map((c) => (
-          <LibraryCard key={c.entityId} card={c} />
-        ))}
-      </Details>
+      {cards.length > 0 ? (
+        <Details>
+          <Element strong>Name</Element>
+          <Element strong>Cost</Element>
+          <Element strong>Description</Element>
+          {cards.map((c) => (
+            <LibraryCard key={c.entityId} card={c} />
+          ))}
+        </Details>
+      ) : (
+        <Loading />
+      )}
       <Header>Structures</Header>
-      <Details>
-        <Element strong>Name</Element>
-        <Element strong>Health</Element>
-        <Element strong>Description</Element>
-        {structures.map((s) => (
-          <LibraryStructure key={s.entityId} structure={s} />
-        ))}
-      </Details>
+      {structures.length > 0 ? (
+        <Details>
+          <Element strong>Name</Element>
+          <Element strong>Health</Element>
+          <Element strong>Description</Element>
+          {structures.map((s) => (
+            <LibraryStructure key={s.entityId} structure={s} />
+          ))}
+        </Details>
+      ) : (
+        <Loading />
+      )}
     </Wrapper>
   );
 };
