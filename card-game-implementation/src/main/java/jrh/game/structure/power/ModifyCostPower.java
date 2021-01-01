@@ -38,8 +38,13 @@ public class ModifyCostPower extends AbstractPower {
         if (amount < 0) {
             introduction = "Decrease cost of cards purchased by ";
         }
-        return AtomicDescription.builder().plainString(introduction).targets(purchasers).plainString("by")
-                .money(Math.abs(amount)).build();
+        return AtomicDescription
+            .builder()
+            .plainString(introduction)
+            .targets(purchasers)
+            .plainString("by")
+            .money(Math.abs(amount))
+            .build();
     }
 
     @Override

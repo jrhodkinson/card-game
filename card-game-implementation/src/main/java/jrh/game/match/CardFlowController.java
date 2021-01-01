@@ -82,12 +82,18 @@ public class CardFlowController implements Controller {
                 return;
             }
             cardPlayed = CardPlayed.storeTarget(player, card, target);
+        } else if (card.requiresCardInHandTarget()) {
+            if (!validateCardInHandTarget(card, target, player)) {
+                logger.info("Card in hand target failed validation");
+                return;
+            }
+            cardPlayed = CardPlayed.cardInHandTarget(player, card, target);
         } else {
             cardPlayed = CardPlayed.noTarget(player, card);
         }
         player.getHand().remove(card);
-        match.getEventBus().dispatch(cardPlayed);
         match.getCurrentTurn().addPlayedCard(card);
+        match.getEventBus().dispatch(cardPlayed);
         match.getEventBus().dispatch(new CardResolved(player, card));
     }
 
@@ -125,7 +131,7 @@ public class CardFlowController implements Controller {
             return;
         }
         match.getCurrentTurn().setMoney(money - cost);
-        match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
+        match.getCurrentTurn().addPlayedCard(card);
         match.getEventBus().dispatch(new CardPurchased(match.getActivePlayer(), card));
         match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
     }
@@ -137,8 +143,17 @@ public class CardFlowController implements Controller {
             return;
         }
         CardImpl card = optionalCard.get();
-        match.getActivePlayer().getDeckAndDiscardPile().getDiscardPile().add(card);
+        match.getCurrentTurn().addPlayedCard(card);
         match.getEventBus().dispatch(new CardGained(match.getActivePlayer(), card));
+    }
+
+    public void giveSecondPlayerBonus(User user) {
+        Optional<CardImpl> bonus = cardImplFactory.secondPlayerBonus();
+        if (bonus.isPresent()) {
+            match.getPlayer(user).getHand().add(bonus.get());
+        } else {
+            logger.error("Could not grant second player bonus to user={}. The factory didn't create one", user);
+        }
     }
 
     public void discardCard(Player player, Card card) {
@@ -158,9 +173,13 @@ public class CardFlowController implements Controller {
         }
     }
 
-    public void destroyStoreCard(EntityId entityId) {
-        Optional<Card> optionalCard = match.getStore().getRow().stream().filter(c -> c.getEntityId().equals(entityId))
-                .findFirst();
+    public Optional<Card> destroyStoreCard(EntityId entityId) {
+        Optional<Card> optionalCard = match
+            .getStore()
+            .getRow()
+            .stream()
+            .filter(c -> c.getEntityId().equals(entityId))
+            .findFirst();
         if (optionalCard.isPresent()) {
             Card card = optionalCard.get();
             match.getStore().removeFromRow(card);
@@ -168,6 +187,7 @@ public class CardFlowController implements Controller {
         } else {
             logger.info("Could not destroy card with entityId={}, it wasn't in the store", entityId);
         }
+        return optionalCard;
     }
 
     public void destroyPlayedCard(Card card) {
@@ -175,12 +195,27 @@ public class CardFlowController implements Controller {
         match.getEventBus().dispatch(new CardDestroyed(card));
     }
 
+    public void destroyCardInHand(Player player, EntityId entityId) {
+        MutablePlayer mutablePlayer = match.getPlayerAsMutable(player);
+        Optional<Card> optionalCard = mutablePlayer.getHand().getCard(entityId);
+        if (optionalCard.isPresent()) {
+            Card card = optionalCard.get();
+            mutablePlayer.getHand().remove(card);
+            match.getEventBus().dispatch(new CardDestroyed(card));
+        } else {
+            logger.info("Could not destroy card with entityId={}, it wasn't in the player's hand", entityId);
+        }
+    }
+
     private Damageable getDamageableTarget(EntityId target) {
         if (target == null) {
             return null;
         }
-        Optional<Structure> optionalStructure = match.getAllStructures().stream()
-                .filter(structure -> structure.getEntityId().equals(target)).findFirst();
+        Optional<Structure> optionalStructure = match
+            .getAllStructures()
+            .stream()
+            .filter(structure -> structure.getEntityId().equals(target))
+            .findFirst();
         if (optionalStructure.isPresent()) {
             return optionalStructure.get();
         }
@@ -213,6 +248,14 @@ public class CardFlowController implements Controller {
         return match.getStore().getRow().stream().anyMatch(c -> c.getEntityId().equals(entityId));
     }
 
+    private boolean validateCardInHandTarget(Card card, EntityId entityId, Player player) {
+        if (entityId == null) {
+            logger.warn("Not playing card={}, couldn't find storefront target", card);
+            return false;
+        }
+        return player.getHand().stream().anyMatch(c -> c.getEntityId().equals(entityId));
+    }
+
     private boolean anotherEnemyStructureHasTaunt(Player source, Damageable target) {
         if (target.equals(source)) {
             return false;
@@ -222,9 +265,11 @@ public class CardFlowController implements Controller {
         if (target instanceof Structure && structureStateController.getOwner((Structure) target).equals(source)) {
             return false;
         }
-        List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt().stream()
-                .filter(s -> structureStateController.getOwner(s).equals(otherPlayer)).map(Structure::getEntityId)
-                .collect(toList());
+        List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt()
+            .stream()
+            .filter(s -> structureStateController.getOwner(s).equals(otherPlayer))
+            .map(Structure::getEntityId)
+            .collect(toList());
         if (otherPlayersStructuresWithTaunt.isEmpty()) {
             return false;
         }

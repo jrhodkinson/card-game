@@ -1,14 +1,11 @@
 {
   "id": "CITY",
-  "name": "City",
+  "name": "Siege Engine",
   "health": 8,
   "powers": [
     [
-      "incrementingDamage",
-      {
-        "amount": 2,
-        "increment": 1
-      }
+      "damage",
+      3
     ]
   ]
 }

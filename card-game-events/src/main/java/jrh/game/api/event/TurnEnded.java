@@ -25,7 +25,9 @@ public class TurnEnded implements Event {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("previousPlayer", previousPlayer)
-                .append("newPlayer", newPlayer).toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("previousPlayer", previousPlayer)
+            .append("newPlayer", newPlayer)
+            .toString();
     }
 }

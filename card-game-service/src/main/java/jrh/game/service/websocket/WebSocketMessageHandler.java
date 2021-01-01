@@ -12,6 +12,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.BUY_CARD;
+import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN;
 import static jrh.game.service.websocket.client.ClientWebSocketMessageTypes.PLAY_CARD;
 
 public class WebSocketMessageHandler {
@@ -19,8 +20,14 @@ public class WebSocketMessageHandler {
     private static final Logger logger = LogManager.getLogger(WebSocketMessageHandler.class);
 
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) {
-        with(webSocketMessage, webSocketSession).handle(this::endTurn).handle(PLAY_CARD, this::playCard)
-                .handle(BUY_CARD, this::buyCard).end();
+        if (webSocketSession.isSpectator()) {
+            return;
+        }
+        with(webSocketMessage, webSocketSession)
+            .handle(this::endTurn)
+            .handle(PLAY_CARD, this::playCard)
+            .handle(BUY_CARD, this::buyCard)
+            .end();
     }
 
     private void endTurn(WebSocketSession webSocketSession) {
@@ -59,8 +66,7 @@ public class WebSocketMessageHandler {
         }
 
         private <T> MessageContext handle(Consumer<WebSocketSession> consumer) {
-            if (jrh.game.service.websocket.client.ClientWebSocketMessageTypes.END_TURN
-                    .equals(webSocketMessage.getType())) {
+            if (END_TURN.equals(webSocketMessage.getType())) {
                 wasHandled = true;
                 consumer.accept(webSocketSession);
             }
@@ -87,7 +93,7 @@ public class WebSocketMessageHandler {
         private static <T> WebSocketMessage<T> cast(WebSocketMessage<?> webSocketMessage, Class<T> clazz) {
             if (!webSocketMessage.getType().getPayloadType().equals(clazz)) {
                 throw new IllegalArgumentException(String
-                        .format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
+                    .format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
             }
             return (WebSocketMessage<T>) webSocketMessage;
         }

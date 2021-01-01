@@ -1,6 +1,6 @@
 {
   "id": "construct:CITY",
-  "name": "Construct City",
+  "name": "Construct Siege Engine",
   "cost": 7,
   "purchasable": true,
   "behaviours": [

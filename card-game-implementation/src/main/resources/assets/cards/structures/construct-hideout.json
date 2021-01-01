@@ -1,6 +1,6 @@
 {
   "id": "construct:HIDEOUT",
-  "name": "Approach Artefact Smuggler",
+  "name": "Approach Smuggler",
   "cost": 5,
   "purchasable": true,
   "behaviours": [

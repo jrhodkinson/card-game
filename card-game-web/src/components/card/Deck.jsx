@@ -1,13 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import CardCount from "./CardCount";
+import Pile from "./Pile";
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  text-align: right;
-`;
-
-const Deck = ({ size }) => <Wrapper>{size} in deck</Wrapper>;
+const Deck = ({ cards, size }) => {
+  if (cards) {
+    return <Pile cards={cards} name="deck" tooltipHeader="(alphabetical)" />;
+  }
+  return <CardCount size={size} name="deck" />;
+};
 
 export default Deck;

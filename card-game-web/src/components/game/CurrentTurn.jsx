@@ -21,7 +21,9 @@ const Wrapper = styled.div`
   padding: 10px 0;
 `;
 
-const Money = styled.div``;
+const Money = styled.div`
+  font-size: 1.2em;
+`;
 
 const pulse = keyframes`
   0%,

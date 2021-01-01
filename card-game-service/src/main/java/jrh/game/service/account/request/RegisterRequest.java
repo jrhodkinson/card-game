@@ -39,8 +39,11 @@ public final class RegisterRequest {
 
         RegisterRequest that = (RegisterRequest) o;
 
-        return new EqualsBuilder().append(email, that.email).append(name, that.name).append(password, that.password)
-                .isEquals();
+        return new EqualsBuilder()
+            .append(email, that.email)
+            .append(name, that.name)
+            .append(password, that.password)
+            .isEquals();
     }
 
     @Override

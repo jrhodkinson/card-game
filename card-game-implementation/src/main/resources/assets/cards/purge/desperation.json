@@ -1,0 +1,15 @@
+{
+  "id": "DESPERATION",
+  "name": "Desperation",
+  "cost": 0,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "sacrifice",
+      5
+    ],
+    [
+      "purge"
+    ]
+  ]
+}

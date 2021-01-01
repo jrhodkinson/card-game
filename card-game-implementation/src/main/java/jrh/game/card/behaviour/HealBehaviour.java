@@ -35,8 +35,10 @@ public class HealBehaviour extends AbstractBehaviour {
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getDamageableTarget().isPresent()) {
             logger.info("Healing {} by {}", cardPlayed.getDamageableTarget().get(), this.health);
-            match.getController(HealthController.class).heal(cardPlayed.getPlayer(),
-                    cardPlayed.getDamageableTarget().get(), this.health);
+            match
+                .getController(HealthController.class)
+                .heal(cardPlayed.getPlayer(),
+                        cardPlayed.getDamageableTarget().get(), this.health);
         }
     }
 

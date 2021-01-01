@@ -28,7 +28,9 @@ public class WebSocketMessage<T> {
         if (payload.equals(NoPayload.INSTANCE)) {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("type", type).toString();
         }
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("type", type)
-                .append("payload", payload).toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("type", type)
+            .append("payload", payload)
+            .toString();
     }
 }

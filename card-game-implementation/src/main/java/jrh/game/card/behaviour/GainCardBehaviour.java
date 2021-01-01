@@ -18,7 +18,7 @@ import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
 @JsonKey("gainCard")
 public class GainCardBehaviour extends AbstractBehaviour {
 
-    private static final Logger logger = LogManager.getLogger(GainCardOnPurchaseBehaviour.class);
+    private static final Logger logger = LogManager.getLogger(GainCardBehaviour.class);
 
     @JsonValue
     private final CardId cardId;

@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const SocialLinks = styled.ul`
+export const Links = styled.ul`
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -18,7 +18,7 @@ export const SocialLinks = styled.ul`
   flex-direction: row;
 `;
 
-export const SocialLink = styled.li`
+export const Link = styled.li`
   font-size: 0.85em;
   margin-right: 12px;
 
@@ -32,7 +32,7 @@ export const SocialLink = styled.li`
   }
 `;
 
-export const ActiveGames = styled.div`
+export const ActiveMatchCount = styled.div`
   margin-left: auto;
   font-size: 0.8em;
 `;

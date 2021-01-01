@@ -1,0 +1,11 @@
+{
+  "id": "PURGE",
+  "name": "Cast Out",
+  "cost": 3,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "purge"
+    ]
+  ]
+}

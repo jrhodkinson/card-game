@@ -40,6 +40,7 @@ public class RegistrationValidationTest {
         assertFalse(RegistrationValidation.isValidUsername("£££"));
         assertFalse(RegistrationValidation.isValidUsername("!!1"));
         assertFalse(RegistrationValidation.isValidUsername("joe blogs"));
+        assertFalse(RegistrationValidation.isValidUsername("verylongusernameeeeeeeeeeeeeeeee"));
     }
 
     @Test

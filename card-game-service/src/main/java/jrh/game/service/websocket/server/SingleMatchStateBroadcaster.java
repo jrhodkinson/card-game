@@ -20,7 +20,7 @@ import jrh.game.common.EventHandler;
 import jrh.game.common.User;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessage;
-import jrh.game.service.websocket.server.dto.MatchDto;
+import jrh.game.service.dto.MatchDto;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -59,8 +59,9 @@ public class SingleMatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void turnEnded(TurnEnded turnEnded) {
-        webSocketConnectionManager.broadcast(matchId,
-                ServerWebSocketMessages.turnEnded(turnEnded.getPreviousPlayer().getUser()));
+        webSocketConnectionManager
+            .broadcast(matchId,
+                    ServerWebSocketMessages.turnEnded(turnEnded.getPreviousPlayer().getUser()));
     }
 
     @Subscribe

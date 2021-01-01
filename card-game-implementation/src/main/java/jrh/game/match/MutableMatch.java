@@ -136,16 +136,20 @@ public class MutableMatch implements Match {
     }
 
     public MutableStructure getStructureAsMutable(Structure structure) {
-        return Stream.of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
-                .flatMap(Structures::stream)
-                .filter(mutableStructure -> structure.getEntityId().equals(mutableStructure.getEntityId())).findFirst()
-                .orElseThrow();
+        return Stream
+            .of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
+            .flatMap(Structures::stream)
+            .filter(mutableStructure -> structure.getEntityId().equals(mutableStructure.getEntityId()))
+            .findFirst()
+            .orElseThrow();
     }
 
     @Override
     public Collection<Structure> getAllStructures() {
-        return Stream.of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
-                .flatMap(Structures::stream).collect(toUnmodifiableList());
+        return Stream
+            .of(firstPlayer.getStructuresAsMutable(), secondPlayer.getStructuresAsMutable())
+            .flatMap(Structures::stream)
+            .collect(toUnmodifiableList());
     }
 
     public ModificationComputer getModificationComputer() {
@@ -181,10 +185,11 @@ public class MutableMatch implements Match {
     }
 
     private void initialise() {
-        List.of(new CardFlowController(this, cardImplFactory), new MatchStateController(this),
-                new HealthController(this), new StructureHealthController(this),
-                new StructureStateController(this, structureFactory), new TurnController(this))
-                .forEach(this::putController);
+        List
+            .of(new CardFlowController(this, cardImplFactory), new MatchStateController(this),
+                    new HealthController(this), new StructureHealthController(this),
+                    new StructureStateController(this, structureFactory), new TurnController(this))
+            .forEach(this::putController);
         controllers.values().forEach(Controller::initialise);
         new TurnTimer(this.eventBus);
     }

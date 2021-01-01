@@ -1,0 +1,13 @@
+{
+  "id": "PATIENCE",
+  "name": "Patience",
+  "cost": 0,
+  "purchasable": false,
+  "behaviours": [
+    [
+      "money",
+      2
+    ],
+    [ "vanish" ]
+  ]
+}

@@ -1,18 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import * as c from "../styles/colors";
-import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
 import Message from "./Message";
-
-const Wrapper = styled.div`
-  width: ${MAIN_COLUMN_WIDTH};
-  margin: 0 auto;
-  padding: 30px 10px 0;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  flex-direction: column;
-`;
 
 const LinkWrapper = styled.a`
   color: ${c.primaryAccentTextOnWhite};
@@ -34,24 +23,24 @@ const Link = ({ text, link }) => {
 };
 
 const GameOffline = () => (
-  <Wrapper>
-    <Message>
-      <p>
-        Thank you for registering to play Revelation 21:8. Your input over the
-        coming months will shape this game.
-      </p>
-      <p>
-        <strong>Doors open Saturday at 16:00 GMT (10:00 CST).</strong>
-      </p>
-      <p>
-        If you haven't already, please join the{" "}
-        <Link text="Discord" link="https://discord.gg/52RjnmSrHQ" />
-        {" or "}
-        <Link text="subreddit" link="https://www.reddit.com/r/revelation218/" />
-        .
-      </p>
-    </Message>
-  </Wrapper>
+  <Message>
+    <p>
+      <strong>Revelation 21:8 is being upgraded.</strong>
+    </p>
+    <p>
+      In progress games will be completed, but no new games will be started.
+    </p>
+    <p>
+      Please join the{" "}
+      <Link text="Discord" link="https://discord.gg/52RjnmSrHQ" />
+      {" or "}
+      <Link
+        text="subreddit"
+        link="https://www.reddit.com/r/revelation218/"
+      />{" "}
+      for updates.
+    </p>
+  </Message>
 );
 
 export default GameOffline;

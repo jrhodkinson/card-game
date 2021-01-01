@@ -9,6 +9,7 @@ const Card = ({
   onCardClick = () => {},
   short = false,
   shaking = false,
+  displayCost = true,
 }) => {
   return (
     <S.Card
@@ -18,7 +19,7 @@ const Card = ({
       onClick={() => onCardClick(card)}
       shaking={shaking}
     >
-      <S.CardCost>{card.cost}</S.CardCost>
+      {displayCost && <S.CardCost>{card.cost}</S.CardCost>}
       <S.CardName>{card.name}</S.CardName>
       {short ? (
         <S.ShortCardDescription>

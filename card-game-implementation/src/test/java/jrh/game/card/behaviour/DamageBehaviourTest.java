@@ -18,8 +18,8 @@ import static org.hamcrest.Matchers.equalTo;
 public class DamageBehaviourTest {
 
     @Test
-    public void roundTripsViaJson() {
-        TestBehaviour.roundTripsViaJson(new DamageBehaviour(nextInt()));
+    public void standardTests() {
+        TestBehaviour.passesAllStandardTests(() -> new DamageBehaviour(nextInt()));
     }
 
     @Test

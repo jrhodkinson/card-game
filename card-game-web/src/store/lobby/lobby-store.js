@@ -1,6 +1,7 @@
 import Immutable from "seamless-immutable";
 import {
-  getActiveGames,
+  getActiveMatchCount,
+  getAllActiveMatches,
   getQueueStatus,
   postJoinQueue,
   postLeaveQueue,
@@ -13,46 +14,79 @@ export const NAMESPACE = "lobby";
 export const defaultState = Immutable({
   initialised: false,
   matchId: undefined,
+  isSpectating: false,
   matchPoller: undefined,
   queueing: false,
-  activeGames: 0,
   gameOffline: false,
+  activeMatches: [],
+  activeMatchCount: 0,
 });
 
-export const RECEIVED_ACTIVE_GAMES = `${NAMESPACE}/RECEIVED_ACTIVE_GAMES`;
+export const CLICKED_GO_HOME = `${NAMESPACE}/CLICKED_GO_HOME`;
+export const RECEIVED_ACTIVE_MATCHES = `${NAMESPACE}/RECEIVED_ACTIVE_MATCHES`;
+export const RECEIVED_ACTIVE_MATCH_COUNT = `${NAMESPACE}/RECEIVED_ACTIVE_MATCH_COUNT`;
 export const RECEIVED_GAME_OFFLINE = `${NAMESPACE}/RECEIVED_GAME_OFFLINE`;
-export const RECEIVED_MATCH_ID = `${NAMESPACE}/RECEIVED_MATCH_ID`;
+export const RECEIVED_MATCH_ID_FROM_QUEUE = `${NAMESPACE}/RECEIVED_MATCH_ID_FROM_QUEUE`;
 export const RECEIVED_NO_MATCH_ID = `${NAMESPACE}/RECEIVED_NO_MATCH_ID`;
 export const STARTED_MATCH_POLLER = `${NAMESPACE}/STARTED_MATCH_POLLER`;
+export const CLEAR_MATCH_POLLER = `${NAMESPACE}/CLEAR_MATCH_POLLER`;
+export const SPECTATE_MATCH = `${NAMESPACE}/SPECTATE_MATCH`;
 export const IN_QUEUE = `${NAMESPACE}/IN_QUEUE`;
+export const NOT_IN_QUEUE = `${NAMESPACE}/NOT_IN_QUEUE`;
 export const LEFT_QUEUE = `${NAMESPACE}/LEFT_QUEUE`;
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case RECEIVED_ACTIVE_GAMES:
-      return state.set("activeGames", action.activeGames);
-    case RECEIVED_MATCH_ID:
+    case RECEIVED_ACTIVE_MATCHES:
+      return state.set("activeMatches", action.activeMatches);
+    case RECEIVED_ACTIVE_MATCH_COUNT:
+      return state.set("activeMatchCount", action.activeMatchCount);
+    case RECEIVED_MATCH_ID_FROM_QUEUE:
       return state
         .set("matchId", action.matchId)
         .set("initialised", true)
-        .set("matchPoller", undefined)
-        .set("queueing", false);
+        .set("queueing", false)
+        .set("isSpectating", false);
     case RECEIVED_NO_MATCH_ID:
       return state.set("initialised", true);
     case IN_QUEUE:
-      return state.set("matchId", undefined).set("queueing", true);
+      return state.set("queueing", true).set("initialised", true);
+    case NOT_IN_QUEUE:
+      return state.set("queueing", false);
     case STARTED_MATCH_POLLER:
       return state.set("matchPoller", action.matchPoller);
     case RECEIVED_GAME_OFFLINE:
-      return state.set("gameOffline", true);
+      return state.set("gameOffline", true).set("initialised", true);
+    case SPECTATE_MATCH:
+      return state
+        .set("matchId", action.matchId)
+        .set("initialised", true)
+        .set("isSpectating", true);
+    case CLEAR_MATCH_POLLER: {
+      clearInterval(state.matchPoller);
+      return state.set("matchPoller", undefined);
+    }
+    case CLICKED_GO_HOME: {
+      if (state.isSpectating) {
+        if (state.matchPoller) {
+          clearInterval(state.matchPoller);
+        }
+        return state
+          .set("matchId", undefined)
+          .set("matchPoller", undefined)
+          .set("isSpectating", false)
+          .set("initialised", true);
+      }
+      return state;
+    }
     case LEFT_QUEUE:
     case LOGGED_OUT:
       if (state.matchPoller) {
         clearInterval(state.matchPoller);
       }
       return state
-        .set("matchId", undefined)
         .set("initialised", true)
+        .set("matchId", undefined)
         .set("matchPoller", undefined)
         .set("queueing", false);
     default:
@@ -63,7 +97,7 @@ export default (state = defaultState, action) => {
 export const queue = () => (dispatch) => {
   postJoinQueue().then(() => {
     dispatch({ type: IN_QUEUE });
-    dispatch(fetchQueueStatus());
+    dispatch(continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue());
   });
 };
 
@@ -73,46 +107,72 @@ export const leaveQueue = () => (dispatch) => {
   });
 };
 
-export const fetchActiveGames = () => (dispatch) => {
-  getActiveGames()
-    .then(({ data }) => {
-      dispatch({ type: RECEIVED_ACTIVE_GAMES, activeGames: data.activeGames });
-    })
-    .catch(({ response }) => {
-      if (response.status === 404) {
-        dispatch({ type: RECEIVED_GAME_OFFLINE });
-      }
+export const fetchActiveMatchCount = () => (dispatch) => {
+  getActiveMatchCount().then(({ data }) => {
+    dispatch({
+      type: RECEIVED_ACTIVE_MATCH_COUNT,
+      activeMatchCount: data.activeMatches,
     });
+  });
 };
 
-export const fetchQueueStatus = () => (dispatch, getState) => {
+export const fetchAllActiveMatches = () => (dispatch) => {
+  getAllActiveMatches().then(({ data }) => {
+    dispatch({ type: RECEIVED_ACTIVE_MATCHES, activeMatches: data.matches });
+  });
+};
+
+export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () => (
+  dispatch,
+  getState
+) => {
   if (!getState()[LOBBY_STATE].matchPoller) {
-    const matchPoller = setInterval(() => {
+    const getAndProcessQueueStatus = () => {
       getQueueStatus()
         .then(({ data }) => {
           if (data.type === "in match") {
-            dispatch({ type: RECEIVED_MATCH_ID, matchId: data.matchId });
-            clearInterval(matchPoller);
+            dispatch({ type: CLEAR_MATCH_POLLER });
+            dispatch({
+              type: RECEIVED_MATCH_ID_FROM_QUEUE,
+              matchId: data.matchId,
+            });
           }
           dispatch({ type: RECEIVED_NO_MATCH_ID });
           if (data.type === "in queue") {
             dispatch({ type: IN_QUEUE });
+          } else {
+            dispatch({ type: NOT_IN_QUEUE });
+            dispatch({ type: CLEAR_MATCH_POLLER });
           }
         })
         .catch(({ response }) => {
-          if (response.status === 404) {
-            dispatch({ type: RECEIVED_NO_MATCH_ID });
-            clearInterval(matchPoller);
+          if (response.status === 503) {
+            dispatch({ type: RECEIVED_GAME_OFFLINE });
           }
         });
-    }, 1500);
+    };
+    getAndProcessQueueStatus();
+    const matchPoller = setInterval(getAndProcessQueueStatus, 5000);
     dispatch({ type: STARTED_MATCH_POLLER, matchPoller: matchPoller });
   }
 };
 
-export const selectActiveGames = (store) => store[LOBBY_STATE].activeGames || 0;
-export const selectIsQueueing = (store) => store[LOBBY_STATE].queueing;
-export const selectCurrentMatchId = (store) => store[LOBBY_STATE].matchId;
+export const spectateMatch = (matchId) => (dispatch) => {
+  dispatch({ type: SPECTATE_MATCH, matchId });
+};
+
+export const clickedGoHome = () => (dispatch) => {
+  dispatch({ type: CLICKED_GO_HOME });
+};
+
+const lobbyState = (store) => store[LOBBY_STATE];
+export const selectAllActiveMatches = (store) =>
+  lobbyState(store).activeMatches || [];
+export const selectActiveMatchCount = (store) =>
+  lobbyState(store).activeMatchCount || 0;
+export const selectIsQueueing = (store) => lobbyState(store).queueing;
+export const selectCurrentMatchId = (store) => lobbyState(store).matchId;
 export const selectHaveInitialisedMatchId = (store) =>
-  store[LOBBY_STATE].initialised;
-export const selectIsGameOffline = (store) => store[LOBBY_STATE].gameOffline;
+  lobbyState(store).initialised;
+export const selectIsGameOffline = (store) => lobbyState(store).gameOffline;
+export const selectIsSpectating = (store) => lobbyState(store).isSpectating;

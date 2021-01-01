@@ -1,0 +1,18 @@
+{
+  "id": "NEEDLE",
+  "name": "Needle",
+  "cost": 6,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "damageGroup",
+      {
+        "targets": ["OTHER"],
+        "amount": 3
+      }
+    ],
+    [
+      "purge"
+    ]
+  ]
+}

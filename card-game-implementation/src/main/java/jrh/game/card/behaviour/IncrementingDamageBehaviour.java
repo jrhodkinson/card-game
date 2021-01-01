@@ -35,8 +35,15 @@ public class IncrementingDamageBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword(Keyword.DAMAGE).number(damage).plainString("then increase future")
-                .keyword(Keyword.DAMAGE).plainString("by").number(increment).build();
+        return AtomicDescription
+            .builder()
+            .keyword(Keyword.DAMAGE)
+            .number(damage)
+            .plainString("then increase future")
+            .keyword(Keyword.DAMAGE)
+            .plainString("by")
+            .number(increment)
+            .build();
     }
 
     @Subscribe
@@ -51,8 +58,9 @@ public class IncrementingDamageBehaviour extends AbstractBehaviour {
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
         if (cardResolved.getCard().equals(this.getCard())) {
-            logger.info("Increasing damage of {} from {} to {}", this.getCard().getEntityId(), damage,
-                    damage + increment);
+            logger
+                .info("Increasing damage of {} from {} to {}", this.getCard().getEntityId(), damage,
+                        damage + increment);
             this.damage += increment;
         }
     }

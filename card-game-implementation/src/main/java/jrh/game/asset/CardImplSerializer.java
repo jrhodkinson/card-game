@@ -30,8 +30,10 @@ public class CardImplSerializer extends StdSerializer<CardImpl> {
         for (Behaviour behaviour : card.getAllBehaviours()) {
             gen.writeStartArray();
             gen.writeString(SerializationKeys.getBehaviourKey(behaviour.getClass()));
-            if (Arrays.stream(behaviour.getClass().getDeclaredFields()).anyMatch(
-                    field -> !field.getType().equals(Logger.class) && !field.getType().equals(CardImpl.class))) {
+            if (Arrays
+                .stream(behaviour.getClass().getDeclaredFields())
+                .anyMatch(
+                        field -> !field.getType().equals(Logger.class) && !field.getType().equals(CardImpl.class))) {
                 gen.writeObject(behaviour);
             }
             gen.writeEndArray();

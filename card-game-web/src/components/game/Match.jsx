@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectIsSpectating } from "../../store/lobby/lobby-store";
 import {
   isPrimaryPlayerActive,
   matchStateHasInitialised,
@@ -10,6 +11,7 @@ import {
 } from "../../store/match/match-selector";
 import FadeIn from "../common/FadeIn";
 import Loading from "../common/Loading";
+import ActiveMatchList from "../lobby/ActiveMatchList";
 import PrimaryPlayer from "../player/PrimaryPlayer";
 import SecondaryPlayer from "../player/SecondaryPlayer";
 import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
@@ -47,6 +49,7 @@ const Match = () => {
   const primaryPlayer = useSelector(selectPrimaryPlayer);
   const secondaryPlayer = useSelector(selectSecondaryPlayer);
   const primaryPlayerActive = useSelector(isPrimaryPlayerActive);
+  const isSpectating = useSelector(selectIsSpectating);
 
   if (!hasInitialised) {
     return <Loading />;
@@ -57,6 +60,7 @@ const Match = () => {
       <MatchOver>
         <Winner>Match is over, winner: {winner}</Winner>
         <QueueButton />
+        <ActiveMatchList />
       </MatchOver>
     );
   }
@@ -71,11 +75,11 @@ const Match = () => {
         {primaryPlayerActive ? (
           <Spacer />
         ) : (
-          <CurrentTurn active={primaryPlayerActive} />
+          <CurrentTurn active={primaryPlayerActive && !isSpectating} />
         )}
-        <Storefront active={primaryPlayerActive} />
+        <Storefront active={primaryPlayerActive && !isSpectating} />
         {primaryPlayerActive ? (
-          <CurrentTurn active={primaryPlayerActive} />
+          <CurrentTurn active={primaryPlayerActive && !isSpectating} />
         ) : (
           <Spacer />
         )}

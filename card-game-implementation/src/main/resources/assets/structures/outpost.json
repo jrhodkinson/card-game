@@ -1,12 +1,12 @@
 {
   "id": "OUTPOST",
-  "name": "Outpost",
-  "health": 7,
+  "name": "Brimstone",
+  "health": 9,
   "powers": [
     [
       "incrementingDamage",
       {
-        "amount": 1,
+        "amount": 2,
         "increment": 1
       }
     ]

@@ -30,9 +30,10 @@ public class MutableStructureSerializer extends StdSerializer<MutableStructure> 
         for (Power power : structure.getAllPowers()) {
             gen.writeStartArray();
             gen.writeString(SerializationKeys.getPowerKey(power.getClass()));
-            if (Arrays.stream(power.getClass().getDeclaredFields())
-                    .anyMatch(field -> !field.getType().equals(Logger.class)
-                            && !field.getType().equals(MutableStructure.class))) {
+            if (Arrays
+                .stream(power.getClass().getDeclaredFields())
+                .anyMatch(field -> !field.getType().equals(Logger.class)
+                        && !field.getType().equals(MutableStructure.class))) {
                 gen.writeObject(power);
             }
             gen.writeEndArray();

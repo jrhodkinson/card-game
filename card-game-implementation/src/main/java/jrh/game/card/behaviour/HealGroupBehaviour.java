@@ -46,8 +46,11 @@ public class HealGroupBehaviour extends AbstractBehaviour {
         if (cardPlayed.getCard().equals(this.getCard())) {
             List<Damageable> realTargets = computeRealTargets(match, cardPlayed.getPlayer());
             logger.info("Healing targets={} by amount={}", realTargets, amount);
-            realTargets.forEach((target) -> match.getController(HealthController.class).heal(cardPlayed.getPlayer(),
-                    target, this.amount));
+            realTargets
+                .forEach((target) -> match
+                    .getController(HealthController.class)
+                    .heal(cardPlayed.getPlayer(),
+                            target, this.amount));
         }
     }
 

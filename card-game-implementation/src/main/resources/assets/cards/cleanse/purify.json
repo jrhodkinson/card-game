@@ -1,0 +1,11 @@
+{
+  "id": "PURIFY",
+  "name": "Purify",
+  "cost": 7,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "cleanse"
+    ]
+  ]
+}

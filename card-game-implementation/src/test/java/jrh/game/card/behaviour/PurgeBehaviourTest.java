@@ -11,7 +11,7 @@ public class PurgeBehaviourTest {
 
     @Test
     public void duplication() {
-        TestBehaviour.duplicatingGivesSameInstance(new PurgeBehaviour());
+        TestBehaviour.duplicatingGivesSameClass(new PurgeBehaviour());
     }
 
 }

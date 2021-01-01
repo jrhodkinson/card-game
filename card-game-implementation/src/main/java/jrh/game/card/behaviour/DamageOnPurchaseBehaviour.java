@@ -22,7 +22,7 @@ import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
 @JsonKey("damageOnPurchase")
 public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
-    private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
+    private static final Logger logger = LogManager.getLogger(DamageOnPurchaseBehaviour.class);
 
     @JsonProperty
     private final List<Target> targets;
@@ -39,8 +39,13 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("On purchase,").keyword(Keyword.DAMAGE).targets(targets)
-                .number(amount).build();
+        return AtomicDescription
+            .builder()
+            .plainString("On purchase,")
+            .keyword(Keyword.DAMAGE)
+            .targets(targets)
+            .number(amount)
+            .build();
     }
 
     @Subscribe
@@ -48,7 +53,9 @@ public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
         if (cardPurchased.getCard().equals(this.getCard())) {
             List<Damageable> realTargets = computeRealTargets(match, cardPurchased.getPurchaser());
             logger.info("Damaging targets={} by amount={}", realTargets, amount);
-            realTargets.forEach((target) -> match.getController(HealthController.class)
+            realTargets
+                .forEach((target) -> match
+                    .getController(HealthController.class)
                     .damage(cardPurchased.getPurchaser(), target, this.amount));
         }
     }

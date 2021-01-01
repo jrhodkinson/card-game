@@ -2,9 +2,9 @@
 
 export const darkestBlack = "#101519";
 export const darkBlack = "#181F25";
-export const darkGrey = "#202931";
-export const mediumGrey = "#415363";
-export const lightGrey = "#51677B";
+export const darkGrey = "#1F2932";
+export const mediumGrey = "#3E5365";
+export const lightGrey = "#4B6781";
 export const veryLightGrey = "#8898A6";
 export const lightestGrey = "#C4CDD4";
 export const offWhite = "#DAE1E7";

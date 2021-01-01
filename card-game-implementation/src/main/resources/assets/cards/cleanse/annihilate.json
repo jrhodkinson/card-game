@@ -1,0 +1,14 @@
+{
+  "id": "ANNIHILATE",
+  "name": "Annihilate",
+  "cost": 3,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "cleanse"
+    ],
+    [
+      "vanish"
+    ]
+  ]
+}

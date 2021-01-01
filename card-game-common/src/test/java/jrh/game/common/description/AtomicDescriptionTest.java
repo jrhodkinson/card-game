@@ -21,8 +21,14 @@ public class AtomicDescriptionTest {
 
     @Test
     public void createsDescriptionForOnPurchaseBehaviour() {
-        AtomicDescription description = AtomicDescription.builder().plainString("On purchase,").keyword(Keyword.DAMAGE)
-                .targets(List.of(OTHER, OTHER_STRUCTURES)).plainString("by").number(4).build();
+        AtomicDescription description = AtomicDescription
+            .builder()
+            .plainString("On purchase,")
+            .keyword(Keyword.DAMAGE)
+            .targets(List.of(OTHER, OTHER_STRUCTURES))
+            .plainString("by")
+            .number(4)
+            .build();
         assertThat(description.get(descriptionContext),
                 equalTo("On purchase, damage your opponent and your opponent's structures by 4"));
     }

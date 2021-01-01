@@ -1,30 +1,32 @@
 import React from "react";
-import ActiveGames from "../lobby/ActiveGames";
+import ActiveMatchCount from "../lobby/ActiveMatchCount";
 import * as S from "./styles/Footer.styles";
 
-const SocialLink = ({ text, link }) => {
+const Link = ({ text, link, sameTab = false }) => {
   return (
-    <S.SocialLink>
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        {text}
-      </a>
-    </S.SocialLink>
+    <S.Link>
+      {sameTab ? (
+        <a href={link}>{text}</a>
+      ) : (
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      )}
+    </S.Link>
   );
 };
 
 const Footer = () => {
   return (
     <S.Wrapper>
-      <S.SocialLinks>
-        <SocialLink text="Discord" link="https://discord.gg/52RjnmSrHQ" />
-        <SocialLink
-          text="Reddit"
-          link="https://www.reddit.com/r/revelation218/"
-        />
-      </S.SocialLinks>
-      <S.ActiveGames>
-        <ActiveGames />
-      </S.ActiveGames>
+      <S.Links>
+        <Link text="Discord" link="https://discord.gg/52RjnmSrHQ" />
+        <Link text="Reddit" link="https://www.reddit.com/r/revelation218/" />
+        <Link text="Library" link="/library" sameTab />
+      </S.Links>
+      <S.ActiveMatchCount>
+        <ActiveMatchCount />
+      </S.ActiveMatchCount>
     </S.Wrapper>
   );
 };

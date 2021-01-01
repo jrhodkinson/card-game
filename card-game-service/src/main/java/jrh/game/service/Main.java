@@ -14,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.time.Instant;
 
+import static jrh.game.service.Environment.DEVELOPMENT;
+
 public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
@@ -27,26 +29,28 @@ public class Main {
         ServiceConfiguration configuration = new ServiceConfiguration();
         String version = configuration.version();
 
-        logger.info("Started {} version={} at {} in environment={}", getClass(), version, Instant.now(),
-                configuration.environment());
+        logger
+            .info("Started {} version={} at {} in environment={}", getClass(), version, Instant.now(),
+                    configuration.environment());
 
         Cookies cookies = new Cookies(configuration.environment());
         Sessions sessions = new Sessions();
         Database database = configuration.database();
         Accounts accounts = new Accounts(database.accountStore());
-        if (configuration.shouldEnablePlay()) {
-            logger.info("Starting Server");
-            ConcreteAssetLibrary assetLibrary = assetLibrary();
-            MatchManager matchManager = new MatchManager(assetLibrary, accounts);
-            MatchQueue matchQueue = new MatchQueue();
-            Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
-            Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
-            matchmaker.start();
-            server.start();
-        } else {
-            logger.info("Starting NoPlayServer");
-            NoPlayServer noPlayServer = new NoPlayServer(version, cookies, sessions, accounts);
-            noPlayServer.start();
+
+        logger.info("Starting Server");
+        ConcreteAssetLibrary assetLibrary = assetLibrary();
+        MatchManager matchManager = new MatchManager(assetLibrary, accounts, database.historicMatchStore(), version);
+        MatchQueue matchQueue = new MatchQueue();
+        Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
+        Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
+        matchmaker.start();
+        server.start();
+
+        if (configuration.environment().equals(DEVELOPMENT)) {
+            logger.info("In development environment, so queueing jack and terry.");
+            matchQueue.join(accounts.getAccountIdByName("jack").orElseThrow());
+            matchQueue.join(accounts.getAccountIdByName("terry").orElseThrow());
         }
     }
 

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.function.Supplier;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -17,13 +18,19 @@ public class TestPower {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
+    public static void passesAllStandardTests(Supplier<AbstractPower> powerSupplier) {
+        TestPower.roundTripsViaJson(powerSupplier.get());
+        TestPower.duplicatingGivesSameClass(powerSupplier.get());
+    }
+
     public static void roundTripsViaJson(AbstractPower power) {
         try {
             Class<? extends AbstractPower> powerClass = power.getClass();
             MutableStructure structure = new MutableStructure(new StructureId("test"), "Test", 1);
             structure.addPower(power);
-            MutableStructure parsed = objectMapper.readValue(objectMapper.writeValueAsString(structure),
-                    MutableStructure.class);
+            MutableStructure parsed = objectMapper
+                .readValue(objectMapper.writeValueAsString(structure),
+                        MutableStructure.class);
             Power parsedPower = parsed.getPowers(powerClass).get(0);
             for (Field field : powerClass.getDeclaredFields()) {
                 if (field.getType().equals(Logger.class)) {
@@ -35,6 +42,11 @@ public class TestPower {
         } catch (IllegalAccessException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void duplicatingGivesSameClass(AbstractPower power) {
+        Power duplicatedPower = power.duplicate();
+        assertThat(duplicatedPower.getClass(), equalTo(power.getClass()));
     }
 
 }

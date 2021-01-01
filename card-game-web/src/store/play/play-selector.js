@@ -10,3 +10,9 @@ export const selectDoesPendingCardRequireDamageableTarget = (store) =>
 
 export const selectDoesPendingCardRequireStoreTarget = (store) =>
   getPlayState(store).expecting === "store";
+
+export const selectDoesPendingCardRequireCardInHandTarget = (store) =>
+  getPlayState(store).expecting === "hand";
+
+export const selectDoesPendingCardRequireTarget = (store) =>
+  getPlayState(store).expecting;

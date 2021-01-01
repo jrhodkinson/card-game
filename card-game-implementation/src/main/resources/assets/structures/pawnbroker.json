@@ -1,0 +1,11 @@
+{
+  "id": "PAWNBROKER",
+  "name": "Pawnbroker",
+  "health": 8,
+  "powers": [
+    [
+      "moneyOnPurge",
+      1
+    ]
+  ]
+}

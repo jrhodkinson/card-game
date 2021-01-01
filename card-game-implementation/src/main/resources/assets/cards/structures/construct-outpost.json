@@ -1,9 +1,13 @@
 {
   "id": "construct:OUTPOST",
-  "name": "Construct Outpost",
+  "name": "Deploy Brimstone",
   "cost": 5,
   "purchasable": true,
   "behaviours": [
+    [
+      "sacrifice",
+      5
+    ],
     [
       "construct",
       "OUTPOST"

@@ -20,6 +20,7 @@ public class EventHandlerRegistered implements Event {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("eventHandlerClass", eventHandlerClass).toString();
+            .append("eventHandlerClass", eventHandlerClass)
+            .toString();
     }
 }

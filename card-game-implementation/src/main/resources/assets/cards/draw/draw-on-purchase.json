@@ -1,0 +1,15 @@
+{
+  "id": "LAST_RESORT",
+  "name": "Last Resort",
+  "cost": 2,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "drawOnPurchase",
+      1
+    ],
+    [
+      "unplayable"
+    ]
+  ]
+}

@@ -22,18 +22,23 @@ public class WebSocketMessageTypes {
 
     private static Map<String, WebSocketMessageType<?>> findWebSocketMessageTypes() {
         Reflections reflections = new Reflections("jrh.game");
-        return reflections.getSubTypesOf(WebSocketMessageTypes.class).stream()
-                .flatMap(subtype -> Arrays.stream(subtype.getFields()))
-                .filter(field -> Modifier.isPublic(field.getModifiers()))
-                .filter(field -> Modifier.isStatic(field.getModifiers()))
-                .filter(field -> WebSocketMessageType.class.isAssignableFrom(field.getType())).map(field -> {
-                    try {
-                        return field.get(null);
-                    } catch (IllegalAccessException e) {
-                        logger.error("IllegalAccessException should not be possible", e);
-                        return null;
-                    }
-                }).filter(Objects::nonNull).map(messageType -> (WebSocketMessageType<?>) messageType)
-                .collect(toMap(WebSocketMessageType::toString, t -> t));
+        return reflections
+            .getSubTypesOf(WebSocketMessageTypes.class)
+            .stream()
+            .flatMap(subtype -> Arrays.stream(subtype.getFields()))
+            .filter(field -> Modifier.isPublic(field.getModifiers()))
+            .filter(field -> Modifier.isStatic(field.getModifiers()))
+            .filter(field -> WebSocketMessageType.class.isAssignableFrom(field.getType()))
+            .map(field -> {
+                try {
+                    return field.get(null);
+                } catch (IllegalAccessException e) {
+                    logger.error("IllegalAccessException should not be possible", e);
+                    return null;
+                }
+            })
+            .filter(Objects::nonNull)
+            .map(messageType -> (WebSocketMessageType<?>) messageType)
+            .collect(toMap(WebSocketMessageType::toString, t -> t));
     }
 }

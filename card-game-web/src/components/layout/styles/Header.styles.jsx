@@ -19,13 +19,22 @@ export const Left = styled.div`
 `;
 
 export const Brand = styled.div`
+  cursor: pointer;
   font-size: 1.4em;
   font-weight: 500;
   margin-right: 10px;
+
+  &:hover {
+    color: ${c.lightestGrey};
+  }
 `;
 
 export const Version = styled.div`
   color: ${c.faintTextOnBlack};
+`;
+
+export const QueueStatus = styled.div`
+  margin-left: 10px;
 `;
 
 export const Account = styled.div`

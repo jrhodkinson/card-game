@@ -1,6 +1,6 @@
 import Immutable from "seamless-immutable";
 import { LOGGED_OUT } from "../account/account-store";
-import { IN_QUEUE } from "../lobby/lobby-store";
+import { RECEIVED_MATCH_ID_FROM_QUEUE } from "../lobby/lobby-store";
 import {
   MATCH_ENDED,
   RECEIVED_MATCH_STATE,
@@ -34,7 +34,7 @@ export default (state = defaultState, action) => {
       return state.set("turnWillEndAt", action.time);
     case MATCH_ENDED:
       return defaultState.set("winner", action.winner).set("initialised", true);
-    case IN_QUEUE:
+    case RECEIVED_MATCH_ID_FROM_QUEUE:
     case LOGGED_OUT:
       return defaultState;
     default:

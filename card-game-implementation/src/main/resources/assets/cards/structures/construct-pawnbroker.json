@@ -1,0 +1,13 @@
+{
+  "id": "construct:PAWNBROKER",
+  "name": "Construct Pawnbroker",
+  "cost": 9,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "construct",
+      "PAWNBROKER"
+    ],
+    [ "vanish" ]
+  ]
+}

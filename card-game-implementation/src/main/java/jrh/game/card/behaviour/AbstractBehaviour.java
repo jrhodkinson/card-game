@@ -6,6 +6,7 @@ import jrh.game.api.Card;
 import jrh.game.common.description.AtomicDescription;
 
 import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.DAMAGEABLE;
+import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.HAND;
 import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.STORE;
 
 public abstract class AbstractBehaviour implements Behaviour {
@@ -36,12 +37,17 @@ public abstract class AbstractBehaviour implements Behaviour {
     }
 
     @Override
+    public final boolean requiresCardInHandTarget() {
+        return HAND.equals(targetType);
+    }
+
+    @Override
     @JsonIgnore
     abstract public AtomicDescription getDescription();
 
     abstract public AbstractBehaviour duplicate();
 
     protected enum TargetType {
-        NO_TARGET, DAMAGEABLE, STORE
+        NO_TARGET, DAMAGEABLE, STORE, HAND
     }
 }

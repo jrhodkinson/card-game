@@ -1,4 +1,5 @@
 import React from "react";
+import QueueStatus from "../lobby/QueueStatus";
 import * as S from "./styles/Header.styles";
 import Account from "../account/Account";
 import Brand from "./Brand";
@@ -8,12 +9,13 @@ const Header = () => {
   return (
     <S.Wrapper>
       <S.Left>
-        <S.Brand>
-          <Brand />
-        </S.Brand>
+        <Brand />
         <S.Version>
           <Version />
         </S.Version>
+        <S.QueueStatus>
+          <QueueStatus />
+        </S.QueueStatus>
       </S.Left>
       <S.Account>
         <Account />

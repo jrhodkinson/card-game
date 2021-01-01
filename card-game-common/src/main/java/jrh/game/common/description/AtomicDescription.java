@@ -58,6 +58,11 @@ public class AtomicDescription {
             return this;
         }
 
+        public Builder actors(List<Target> actors) {
+            pieces.add(new ActorDescriptionPiece(actors));
+            return this;
+        }
+
         public Builder targets(List<Target> targets) {
             pieces.add(new TargetDescriptionPiece(targets));
             return this;
@@ -89,8 +94,10 @@ public class AtomicDescription {
         }
 
         private String get(DescriptionContext descriptionContext) {
-            String description = pieces.stream().map(descriptionPiece -> descriptionPiece.get(descriptionContext))
-                    .collect(joining(" "));
+            String description = pieces
+                .stream()
+                .map(descriptionPiece -> descriptionPiece.get(descriptionContext))
+                .collect(joining(" "));
             if (description.length() > 0) {
                 description = description.substring(0, 1).toUpperCase() + description.substring(1);
             }

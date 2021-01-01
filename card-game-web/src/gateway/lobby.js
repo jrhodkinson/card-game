@@ -1,9 +1,11 @@
 import axios from "axios";
 
-export const postJoinQueue = () => axios.post("/games/queue/join");
+export const postJoinQueue = () => axios.post("/matches/queue/join");
 
-export const postLeaveQueue = () => axios.post("/games/queue/leave");
+export const postLeaveQueue = () => axios.post("/matches/queue/leave");
 
-export const getQueueStatus = () => axios.get("/games/queue/status");
+export const getQueueStatus = () => axios.get("/matches/queue/status");
 
-export const getActiveGames = () => axios.get("/games/active");
+export const getActiveMatchCount = () => axios.get("/matches/count");
+
+export const getAllActiveMatches = () => axios.get("/matches/all");

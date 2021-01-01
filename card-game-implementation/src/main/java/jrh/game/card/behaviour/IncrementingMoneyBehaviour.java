@@ -34,8 +34,13 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(amount).plainString("then increase by")
-                .money(increment).build();
+        return AtomicDescription
+            .builder()
+            .keyword(Keyword.ACQUIRE)
+            .money(amount)
+            .plainString("then increase by")
+            .money(increment)
+            .build();
     }
 
     @Subscribe
@@ -49,8 +54,9 @@ public class IncrementingMoneyBehaviour extends AbstractBehaviour {
     @Subscribe
     private void cardResolved(CardResolved cardResolved, Match match, Callback callback) {
         if (cardResolved.getCard().equals(this.getCard())) {
-            logger.info("Increasing money of {} from {} to {}", this.getCard().getEntityId(), amount,
-                    amount + increment);
+            logger
+                .info("Increasing money of {} from {} to {}", this.getCard().getEntityId(), amount,
+                        amount + increment);
             this.amount += increment;
         }
     }

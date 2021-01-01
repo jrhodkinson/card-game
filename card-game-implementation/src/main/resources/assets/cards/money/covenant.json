@@ -1,0 +1,15 @@
+{
+  "id": "COVENANT",
+  "name": "Covenant",
+  "cost": 0,
+  "purchasable": true,
+  "behaviours": [
+    [
+      "moneyOnPurchase",
+      5
+    ],
+    [
+      "unplayable"
+    ]
+  ]
+}
