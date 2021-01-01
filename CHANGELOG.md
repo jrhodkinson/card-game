@@ -1,4 +1,4 @@
-# NEXT / 0.1.0
+# 0.1.0
 - [Meta] Introduce new 'Spectator Mode' - you can watch an active match by clicking 'spectate' next to it in the lobby
 - [Meta] Players are now automatically removed from the queue if they leave the website
 - [Meta] Provide admin controls (only to Richard) to allow upgrades to take place without disrupting in progress games
