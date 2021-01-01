@@ -2,6 +2,7 @@ package jrh.game.service.lobby;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import io.javalin.http.ServiceUnavailableResponse;
 import jrh.game.common.account.AccountId;
 import jrh.game.service.account.Accounts;
 import jrh.game.service.lobby.response.MatchCountResponse;
@@ -17,6 +18,7 @@ import static io.javalin.apibuilder.ApiBuilder.path;
 import static io.javalin.apibuilder.ApiBuilder.post;
 import static java.util.Collections.singleton;
 import static jrh.game.service.Attributes.ACCOUNT_ID;
+import static jrh.game.service.account.AccountRole.ADMIN;
 import static jrh.game.service.account.AccountRole.ANYONE;
 
 public class LobbyEndpoint {
@@ -25,6 +27,7 @@ public class LobbyEndpoint {
 
     private final MatchManager matchManager;
     private final MatchQueue matchQueue;
+    private volatile boolean gameIsOnline = true;
 
     public LobbyEndpoint(Javalin javalin, Accounts accounts, MatchManager matchManager, MatchQueue matchQueue) {
         this.matchManager = matchManager;
@@ -42,6 +45,8 @@ public class LobbyEndpoint {
                     post("join", this::joinQueue);
                     post("leave", this::leaveQueue);
                 });
+                get("stop", this::stop, singleton(ADMIN));
+                get("start", this::start, singleton(ADMIN));
             });
         });
     }
@@ -54,7 +59,9 @@ public class LobbyEndpoint {
             context.json(QueueStatusResponse.inMatch(match.get().getId()));
             return;
         }
-        if (matchQueue.contains(accountId)) {
+        if (!gameIsOnline) {
+            context.json(QueueStatusResponse.downForMaintenance());
+        } else if (matchQueue.contains(accountId)) {
             matchQueue.refresh(accountId);
             context.json(QueueStatusResponse.queueing());
         } else {
@@ -63,6 +70,7 @@ public class LobbyEndpoint {
     }
 
     private void joinQueue(Context context) {
+        ensureGameIsOnline(context);
         AccountId accountId = context.attribute(ACCOUNT_ID);
         if (!matchManager.isInAMatch(accountId)) {
             logger.debug("RX join queue request for accountId={}", accountId);
@@ -73,6 +81,7 @@ public class LobbyEndpoint {
     }
 
     private void leaveQueue(Context context) {
+        ensureGameIsOnline(context);
         AccountId accountId = context.attribute(ACCOUNT_ID);
         logger.debug("RX leave queue request for accountId={}", accountId);
         matchQueue.remove(accountId);
@@ -84,5 +93,20 @@ public class LobbyEndpoint {
 
     private void allGames(Context context) {
         context.json(new MatchListResponse(matchManager.getAllActiveMatches()));
+    }
+
+    private void ensureGameIsOnline(Context context) {
+        if (!gameIsOnline) {
+            throw new ServiceUnavailableResponse("Down for maintenance");
+        }
+    }
+
+    private void stop(Context context) {
+        gameIsOnline = false;
+        matchQueue.clear();
+    }
+
+    private void start(Context context) {
+        gameIsOnline = true;
     }
 }

@@ -54,6 +54,11 @@ public class MatchQueue {
         }
     }
 
+    public void clear() {
+        logger.info("Clearing queue containing {} accounts", queue.size());
+        queue.clear();
+    }
+
     public boolean contains(AccountId accountId) {
         return queue.contains(accountId);
     }
