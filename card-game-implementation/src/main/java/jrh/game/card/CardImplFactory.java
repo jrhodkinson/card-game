@@ -45,8 +45,8 @@ public class CardImplFactory {
 
     public CardImpl randomPurchasableCard() {
         List<CardId> purchasableCards = concreteAssetLibrary.getAllCardIds().stream()
-                .map(concreteAssetLibrary::getCardImpl).filter(Objects::nonNull).map(Optional::get)
-                .filter(Card::isPurchasable).map(Card::getCardId).collect(toList());
+            .map(concreteAssetLibrary::getCardImpl).filter(Objects::nonNull).map(Optional::get)
+            .filter(Card::isPurchasable).map(Card::getCardId).collect(toList());
         CardId cardId = purchasableCards.get(random.nextInt(purchasableCards.size()));
         return create(cardId).orElseThrow();
     }
@@ -54,20 +54,24 @@ public class CardImplFactory {
     public Deck startingDeck() {
         Deck deck = new Deck();
         List<CardId> startingDeck = new ArrayList<>();
-        Streams.concat(Collections.nCopies(4, new CardId("MONEY:1")).stream(),
-                Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
-                Collections.nCopies(2, new CardId("DEVOTION")).stream(), Stream.of(new CardId("PURGE")))
-                .map(this::create).filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
-        Collections.shuffle(deck);
+        Streams.concat(
+//            Collections.nCopies(4, new CardId("MONEY:1")).stream(),
+//            Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
+//            Collections.nCopies(2, new CardId("DEVOTION")).stream(),
+//            Stream.of(new CardId("PURGE"))
+            Collections.nCopies(3, new CardId("PURIFY")).stream()
+        )
+            .map(this::create).filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
         while (deck.size() < Constants.MINIMUM_INITIAL_DECK_SIZE) {
             deck.add(randomPurchasableCard());
         }
+        Collections.shuffle(deck);
         return deck;
     }
 
     public List<CardImpl> startingStore() {
         return Stream.of(new CardId("MONEY:2"), new CardId("MONEY:3")).map(this::create).filter(Optional::isPresent)
-                .map(Optional::get).collect(toList());
+            .map(Optional::get).collect(toList());
     }
 
     public Optional<CardImpl> secondPlayerBonus() {

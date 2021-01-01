@@ -3,10 +3,10 @@ import { LOGGED_OUT } from "../account/account-store";
 import { IN_QUEUE } from "../lobby/lobby-store";
 import { MATCH_ENDED, TURN_ENDED } from "../match/match-actions";
 import {
+  CLEAR_PENDING_CARD,
   PLAYED_CARD,
   PURCHASED_CARD,
-  SELECTED_CARD_REQUIRING_DAMAGEABLE_TARGET,
-  SELECTED_CARD_REQUIRING_STORE_TARGET,
+  SELECTED_CARD_REQUIRING_TARGET,
 } from "./play-actions";
 
 export const PLAY_STATE = "play";
@@ -18,23 +18,17 @@ export const defaultState = Immutable({
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case SELECTED_CARD_REQUIRING_DAMAGEABLE_TARGET:
+    case SELECTED_CARD_REQUIRING_TARGET:
       if (action.cardEntityId === state.pendingCardEntityId) {
         return defaultState;
       }
       return state
         .set("pendingCardEntityId", action.cardEntityId)
-        .set("expecting", "damageable");
-    case SELECTED_CARD_REQUIRING_STORE_TARGET:
-      if (action.cardEntityId === state.pendingCardEntityId) {
-        return defaultState;
-      }
-      return state
-        .set("pendingCardEntityId", action.cardEntityId)
-        .set("expecting", "store");
+        .set("expecting", action.targetType);
     case TURN_ENDED:
     case PLAYED_CARD:
     case PURCHASED_CARD:
+    case CLEAR_PENDING_CARD:
     case MATCH_ENDED:
     case IN_QUEUE:
     case LOGGED_OUT:

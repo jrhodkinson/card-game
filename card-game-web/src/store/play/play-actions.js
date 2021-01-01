@@ -1,31 +1,50 @@
 import { buyCard, playCard } from "../../gateway/ws";
 import { selectIsSpectating } from "../lobby/lobby-store";
 import {
+  selectDoesPendingCardRequireCardInHandTarget,
   selectDoesPendingCardRequireDamageableTarget,
   selectDoesPendingCardRequireStoreTarget,
+  selectDoesPendingCardRequireTarget,
   selectPendingCardEntityId,
 } from "./play-selector";
 
 export const NAMESPACE = "match";
 
-export const SELECTED_CARD_REQUIRING_DAMAGEABLE_TARGET = `${NAMESPACE}/SELECTED_CARD_REQUIRING_DAMAGEABLE_TARGET`;
-export const SELECTED_CARD_REQUIRING_STORE_TARGET = `${NAMESPACE}/SELECTED_CARD_REQUIRING_STORE_TARGET`;
+export const SELECTED_CARD_REQUIRING_TARGET = `${NAMESPACE}/SELECTED_CARD_REQUIRING_TARGET`;
+export const CLEAR_PENDING_CARD = `${NAMESPACE}/CLEAR_PENDING_CARD`;
 export const PLAYED_CARD = `${NAMESPACE}/PLAYED_CARD`;
 export const PURCHASED_CARD = `${NAMESPACE}/PURCHASED_CARD`;
 
+const targetType = (card) => {
+  if (card.requiresDamageableTarget) {
+    return "damageable";
+  } else if (card.requiresStoreTarget) {
+    return "store";
+  } else if (card.requiresCardInHandTarget) {
+    return "hand";
+  }
+};
+
+const requiresTarget = (card) => targetType(card);
+
 export const selectedCardInHand = (card) => (dispatch, getState) => {
-  if (selectIsSpectating(getState())) {
+  const state = getState();
+  if (selectIsSpectating(state)) {
     return;
   }
   const { entityId } = card;
-  if (card.requiresDamageableTarget) {
+  const pendingCardEntityId = selectPendingCardEntityId(state);
+  if (entityId === pendingCardEntityId) {
+    dispatch({ type: CLEAR_PENDING_CARD });
+  } else if (selectDoesPendingCardRequireCardInHandTarget(state)) {
+    playCard(pendingCardEntityId, entityId);
+    dispatch({ type: PLAYED_CARD });
+  } else if (selectDoesPendingCardRequireTarget(state)) {
+    dispatch({ type: CLEAR_PENDING_CARD });
+  } else if (requiresTarget(card)) {
     dispatch({
-      type: SELECTED_CARD_REQUIRING_DAMAGEABLE_TARGET,
-      cardEntityId: entityId,
-    });
-  } else if (card.requiresStoreTarget) {
-    dispatch({
-      type: SELECTED_CARD_REQUIRING_STORE_TARGET,
+      type: SELECTED_CARD_REQUIRING_TARGET,
+      targetType: targetType(card),
       cardEntityId: entityId,
     });
   } else {
@@ -34,7 +53,10 @@ export const selectedCardInHand = (card) => (dispatch, getState) => {
   }
 };
 
-export const selectedTarget = (targetEntityId) => (dispatch, getState) => {
+export const selectedDamageableTarget = (targetEntityId) => (
+  dispatch,
+  getState
+) => {
   if (selectIsSpectating(getState())) {
     return;
   }
