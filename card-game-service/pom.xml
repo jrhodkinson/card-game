@@ -26,7 +26,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>jrh.game.service.GameMain</mainClass>
+                            <mainClass>jrh.game.service.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
