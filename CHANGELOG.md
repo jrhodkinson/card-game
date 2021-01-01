@@ -7,6 +7,7 @@
 - [Game] Rename 'Artefact Smuggler' to 'Smuggler'
 - [Game] The player who goes second receives an additional card in their first hand, Patience ('Acquire 2M. Vanish.').
 - [Game] Cards that are purchased or gained via another a card are now gained to your play area, to be discarded at the end of your turn and join your deck (previously the card immediately joined your discard pile)
+- [New Mechanic] Cleanse: 'Remove another card in your hand from the game'
 - [New Card] Patience: Not purchasable. 'Acquire 2M. Vanish.'
 - [UI] Display the contents of your deck (in alphabetical order) in a tooltip (hover over "N cards in deck")
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
