@@ -1,6 +1,7 @@
 # NEXT / 0.1.0
 - [Meta] Introduce new 'Spectator Mode' - you can watch an active match by clicking 'spectate' next to it in the lobby
 - [Meta] Players are now automatically removed from the queue if they leave the website
+- [Meta] Provide admin controls (only to Richard) to allow upgrades to take place without disrupting in progress games
 - [Game] The next card to be available in the market is now visible to the right of the market
 - [Game] Reduce the number of cards available for purchase in the market to 5 (was 6)
 - [Game] Rename 'Artefact Smuggler' to 'Smuggler'
