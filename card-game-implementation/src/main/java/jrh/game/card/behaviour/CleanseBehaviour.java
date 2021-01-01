@@ -32,8 +32,12 @@ public class CleanseBehaviour extends AbstractBehaviour implements EventHandler 
     private void cardPlayed(CardPlayed cardPlayed, Match match) {
         if (cardPlayed.getCard().equals(this.getCard()) && cardPlayed.getCardInHandTarget().isPresent()) {
             EntityId target = cardPlayed.getCardInHandTarget().get();
-            logger.info("Destroying card in hand={}", target);
-            match.getController(CardFlowController.class).destroyCardInHand(cardPlayed.getPlayer(), target);
+            if (target.equals(cardPlayed.getCard().getEntityId())) {
+                logger.warn("{} cannot destroy itself", getClass().getSimpleName());
+            } else {
+                logger.info("Destroying card in hand={}", target);
+                match.getController(CardFlowController.class).destroyCardInHand(cardPlayed.getPlayer(), target);
+            }
         }
     }
 
