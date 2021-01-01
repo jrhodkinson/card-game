@@ -8,9 +8,7 @@ const Header = () => {
   return (
     <S.Wrapper>
       <S.Left>
-        <S.Brand>
-          <Brand />
-        </S.Brand>
+        <Brand />
         <S.Version>
           <Version />
         </S.Version>

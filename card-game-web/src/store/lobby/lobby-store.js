@@ -22,6 +22,7 @@ export const defaultState = Immutable({
   activeMatchCount: 0,
 });
 
+export const CLICKED_GO_HOME = `${NAMESPACE}/CLICKED_GO_HOME`;
 export const RECEIVED_ACTIVE_MATCHES = `${NAMESPACE}/RECEIVED_ACTIVE_MATCHES`;
 export const RECEIVED_ACTIVE_MATCH_COUNT = `${NAMESPACE}/RECEIVED_ACTIVE_MATCH_COUNT`;
 export const RECEIVED_GAME_OFFLINE = `${NAMESPACE}/RECEIVED_GAME_OFFLINE`;
@@ -64,6 +65,18 @@ export default (state = defaultState, action) => {
     case CLEAR_MATCH_POLLER: {
       clearInterval(state.matchPoller);
       return state.set("matchPoller", undefined);
+    }
+    case CLICKED_GO_HOME: {
+      if (state.isSpectating) {
+        if (state.matchPoller) {
+          clearInterval(state.matchPoller);
+        }
+        return state
+          .set("matchId", undefined)
+          .set("matchPoller", undefined)
+          .set("initialised", true);
+      }
+      return state;
     }
     case LEFT_QUEUE:
     case LOGGED_OUT:
@@ -145,6 +158,10 @@ export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () =>
 
 export const spectateMatch = (matchId) => (dispatch) => {
   dispatch({ type: SPECTATE_MATCH, matchId });
+};
+
+export const clickedGoHome = () => (dispatch) => {
+  dispatch({ type: CLICKED_GO_HOME });
 };
 
 const lobbyState = (store) => store[LOBBY_STATE];
