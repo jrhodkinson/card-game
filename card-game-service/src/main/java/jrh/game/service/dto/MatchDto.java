@@ -1,4 +1,4 @@
-package jrh.game.service.websocket.server.dto;
+package jrh.game.service.dto;
 
 import jrh.game.api.Match;
 import jrh.game.common.User;

@@ -13,7 +13,7 @@ import jrh.game.service.account.Accounts;
 import jrh.game.service.lobby.ActiveMatch;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.websocket.server.SingleMatchStateBroadcaster;
-import jrh.game.service.websocket.server.dto.MatchDto;
+import jrh.game.service.dto.MatchDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

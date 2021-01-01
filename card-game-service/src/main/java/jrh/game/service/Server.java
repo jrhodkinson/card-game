@@ -3,26 +3,20 @@ package jrh.game.service;
 import io.javalin.Javalin;
 import io.javalin.core.validation.JavalinValidation;
 import io.javalin.plugin.json.JavalinJackson;
+import jrh.game.asset.ConcreteAssetLibrary;
 import jrh.game.common.ObjectMapperFactory;
-import jrh.game.common.asset.AssetLibrary;
-import jrh.game.common.description.DescriptionContext;
 import jrh.game.service.account.AccountEndpoint;
 import jrh.game.service.account.Accounts;
 import jrh.game.service.account.SessionAccessManager;
 import jrh.game.service.account.Sessions;
+import jrh.game.service.asset.AssetEndpoint;
+import jrh.game.service.dto.DtoFactories;
 import jrh.game.service.lobby.LobbyEndpoint;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.lobby.MatchQueue;
 import jrh.game.service.websocket.WebSocketConnectionManager;
 import jrh.game.service.websocket.WebSocketMessageHandler;
 import jrh.game.service.websocket.WebSocketPinger;
-import jrh.game.service.websocket.server.dto.CardDto;
-import jrh.game.service.websocket.server.dto.DescriptionDto;
-import jrh.game.service.websocket.server.dto.MatchDto;
-import jrh.game.service.websocket.server.dto.PlayerDto;
-import jrh.game.service.websocket.server.dto.StoreDto;
-import jrh.game.service.websocket.server.dto.StructureDto;
-import jrh.game.service.websocket.server.dto.TurnDto;
 
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -42,10 +36,10 @@ public class Server {
     private final MatchManager matchManager;
     private final MatchQueue matchQueue;
     private final Accounts accounts;
-    private final AssetLibrary assetLibrary;
+    private final ConcreteAssetLibrary assetLibrary;
 
     public Server(String version, Cookies cookies, Sessions sessions, MatchManager matchManager, MatchQueue matchQueue,
-            Accounts accounts, AssetLibrary assetLibrary) {
+            Accounts accounts, ConcreteAssetLibrary assetLibrary) {
         this.version = version;
         this.cookies = cookies;
         this.sessions = sessions;
@@ -62,27 +56,18 @@ public class Server {
         javalin.start(PORT);
         Runtime.getRuntime().addShutdownHook(new Thread(javalin::stop));
 
+        DtoFactories dtoFactories = new DtoFactories(assetLibrary);
+
         new VersionEndpoint(javalin, version);
         new AccountEndpoint(javalin, cookies, accounts, sessions);
         new LobbyEndpoint(javalin, accounts, matchManager, matchQueue);
+        new AssetEndpoint(javalin, assetLibrary, dtoFactories.cardFactory(), dtoFactories.structureFactory());
 
         WebSocketMessageHandler webSocketMessageHandler = new WebSocketMessageHandler();
-        MatchDto.Factory matchDtoFactory = matchDtoFactory();
         WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(javalin, accounts,
-                matchManager, webSocketMessageHandler, matchDtoFactory);
+                matchManager, webSocketMessageHandler, dtoFactories.matchFactory());
         webSocketConnectionManager.start();
 
         new WebSocketPinger(webSocketConnectionManager, Executors.newSingleThreadScheduledExecutor());
-    }
-
-    private MatchDto.Factory matchDtoFactory() {
-        DescriptionContext descriptionContext = new DescriptionContext(assetLibrary);
-        DescriptionDto.Factory descriptionFactory = new DescriptionDto.Factory(descriptionContext);
-        CardDto.Factory cardFactory = new CardDto.Factory(descriptionFactory);
-        StructureDto.Factory structureFactory = new StructureDto.Factory(descriptionFactory);
-        PlayerDto.Factory playerFactory = new PlayerDto.Factory(cardFactory, structureFactory);
-        TurnDto.Factory turnFactory = new TurnDto.Factory(cardFactory);
-        StoreDto.Factory storeFactory = new StoreDto.Factory(cardFactory);
-        return new MatchDto.Factory(playerFactory, turnFactory, storeFactory);
     }
 }

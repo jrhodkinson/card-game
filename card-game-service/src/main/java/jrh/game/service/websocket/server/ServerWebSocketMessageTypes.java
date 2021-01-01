@@ -3,7 +3,7 @@ package jrh.game.service.websocket.server;
 import jrh.game.common.User;
 import jrh.game.service.websocket.WebSocketMessageType;
 import jrh.game.service.websocket.WebSocketMessageTypes;
-import jrh.game.service.websocket.server.dto.MatchDto;
+import jrh.game.service.dto.MatchDto;
 
 public class ServerWebSocketMessageTypes extends WebSocketMessageTypes {
     public static final WebSocketMessageType<Long> PING = WebSocketMessageType.of("ping", Long.class);
