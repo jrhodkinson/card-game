@@ -33,6 +33,10 @@ export const Version = styled.div`
   color: ${c.faintTextOnBlack};
 `;
 
+export const QueueStatus = styled.div`
+  margin-left: 10px;
+`;
+
 export const Account = styled.div`
   display: flex;
   align-items: center;

@@ -50,7 +50,7 @@ export default (state = defaultState, action) => {
     case RECEIVED_NO_MATCH_ID:
       return state.set("initialised", true);
     case IN_QUEUE:
-      return state.set("matchId", undefined).set("queueing", true);
+      return state.set("queueing", true).set("initialised", true);
     case NOT_IN_QUEUE:
       return state.set("queueing", false);
     case STARTED_MATCH_POLLER:
@@ -74,6 +74,7 @@ export default (state = defaultState, action) => {
         return state
           .set("matchId", undefined)
           .set("matchPoller", undefined)
+          .set("isSpectating", false)
           .set("initialised", true);
       }
       return state;
