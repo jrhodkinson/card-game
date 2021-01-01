@@ -21,7 +21,9 @@ const Hand = ({ hand, interactable }) => {
   return (
     <Cards
       cards={hand}
-      isInteractable={(card) => interactable && card.isPlayable}
+      isInteractable={(card) =>
+        (interactable && card.isPlayable) || pendingCardRequiresHandTarget
+      }
       onCardClick={handleCardClick}
       selectedCardEntityId={pendingCardEntityId}
       displayCost={false}
