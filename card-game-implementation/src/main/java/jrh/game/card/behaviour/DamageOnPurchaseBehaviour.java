@@ -22,7 +22,7 @@ import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
 @JsonKey("damageOnPurchase")
 public class DamageOnPurchaseBehaviour extends AbstractBehaviour {
 
-    private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
+    private static final Logger logger = LogManager.getLogger(DamageOnPurchaseBehaviour.class);
 
     @JsonProperty
     private final List<Target> targets;

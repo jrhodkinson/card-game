@@ -17,7 +17,7 @@ import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
 @JsonKey("drawOnPurchase")
 public class DrawOnPurchaseBehaviour extends AbstractBehaviour {
 
-    private static final Logger logger = LogManager.getLogger(DamageBehaviour.class);
+    private static final Logger logger = LogManager.getLogger(DrawOnPurchaseBehaviour.class);
 
     @JsonValue
     private final int amount;

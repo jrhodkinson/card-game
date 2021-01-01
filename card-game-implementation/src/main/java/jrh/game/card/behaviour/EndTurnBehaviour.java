@@ -15,7 +15,7 @@ import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.NO_TARGET;
 @JsonKey("endTurn")
 public class EndTurnBehaviour extends AbstractBehaviour {
 
-    private static final Logger logger = LogManager.getLogger(ConstructBehaviour.class);
+    private static final Logger logger = LogManager.getLogger(EndTurnBehaviour.class);
 
     public EndTurnBehaviour() {
         super(NO_TARGET);

@@ -17,8 +17,7 @@ import static jrh.game.card.behaviour.AbstractBehaviour.TargetType.HAND;
 @JsonKey("cleanse")
 public class CleanseBehaviour extends AbstractBehaviour implements EventHandler {
 
-    // TODO test is right class
-    private static final Logger logger = LogManager.getLogger(VanishBehaviour.class);
+    private static final Logger logger = LogManager.getLogger(CleanseBehaviour.class);
 
     public CleanseBehaviour() {
         super(HAND);
