@@ -8,8 +8,8 @@
 
 ## Minor
 - [Meta] Players are now automatically removed from the queue if they leave the website
-- [Meta] Provide admin controls (only to Richard) to allow upgrades to take place without disrupting in progress games
 - [Meta] Introduce https://revelation218.com/library which lists all cards and structures in the game
+- [Meta] Provide admin controls (only to Richard) to allow upgrades to take place without disrupting in progress games
 - [Game] Cards that are purchased or gained via another a card are now gained to your play area, to be discarded at the end of your turn and join your deck (previously the card immediately joined your discard pile)
 - [UI] Display the contents of your deck (in alphabetical order) in a tooltip (hover over "N cards in deck")
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
