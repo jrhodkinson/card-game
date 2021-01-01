@@ -21,7 +21,7 @@ const Details = styled.div`
   background-color: ${c.offWhite};
   color: ${c.textOnWhite};
   border-radius: 3px;
-  padding: 10px;
+  padding: 5px;
   margin: 10px 0;
   display: grid;
   grid-template-columns: min-content min-content 1fr;
