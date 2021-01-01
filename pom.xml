@@ -3,11 +3,11 @@
     <groupId>jrh</groupId>
     <packaging>pom</packaging>
     <artifactId>card-game</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <scm>
         <developerConnection>scm:git:https://github.com/jrhodkinson/card-game.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>0.1.0</tag>
   </scm>
 
     <properties>
