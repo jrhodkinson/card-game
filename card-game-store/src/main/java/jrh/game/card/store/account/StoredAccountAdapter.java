@@ -1,4 +1,4 @@
-package jrh.game.card.store;
+package jrh.game.card.store.account;
 
 import jrh.game.common.account.Account;
 import jrh.game.common.account.AccountId;

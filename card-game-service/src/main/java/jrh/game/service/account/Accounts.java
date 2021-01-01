@@ -2,7 +2,7 @@ package jrh.game.service.account;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import at.favre.lib.crypto.bcrypt.LongPasswordStrategies;
-import jrh.game.card.store.AccountStore;
+import jrh.game.card.store.account.AccountStore;
 import jrh.game.common.account.Account;
 import jrh.game.common.account.AccountId;
 import jrh.game.common.account.AccountWithHashedPassword;

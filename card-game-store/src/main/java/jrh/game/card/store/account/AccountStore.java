@@ -1,4 +1,4 @@
-package jrh.game.card.store;
+package jrh.game.card.store.account;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Collation;
@@ -26,7 +26,7 @@ public class AccountStore {
     private static final String INDEX_EMAIL = "email";
     private static final String INDEX_NAME = "name";
 
-    AccountStore(MongoCollection<StoredAccount> collection) {
+    public AccountStore(MongoCollection<StoredAccount> collection) {
         this.collection = collection;
     }
 
@@ -55,7 +55,7 @@ public class AccountStore {
         return Optional.ofNullable(collection.find(filter).first()).map(StoredAccountAdapter::account);
     }
 
-    void initialise() {
+    public void initialise() {
         new IndexOptions().name("").collation(CASE_INSENSITIVE);
         List<String> indexes = new ArrayList<>();
         for (Document index : collection.listIndexes()) {

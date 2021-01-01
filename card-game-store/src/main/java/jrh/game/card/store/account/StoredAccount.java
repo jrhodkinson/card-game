@@ -1,4 +1,4 @@
-package jrh.game.card.store;
+package jrh.game.card.store.account;
 
 import java.util.List;
 import java.util.UUID;
