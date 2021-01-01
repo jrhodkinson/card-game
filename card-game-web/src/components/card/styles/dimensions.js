@@ -21,6 +21,8 @@ export const header = {
 
 export const cost = {
   RADIUS: 14,
+  OFFSET_X_FOR_CENTRING: 1,
+  OFFSET_Y_FOR_CENTRING: 2,
 };
 
 export const image = {

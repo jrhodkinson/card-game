@@ -141,6 +141,7 @@ export const CardCost = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 2;
+  padding: 0 ${cost.OFFSET_X_FOR_CENTRING}px ${cost.OFFSET_Y_FOR_CENTRING}px 0;
 `;
 
 export const CardStump = styled(Card)`

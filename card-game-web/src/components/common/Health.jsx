@@ -4,6 +4,8 @@ import styled, { css, keyframes } from "styled-components";
 import * as c from "../styles/colors";
 
 const healthDiameter = 32;
+const offsetXForCentring = 1;
+const offsetYForCentring = 3;
 const animationTime = 800;
 
 const Wrapper = styled.div`
@@ -26,12 +28,13 @@ const AnimatedHealth = styled.div`
   background-color: ${c.red};
   color: ${c.textOnRed};
   text-align: center;
-  line-height: ${healthDiameter}px;
+  line-height: ${healthDiameter - offsetYForCentring}px;
   width: ${healthDiameter}px;
   height: ${healthDiameter}px;
   border-radius: ${healthDiameter / 4}px;
   left: 0;
   top: 0;
+  padding: 0 ${offsetXForCentring}px ${offsetYForCentring}px 0;
 
   ${({ state }) => {
     if (state === "entering") {
