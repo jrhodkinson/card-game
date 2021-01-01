@@ -54,7 +54,7 @@ const Storefront = ({ active }) => {
         short
         animateEntry
         isInteractable={() => active || selectedCardRequiresStoreFront}
-        shaking={selectedCardRequiresStoreFront}
+        shaking={() => selectedCardRequiresStoreFront}
         onCardClick={handleCardClick}
       />
       <LabelWrapper>

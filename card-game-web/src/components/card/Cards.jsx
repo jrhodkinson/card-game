@@ -88,7 +88,7 @@ const Cards = ({
   animateEntry = false,
   animateExit = false,
   onCardClick = () => {},
-  shaking = false,
+  shaking = () => false,
   displayCost = true,
 }) => {
   const cardComponent = (card) => (
@@ -99,7 +99,7 @@ const Cards = ({
       isInteractable={isInteractable}
       selected={selectedCardEntityId === card.entityId}
       onCardClick={onCardClick}
-      shaking={shaking}
+      shaking={shaking(card)}
       displayCost={displayCost}
     />
   );
