@@ -39,7 +39,7 @@ public class Main {
 
         logger.info("Starting Server");
         ConcreteAssetLibrary assetLibrary = assetLibrary();
-        MatchManager matchManager = new MatchManager(assetLibrary, accounts);
+        MatchManager matchManager = new MatchManager(assetLibrary, accounts, database.historicMatchStore(), version);
         MatchQueue matchQueue = new MatchQueue();
         Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
         Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
