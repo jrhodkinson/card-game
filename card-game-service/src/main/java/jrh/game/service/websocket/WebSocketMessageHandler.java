@@ -23,8 +23,11 @@ public class WebSocketMessageHandler {
         if (webSocketSession.isSpectator()) {
             return;
         }
-        with(webSocketMessage, webSocketSession).handle(this::endTurn).handle(PLAY_CARD, this::playCard)
-                .handle(BUY_CARD, this::buyCard).end();
+        with(webSocketMessage, webSocketSession)
+            .handle(this::endTurn)
+            .handle(PLAY_CARD, this::playCard)
+            .handle(BUY_CARD, this::buyCard)
+            .end();
     }
 
     private void endTurn(WebSocketSession webSocketSession) {
@@ -90,7 +93,7 @@ public class WebSocketMessageHandler {
         private static <T> WebSocketMessage<T> cast(WebSocketMessage<?> webSocketMessage, Class<T> clazz) {
             if (!webSocketMessage.getType().getPayloadType().equals(clazz)) {
                 throw new IllegalArgumentException(String
-                        .format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
+                    .format("Expected payload of class %s for websocket message %s", clazz, webSocketMessage));
             }
             return (WebSocketMessage<T>) webSocketMessage;
         }
