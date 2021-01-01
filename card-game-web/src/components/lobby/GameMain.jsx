@@ -14,7 +14,7 @@ import Loading from "../common/Loading";
 import MatchWrapper from "../game/MatchWrapper";
 import Lobby from "./Lobby";
 
-const Main = () => {
+const GameMain = () => {
   const accountId = useSelector(selectAccountId);
   const haveInitialisedAccountId = useSelector(selectHaveInitialisedAccountId);
   const matchId = useSelector(selectCurrentMatchId);
@@ -46,4 +46,4 @@ const Main = () => {
   return <Loading />;
 };
 
-export default Main;
+export default GameMain;

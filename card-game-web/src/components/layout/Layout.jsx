@@ -1,7 +1,7 @@
 import React from "react";
-import Main from "../lobby/Main";
 import Footer from "./Footer";
 import Header from "./Header";
+import Main from "./Main";
 import * as S from "./styles/Layout.styles";
 
 const Layout = () => {
