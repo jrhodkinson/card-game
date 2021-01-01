@@ -1,6 +1,8 @@
 package jrh.game.common.history;
 
 import jrh.game.common.account.AccountId;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.time.Instant;
 import java.util.Set;
@@ -40,5 +42,16 @@ public class HistoricMatch {
 
     public AccountId getWinner() {
         return winner;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("id", id)
+            .append("version", version)
+            .append("players", players)
+            .append("matchEndedAt", matchEndedAt)
+            .append("winner", winner)
+            .toString();
     }
 }

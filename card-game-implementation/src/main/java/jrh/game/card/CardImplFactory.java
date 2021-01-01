@@ -59,8 +59,7 @@ public class CardImplFactory {
 //            Collections.nCopies(3, new CardId("DAMAGE:1")).stream(),
 //            Collections.nCopies(2, new CardId("DEVOTION")).stream(),
 //            Stream.of(new CardId("PURGE"))
-            Collections.nCopies(2, new CardId("construct:CITY")).stream(),
-            Collections.nCopies(2, new CardId("construct:OUTPOST")).stream()
+            Collections.nCopies(10, new CardId("DAMAGE_VANISH")).stream()
         )
             .map(this::create).filter(Optional::isPresent).map(Optional::get).forEach(deck::add);
         while (deck.size() < Constants.MINIMUM_INITIAL_DECK_SIZE) {
