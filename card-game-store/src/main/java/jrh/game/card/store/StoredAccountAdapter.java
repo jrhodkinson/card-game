@@ -6,6 +6,7 @@ import jrh.game.common.account.AccountWithHashedPassword;
 import jrh.game.common.account.Role;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,6 +36,9 @@ public class StoredAccountAdapter {
     }
 
     private static Set<Role> roles(List<String> roles) {
+        if (roles == null) {
+            return Collections.emptySet();
+        }
         return roles.stream().map(Role::valueOf).collect(Collectors.toSet());
     }
 
