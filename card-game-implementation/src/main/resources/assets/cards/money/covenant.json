@@ -1,6 +1,6 @@
 {
-  "id": "LOAN",
-  "name": "Loan",
+  "id": "COVENANT",
+  "name": "Covenant",
   "cost": 0,
   "purchasable": true,
   "behaviours": [

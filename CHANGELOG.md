@@ -5,15 +5,31 @@
 - [Meta] Introduce https://revelation218.com/library which lists all cards and structures in the game
 - [Game] The next card to be available in the market is now visible to the right of the market
 - [Game] Reduce the number of cards available for purchase in the market to 5 (was 6)
-- [Game] Rename 'Artefact Smuggler' to 'Smuggler'
 - [Game] The player who goes second receives an additional card in their first hand, Patience ('Acquire 2M. Vanish.').
 - [Game] Cards that are purchased or gained via another a card are now gained to your play area, to be discarded at the end of your turn and join your deck (previously the card immediately joined your discard pile)
-- [New Mechanic] Cleanse: 'Remove another card in your hand from the game'
-- [New Card] Patience: Not purchasable. 'Acquire 2M. Vanish.'
 - [UI] Display the contents of your deck (in alphabetical order) in a tooltip (hover over "N cards in deck")
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
 - [UI] Add a tooltip stating what needs to be selected next if the selected card requires a target (e.g. damage cards, purge cards)
-- TODO new cards and structures / balance changes
+- [New Mechanic] Cleanse: 'Remove another card in your hand from the game'
+- [New Mechanic] Unplayable: Some cards cannot be played from your hand
+- [New Mechanic] Some cards can now end your turn when played
+- [New Card] Annihilate: Cost 3M. 'Cleanse 1. Vanish.'
+- [New Card] Purify: Cost 7M. 'Cleanse 1.'
+- [New Card] Last Resort: Cost 2M. 'On purchase, draw 1. Unplayable.'
+- [New Card] Bargain: Cost 0M. 'On purchase, acquire 3M. Damage yourself 3. Vanish.'
+- [New Card] Covenant: Cost 0M. 'On purchase, acquire 5M. Unplayable.'
+- [New Card] Patience: Not purchasable. 'Acquire 2M. Vanish.'
+- [New Card] Desperation: Cost 0M. 'Damage yourself 5. Purge 1.'
+- [New Card] Last Request: Cost 1M. 'Purge 1. End your turn.'
+- [New Card] Needle: Cost 6M. 'Damage your opponent 3. Purge 1.'
+- [New Structure] Brimstone: Costs 5M and 5 health to construct. 9 health. 'At the end of your opponent's turn, damage them by 2 then increase future damage by 1.'
+- [New Structure] Pawnbroker: Costs 9M. 8 health. 'Acquire 1M whenever you purge.'
+- [New Structure] Soul Trader: Costs 4M. 1 health. 'Acquire 1M whenever you purge.'
+- [New Structure] Siege Engine: Costs 7M. 8 health. 'At the end of your opponent's turn, damage them by 5.'
+- [Removed Structure] Removed City
+- [Removed Structure] Removed Outpost
+- [Balance] Cast Out: Cost increased to 3M (was 2M)
+- [Renamed Structure] Rename 'Artefact Smuggler' to 'Smuggler'
 
 # 0.0.7
 - [Game] Swap a starting Denarius and Small Favour with 2x Devotion. New starting deck: 4x Denarius, 3x Blunt Dagger, 2x Devotion, 1x Cast Out
