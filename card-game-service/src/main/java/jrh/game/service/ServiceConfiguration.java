@@ -24,7 +24,6 @@ public class ServiceConfiguration {
 
     private static final String VERSION = "game.version";
     private static final String ENVIRONMENT = "environment";
-    private static final String ENABLE_PLAY = "enable.play";
     private static final String DATABASE_HOST = "database.host";
     private static final String DATABASE_PORT = "database.port";
 
@@ -46,10 +45,6 @@ public class ServiceConfiguration {
         String host = configuration.getString(DATABASE_HOST);
         int port = configuration.getInt(DATABASE_PORT);
         return Database.instance(host, port);
-    }
-
-    public boolean shouldEnablePlay() {
-        return configuration.getBoolean(ENABLE_PLAY);
     }
 
     private Configuration buildConfiguration() {
@@ -87,7 +82,6 @@ public class ServiceConfiguration {
     private Map<String, String> defaults() {
         Map<String, String> defaults = new HashMap<>();
         defaults.put(ENVIRONMENT, Environment.DEVELOPMENT.toString());
-        defaults.put(ENABLE_PLAY, "true");
         return defaults;
     }
 }

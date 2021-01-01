@@ -56,7 +56,7 @@ public class Server {
     }
 
     public void start() {
-        SessionAccessManager accessManager = new SessionAccessManager(cookies, sessions);
+        SessionAccessManager accessManager = new SessionAccessManager(cookies, sessions, accounts);
 
         Javalin javalin = Javalin.create(config -> config.accessManager(accessManager));
         javalin.start(PORT);

@@ -36,24 +36,20 @@ public class Main {
         Sessions sessions = new Sessions();
         Database database = configuration.database();
         Accounts accounts = new Accounts(database.accountStore());
-        if (configuration.shouldEnablePlay()) {
-            logger.info("Starting Server");
-            ConcreteAssetLibrary assetLibrary = assetLibrary();
-            MatchManager matchManager = new MatchManager(assetLibrary, accounts);
-            MatchQueue matchQueue = new MatchQueue();
-            Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
-            Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
-            matchmaker.start();
-            server.start();
-            if (configuration.environment().equals(DEVELOPMENT)) {
-                logger.info("In development environment, so queueing jack and terry.");
-                matchQueue.join(accounts.getAccountIdByName("jack").orElseThrow());
-                matchQueue.join(accounts.getAccountIdByName("terry").orElseThrow());
-            }
-        } else {
-            logger.info("Starting NoPlayServer");
-            NoPlayServer noPlayServer = new NoPlayServer(version, cookies, sessions, accounts);
-            noPlayServer.start();
+
+        logger.info("Starting Server");
+        ConcreteAssetLibrary assetLibrary = assetLibrary();
+        MatchManager matchManager = new MatchManager(assetLibrary, accounts);
+        MatchQueue matchQueue = new MatchQueue();
+        Matchmaker matchmaker = new Matchmaker(matchManager, matchQueue);
+        Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
+        matchmaker.start();
+        server.start();
+
+        if (configuration.environment().equals(DEVELOPMENT)) {
+            logger.info("In development environment, so queueing jack and terry.");
+            matchQueue.join(accounts.getAccountIdByName("jack").orElseThrow());
+            matchQueue.join(accounts.getAccountIdByName("terry").orElseThrow());
         }
     }
 
