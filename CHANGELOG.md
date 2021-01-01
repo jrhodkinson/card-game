@@ -6,7 +6,16 @@
 - [Game] The player who goes second receives an additional card in their first hand, Patience ('Acquire 2M. Vanish.')
 - [Game] Reduce the number of cards available for purchase in the market to 5 (was 6)
 
-## New cards and mechanics
+## Minor
+- [Meta] Players are now automatically removed from the queue if they leave the website
+- [Meta] Provide admin controls (only to Richard) to allow upgrades to take place without disrupting in progress games
+- [Meta] Introduce https://revelation218.com/library which lists all cards and structures in the game
+- [Game] Cards that are purchased or gained via another a card are now gained to your play area, to be discarded at the end of your turn and join your deck (previously the card immediately joined your discard pile)
+- [UI] Display the contents of your deck (in alphabetical order) in a tooltip (hover over "N cards in deck")
+- [UI] Don't display the cost of cards in your hand, to avoid confusion
+- [UI] Add a tooltip stating what needs to be selected next if the selected card requires a target (e.g. damage cards, purge cards)
+
+## Card / Structure / Mechanic changes
 - [New Mechanic] Cleanse: 'Remove another card in your hand from the game'
 - [New Mechanic] Unplayable: Some cards cannot be played from your hand
 - [New Mechanic] Some cards can now end your turn when played
@@ -26,15 +35,6 @@
 - [Removed Structure] Removed City
 - [Removed Structure] Removed Outpost
 - [Renamed Structure] Rename 'Artefact Smuggler' to 'Smuggler'
-
-## Minor
-- [Meta] Players are now automatically removed from the queue if they leave the website
-- [Meta] Provide admin controls (only to Richard) to allow upgrades to take place without disrupting in progress games
-- [Meta] Introduce https://revelation218.com/library which lists all cards and structures in the game
-- [Game] Cards that are purchased or gained via another a card are now gained to your play area, to be discarded at the end of your turn and join your deck (previously the card immediately joined your discard pile)
-- [UI] Display the contents of your deck (in alphabetical order) in a tooltip (hover over "N cards in deck")
-- [UI] Don't display the cost of cards in your hand, to avoid confusion
-- [UI] Add a tooltip stating what needs to be selected next if the selected card requires a target (e.g. damage cards, purge cards)
 - [Balance] Cast Out: Cost increased to 3M (was 2M)
 
 # 0.0.7
