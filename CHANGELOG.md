@@ -10,6 +10,7 @@
 - [New Card] Patience: Not purchasable. 'Acquire 2M. Vanish.'
 - [UI] Display the contents of your deck (in alphabetical order) in a tooltip (hover over "N cards in deck")
 - [UI] Don't display the cost of cards in your hand, to avoid confusion
+- [UI] Add a tooltip stating what needs to be selected next if the selected card requires a target (e.g. damage cards, purge cards)
 - TODO new cards and structures / balance changes
 
 # 0.0.7
