@@ -23,7 +23,8 @@ public class AssetEndpoint {
     private final CardDto.Factory cardFactory;
     private final StructureDto.Factory structureFactory;
 
-    public AssetEndpoint(Javalin javalin, ConcreteAssetLibrary assetLibrary, CardDto.Factory cardFactory, StructureDto.Factory structureFactory) {
+    public AssetEndpoint(Javalin javalin, ConcreteAssetLibrary assetLibrary, CardDto.Factory cardFactory,
+            StructureDto.Factory structureFactory) {
         this.assetLibrary = assetLibrary;
         this.cardFactory = cardFactory;
         this.structureFactory = structureFactory;
@@ -40,20 +41,26 @@ public class AssetEndpoint {
     }
 
     private void cards(Context context) {
-        context.json(assetLibrary.getAllCardIds().stream()
-            .map(assetLibrary::getCardImpl)
-            .map(Optional::orElseThrow)
-            .sorted(Comparator.comparing(Card::getName))
-            .map(cardFactory::cardDto)
-            .collect(toList()));
+        context
+            .json(assetLibrary
+                .getAllCardIds()
+                .stream()
+                .map(assetLibrary::getCardImpl)
+                .map(Optional::orElseThrow)
+                .sorted(Comparator.comparing(Card::getName))
+                .map(cardFactory::cardDto)
+                .collect(toList()));
     }
 
     private void structures(Context context) {
-        context.json(assetLibrary.getAllStructureIds().stream()
-            .map(assetLibrary::getMutableStructure)
-            .map(Optional::orElseThrow)
-            .sorted(Comparator.comparing(Structure::getName))
-            .map(structureFactory::structureDto)
-            .collect(toList()));
+        context
+            .json(assetLibrary
+                .getAllStructureIds()
+                .stream()
+                .map(assetLibrary::getMutableStructure)
+                .map(Optional::orElseThrow)
+                .sorted(Comparator.comparing(Structure::getName))
+                .map(structureFactory::structureDto)
+                .collect(toList()));
     }
 }

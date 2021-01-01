@@ -174,8 +174,12 @@ public class CardFlowController implements Controller {
     }
 
     public Optional<Card> destroyStoreCard(EntityId entityId) {
-        Optional<Card> optionalCard = match.getStore().getRow().stream().filter(c -> c.getEntityId().equals(entityId))
-                .findFirst();
+        Optional<Card> optionalCard = match
+            .getStore()
+            .getRow()
+            .stream()
+            .filter(c -> c.getEntityId().equals(entityId))
+            .findFirst();
         if (optionalCard.isPresent()) {
             Card card = optionalCard.get();
             match.getStore().removeFromRow(card);
@@ -207,8 +211,11 @@ public class CardFlowController implements Controller {
         if (target == null) {
             return null;
         }
-        Optional<Structure> optionalStructure = match.getAllStructures().stream()
-                .filter(structure -> structure.getEntityId().equals(target)).findFirst();
+        Optional<Structure> optionalStructure = match
+            .getAllStructures()
+            .stream()
+            .filter(structure -> structure.getEntityId().equals(target))
+            .findFirst();
         if (optionalStructure.isPresent()) {
             return optionalStructure.get();
         }
@@ -258,9 +265,11 @@ public class CardFlowController implements Controller {
         if (target instanceof Structure && structureStateController.getOwner((Structure) target).equals(source)) {
             return false;
         }
-        List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt().stream()
-                .filter(s -> structureStateController.getOwner(s).equals(otherPlayer)).map(Structure::getEntityId)
-                .collect(toList());
+        List<EntityId> otherPlayersStructuresWithTaunt = structuresWithTaunt()
+            .stream()
+            .filter(s -> structureStateController.getOwner(s).equals(otherPlayer))
+            .map(Structure::getEntityId)
+            .collect(toList());
         if (otherPlayersStructuresWithTaunt.isEmpty()) {
             return false;
         }

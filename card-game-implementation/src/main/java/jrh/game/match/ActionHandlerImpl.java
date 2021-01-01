@@ -37,8 +37,10 @@ public class ActionHandlerImpl implements ActionHandler, EventHandler {
 
     @Subscribe
     private void playCard(PlayCard playCard) {
-        match.getController(CardFlowController.class).playCard(playCard.getActor(), playCard.getCardEntityId(),
-                playCard.getTarget());
+        match
+            .getController(CardFlowController.class)
+            .playCard(playCard.getActor(), playCard.getCardEntityId(),
+                    playCard.getTarget());
     }
 
     @Subscribe

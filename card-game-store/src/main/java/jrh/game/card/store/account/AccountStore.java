@@ -20,8 +20,11 @@ public class AccountStore {
 
     private final MongoCollection<StoredAccount> collection;
 
-    private static final Collation CASE_INSENSITIVE = Collation.builder().locale("en")
-            .collationStrength(CollationStrength.PRIMARY).build();
+    private static final Collation CASE_INSENSITIVE = Collation
+        .builder()
+        .locale("en")
+        .collationStrength(CollationStrength.PRIMARY)
+        .build();
 
     private static final String INDEX_EMAIL = "email";
     private static final String INDEX_NAME = "name";
@@ -40,14 +43,18 @@ public class AccountStore {
 
     public Optional<AccountId> getAccountIdByName(String name) {
         Bson filter = Filters.eq("name", name);
-        return Optional.ofNullable(collection.find(filter).collation(CASE_INSENSITIVE).first())
-                .map(StoredAccount::getId).map(AccountId::fromUUID);
+        return Optional
+            .ofNullable(collection.find(filter).collation(CASE_INSENSITIVE).first())
+            .map(StoredAccount::getId)
+            .map(AccountId::fromUUID);
     }
 
     public Optional<AccountId> getAccountIdByEmail(String email) {
         Bson filter = Filters.eq("email", email);
-        return Optional.ofNullable(collection.find(filter).collation(CASE_INSENSITIVE).first())
-                .map(StoredAccount::getId).map(AccountId::fromUUID);
+        return Optional
+            .ofNullable(collection.find(filter).collation(CASE_INSENSITIVE).first())
+            .map(StoredAccount::getId)
+            .map(AccountId::fromUUID);
     }
 
     public Optional<AccountWithHashedPassword> getAccountWithHashedPassword(AccountId accountId) {

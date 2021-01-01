@@ -28,8 +28,9 @@ public class TestPower {
             Class<? extends AbstractPower> powerClass = power.getClass();
             MutableStructure structure = new MutableStructure(new StructureId("test"), "Test", 1);
             structure.addPower(power);
-            MutableStructure parsed = objectMapper.readValue(objectMapper.writeValueAsString(structure),
-                    MutableStructure.class);
+            MutableStructure parsed = objectMapper
+                .readValue(objectMapper.writeValueAsString(structure),
+                        MutableStructure.class);
             Power parsedPower = parsed.getPowers(powerClass).get(0);
             for (Field field : powerClass.getDeclaredFields()) {
                 if (field.getType().equals(Logger.class)) {

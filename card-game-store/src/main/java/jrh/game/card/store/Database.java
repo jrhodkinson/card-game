@@ -32,7 +32,8 @@ public class Database {
     private Database(String host, int port) {
         MongoDatabase database = database(host, port);
         this.accountStore = new AccountStore(database.getCollection(Collections.ACCOUNTS, StoredAccount.class));
-        this.historicMatchStore = new HistoricMatchStore(database.getCollection(Collections.HISTORIC_MATCHES, StoredHistoricMatch.class));
+        this.historicMatchStore = new HistoricMatchStore(
+                database.getCollection(Collections.HISTORIC_MATCHES, StoredHistoricMatch.class));
         accountStore.initialise();
     }
 
@@ -54,7 +55,10 @@ public class Database {
         CodecRegistry pojoCodecRegistry = fromRegistries(fromCodecs(new UuidCodec(UuidRepresentation.STANDARD)),
                 MongoClientSettings.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-        return MongoClientSettings.builder().applyToClusterSettings(b -> b.hosts(singletonList(serverAddress)))
-                .codecRegistry(pojoCodecRegistry).build();
+        return MongoClientSettings
+            .builder()
+            .applyToClusterSettings(b -> b.hosts(singletonList(serverAddress)))
+            .codecRegistry(pojoCodecRegistry)
+            .build();
     }
 }

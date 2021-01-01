@@ -15,12 +15,11 @@ public class StoredAccountAdapter {
 
     public static AccountWithHashedPassword account(StoredAccount storedAccount) {
         Account account = new Account(
-            AccountId.fromUUID(storedAccount.getId()),
-            storedAccount.getName(),
-            storedAccount.getEmail(),
-            Instant.ofEpochMilli(storedAccount.getRegistered()),
-            roles(storedAccount.getRoles())
-        );
+                AccountId.fromUUID(storedAccount.getId()),
+                storedAccount.getName(),
+                storedAccount.getEmail(),
+                Instant.ofEpochMilli(storedAccount.getRegistered()),
+                roles(storedAccount.getRoles()));
         return new AccountWithHashedPassword(account, storedAccount.getBcrypt());
     }
 

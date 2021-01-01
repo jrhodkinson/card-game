@@ -31,7 +31,8 @@ public class DescriptionDtoTest {
     @Test
     public void transformsDescriptionToJson() throws JsonProcessingException {
         Description description = Description
-                .of(List.of(AtomicDescription.builder().keyword(Keyword.DAMAGE).number(3).build(),
+            .of(List
+                .of(AtomicDescription.builder().keyword(Keyword.DAMAGE).number(3).build(),
                         AtomicDescription.builder().keyword(Keyword.ACQUIRE).money(2).plainString("ok").build()));
 
         DescriptionDto.Factory factory = new DescriptionDto.Factory(new DescriptionContext(null));

@@ -64,8 +64,11 @@ public class WebSocketConnectionManager {
     }
 
     public void broadcast(UUID matchId, WebSocketMessage<?> webSocketMessage) {
-        webSocketSessionsBySessionId.values().stream().filter(s -> matchId.equals(s.getMatch().getId()))
-                .forEach(s -> send(s, webSocketMessage));
+        webSocketSessionsBySessionId
+            .values()
+            .stream()
+            .filter(s -> matchId.equals(s.getMatch().getId()))
+            .forEach(s -> send(s, webSocketMessage));
     }
 
     public void broadcastAll(WebSocketMessage<?> webSocketMessage) {
@@ -82,8 +85,9 @@ public class WebSocketConnectionManager {
     public void addWelcomeMessage(UUID matchId,
             Supplier<Optional<? extends WebSocketMessage<?>>> welcomeMessageSupplier) {
         logger.info("Added welcome message supplier {} for matchId={}", welcomeMessageSupplier, matchId);
-        welcomeMessageSuppliersByMatchId.computeIfAbsent(matchId, m -> new CopyOnWriteArrayList<>())
-                .add(welcomeMessageSupplier);
+        welcomeMessageSuppliersByMatchId
+            .computeIfAbsent(matchId, m -> new CopyOnWriteArrayList<>())
+            .add(welcomeMessageSupplier);
     }
 
     private void handleConnect(WsConnectContext wsConnectContext) {
@@ -104,7 +108,7 @@ public class WebSocketConnectionManager {
                 return broadcaster;
             });
             List<Supplier<Optional<? extends WebSocketMessage<?>>>> welcomeMessageSuppliers = welcomeMessageSuppliersByMatchId
-                    .getOrDefault(matchId, Collections.emptyList());
+                .getOrDefault(matchId, Collections.emptyList());
             logger.info("Sending {} welcome message(s)", welcomeMessageSuppliers.size());
             welcomeMessageSuppliers.forEach(supplier -> supplier.get().ifPresent(m -> send(webSocketSession, m)));
         }

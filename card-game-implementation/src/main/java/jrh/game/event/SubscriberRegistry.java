@@ -46,7 +46,7 @@ public class SubscriberRegistry {
             if (method.isAnnotationPresent(SubscribeAll.class)) {
                 verifyTypeSignature(method, SubscribeAll.class);
                 List<Class<? extends Event>> eventTypes = Arrays
-                        .asList(method.getAnnotation(SubscribeAll.class).value());
+                    .asList(method.getAnnotation(SubscribeAll.class).value());
                 Subscriber subscriber = new Subscriber(eventHandler, method, eventTypes);
                 logger.info("Registering subscriber={}", subscriber);
                 subscribers.add(subscriber);

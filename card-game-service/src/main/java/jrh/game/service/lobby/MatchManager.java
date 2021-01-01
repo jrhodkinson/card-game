@@ -33,7 +33,8 @@ public class MatchManager {
     private final Map<UUID, ActiveMatch> activeMatches = new ConcurrentHashMap<>();
     private final Map<UUID, MatchMetadata> matchMetadata = new ConcurrentHashMap<>();
 
-    public MatchManager(ConcreteAssetLibrary assetLibrary, Accounts accounts, HistoricMatchStore historicMatchStore, String version) {
+    public MatchManager(ConcreteAssetLibrary assetLibrary, Accounts accounts, HistoricMatchStore historicMatchStore,
+            String version) {
         this.assetLibrary = assetLibrary;
         this.accounts = accounts;
         this.historicMatchStore = historicMatchStore;
@@ -88,21 +89,24 @@ public class MatchManager {
     }
 
     private void storeMatchHistory(ActiveMatch activeMatch, User winner) {
-        Optional<Account> optionalWinner = activeMatch.getInvolvedAccountIds().stream()
+        Optional<Account> optionalWinner = activeMatch
+            .getInvolvedAccountIds()
+            .stream()
             .map(accounts::getAccount)
             .filter(a -> a.getName().equals(winner.toString()))
             .findAny();
         if (optionalWinner.isEmpty()) {
-            logger.error("Could not store match history for activeMatch={}, couldn't find winner's name", activeMatch.getId());
+            logger
+                .error("Could not store match history for activeMatch={}, couldn't find winner's name",
+                        activeMatch.getId());
             return;
         }
         HistoricMatch historicMatch = new HistoricMatch(
-            activeMatch.getId(),
-            version,
-            activeMatch.getInvolvedAccountIds(),
-            Instant.now(clock),
-            optionalWinner.get().getId()
-        );
+                activeMatch.getId(),
+                version,
+                activeMatch.getInvolvedAccountIds(),
+                Instant.now(clock),
+                optionalWinner.get().getId());
         historicMatchStore.putHistoricMatch(historicMatch);
     }
 }

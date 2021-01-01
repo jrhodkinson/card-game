@@ -73,8 +73,9 @@ public class ServiceConfiguration {
     private Configuration environmentVariables() {
         BaseConfiguration configuration = new BaseConfiguration();
         for (Map.Entry<String, String> config : System.getenv().entrySet()) {
-            configuration.addProperty(config.getKey().replaceAll("_", ".").toLowerCase(Locale.ENGLISH),
-                    config.getValue());
+            configuration
+                .addProperty(config.getKey().replaceAll("_", ".").toLowerCase(Locale.ENGLISH),
+                        config.getValue());
         }
         return configuration;
     }

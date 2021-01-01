@@ -43,9 +43,10 @@ public class StructureStateController implements Controller, EventHandler {
     public void construct(StructureId structureId, Player player) {
         Optional<MutableStructure> optionalStructure = factory.create(structureId);
         if (optionalStructure.isEmpty()) {
-            logger.error(
-                    "Could not construct structure with structureId={} for player={}. It wasn't in the structure factory",
-                    structureId, player);
+            logger
+                .error(
+                        "Could not construct structure with structureId={} for player={}. It wasn't in the structure factory",
+                        structureId, player);
             return;
         }
         MutableStructure structure = optionalStructure.get();
@@ -60,8 +61,10 @@ public class StructureStateController implements Controller, EventHandler {
         Structure structure = structureTookDamage.getStructure();
         if (structure.getHealth() <= 0) {
             logger.info("Structure={} has health <= 0, destroying structure", structure);
-            match.getStructureAsMutable(structureTookDamage.getStructure()).getAllPowers()
-                    .forEach(power -> match.getEventBus().unregister(power));
+            match
+                .getStructureAsMutable(structureTookDamage.getStructure())
+                .getAllPowers()
+                .forEach(power -> match.getEventBus().unregister(power));
             match.getPlayerAsMutable(getOwner(structure)).getStructuresAsMutable().remove(structure.getEntityId());
             match.getEventBus().dispatch(new StructureDestroyed(structure));
         }

@@ -20,8 +20,9 @@ public class LoginRequestTest {
 
     @Test
     public void deserializesFromJson() throws JsonProcessingException {
-        LoginRequest loginRequest = objectMapper.readValue("{\"name\":\"jack\",\"password\":\"£!\"}",
-                LoginRequest.class);
+        LoginRequest loginRequest = objectMapper
+            .readValue("{\"name\":\"jack\",\"password\":\"£!\"}",
+                    LoginRequest.class);
         assertThat(loginRequest, equalTo(new LoginRequest("jack", "£!")));
     }
 

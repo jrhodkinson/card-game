@@ -11,12 +11,11 @@ public class StoredHistoricMatchAdapter {
 
     public static HistoricMatch historicMatch(StoredHistoricMatch storedHistoricMatch) {
         return new HistoricMatch(
-            storedHistoricMatch.getId(),
-            storedHistoricMatch.getVersion(),
-            storedHistoricMatch.getPlayers().stream().map(AccountId::fromUUID).collect(toSet()),
-            Instant.ofEpochMilli(storedHistoricMatch.getMatchEndedAt()),
-            AccountId.fromUUID(storedHistoricMatch.getWinner())
-        );
+                storedHistoricMatch.getId(),
+                storedHistoricMatch.getVersion(),
+                storedHistoricMatch.getPlayers().stream().map(AccountId::fromUUID).collect(toSet()),
+                Instant.ofEpochMilli(storedHistoricMatch.getMatchEndedAt()),
+                AccountId.fromUUID(storedHistoricMatch.getWinner()));
     }
 
     public static StoredHistoricMatch storedHistoricMatch(HistoricMatch historicMatch) {

@@ -59,8 +59,9 @@ public class SingleMatchStateBroadcaster implements EventHandler {
 
     @Subscribe
     private void turnEnded(TurnEnded turnEnded) {
-        webSocketConnectionManager.broadcast(matchId,
-                ServerWebSocketMessages.turnEnded(turnEnded.getPreviousPlayer().getUser()));
+        webSocketConnectionManager
+            .broadcast(matchId,
+                    ServerWebSocketMessages.turnEnded(turnEnded.getPreviousPlayer().getUser()));
     }
 
     @Subscribe

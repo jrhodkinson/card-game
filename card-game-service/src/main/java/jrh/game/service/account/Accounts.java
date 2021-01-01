@@ -40,15 +40,19 @@ public class Accounts {
 
     public boolean isValidPassword(AccountId accountId, String password) {
         AccountWithHashedPassword account = store.getAccountWithHashedPassword(accountId).orElseThrow();
-        BCrypt.Result result = BCrypt.verifyer(VERSION_2A, LongPasswordStrategies.truncate(VERSION_2A))
-                .verify(password.toCharArray(), account.getHashedPassword());
+        BCrypt.Result result = BCrypt
+            .verifyer(VERSION_2A, LongPasswordStrategies.truncate(VERSION_2A))
+            .verify(password.toCharArray(), account.getHashedPassword());
         return result.verified;
     }
 
     public Account createAccount(String name, String email, String password) {
-        String hashedPassword = BCrypt.with(VERSION_2A, LongPasswordStrategies.truncate(VERSION_2A)).hashToString(12,
-                password.toCharArray());
-        Account account = new Account(AccountId.randomAccountId(), name, email, Instant.now(Clock.systemUTC()), emptySet());
+        String hashedPassword = BCrypt
+            .with(VERSION_2A, LongPasswordStrategies.truncate(VERSION_2A))
+            .hashToString(12,
+                    password.toCharArray());
+        Account account = new Account(AccountId.randomAccountId(), name, email, Instant.now(Clock.systemUTC()),
+                emptySet());
         AccountWithHashedPassword accountWithHashedPassword = new AccountWithHashedPassword(account, hashedPassword);
         store.putAccount(accountWithHashedPassword);
         return account;

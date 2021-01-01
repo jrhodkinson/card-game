@@ -58,12 +58,12 @@ public class SessionAccessManager implements AccessManager {
         }
 
         if (permittedRoles.contains(ADMIN)) {
-           Account account = accounts.getAccount(optionalAccountId.orElseThrow());
-           if (account.isAdmin()) {
-               handler.handle(context);
-           } else {
-               throw new UnauthorizedResponse();
-           }
+            Account account = accounts.getAccount(optionalAccountId.orElseThrow());
+            if (account.isAdmin()) {
+                handler.handle(context);
+            } else {
+                throw new UnauthorizedResponse();
+            }
         } else {
             handler.handle(context);
         }

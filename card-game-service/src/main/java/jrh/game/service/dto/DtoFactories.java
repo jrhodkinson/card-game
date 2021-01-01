@@ -21,7 +21,7 @@ public class DtoFactories {
         playerFactory = new PlayerDto.Factory(cardFactory, structureFactory);
         turnFactory = new TurnDto.Factory(cardFactory);
         storeFactory = new StoreDto.Factory(cardFactory);
-        matchFactory =  new MatchDto.Factory(playerFactory, turnFactory, storeFactory);
+        matchFactory = new MatchDto.Factory(playerFactory, turnFactory, storeFactory);
     }
 
     public MatchDto.Factory matchFactory() {

@@ -31,9 +31,17 @@ public class IncrementingDamagePower extends AbstractPower {
 
     @Override
     public AtomicDescription getDescription() {
-        return AtomicDescription.builder().plainString("At the end of your opponent's turn,").keyword(Keyword.DAMAGE)
-                .plainString("them by").number(amount).plainString("then increase future").keyword(Keyword.DAMAGE)
-                .plainString("by").number(increment).build();
+        return AtomicDescription
+            .builder()
+            .plainString("At the end of your opponent's turn,")
+            .keyword(Keyword.DAMAGE)
+            .plainString("them by")
+            .number(amount)
+            .plainString("then increase future")
+            .keyword(Keyword.DAMAGE)
+            .plainString("by")
+            .number(increment)
+            .build();
     }
 
     @Subscribe
@@ -42,8 +50,9 @@ public class IncrementingDamagePower extends AbstractPower {
             Damageable target = match.getOtherPlayer(getOwner(match).getUser());
             logger.info("Damaging target={} by amount={}", target, amount);
             match.getController(HealthController.class).damage(getOwner(match), target, amount);
-            logger.info("Increasing damage of {} from {} to {}", this.getStructure().getEntityId(), amount,
-                    amount + increment);
+            logger
+                .info("Increasing damage of {} from {} to {}", this.getStructure().getEntityId(), amount,
+                        amount + increment);
             this.amount += increment;
         }
     }

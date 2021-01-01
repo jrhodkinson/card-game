@@ -25,7 +25,7 @@ public class AccountResponseTest {
     @Test
     public void serialisesAccountResponseToJson() throws JsonProcessingException, JSONException {
         Account account = new Account(AccountId.randomAccountId(), randomAlphanumeric(10), randomAlphanumeric(10),
-            Instant.now(), singleton(Role.ADMIN));
+                Instant.now(), singleton(Role.ADMIN));
         AccountResponse response = new AccountResponse(account);
 
         String json = objectMapper.writeValueAsString(response);

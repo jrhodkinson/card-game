@@ -31,12 +31,13 @@ public class TestBehaviour {
     public static void roundTripsViaJson(AbstractBehaviour behaviour) {
         try {
             Class<? extends AbstractBehaviour> behaviourClass = behaviour.getClass();
-            Card card = CardImpl.card(new CardId("test"))
-                    .withName("Test")
-                    .withCost(1)
-                    .isPurchasable(true)
-                    .withBehaviour(behaviour)
-                    .build();
+            Card card = CardImpl
+                .card(new CardId("test"))
+                .withName("Test")
+                .withCost(1)
+                .isPurchasable(true)
+                .withBehaviour(behaviour)
+                .build();
             Card parsed = objectMapper.readValue(objectMapper.writeValueAsString(card), CardImpl.class);
             Behaviour parsedBehaviour = parsed.getBehaviours(behaviourClass).get(0);
             for (Field field : behaviourClass.getDeclaredFields()) {
@@ -57,6 +58,8 @@ public class TestBehaviour {
     }
 
     private static void hasJsonKeyAnnotation(Class<? extends Behaviour> behaviourClass) {
-        assertTrue(Arrays.stream(behaviourClass.getAnnotations()).anyMatch(a -> a.annotationType().isAssignableFrom(JsonKey.class)));
+        assertTrue(Arrays
+            .stream(behaviourClass.getAnnotations())
+            .anyMatch(a -> a.annotationType().isAssignableFrom(JsonKey.class)));
     }
 }
