@@ -19,7 +19,7 @@ public class DamageBehaviourTest {
 
     @Test
     public void standardTests() {
-        TestBehaviour.passesAllStandardTests(new DamageBehaviour(nextInt()));
+        TestBehaviour.passesAllStandardTests(() -> new DamageBehaviour(nextInt()));
     }
 
     @Test

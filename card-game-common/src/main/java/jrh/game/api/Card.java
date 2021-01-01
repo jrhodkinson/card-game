@@ -32,6 +32,8 @@ public interface Card {
 
     boolean requiresStoreTarget();
 
+    boolean requiresCardInHandTarget();
+
     boolean isPurchasable();
 
 }

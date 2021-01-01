@@ -18,7 +18,7 @@ public class EndTurnBehaviourTest {
 
     @Test
     public void standardTests() {
-        TestBehaviour.passesAllStandardTests(new EndTurnBehaviour());
+        TestBehaviour.passesAllStandardTests(EndTurnBehaviour::new);
     }
 
     @Test

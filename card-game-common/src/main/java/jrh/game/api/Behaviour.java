@@ -9,5 +9,7 @@ public interface Behaviour extends EventHandler {
 
     boolean requiresStoreTarget();
 
+    boolean requiresCardInHandTarget();
+
     AtomicDescription getDescription();
 }

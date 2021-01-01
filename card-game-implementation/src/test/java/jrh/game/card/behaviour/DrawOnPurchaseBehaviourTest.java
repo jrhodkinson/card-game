@@ -19,7 +19,7 @@ public class DrawOnPurchaseBehaviourTest {
 
     @Test
     public void standardTests() {
-        TestBehaviour.passesAllStandardTests(new DrawOnPurchaseBehaviour(nextInt()));
+        TestBehaviour.passesAllStandardTests(() -> new DrawOnPurchaseBehaviour(nextInt()));
     }
 
     @Test

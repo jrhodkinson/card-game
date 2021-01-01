@@ -185,6 +185,18 @@ public class CardFlowController implements Controller {
         match.getEventBus().dispatch(new CardDestroyed(card));
     }
 
+    public void destroyCardInHand(Player player, EntityId entityId) {
+        MutablePlayer mutablePlayer = match.getPlayerAsMutable(player);
+        Optional<Card> optionalCard = mutablePlayer.getHand().getCard(entityId);
+        if (optionalCard.isPresent()) {
+            Card card = optionalCard.get();
+            mutablePlayer.getHand().remove(card);
+            match.getEventBus().dispatch(new CardDestroyed(card));
+        } else {
+            logger.info("Could not destroy card with entityId={}, it wasn't in the player's hand", entityId);
+        }
+    }
+
     private Damageable getDamageableTarget(EntityId target) {
         if (target == null) {
             return null;

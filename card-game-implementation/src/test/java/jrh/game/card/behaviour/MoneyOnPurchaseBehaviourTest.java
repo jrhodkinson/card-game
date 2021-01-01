@@ -19,7 +19,7 @@ public class MoneyOnPurchaseBehaviourTest {
 
     @Test
     public void standardTests() {
-        TestBehaviour.passesAllStandardTests(new MoneyOnPurchaseBehaviour(nextInt()));
+        TestBehaviour.passesAllStandardTests(() -> new MoneyOnPurchaseBehaviour(nextInt()));
     }
 
     @Test

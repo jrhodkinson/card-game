@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.function.Supplier;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -18,9 +19,11 @@ public class TestBehaviour {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public static void passesAllStandardTests(AbstractBehaviour behaviour) {
-        TestBehaviour.roundTripsViaJson(behaviour);
-        TestBehaviour.duplicatingGivesSameClass(behaviour);
+    public static void passesAllStandardTests(Supplier<AbstractBehaviour> behaviourSupplier) {
+        TestBehaviour.roundTripsViaJson(behaviourSupplier.get());
+        TestBehaviour.duplicatingGivesSameClass(behaviourSupplier.get());
+        TestBehaviour.hasJsonKeyAnnotation(behaviourSupplier.get().getClass());
+        TestBehaviour.loggerHasAppropriateName(behaviourSupplier.get().getClass());
     }
 
     public static void roundTripsViaJson(AbstractBehaviour behaviour) {
@@ -45,6 +48,14 @@ public class TestBehaviour {
     public static void duplicatingGivesSameClass(AbstractBehaviour behaviour) {
         Behaviour duplicatedBehaviour = behaviour.duplicate();
         assertThat(duplicatedBehaviour.getClass(), equalTo(behaviour.getClass()));
+    }
+
+    private static void loggerHasAppropriateName(Class<? extends Behaviour> behaviourClass) {
+        // TODO
+    }
+
+    private static void hasJsonKeyAnnotation(Class<? extends Behaviour> behaviourClass) {
+        // TODO
     }
 
 }

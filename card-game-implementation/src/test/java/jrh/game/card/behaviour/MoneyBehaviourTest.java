@@ -18,8 +18,8 @@ import static org.hamcrest.Matchers.equalTo;
 public class MoneyBehaviourTest {
 
     @Test
-    public void roundTripsViaJson() {
-        TestBehaviour.passesAllStandardTests(new MoneyBehaviour(nextInt()));
+    public void standardTests() {
+        TestBehaviour.passesAllStandardTests(() -> new MoneyBehaviour(nextInt()));
     }
 
     @Test

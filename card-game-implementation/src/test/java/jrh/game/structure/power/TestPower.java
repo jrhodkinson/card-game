@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.function.Supplier;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -17,9 +18,9 @@ public class TestPower {
 
     private static final ObjectMapper objectMapper = ObjectMapperFactory.create();
 
-    public static void passesAllStandardTests(AbstractPower power) {
-        TestPower.roundTripsViaJson(power);
-        TestPower.duplicatingGivesSameClass(power);
+    public static void passesAllStandardTests(Supplier<AbstractPower> powerSupplier) {
+        TestPower.roundTripsViaJson(powerSupplier.get());
+        TestPower.duplicatingGivesSameClass(powerSupplier.get());
     }
 
     public static void roundTripsViaJson(AbstractPower power) {

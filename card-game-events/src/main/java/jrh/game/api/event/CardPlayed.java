@@ -14,7 +14,7 @@ public class CardPlayed implements Event {
     private final Player player;
     private final Card card;
     private final Damageable damageableTarget;
-    private final EntityId storeTarget;
+    private final EntityId cardEntity;
 
     public static CardPlayed noTarget(Player player, Card card) {
         return new CardPlayed(Type.NO_TARGET, player, card, null, null);
@@ -28,12 +28,16 @@ public class CardPlayed implements Event {
         return new CardPlayed(Type.STORE_TARGET, player, card, null, cardEntity);
     }
 
-    private CardPlayed(Type type, Player player, Card card, Damageable damageableTarget, EntityId storeTarget) {
+    public static CardPlayed cardInHandTarget(Player player, Card card, EntityId cardEntity) {
+        return new CardPlayed(Type.HAND_TARGET, player, card, null, cardEntity);
+    }
+
+    private CardPlayed(Type type, Player player, Card card, Damageable damageableTarget, EntityId cardEntity) {
         this.type = type;
         this.player = player;
         this.card = card;
         this.damageableTarget = damageableTarget;
-        this.storeTarget = storeTarget;
+        this.cardEntity = cardEntity;
     }
 
     public Player getPlayer() {
@@ -51,7 +55,14 @@ public class CardPlayed implements Event {
         if (type != Type.STORE_TARGET) {
             return Optional.empty();
         }
-        return Optional.of(storeTarget);
+        return Optional.of(cardEntity);
+    }
+
+    public Optional<EntityId> getCardInHandTarget() {
+        if (type != Type.HAND_TARGET) {
+            return Optional.empty();
+        }
+        return Optional.of(cardEntity);
     }
 
     public Card getCard() {
@@ -64,6 +75,6 @@ public class CardPlayed implements Event {
     }
 
     private enum Type {
-        NO_TARGET, DAMAGEABLE_TARGET, STORE_TARGET
+        NO_TARGET, DAMAGEABLE_TARGET, STORE_TARGET, HAND_TARGET
     }
 }

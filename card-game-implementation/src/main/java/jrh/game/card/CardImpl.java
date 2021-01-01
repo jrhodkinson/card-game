@@ -106,6 +106,11 @@ public class CardImpl implements Card {
         return behaviours.values().stream().anyMatch(AbstractBehaviour::requiresStoreTarget);
     }
 
+    @Override
+    public boolean requiresCardInHandTarget() {
+        return behaviours.values().stream().anyMatch(AbstractBehaviour::requiresCardInHandTarget);
+    }
+
     CardImpl duplicate() {
         CardImpl.Builder duplicateBuilder = CardImpl.card(cardId).withName(name).withCost(cost)
                 .isPurchasable(purchasable).withFlavorText(flavorText);

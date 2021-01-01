@@ -7,6 +7,7 @@ public final class Keyword {
 
     public static final Keyword ACQUIRE = new Keyword("acquire",
             "Accumulate mammon (M), used to purchase cards during the current turn only");
+    public static final Keyword CLEANSE = new Keyword("cleanse", "Remove another card in your hand from the game");
     public static final Keyword CONSTRUCT = new Keyword("construct", "Build a structure");
     public static final Keyword DAMAGE = new Keyword("damage", "Remove health from a player or structure's life total");
     public static final Keyword DRAW = new Keyword("draw", "Pick up cards from your deck");
