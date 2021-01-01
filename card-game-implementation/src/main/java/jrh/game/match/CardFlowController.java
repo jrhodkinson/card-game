@@ -82,6 +82,12 @@ public class CardFlowController implements Controller {
                 return;
             }
             cardPlayed = CardPlayed.storeTarget(player, card, target);
+        } else if (card.requiresCardInHandTarget()) {
+            if (!validateCardInHandTarget(card, target, player)) {
+                logger.info("Card in hand target failed validation");
+                return;
+            }
+            cardPlayed = CardPlayed.cardInHandTarget(player, card, target);
         } else {
             cardPlayed = CardPlayed.noTarget(player, card);
         }
@@ -233,6 +239,14 @@ public class CardFlowController implements Controller {
             return false;
         }
         return match.getStore().getRow().stream().anyMatch(c -> c.getEntityId().equals(entityId));
+    }
+
+    private boolean validateCardInHandTarget(Card card, EntityId entityId, Player player) {
+        if (entityId == null) {
+            logger.warn("Not playing card={}, couldn't find storefront target", card);
+            return false;
+        }
+        return player.getHand().stream().anyMatch(c -> c.getEntityId().equals(entityId));
     }
 
     private boolean anotherEnemyStructureHasTaunt(Player source, Damageable target) {
