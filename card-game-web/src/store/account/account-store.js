@@ -1,5 +1,6 @@
 import Immutable from "seamless-immutable";
 import { getMe, postLogout } from "../../gateway/account";
+import { leaveQueue, selectIsQueueing } from "../lobby/lobby-store";
 
 export const ACCOUNT_STATE = "account";
 export const NAMESPACE = "account";
@@ -41,7 +42,10 @@ export const receivedAccountDetails = (details) => (dispatch) => {
   dispatch({ type: RECEIVED_ACCOUNT_DETAILS, account: details });
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch, getState) => {
+  if (selectIsQueueing(getState())) {
+    dispatch(leaveQueue());
+  }
   postLogout()
     .then(() => dispatch({ type: LOGGED_OUT }))
     .catch(() => {});
