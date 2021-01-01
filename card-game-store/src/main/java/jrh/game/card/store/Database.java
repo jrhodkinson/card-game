@@ -6,6 +6,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import jrh.game.card.store.account.AccountStore;
 import jrh.game.card.store.account.StoredAccount;
+import jrh.game.card.store.history.HistoricMatchStore;
+import jrh.game.card.store.history.StoredHistoricMatch;
 import org.bson.UuidRepresentation;
 import org.bson.codecs.UuidCodec;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -21,6 +23,7 @@ public class Database {
     private static final String DATABASE = "card-game";
 
     private final AccountStore accountStore;
+    private final HistoricMatchStore historicMatchStore;
 
     public static Database instance(String host, int port) {
         return new Database(host, port);
@@ -29,11 +32,16 @@ public class Database {
     private Database(String host, int port) {
         MongoDatabase database = database(host, port);
         this.accountStore = new AccountStore(database.getCollection(Collections.ACCOUNTS, StoredAccount.class));
+        this.historicMatchStore = new HistoricMatchStore(database.getCollection(Collections.HISTORIC_MATCHES, StoredHistoricMatch.class));
         accountStore.initialise();
     }
 
     public AccountStore accountStore() {
         return accountStore;
+    }
+
+    public HistoricMatchStore historicMatchStore() {
+        return historicMatchStore;
     }
 
     private MongoDatabase database(String host, int port) {
