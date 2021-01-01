@@ -7,7 +7,7 @@ const Tooltip = styled.span`
   border: 1px solid ${c.lightestGrey};
   color: ${c.textOnWhite};
   box-shadow: ${c.darkGrey} 0 0 3px 0;
-  padding: 3px;
+  padding: 5px;
   border-radius: 3px;
 `;
 
