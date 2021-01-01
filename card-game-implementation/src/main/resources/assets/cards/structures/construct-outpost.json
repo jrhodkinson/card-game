@@ -5,6 +5,10 @@
   "purchasable": true,
   "behaviours": [
     [
+      "sacrifice",
+      5
+    ],
+    [
       "construct",
       "OUTPOST"
     ],
