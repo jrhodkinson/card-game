@@ -1,9 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectIsQueueing } from "../../store/lobby/lobby-store";
+import {
+  selectIsGameOffline,
+  selectIsQueueing,
+} from "../../store/lobby/lobby-store";
 import ActiveMatchList from "./ActiveMatchList";
 import Disclaimer from "./Disclaimer";
+import GameOffline from "./GameOffline";
 import QueueButton from "./QueueButton";
 import { MAIN_COLUMN_WIDTH } from "../styles/dimensions";
 import InQueue from "./InQueue";
@@ -19,11 +23,18 @@ const Wrapper = styled.div`
 `;
 
 const Lobby = () => {
+  const isGameOffline = useSelector(selectIsGameOffline);
   const isQueueing = useSelector(selectIsQueueing);
   return (
     <Wrapper>
-      <Disclaimer />
-      {isQueueing ? <InQueue /> : <QueueButton />}
+      {isGameOffline ? (
+        <GameOffline />
+      ) : (
+        <>
+          <Disclaimer />
+          {isQueueing ? <InQueue /> : <QueueButton />}
+        </>
+      )}
       <ActiveMatchList />
     </Wrapper>
   );

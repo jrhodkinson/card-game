@@ -8,12 +8,10 @@ import {
   continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue,
   selectHaveInitialisedMatchId,
   selectCurrentMatchId,
-  selectIsGameOffline,
 } from "../../store/lobby/lobby-store";
 import Register from "../account/Register";
 import Loading from "../common/Loading";
 import MatchWrapper from "../game/MatchWrapper";
-import GameOffline from "./GameOffline";
 import Lobby from "./Lobby";
 
 const Main = () => {
@@ -21,7 +19,6 @@ const Main = () => {
   const haveInitialisedAccountId = useSelector(selectHaveInitialisedAccountId);
   const matchId = useSelector(selectCurrentMatchId);
   const haveInitialisedMatchId = useSelector(selectHaveInitialisedMatchId);
-  const isGameOffline = useSelector(selectIsGameOffline);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,10 +37,6 @@ const Main = () => {
 
   if (matchId) {
     return <MatchWrapper />;
-  }
-
-  if (isGameOffline) {
-    return <GameOffline />;
   }
 
   if (haveInitialisedMatchId) {

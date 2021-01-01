@@ -25,6 +25,8 @@ public class LobbyEndpoint {
 
     private static final Logger logger = LogManager.getLogger(LobbyEndpoint.class);
 
+    private static final String GAME_OFFLINE_MESSAGE = "Down for maintenance";
+
     private final MatchManager matchManager;
     private final MatchQueue matchQueue;
     private volatile boolean gameIsOnline = true;
@@ -60,7 +62,7 @@ public class LobbyEndpoint {
             return;
         }
         if (!gameIsOnline) {
-            context.json(QueueStatusResponse.downForMaintenance());
+            throw new ServiceUnavailableResponse(GAME_OFFLINE_MESSAGE);
         } else if (matchQueue.contains(accountId)) {
             matchQueue.refresh(accountId);
             context.json(QueueStatusResponse.queueing());
@@ -97,7 +99,7 @@ public class LobbyEndpoint {
 
     private void ensureGameIsOnline(Context context) {
         if (!gameIsOnline) {
-            throw new ServiceUnavailableResponse("Down for maintenance");
+            throw new ServiceUnavailableResponse(GAME_OFFLINE_MESSAGE);
         }
     }
 

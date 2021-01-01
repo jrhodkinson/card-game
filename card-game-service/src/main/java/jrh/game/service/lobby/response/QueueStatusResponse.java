@@ -24,10 +24,6 @@ public class QueueStatusResponse {
         return new QueueStatusResponse("not in queue", null);
     }
 
-    public static QueueStatusResponse downForMaintenance() {
-        return new QueueStatusResponse("down for maintenance", null);
-    }
-
     public String getType() {
         return type;
     }

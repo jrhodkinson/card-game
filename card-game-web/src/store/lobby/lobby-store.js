@@ -55,7 +55,7 @@ export default (state = defaultState, action) => {
     case STARTED_MATCH_POLLER:
       return state.set("matchPoller", action.matchPoller);
     case RECEIVED_GAME_OFFLINE:
-      return state.set("gameOffline", true);
+      return state.set("gameOffline", true).set("initialised", true);
     case SPECTATE_MATCH:
       return state
         .set("matchId", action.matchId)
@@ -71,8 +71,8 @@ export default (state = defaultState, action) => {
         clearInterval(state.matchPoller);
       }
       return state
-        .set("matchId", undefined)
         .set("initialised", true)
+        .set("matchId", undefined)
         .set("matchPoller", undefined)
         .set("queueing", false);
     default:
@@ -94,18 +94,12 @@ export const leaveQueue = () => (dispatch) => {
 };
 
 export const fetchActiveMatchCount = () => (dispatch) => {
-  getActiveMatchCount()
-    .then(({ data }) => {
-      dispatch({
-        type: RECEIVED_ACTIVE_MATCH_COUNT,
-        activeMatchCount: data.activeMatches,
-      });
-    })
-    .catch(({ response }) => {
-      if (response.status === 404) {
-        dispatch({ type: RECEIVED_GAME_OFFLINE });
-      }
+  getActiveMatchCount().then(({ data }) => {
+    dispatch({
+      type: RECEIVED_ACTIVE_MATCH_COUNT,
+      activeMatchCount: data.activeMatches,
     });
+  });
 };
 
 export const fetchAllActiveMatches = () => (dispatch) => {
@@ -120,22 +114,28 @@ export const continueFetchingQueueStatusUntilReceivedMatchIdOrNotInQueue = () =>
 ) => {
   if (!getState()[LOBBY_STATE].matchPoller) {
     const getAndProcessQueueStatus = () => {
-      getQueueStatus().then(({ data }) => {
-        if (data.type === "in match") {
-          dispatch({ type: CLEAR_MATCH_POLLER });
-          dispatch({
-            type: RECEIVED_MATCH_ID_FROM_QUEUE,
-            matchId: data.matchId,
-          });
-        }
-        dispatch({ type: RECEIVED_NO_MATCH_ID });
-        if (data.type === "in queue") {
-          dispatch({ type: IN_QUEUE });
-        } else {
-          dispatch({ type: NOT_IN_QUEUE });
-          dispatch({ type: CLEAR_MATCH_POLLER });
-        }
-      });
+      getQueueStatus()
+        .then(({ data }) => {
+          if (data.type === "in match") {
+            dispatch({ type: CLEAR_MATCH_POLLER });
+            dispatch({
+              type: RECEIVED_MATCH_ID_FROM_QUEUE,
+              matchId: data.matchId,
+            });
+          }
+          dispatch({ type: RECEIVED_NO_MATCH_ID });
+          if (data.type === "in queue") {
+            dispatch({ type: IN_QUEUE });
+          } else {
+            dispatch({ type: NOT_IN_QUEUE });
+            dispatch({ type: CLEAR_MATCH_POLLER });
+          }
+        })
+        .catch(({ response }) => {
+          if (response.status === 503) {
+            dispatch({ type: RECEIVED_GAME_OFFLINE });
+          }
+        });
     };
     getAndProcessQueueStatus();
     const matchPoller = setInterval(getAndProcessQueueStatus, 5000);
