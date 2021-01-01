@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.Optional;
 
 import static at.favre.lib.crypto.bcrypt.BCrypt.Version.VERSION_2A;
+import static java.util.Collections.emptySet;
 
 public class Accounts {
 
@@ -47,7 +48,7 @@ public class Accounts {
     public Account createAccount(String name, String email, String password) {
         String hashedPassword = BCrypt.with(VERSION_2A, LongPasswordStrategies.truncate(VERSION_2A)).hashToString(12,
                 password.toCharArray());
-        Account account = new Account(AccountId.randomAccountId(), name, email, Instant.now(Clock.systemUTC()));
+        Account account = new Account(AccountId.randomAccountId(), name, email, Instant.now(Clock.systemUTC()), emptySet());
         AccountWithHashedPassword accountWithHashedPassword = new AccountWithHashedPassword(account, hashedPassword);
         store.putAccount(accountWithHashedPassword);
         return account;

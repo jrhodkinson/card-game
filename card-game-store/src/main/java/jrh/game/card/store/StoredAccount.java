@@ -1,5 +1,6 @@
 package jrh.game.card.store;
 
+import java.util.List;
 import java.util.UUID;
 
 public class StoredAccount {
@@ -9,6 +10,7 @@ public class StoredAccount {
     private String email;
     private String bcrypt;
     private long registered;
+    private List<String> roles;
 
     public UUID getId() {
         return id;
@@ -48,5 +50,13 @@ public class StoredAccount {
 
     public void setRegistered(long registered) {
         this.registered = registered;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

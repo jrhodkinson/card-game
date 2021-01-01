@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Instant;
 import java.util.Map;
 
+import static java.util.Collections.emptySet;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,7 +22,7 @@ public class AccountResponseTest {
     public void serialisesAccountResponseToJson() throws JsonProcessingException {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
         Account account = new Account(AccountId.randomAccountId(), randomAlphanumeric(10), randomAlphanumeric(10),
-                Instant.now());
+                Instant.now(), emptySet());
         AccountResponse response = new AccountResponse(account);
         Map<String, String> json = objectMapper.readValue(objectMapper.writeValueAsString(response),
                 new TypeReference<>() {
