@@ -63,7 +63,7 @@ public class SlowQueueAlerter {
         lastAlert = Instant.now();
         String name = accounts.getAccount(accountId).getName();
         String message = String
-            .format("**%s** is waiting for a game, does anybody want to join them? %s", name, website);
+            .format("**%s** is waiting for a game, does anybody want to join them? <%s>", name, website);
         alertService.sendAlert(channel, message);
     }
 }

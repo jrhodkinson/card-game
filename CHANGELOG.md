@@ -1,3 +1,6 @@
+# 0.1.3
+- Remove link preview from messages in #looking-for-group
+
 # 0.1.2
 - Send a message to #looking-for-group if a player is queueing for a game for too long without a partner
 
