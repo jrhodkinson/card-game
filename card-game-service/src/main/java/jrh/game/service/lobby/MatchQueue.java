@@ -78,4 +78,8 @@ public class MatchQueue {
     public AccountId poll() {
         return queue.poll();
     }
+
+    public AccountId peek() {
+        return queue.peek();
+    }
 }

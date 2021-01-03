@@ -201,6 +201,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>jrh</groupId>
+                <artifactId>card-game-alerts</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.javalin</groupId>
                 <artifactId>javalin</artifactId>
                 <version>${version.javalin}</version>

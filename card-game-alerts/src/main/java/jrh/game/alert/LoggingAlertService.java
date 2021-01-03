@@ -8,7 +8,7 @@ public class LoggingAlertService implements AlertService {
     private static final Logger logger = LogManager.getLogger(LoggingAlertService.class);
 
     @Override
-    public void sendAlert(String message) {
-        logger.info("Would have sent alert={}", message);
+    public void sendAlert(String channel, String message) {
+        logger.info("Would have sent to channel={}: {}", channel, message);
     }
 }

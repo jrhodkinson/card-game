@@ -8,6 +8,7 @@ import jrh.game.service.account.Sessions;
 import jrh.game.service.lobby.MatchManager;
 import jrh.game.service.lobby.MatchQueue;
 import jrh.game.service.lobby.Matchmaker;
+import jrh.game.service.lobby.SlowQueueAlerter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,6 +47,8 @@ public class Main {
         Server server = new Server(version, cookies, sessions, matchManager, matchQueue, accounts, assetLibrary);
         matchmaker.start();
         server.start();
+
+        new SlowQueueAlerter(configuration.alertService(), matchQueue, configuration.lookingForGroupChannel(), accounts, configuration.url());
 
         if (configuration.environment().equals(DEVELOPMENT)) {
             logger.info("In development environment, so queueing jack and terry.");
