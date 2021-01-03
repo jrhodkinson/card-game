@@ -28,7 +28,8 @@ public class SlowQueueAlerter {
     private Instant queueHasBeenPopulatedSince = null;
     private Instant lastAlert = Instant.EPOCH;
 
-    public SlowQueueAlerter(AlertService alertService, MatchQueue matchQueue, String channel, Accounts accounts, String website) {
+    public SlowQueueAlerter(AlertService alertService, MatchQueue matchQueue, String channel, Accounts accounts,
+            String website) {
         this.alertService = alertService;
         this.matchQueue = matchQueue;
         this.channel = channel;
@@ -61,7 +62,8 @@ public class SlowQueueAlerter {
         }
         lastAlert = Instant.now();
         String name = accounts.getAccount(accountId).getName();
-        String message = String.format("**%s** is waiting for a game, does anybody want to join them? %s", name, website);
+        String message = String
+            .format("**%s** is waiting for a game, does anybody want to join them? %s", name, website);
         alertService.sendAlert(channel, message);
     }
 }

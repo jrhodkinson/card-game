@@ -48,7 +48,8 @@ public class Main {
         matchmaker.start();
         server.start();
 
-        new SlowQueueAlerter(configuration.alertService(), matchQueue, configuration.lookingForGroupChannel(), accounts, configuration.url());
+        new SlowQueueAlerter(configuration.alertService(), matchQueue, configuration.lookingForGroupChannel(), accounts,
+                configuration.url());
 
         if (configuration.environment().equals(DEVELOPMENT)) {
             logger.info("In development environment, so queueing jack and terry.");
