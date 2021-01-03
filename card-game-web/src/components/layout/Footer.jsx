@@ -20,8 +20,8 @@ const Footer = () => {
   return (
     <S.Wrapper>
       <S.Links>
-        <Link text="Discord" link="https://discord.gg/52RjnmSrHQ" />
-        <Link text="Reddit" link="https://www.reddit.com/r/revelation218/" />
+        <Link text="Discord" link="/s/discord" />
+        <Link text="Reddit" link="/s/reddit" />
         <Link text="Library" link="/library" sameTab />
       </S.Links>
       <S.ActiveMatchCount>
