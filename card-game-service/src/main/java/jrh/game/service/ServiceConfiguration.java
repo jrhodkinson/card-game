@@ -1,5 +1,8 @@
 package jrh.game.service;
 
+import jrh.game.alert.AlertService;
+import jrh.game.alert.DiscordAlertService;
+import jrh.game.alert.LoggingAlertService;
 import jrh.game.card.store.Database;
 import org.apache.commons.configuration2.BaseConfiguration;
 import org.apache.commons.configuration2.CompositeConfiguration;
@@ -14,6 +17,7 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.security.auth.login.LoginException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -26,6 +30,9 @@ public class ServiceConfiguration {
     private static final String ENVIRONMENT = "environment";
     private static final String DATABASE_HOST = "database.host";
     private static final String DATABASE_PORT = "database.port";
+    private static final String DISCORD_TOKEN = "discord.token";
+    private static final String DISCORD_CHANNEL_LOOKING_FOR_GROUP = "discord.channel.group";
+    private static final String WEBSITE_URL = "website.url";
 
     private final Configuration configuration;
 
@@ -41,10 +48,30 @@ public class ServiceConfiguration {
         return Environment.valueOf(configuration.getString(ENVIRONMENT));
     }
 
+    public String url() {
+        return configuration.getString(WEBSITE_URL);
+    }
+
     public Database database() {
         String host = configuration.getString(DATABASE_HOST);
         int port = configuration.getInt(DATABASE_PORT);
         return Database.instance(host, port);
+    }
+
+    public AlertService alertService() {
+        String discordToken = configuration.getString(DISCORD_TOKEN);
+        if (discordToken != null) {
+            try {
+                return new DiscordAlertService(discordToken);
+            } catch (LoginException | InterruptedException e) {
+                logger.error("Failed to construct DiscordAlertService, using LoggingAlertService instead", e);
+            }
+        }
+        return new LoggingAlertService();
+    }
+
+    public String lookingForGroupChannel() {
+        return configuration.getString(DISCORD_CHANNEL_LOOKING_FOR_GROUP);
     }
 
     private Configuration buildConfiguration() {
@@ -83,6 +110,8 @@ public class ServiceConfiguration {
     private Map<String, String> defaults() {
         Map<String, String> defaults = new HashMap<>();
         defaults.put(ENVIRONMENT, Environment.DEVELOPMENT.toString());
+        defaults.put(DISCORD_CHANNEL_LOOKING_FOR_GROUP, "looking-for-group");
+        defaults.put(WEBSITE_URL, "http://localhost:3000");
         return defaults;
     }
 }

@@ -1,3 +1,6 @@
+# 0.1.2
+- Send a message to #looking-for-group if a player is queueing for a game for too long without a partner
+
 # 0.1.1
 - Introduce the URLs https://revelation218.com/s/discord and https://revelation218.com/s/reddit which redirect to Discord and Reddit
 

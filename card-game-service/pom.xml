@@ -78,6 +78,10 @@
             <artifactId>card-game-store</artifactId>
         </dependency>
         <dependency>
+            <groupId>jrh</groupId>
+            <artifactId>card-game-alerts</artifactId>
+        </dependency>
+        <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
         </dependency>
