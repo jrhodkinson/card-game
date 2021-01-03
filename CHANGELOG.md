@@ -1,3 +1,6 @@
+# 0.1.1
+- Introduce the URLs https://revelation218.com/s/discord and https://revelation218.com/s/reddit which redirect to Discord and Reddit
+
 # 0.1.0
 
 ## Major
