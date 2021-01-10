@@ -1,3 +1,6 @@
+# 0.1.4
+- Fix a bug where the first new card in the store could be a card that is not intended to be purchasable
+
 # 0.1.3
 - Remove link preview from messages in #looking-for-group
 

@@ -38,7 +38,7 @@ public class MutableStore implements Store {
             row.add(cardImplFactory.randomPurchasableCard());
         }
         Collections.shuffle(row);
-        next = cardImplFactory.randomCard();
+        next = cardImplFactory.randomPurchasableCard();
     }
 
     @Override
