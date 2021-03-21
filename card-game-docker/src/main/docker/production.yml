@@ -3,7 +3,7 @@ version: "3.8"
 services:
   service:
     environment:
-      - DISCORD_TOKEN=Nzk1MjYyMDk4OTEzMDk5ODE4.X_Gziw.oG_cMlyRAIKahOMZ4w2N1jof7rA
+      - DISCORD_TOKEN=
       - WEBSITE_URL=https://revelation218.com
 
   ssl:
